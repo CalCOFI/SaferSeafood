@@ -1,11 +1,119 @@
 #........................dashboardHeader.........................
-header <- dashboardHeader()
+header <- dashboardHeader(
+  
+  #title ----
+  title = "DDT Concentration Distribution",
+  titleWidth = 500
+  
+) # END dashboardHeader
 
 #........................dashboardSidebar........................
-sidebar <- dashboardSidebar()
+sidebar <- dashboardSidebar(
+  
+  #sidebarMenu ----
+  sidebarMenu(
+  
+  menuItem(text = "Welcome", tabName = "welcome", icon = icon("star")),
+  menuItem(text = "Dashboard", tabName = "dashboard", icon = icon("gauge"))
+  
+  ) # END sidebarMenu 
+) # end dashboard Sidebar
 
 #..........................dashboardBody.........................
-body <- dashboardBody()
+body <- dashboardBody(
+  
+  # welcome tabItem ----
+  tabItems(
+    
+    # welcome tabItem ----
+    tabItem(tabName = "welcome",
+          
+          # left - hand column ----
+          column(width = 6,
+                
+                 #background info box ----
+                 box(width = NULL,
+                     
+                     "The harmful effects of Dichlorodiphenyltrichloroethane (DDT), and its breakdown products (DDX), have triggered widespread concerns, particularly due to the recent rediscovery of a barrel field containing DDT-laced sludge off the Southern California coast. This alarming find has not only captured the public's attention but has also highlighted its potential threats to human and environmental health. The negative side effects of DDT, including heightened cancer risks, premature births, developmental abnormalities, and neurological diseases in both humans and animals, have raised concerns of consuming seafood from the contaminated area. The consequences go beyond immediate health worries, also affecting the local economy and the well-being of recreational fishing communities.
+"
+                     
+                 ) # END background info box 
+                
+            ), # END left-hand column 
+          
+          #right - hand column ----
+            column(width = 6,
+                   
+                   #first fluidRow ----
+                   
+                   fluidRow(
+                     
+                     # data source box ----
+                    box(width = NULL,
+                        
+                        "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. "
+                        
+                    ) #END data source box  
+                  
+                   ), # END first fluidRow
+                   
+                   # second fluidRow ----
+                   fluidRow(
+                     
+                     #disclaimer box ----
+                     box(width = NULL,
+                         
+                         "There are no restrictions on sharing the data and any outputs that result from this project, but all sources of data should be referenced."
+                         
+                         ) # END disclaimer box
+                     
+                   ) # END second fluidRow
+                   
+            ) # END right - hand column
+          
+          
+  ), # END welcome tabItem
+  
+  # dashboard tabItem ----
+  tabItem(tabName = "dashboard",
+          
+           # fluidRow ----
+           
+           fluidRow(
+             
+             # input box ----
+             box(width = 4,
+                 
+                 title = tags$strong("Adjust DDT ranges:"),
+                 
+                 # sliderInputs ----
+                 sliderInput(inputId = "DDT_slider_input", label = "DDT Concentration:",
+                             min = min(fish_data$AvgDDT), max = max(fish_data$AvgDDT),
+                             value = c(min(fish_data$AvgDDT), max(fish_data$AvgDDT)))
+                 
+              ), # END input box ----
+           
+             # leaflet box ----
+             box(width = 8,
+                 
+                 title = tags$strong("Fishing Zones:"),
+                      
+                  #leafleft output ----
+                  leafletOutput(outputId = "fish_map_output") %>%
+                    withSpinner(type = 1, color = "#4287f5")
+                                  
+                 
+                 ) # END leaflet box
+             
+             ) # END fluidRow
+           
+           
+    ) #END dashboard tabItem
+    
+  ) # END tabItems
+
+) # END dashboardBody 
+
 
 #..................combine all in dashboardPage..................
 dashboardPage(header, sidebar, body)
