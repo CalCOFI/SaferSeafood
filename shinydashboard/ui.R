@@ -1,0 +1,13 @@
+#........................dashboardHeader.........................
+header <- dashboardHeader()
+
+#........................dashboardSidebar........................
+sidebar <- dashboardSidebar()
+
+#..........................dashboardBody.........................
+body <- dashboardBody()
+
+#..................combine all in dashboardPage..................
+dashboardPage(header, sidebar, body)
+
+
