@@ -2,8 +2,8 @@
 header <- dashboardHeader(
   
   #title ----
-  title = "DDT Concentration Distribution",
-  titleWidth = 350
+  title = "Improving Access to Fish Consumption Advisories and Maintaining Confidence in California's Healthy Seafood Products",
+  titleWidth = 1200
   
 ) # END dashboardHeader
 
@@ -56,8 +56,8 @@ body <- dashboardBody(
                      
                      # data source box ----
                     box(width = NULL,
-                        title = tagList(icon("table"), strong("Citation")),
-                        "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. "
+                        title = tagList(icon("database"), strong("About The Data")),
+                        "All resources employed in this study are provided by the client, Scripps Institute of Oceanography and California Cooperative Oceanic Fisheries Investigations (CalCOFI). Raster and tabular data collected across the Southern California Bight will be used to conduct this analysis."
                         
                     ) #END data source box  
                   
@@ -68,8 +68,8 @@ body <- dashboardBody(
                      
                      #disclaimer box ----
                      box(width = NULL,
-                         title = tagList(icon("triangle-exclamation"), strong("Disclaimer")),
-                         "There are no restrictions on sharing the data and any outputs that result from this project, but all sources of data should be referenced.",
+                         title = tagList(icon("fish"), strong("About")),
+                         "This tool will allow users to input specific details such as species, location, and demographic information, yielding personalized and precise predictions of DDT concentrations along with corresponding advisories."
                          #style = "background-color: #ff0000;"  # change color as needed
                          
                          ) # END disclaimer box
