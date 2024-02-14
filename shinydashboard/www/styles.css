@@ -1,0 +1,14 @@
+.box-header {
+  background-color: skyblue;
+  color: black; /* text color */
+}
+
+.navbar {
+  background-color: darkslategrey!important;
+  color: white; /* text color */
+}
+
+.navbar .navbar-inner {
+  background-color: grey!important;
+  color: white; /* text color */
+}

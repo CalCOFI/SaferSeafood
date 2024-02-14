@@ -3,7 +3,7 @@ header <- dashboardHeader(
   
   #title ----
   title = "DDT Concentration Distribution",
-  titleWidth = 500
+  titleWidth = 350
   
 ) # END dashboardHeader
 
@@ -22,6 +22,8 @@ sidebar <- dashboardSidebar(
 #..........................dashboardBody.........................
 body <- dashboardBody(
   
+  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
+  
   # welcome tabItem ----
   tabItems(
     
@@ -33,9 +35,13 @@ body <- dashboardBody(
                 
                  #background info box ----
                  box(width = NULL,
-                     
-                     "The harmful effects of Dichlorodiphenyltrichloroethane (DDT), and its breakdown products (DDX), have triggered widespread concerns, particularly due to the recent rediscovery of a barrel field containing DDT-laced sludge off the Southern California coast. This alarming find has not only captured the public's attention but has also highlighted its potential threats to human and environmental health. The negative side effects of DDT, including heightened cancer risks, premature births, developmental abnormalities, and neurological diseases in both humans and animals, have raised concerns of consuming seafood from the contaminated area. The consequences go beyond immediate health worries, also affecting the local economy and the well-being of recreational fishing communities.
-"
+                     title = tagList(icon("water"), strong("Background")),
+                     "The harmful effects of Dichlorodiphenyltrichloroethane (DDT), and its breakdown products (DDX), have triggered widespread concerns, particularly due to the recent rediscovery of a barrel field containing DDT-laced sludge off the Southern California coast. This alarming find has not only captured the public's attention but has also highlighted its potential threats to human and environmental health. The negative side effects of DDT, including heightened cancer risks, premature births, developmental abnormalities, and neurological diseases in both humans and animals, have raised concerns of consuming seafood from the contaminated area. The consequences go beyond immediate health worries, also affecting the local economy and the well-being of recreational fishing communities.",
+                     tags$img(src = "figure.png", 
+                              alt = "Map of fishing zones and the number of fish samples through time, by region (inset). Nearshore 708 polygons are derived from McLaughlin et al. (2021) and pink blocks are California Department of Fish and Game 256 km2 709 fishing blocks.",
+                              style = "max-width: 70%; display: block; margin: 0 auto;"),
+                     tags$h6(tags$em("Map Source:", tags$a(href = "link", "link")),
+                             style = "text-align: center;")
                      
                  ) # END background info box 
                 
@@ -50,7 +56,7 @@ body <- dashboardBody(
                      
                      # data source box ----
                     box(width = NULL,
-                        
+                        title = tagList(icon("table"), strong("Citation")),
                         "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. "
                         
                     ) #END data source box  
@@ -62,8 +68,9 @@ body <- dashboardBody(
                      
                      #disclaimer box ----
                      box(width = NULL,
-                         
-                         "There are no restrictions on sharing the data and any outputs that result from this project, but all sources of data should be referenced."
+                         title = tagList(icon("triangle-exclamation"), strong("Disclaimer")),
+                         "There are no restrictions on sharing the data and any outputs that result from this project, but all sources of data should be referenced.",
+                         #style = "background-color: #ff0000;"  # change color as needed
                          
                          ) # END disclaimer box
                      
