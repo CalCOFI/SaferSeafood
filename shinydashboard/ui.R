@@ -115,11 +115,64 @@ body <- dashboardBody(
              ) # END fluidRow
            
            
-    ) #END dashboard tabItem
-    
+    ), #END dashboard tabItem
+  
+  # advisory tabItem ----
+  tabItem(tabName = "Seafood Advisories",
+          
+          # left - hand column ----
+          column(width = 6,
+                 
+                 #other chemical advisory info box ----
+                 box(width = NULL,
+                     title = tagList(icon("bookmark"), strong("Mercury and PCB Consumption Advice")),
+                     "la di da for running purposes",
+                     tags$img(src = "advising.png", 
+                              alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories",
+                              style = "max-width: 70%; display: block; margin: 0 auto;")
+                     
+                 ) # END chemical advisory info box 
+                 
+          ), #end left hand box
+  
+  
+        #right - hand column ----
+        column(width = 6,
+         
+         #first fluidRow ----
+         
+         fluidRow(
+           
+           # data source box ----
+           box(width = NULL,
+               title = tagList(icon("plus"), strong("Series of Consumer Inputs")),
+               "User Selection, here are the inputs"
+               
+           ) #END data source box  
+           
+         ), # END first fluidRow
+         
+         # second fluidRow ----
+         fluidRow(
+           
+           #disclaimer box ----
+           box(width = NULL,
+               title = tagList(icon("circle-exclamation"), strong("Outputs")),
+               "How DDT cocentrations will be voiced to the public"
+               #style = "background-color: #ff0000;"  # change color as needed
+               
+           ) # END disclaimer box
+           
+         ) # END second fluidRow
+         
+    ) # END right - hand column
+  
+
   ) # END tabItems
 
-) # END dashboardBody 
+  ) # END dashboardBody 
+
+)
 
 
 #..................combine all in dashboardPage..................
