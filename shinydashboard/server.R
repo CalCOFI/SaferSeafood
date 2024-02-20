@@ -16,6 +16,7 @@ server <- function(input, output) {
       
       # add titles
       addProviderTiles(providers$Esri.WorldImagery) %>%
+
       
       # set view over CA
       setView(lng = -117.784, lat = 30.0906, zoom = 5) %>%

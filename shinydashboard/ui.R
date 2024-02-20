@@ -77,7 +77,6 @@ body <- dashboardBody(
                    
             ) # END right - hand column
           
-          
   ), # END welcome tabItem
   
   # dashboard tabItem ----
@@ -132,7 +131,7 @@ body <- dashboardBody(
   tabItem(tabName = "seafood_advisory",
           
           # left - hand column ----
-          column(width = 8,
+          column(width = 6,
                  
                  #other chemical advisory info box ----
                  box(width = NULL,
@@ -144,7 +143,17 @@ body <- dashboardBody(
                               style = "max-width: 90%; display: block; margin: 0 auto;")
                      
                      
-                 ) # END chemical advisory info box 
+                 ), # END chemical advisory info box 
+                 
+                 box(width = NULL,
+                     
+                     title = tagList(strong("Following Guidelines")),
+                     "",
+                     tags$img(src = "advising-fish-guide.png",
+                             alt = "Guidelines",
+                     style = "max-width: 90%; display: block; margin: 0 auto;")
+                     
+                 ) # end GUIDELINES box 
                  
           ), #end left hand box
   
@@ -159,11 +168,23 @@ body <- dashboardBody(
            # data source box ----
            box(width = NULL,
                title = tagList(icon("plus"), strong("Series of Consumer Inputs")),
-               "User Selection, here are the inputs."
+               "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination."
                
            ) #END data source box  
            
          ), # END first fluidRow
+         
+        
+         # adding text box inputs
+         fluidPage(
+           
+           textInput("Species", "What species did you catch?"),
+           textInput("Weight", "Weight of Species"),
+           textInput("Length", "Length of Species"),
+           textInput("Latitude", "What's your latitude?"),
+           textInput("Longitude", "What's yours Longitude?")
+         ), #end fluid page 
+         
          
          # second fluidRow ----
          fluidRow(
@@ -171,12 +192,19 @@ body <- dashboardBody(
            #disclaimer box ----
            box(width = NULL,
                title = tagList(icon("circle-exclamation"), strong("Outputs")),
-               "How DDT cocentrations will be voiced to the public"
+               "Click the button below to output the DDT concentration for your catch!"
                #style = "background-color: #ff0000;"  # change color as needed
                
            ) # END disclaimer box
            
-         ) # END second fluidRow
+         ), # end second fluid row ----
+         
+         fluidPage(
+           actionButton("click", "DDT Concentraiton Advisory")
+           
+         ) #end fluid page 
+           
+             
          
     ) # END right - hand column
     
