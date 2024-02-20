@@ -18,7 +18,7 @@ server <- function(input, output) {
       addProviderTiles(providers$Esri.WorldImagery) %>%
       
       # set view over CA
-      setView(lng = -117.784, lat = 30.0906, zoom = 6) %>%
+      setView(lng = -117.784, lat = 30.0906, zoom = 5) %>%
       
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
