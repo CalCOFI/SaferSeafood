@@ -30,6 +30,24 @@ server <- function(input, output) {
                  popup = paste0("Site Name: ", filtered_fish_data()$CompositeStationArea, "<br>",
                                 "Avg DDT: ", filtered_fish_data()$AvgDDT, "<br>"))
   })
+  
+  # Model testing code
+  predict_DDT <- function(species, latitude, longitude) {
+    # Placeholder for the actual prediction
+    return(runif(1, min = 0, max = 10))
+  }
+  
+  observeEvent(input$predict_button, {
+    species <- input$species
+    latitude <- input$latitude
+    longitude <- input$longitude
+    
+    prediction <- predict_DDT(species, latitude, longitude)
+    
+    output$prediction <- renderPrint({
+      paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid")
+    })
+  })
 }
 
   
