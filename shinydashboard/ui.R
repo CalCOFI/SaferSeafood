@@ -165,7 +165,7 @@ body <- dashboardBody(
                    
                    fluidRow(
                      
-                     # data source box ----
+                     #START data entry box ----
                      box(width = NULL,
                          title = tagList(icon("plus"), strong("Series of Consumer Inputs")), status = "primary", collapsible = TRUE,
                          "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination.",
@@ -175,13 +175,15 @@ body <- dashboardBody(
                          numericInput("longitude", "Longitude:", value = NA),
                          actionButton("predict_button", "Predict")
                          
-                     ), #END data source box  
+                     ), #END data entry box  
+                     
+                     #START Prediction Box
                      box(width = NULL, title = "Prediction Result", status = "success", solidHeader = TRUE,
                          collapsible = TRUE,
                          verbatimTextOutput("prediction")
                          #style = "background-color: #ff0000;"  # change color as needed
                          
-                     ) # END disclaimer box
+                     ) # END Prediction box
                      
                    ), # END first fluidRow
                    
