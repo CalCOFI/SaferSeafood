@@ -15,8 +15,7 @@ sidebar <- dashboardSidebar(
     
     menuItem(text = "Welcome", tabName = "welcome", icon = icon("star")),
     menuItem(text = "Dashboard", tabName = "dashboard", icon = icon("gauge")),
-    menuItem(text = "Seafood Advisory", tabName = "seafood_advisory", icon = icon("circle-exclamation")),
-    menuItem(text = "Model Testing", tabName = "model_testing", icon = icon("circle"))
+    menuItem(text = "Seafood Advisory", tabName = "seafood_advisory", icon = icon("circle-exclamation"))
     
   ) # END sidebarMenu
 ) # end dashboard Sidebar
@@ -168,37 +167,23 @@ body <- dashboardBody(
                      
                      # data source box ----
                      box(width = NULL,
-                         title = tagList(icon("plus"), strong("Series of Consumer Inputs")),
-                         "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination."
+                         title = tagList(icon("plus"), strong("Series of Consumer Inputs")), status = "primary", collapsible = TRUE,
+                         "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination.",
                          
-                     ) #END data source box  
-                     
-                   ), # END first fluidRow
-                   
-                   
-                   # adding text box inputs
-                   fluidPage(
-                     
-                     textInput("Species", "What species did you catch?"),
-                     textInput("Weight", "Weight of Species"),
-                     textInput("Length", "Length of Species"),
-                     textInput("Latitude", "What's your latitude?"),
-                     textInput("Longitude", "What's yours Longitude?")
-                   ), #end fluid page 
-                   
-                   
-                   # second fluidRow ----
-                   fluidRow(
-                     
-                     #disclaimer box ----
-                     box(width = NULL,
-                         title = tagList(icon("circle-exclamation"), strong("Outputs")),
-                         "Click the button below to output the DDT concentration for your catch!"
+                         textInput("species", "Species:"),
+                         numericInput("latitude", "Latitude:", value = NA),
+                         numericInput("longitude", "Longitude:", value = NA),
+                         actionButton("predict_button", "Predict")
+                         
+                     ), #END data source box  
+                     box(width = NULL, title = "Prediction Result", status = "success", solidHeader = TRUE,
+                         collapsible = TRUE,
+                         verbatimTextOutput("prediction")
                          #style = "background-color: #ff0000;"  # change color as needed
                          
                      ) # END disclaimer box
                      
-                   ), # end second fluid row ----
+                   ), # END first fluidRow
                    
                    fluidPage(
                      actionButton("click", "DDT Concentraiton Advisory")
@@ -242,77 +227,7 @@ body <- dashboardBody(
             ), #end left hand box
             
             
-            #right - hand column ----
-            column(width = 6,
-                   
-                   #first fluidRow ----
-                   
-                   fluidRow(
-                     
-                     # data source box ----
-                     box(width = NULL,
-                         title = tagList(icon("plus"), strong("Series of Consumer Inputs")),
-                         "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination."
-                         
-                     ) #END data source box  
-                     
-                   ), # END first fluidRow
-                   
-                   
-                   # adding text box inputs
-                   fluidPage(
-                     
-                     textInput("Species", "What species did you catch?"),
-                     textInput("Weight", "Weight of Species"),
-                     textInput("Length", "Length of Species"),
-                     textInput("Latitude", "What's your latitude?"),
-                     textInput("Longitude", "What's yours Longitude?")
-                   ), #end fluid page 
-                   
-                   
-                   # second fluidRow ----
-                   fluidRow(
-                     
-                     #disclaimer box ----
-                     box(width = NULL,
-                         title = tagList(icon("circle-exclamation"), strong("Outputs")),
-                         "Click the button below to output the DDT concentration for your catch!"
-                         #style = "background-color: #ff0000;"  # change color as needed
-                         
-                     ) # END disclaimer box
-                     
-                   ), # end second fluid row ----
-                   
-                   fluidPage(
-                     actionButton("click", "DDT Concentraiton Advisory")
-                     
-                   ) #end fluid page 
-                   
-                   
-                   
-            ) # END right - hand column
-            
-    ), # end seafood advisory tab 
-    
-    # Model Testing tabItem
-    tabItem(tabName = "model_testing",
-            
-            fluidRow(
-              box(title = "DDT Concentration Prediction", status = "primary", solidHeader = TRUE,
-                  collapsible = TRUE,
-                  textInput("species", "Species:"),
-                  numericInput("latitude", "Latitude:", value = NA),
-                  numericInput("longitude", "Longitude:", value = NA),
-                  actionButton("predict_button", "Predict")
-              ),
-              box(title = "Prediction Result", status = "success", solidHeader = TRUE,
-                  collapsible = TRUE,
-                  verbatimTextOutput("prediction")
-              )
-            )
-    )
-    
-    # end model testing tab
+    ) # end seafood advisory tab 
     
   ) # END tabItems
   
