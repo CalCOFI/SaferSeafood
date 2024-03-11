@@ -34,29 +34,22 @@
     color: #B6B1A9 !important; /* Hamburger icon color */
 }
 
-.body {
-    background-color: #747678; /* Adjust the color as needed */
-}
-
+/* Customize the boxes */
 .box {
     border-radius: 5px; /* Round the borders */
     border: 1px solid black; /* Add border to box */
 }
 
+/* Customize the box headers */
 .box-header {
   background-color: #182B49; /* Adjust the color as needed */
   color: #B6B1A9; /* text color */
   text-align: center; /* Alignment of box text */
 }
 
+/* Customize the navigation bar */
 .navbar {
   background-color: #00629B!important; /* Adjust the color as needed */
-  color: #B6B1A9; /* text color */
-  border: 1px solid black; /* Add border to box */
-}
-
-.navbar .navbar-inner {
-  background-color: #B6B1A9!important; /* Adjust the color as needed */
   color: #B6B1A9; /* text color */
   border: 1px solid black; /* Add border to box */
 }

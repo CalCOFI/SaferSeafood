@@ -186,7 +186,6 @@ body <- dashboardBody(
                      box(width = NULL, title = "Prediction Result", status = "success", solidHeader = TRUE,
                          collapsible = TRUE,
                          verbatimTextOutput("prediction")
-                         #style = "background-color: #ff0000;"  # change color as needed
                          
                      ) # END Prediction box
                      
