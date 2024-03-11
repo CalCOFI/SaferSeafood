@@ -4,10 +4,11 @@
 /* Change font family and size of the dashboard title */
 .skin-black .main-header .logo {
     text-align: left;
-    font-family: 'brix'; /* Replace 'brix' with the desired font family if you have it */
+    font-family: 'Brix Sans'; 
     font-size: 19px; /* Adjust the font size as needed */
     background-color: #182B49 !important;
     color: #B6B1A9; /* text color */
+    border: 1px solid black;
 }
 
 /* Change background color of header */
@@ -31,11 +32,6 @@
     color: #B6B1A9 !important; /* Change 'your-color' to the desired color */
 }
 
-/* Change color of the hamburger icon when opened */
-.skin-black .sidebar-collapse .sidebar-toggle::before {
-    color: wh#B6B1A9ite !important; /* Change 'your-color' to the desired color */
-}
-
 .body {
     background-color: #747678;
 }
@@ -48,14 +44,17 @@
 .box-header {
   background-color: #182B49;
   color: #B6B1A9; /* text color */
+  text-align: center;
 }
 
 .navbar {
   background-color: #00629B!important;
   color: #B6B1A9; /* text color */
+  border: 1px solid black;
 }
 
 .navbar .navbar-inner {
   background-color: #B6B1A9!important;
   color: #B6B1A9; /* text color */
+  border: 1px solid black;
 }
