@@ -1,8 +1,12 @@
 #........................dashboardHeader.........................
 header <- dashboardHeader(
   
-  #title ----
-  title = "Improving Access to Fish Consumption Advisories and Maintaining Confidence in California's Healthy Seafood Products",
+  title = tags$div(
+    style = "position: relative; width: 100%;",
+    tags$img(src = "scripps-logo.png", 
+             style = "position: absolute; top: 0px; right: -20px; width: 250px; height: 50px;"),
+    "Improving Access to Fish Consumption Advisories and Maintaining Confidence in California's Healthy Seafood Products"
+  ),
   titleWidth = 1200
   
 ) # END dashboardHeader
@@ -30,6 +34,7 @@ body <- dashboardBody(
     
     # welcome tabItem ----
     tabItem(tabName = "welcome",
+            
             
             # left - hand column ----
             column(width = 8,
@@ -239,6 +244,4 @@ body <- dashboardBody(
 
 
 #..................combine all in dashboardPage..................
-dashboardPage(header, sidebar, body)
-
-
+dashboardPage(header, sidebar, body, skin = "black")

@@ -1,14 +1,61 @@
+/* styles.css */
+
+
+/* Change font family and size of the dashboard title */
+.skin-black .main-header .logo {
+    text-align: left;
+    font-family: 'brix'; /* Replace 'brix' with the desired font family if you have it */
+    font-size: 19px; /* Adjust the font size as needed */
+    background-color: #182B49 !important;
+    color: #B6B1A9; /* text color */
+}
+
+/* Change background color of header */
+.skin-black .main-header {
+    background-color: #747678 !important; /* Adjust the color as needed */
+}
+
+/* Change background color of sidebar */
+.skin-black .main-sidebar {
+    background-color: black !important; /* Adjust the color as needed */
+}
+
+/* Change background color of body */
+.skin-black .content-wrapper,
+.skin-black .right-side {
+    background-color: #747678 !important; /* Adjust the color as needed */
+}
+
+/* Change color of the hamburger icon when closed */
+.skin-black .sidebar-toggle::before {
+    color: #B6B1A9 !important; /* Change 'your-color' to the desired color */
+}
+
+/* Change color of the hamburger icon when opened */
+.skin-black .sidebar-collapse .sidebar-toggle::before {
+    color: wh#B6B1A9ite !important; /* Change 'your-color' to the desired color */
+}
+
+.body {
+    background-color: #747678;
+}
+
+.box {
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
 .box-header {
-  background-color: skyblue;
-  color: black; /* text color */
+  background-color: #182B49;
+  color: #B6B1A9; /* text color */
 }
 
 .navbar {
-  background-color: darkslategrey!important;
-  color: white; /* text color */
+  background-color: #00629B!important;
+  color: #B6B1A9; /* text color */
 }
 
 .navbar .navbar-inner {
-  background-color: grey!important;
-  color: white; /* text color */
+  background-color: #B6B1A9!important;
+  color: #B6B1A9; /* text color */
 }
