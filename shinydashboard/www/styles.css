@@ -1,37 +1,37 @@
-/* add calcofi */
 
 /* styles.css */
 
 
 /* Change font family and size of the dashboard title */
+      
 .skin-black .main-header .logo {
-    text-align: left; /* Align dashboard title text */
-    font-family: 'Brix Sans'; /* Change font family */
-    font-size: 19px; /* Adjust the font size as needed */
-    background-color: #182B49 !important; /* Adjust the color as needed */
-    color: #B6B1A9; /* text color */
-    border: 1px solid black; /* Add border to box */
+          text-align: left; /* Align dashboard title text */
+          font-size: 15.2px; /* Adjust the font size as needed */
+          font-weight: bold; /* Make the font bold */
+          background-color: #0c3D6E !important; /* Adjust the background color as needed */
+          color: #FFDB00; /* Change text color */
+          border: 1px solid black; /* Add border to the header */
 }
 
 /* Change header */
 .skin-black .main-header {
-    background-color: #747678 !important; /* Adjust the color as needed */
+    background-color: #333D48 !important; /* Adjust the color as needed */
 }
 
 /* Change sidebar */
 .skin-black .main-sidebar {
-    background-color: black !important; /* Adjust the color as needed */
+    background-color: #191E24  !important; /* Adjust the color as needed */
 }
 
 /* Change  body */
 .skin-black .content-wrapper,
 .skin-black .right-side {
-    background-color: #747678 !important; /* Adjust the color as needed */
+    background-color: #333D48 !important; /* Adjust the color as needed */
 }
 
 /* Change hamburger icon when closed */
 .skin-black .sidebar-toggle::before {
-    color: #B6B1A9 !important; /* Hamburger icon color */
+    color: #FBFBEF !important; /* Hamburger icon color */
 }
 
 /* Customize the boxes */
@@ -42,14 +42,14 @@
 
 /* Customize the box headers */
 .box-header {
-  background-color: #182B49; /* Adjust the color as needed */
-  color: #B6B1A9; /* text color */
+  background-color: #0c3D6E; /* Adjust the color as needed */
+  color: #FBFBEF; /* text color */
   text-align: center; /* Alignment of box text */
 }
 
 /* Customize the navigation bar */
 .navbar {
-  background-color: #00629B!important; /* Adjust the color as needed */
-  color: #B6B1A9; /* text color */
+  background-color: #006189!important; /* Adjust the color as needed */
+  color: #191E24; /* text color */
   border: 1px solid black; /* Add border to box */
 }

@@ -5,6 +5,8 @@ header <- dashboardHeader(
     style = "position: relative; width: 100%;",
     tags$img(src = "scripps-logo.png", 
              style = "position: absolute; top: 0px; right: -20px; width: 250px; height: 50px;"),
+    tags$img(src = "calcofi-logo.png", 
+             style = "position: absolute; top: 0px; right: 235px; width: 50px; height: 50px;"),
     "Improving Access to Fish Consumption Advisories and Maintaining Confidence in California's Healthy Seafood Products"
   ),
   titleWidth = 1200
@@ -31,7 +33,7 @@ body <- dashboardBody(
   
   # welcome tabItem ----
   tabItems(
-    
+     
     # welcome tabItem ----
     tabItem(tabName = "welcome",
             
