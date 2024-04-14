@@ -25,14 +25,7 @@ server <- function(input, output, session) {
   })
   
   # Bayesian regression model for prediction
-  brm.diet.habitat.year.fam.clean <- brm(
-    TotalDDT.trans.non|cens(Censored, Detection.Limit) ~ TotalDDT.sed.trans * trophic_category +
-      TotalDDT.sed.trans * feeding_position + Year + (1|Family), 
-    data = fish.clean.fam,
-    prior = c(
-      set_prior("cauchy(0, 0.5)", class = "b"),
-      set_prior("cauchy(0, 2)", class = "sd"))
-  )
+  model <- brm.diet.habitat.year.fam.clean
   
   
   
@@ -83,7 +76,7 @@ server <- function(input, output, session) {
     )
     
     # Predict using the model and the new_data
-    prediction <- predict(brm.diet.habitat.year.fam.clean, newdata = new_data, re.form = NA)
+    prediction <- predict(model, newdata = new_data, re.form = NA)
     
     return(prediction) # Adjust based on prediction result structure
   }
@@ -98,9 +91,12 @@ server <- function(input, output, session) {
     # Call the prediction function
     prediction <- predict_DDT(species, latitude, longitude)
     
+    # access the Estimate from the resulting dataframe
+    estimate <- prediction[1]
+    
     # Render the prediction in the UI
     output$prediction <- renderPrint({
-      paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid")
+      paste("Predicted DDT Concentration:", round(prediction[1], 2), "ng/g lipid")
     })
   })
 }

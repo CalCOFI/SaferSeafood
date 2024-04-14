@@ -96,3 +96,6 @@ fish.clean.fam <- fish_clean %>%
                                 Family))
 
 
+# Loading Bayesian regression model for prediction
+brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "brm_mod.rda"))
+
