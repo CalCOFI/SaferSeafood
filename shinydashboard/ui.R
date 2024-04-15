@@ -109,20 +109,8 @@ body <- dashboardBody(
             
             fluidRow(
               
-              # input box ----
-              box(width = 4,
-                  
-                  title = tags$strong("Adjust DDT Range:"),
-                  
-                  # sliderInputs ----
-                  sliderInput(inputId = "DDT_slider_input", label = "DDT (ng/g):",
-                              min = min(fish_data$AvgDDT), max = max(fish_data$AvgDDT),
-                              value = c(min(fish_data$AvgDDT), max(fish_data$AvgDDT)))
-                  
-              ), # END input box ----
-              
               # leaflet box ----
-              box(width = 8,
+              box(width = 12,
                   
                   title = tags$strong("Fishing Zones:"),
                   
@@ -130,20 +118,9 @@ body <- dashboardBody(
                   leafletOutput(outputId = "fish_map_output") %>%
                     withSpinner(type = 1, color = "#4287f5")
                   
-                  
-              ), # END leaflet box
-              
-              box(width = 6,
-                  
-                  title = tagList(strong("California Department of Fish and Wildlife")),
-                  "",
-                  tags$img(src = "fishing.png", 
-                           alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories.",
-                           style = "max-width: 80%; display: block; margin: 0 auto;")
-                  
-                  
+
               ) # END fishing zone map box 
-              
+        
               
             ) # END fluidRow
             
@@ -210,8 +187,6 @@ body <- dashboardBody(
 #..................combine all in dashboardPage..................
 
 dashboardPage(header, sidebar, body, skin = "black")
-
-
 
 
 

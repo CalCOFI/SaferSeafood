@@ -8,27 +8,32 @@ server <- function(input, output, session) {
       filter(AvgDDT >= input$DDT_slider_input[1] & AvgDDT <= input$DDT_slider_input[2])
   })
   
-  # build leaflet map ----
   output$fish_map_output <- renderLeaflet({
+    
     leaflet() %>%
+      
       # add titles
       addProviderTiles(providers$Esri.WorldImagery) %>%
+      
+      
       # set view over CA
-      setView(lng = -119.784, lat = 30.0906, zoom = 6) %>%
+      setView(lng = -117.784, lat = 30.0906, zoom = 5) %>%
+      
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
+      
       # add markers
       addMarkers(data = filtered_fish_data(),
-                 lng = ~CompositeTargetLongitude, lat = ~CompositeTargetLatitude,
-                 popup = ~paste("Site Name: ", CompositeStationArea, "<br>",
-                                "Avg DDT: ", AvgDDT, "<br>"))
+                 lng = filtered_fish_data()$CompositeTargetLongitude, lat = filtered_fish_data()$CompositeTargetLatitude,
+                 popup = paste0("Site Name: ", filtered_fish_data()$CompositeStationArea, "<br>",
+                                "Avg DDT: ", filtered_fish_data()$AvgDDT, "<br>"))
   })
+  
   
   # Bayesian regression model for prediction
   model <- brm.diet.habitat.year.fam.clean
   
-  
-  
+
   ## Functions
   
   calculateDDTValue <- function(latitude, longitude) {
