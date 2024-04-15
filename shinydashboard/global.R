@@ -57,18 +57,6 @@ fish_clean_names <- as.data.frame(unique(fish_clean$scientific_name)) %>%
 # get the unique species names - should be 61
 species_name <- unique(fish_clean$scientific_name)
 
-# look at the list of species using the names - these are different sizes
-#species_info <- species(species_list = species_name)
-
-
-# Comparing the number of fish in the fish_clean and the fish_lh
-#fish_clean_names <- as.data.frame(unique(fish_clean$scientific_name)) %>% 
-#mutate(species = `unique(fish_clean$scientific_name)`) %>% 
-#dplyr::select('species')
-
-#fish_lh_names <- as.data.frame(unique(species_info$species))
-
-
 # Recode them into the names that are included in fishbase 
 
 # update the names of the fish to match fishbase
@@ -77,8 +65,7 @@ species_name_clean <- as.data.frame(species_name) %>%
                                          species_name ==  "Rhinobatos productus" ~ "Pseudobatos productus",
                                          TRUE ~ species_name))
 
-# look at the taxa of the fish
-
+# load fish taxa
 taxa <- rfishbase::load_taxa()
 
 # filter the taxa based on name 
@@ -94,6 +81,9 @@ fish.clean.fam <- fish_clean %>%
   dplyr::mutate(Family = ifelse(scientific_name == "Doryteuthis opalescens",
                                 "Loliginidae",
                                 Family))
+
+# load in dataframe with cleaned species name, and life history characterstics
+fish_lh <- read_csv("data/species_common_science.csv") 
 
 
 # Loading Bayesian regression model for prediction

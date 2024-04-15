@@ -26,9 +26,7 @@ server <- function(input, output, session) {
   
   # Bayesian regression model for prediction
   model <- brm.diet.habitat.year.fam.clean
-  
-  
-  
+    
   ## Functions
   
   calculateDDTValue <- function(latitude, longitude) {
@@ -36,24 +34,9 @@ server <- function(input, output, session) {
     return(0.735932630)  # Placeholder constant value
   }
   
-  determineTrophicCategory <- function(species) {
-    # Placeholder logic to determine trophic category based on species
-    return("Secondary Carnivore")  # Placeholder constant value
-  }
-  
-  determineFeedingPosition <- function(species) {
-    # Placeholder logic to determine feeding position based on species
-    return("Benthopelagic")  # Placeholder constant value
-  }
-  
   getYear <- function(Year) {
     # Placeholder logic to get the year
     return(2)  # Placeholder constant value
-  }
-  
-  determineFamily <- function(species) {
-    # Placeholder logic to determine family based on species
-    return("Sciaenidae")  # Placeholder constant value
   }
   
   
@@ -62,28 +45,37 @@ server <- function(input, output, session) {
     # Determine predictor values based on input
     
     TotalDDT_value = calculateDDTValue(latitude, longitude)  
-    trophic_category_value = determineTrophicCategory(species) 
-    feeding_position_value = determineFeedingPosition(species) 
     Year_value = getYear()  # function or logic
-    Family_value = determineFamily(species) 
     
+    # filer the fish life history dataframe for the species inputted by the user
+    input_species <- fish_lh %>% 
+      filter(CompositeCommonName %in% species)
+    
+    # create data frame with values based on user input and life history
     new_data <- data.frame(
       TotalDDT.sed.trans = TotalDDT_value,
-      trophic_category = trophic_category_value,
-      feeding_position = feeding_position_value,
+      trophic_category = input_species$trophic_category,
+      feeding_position = input_species$feeding_position,
       Year = Year_value,
-      Family = Family_value
+      Family = input_species$Family
     )
     
     # Predict using the model and the new_data
     prediction <- predict(model, newdata = new_data, re.form = NA)
     
-    return(prediction) # Adjust based on prediction result structure
+    # access the Estimate from the resulting dataframe
+    estimate <- prediction[1]
+    
+    # undo the transformation on the data of log1p()
+    estimate_trans <- exp(estimate) - 1
+    
+    return(estimate_trans) # Adjust based on prediction result structure
   }
   
   
   # In your server function, when calling predict_DDT, ensure you pass the right arguments:
   observeEvent(input$predict_button, {
+    
     species <- input$CompositeCommonName
     latitude <- input$CompositeTargetLatitude
     longitude <- input$CompositeTargetLongitude
@@ -91,12 +83,10 @@ server <- function(input, output, session) {
     # Call the prediction function
     prediction <- predict_DDT(species, latitude, longitude)
     
-    # access the Estimate from the resulting dataframe
-    estimate <- prediction[1]
     
     # Render the prediction in the UI
     output$prediction <- renderPrint({
-      paste("Predicted DDT Concentration:", round(prediction[1], 2), "ng/g lipid")
+      paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid")
     })
   })
 }

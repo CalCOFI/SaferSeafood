@@ -6,7 +6,7 @@ header <- dashboardHeader(
              style = "position: absolute; top: 0px; right: -20px; width: 250px; height: 50px;"),
     tags$img(src = "calcofi-logo.png", 
              style = "position: absolute; top: 0px; right: 235px; width: 50px; height: 50px;"),
-    "Improving Access to Fish Consumption Advisories and Maintaining Confidence in California's Healthy Seafood Products"),
+    "SeaferSeafood"),
   titleWidth = 1200
   
 ) # END dashboardHeader
@@ -21,9 +21,15 @@ sidebar <- dashboardSidebar(
   #sidebarMenu ----
   sidebarMenu(
     
-    menuItem(text = "Welcome", tabName = "welcome", icon = icon("star")),
-    menuItem(text = "Dashboard", tabName = "dashboard", icon = icon("gauge")),
-    menuItem(text = "Seafood Advisory", tabName = "seafood_advisory", icon = icon("circle-exclamation"))
+    menuItem(text = "About", tabName = "about", icon = icon("star"), # previously welcome
+             menuSubItem(text = "Project", tabName = "project", icon = icon("star")),
+             menuSubItem(text = "User Manual", tabName = "user_manual", icon = icon("circle-exclamation")),
+             menuSubItem(text = "Authors", tabName = "authors", icon = icon("gauge")),
+             menuSubItem(text = "Data", tabName = "data", icon = icon("gauge"))),
+    menuItem(text = "Whats In My Catch?", tabName = "whats_in_my_catch", icon = icon("gauge")), # previously dashboard
+    menuItem(text = "Resources", tabName = "resources", icon = icon("circle-exclamation"), # previously seafood_advisory
+             menuSubItem(text = "Fish Identification", tabName = "fish_id", icon = icon("circle-exclamation")),
+             menuSubItem(text = "Research", tabName = "research", icon = icon("circle-exclamation"))) 
     
   ) # END sidebarMenu
 ) # end dashboard Sidebar
@@ -33,18 +39,18 @@ body <- dashboardBody(
   
   tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
   
-  # welcome tabItem ----
+  # about tabItem ----
   tabItems(
     
-    # welcome tabItem ----
-    tabItem(tabName = "welcome",
+    # about tabItem ----
+    tabItem(tabName = "project",
             
             # left - hand column ----
-            column(width = 8,
+            column(width = 12,
                    
                    #background info box ----
                    box(width = NULL,
-                       title = tagList(icon("water"), strong("Background")),
+                       title = tagList(strong("Project Background")),
                        "The harmful effects of Dichlorodiphenyltrichloroethane (DDT), and its breakdown products (DDX), have triggered widespread concerns, particularly due to the recent rediscovery of a barrel field containing DDT-laced sludge off the Southern California coast. This alarming find has not only captured the public's attention but has also highlighted its potential threats to human and environmental health. The negative side effects of DDT, including heightened cancer risks, premature births, developmental abnormalities, and neurological diseases in both humans and animals, have raised concerns of consuming seafood from the contaminated area. The consequences go beyond immediate health worries, also affecting the local economy and the well-being of recreational fishing communities.",
                        tags$img(src = "dumpsite.png.jpeg", 
                                 alt = "Map of fishing zones and the number of fish samples through time, by region (inset). Nearshore 708 polygons are derived from McLaughlin et al. (2021) and pink blocks are California Department of Fish and Game 256 km2 709 fishing blocks.",
@@ -54,8 +60,13 @@ body <- dashboardBody(
                    
             ), # END left-hand column 
             
+    ), # END about tabItem
+    
+    # data tabItem ----
+    tabItem(tabName = "data",
+            
             #right - hand column ----
-            column(width = 4,
+            column(width = 8,
                    
                    #first fluidRow ----
                    
@@ -100,10 +111,11 @@ body <- dashboardBody(
                    
             ) # END right - hand column
             
-    ), # END welcome tabItem
+            
+    ), #END data tabItem
     
-    # dashboard tabItem ----
-    tabItem(tabName = "dashboard",
+    # fish_identification tabItem ----
+    tabItem(tabName = "fish_identification",
             
             # fluidRow ----
             
@@ -148,10 +160,10 @@ body <- dashboardBody(
             ) # END fluidRow
             
             
-    ), #END dashboard tabItem
+    ), #END fish_identification tabItem
     
-    # seafood_advisory tabItem
-    tabItem(tabName = "seafood_advisory",
+    # whats_in_my_catch tabItem
+    tabItem(tabName = "whats_in_my_catch",
             
             # Left-hand column content
             column(width = 6,
@@ -198,7 +210,7 @@ body <- dashboardBody(
                    
             ) # END right-hand column
             
-    ) # end seafood advisory tabItem
+    ) # end whats_in_my_catch tabItem
     
     
   ) # END tabItems
