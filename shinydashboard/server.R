@@ -6,7 +6,7 @@ server <- function(input, output, session) {
   filtered_fish_data <- reactive(
     fish_data %>%
       filter(AvgDDT >= input$DDT_slider_input[1] & AvgDDT <= input$DDT_slider_input[2])
-  )}
+  )
   
   # build leaflet map ----
   output$fish_map_output <- renderLeaflet({
@@ -99,3 +99,4 @@ server <- function(input, output, session) {
       paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid")
     })
   })
+}
