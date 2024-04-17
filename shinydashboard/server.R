@@ -72,13 +72,12 @@ server <- function(input, output, session) {
     return(estimate_trans) # Adjust based on prediction result structure
   }
   
-  
   # In your server function, when calling predict_DDT, ensure you pass the right arguments:
   observeEvent(input$predict_button, {
     
     species <- input$CompositeCommonName
-    latitude <- input$CompositeTargetLatitude
-    longitude <- input$CompositeTargetLongitude
+    latitude <- input$lat 
+    longitude <- input$long
     
     # Call the prediction function
     prediction <- predict_DDT(species, latitude, longitude)
@@ -88,5 +87,18 @@ server <- function(input, output, session) {
     output$prediction <- renderPrint({
       paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid")
     })
+  })
+  
+  
+  output$lat <- renderPrint({
+    input$lat
+  })
+  
+  output$long <- renderPrint({
+    input$long
+  })
+  
+  output$geolocation <- renderPrint({
+    input$geolocation
   })
 }

@@ -118,46 +118,79 @@ body <- dashboardBody(
     tabItem(tabName = "fish_identification",
             
             # fluidRow ----
+            column(width = 8,
+            fluidPage(
+              
+              titlePanel("Using Geolocation"),
+              
+              tags$script('
+      $(document).ready(function () {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+              
+        function onError (err) {
+          Shiny.onInputChange("geolocation", false);
+        }
+              
+        function onSuccess (position) {
+          setTimeout(function () {
+            var coords = position.coords;
+            console.log(coords.latitude + ", " + coords.longitude);
+            Shiny.onInputChange("geolocation", true);
+            Shiny.onInputChange("lat", coords.latitude);
+            Shiny.onInputChange("long", coords.longitude);
+          }, 1100)
+        }
+      });
+              '),
+      
+      # Show a plot of the generated distribution
+      fluidRow(column(width = 2,
+                      verbatimTextOutput("lat"),
+                      verbatimTextOutput("long"),
+                      verbatimTextOutput("geolocation"))
+      )
+            )
+            )
             
-            fluidRow(
+            # fluidRow(
+            #   
+            #   # input box ----
+            #   box(width = 4,
+            #       
+            #       title = tags$strong("Adjust DDT Range:"),
+            #       
+            #       # sliderInputs ----
+            #       sliderInput(inputId = "DDT_slider_input", label = "DDT (ng/g):",
+            #                   min = min(fish_data$AvgDDT), max = max(fish_data$AvgDDT),
+            #                   value = c(min(fish_data$AvgDDT), max(fish_data$AvgDDT)))
+            #       
+            #   ), # END input box ----
+            #   
+            #   # leaflet box ----
+            #   box(width = 2,
+            #       
+            #       title = tags$strong("Fishing Zones:"),
+            #       
+            #       #leafleft output ----
+            #       leafletOutput(outputId = "fish_map_output") %>%
+            #         withSpinner(type = 1, color = "#4287f5")
+            #       
+            #       
+            #   ), # END leaflet box
+            #   
+            #   box(width = 6,
+            #       
+            #       title = tagList(strong("California Department of Fish and Wildlife")),
+            #       "",
+            #       tags$img(src = "fishing.png", 
+            #                alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories.",
+            #                style = "max-width: 80%; display: block; margin: 0 auto;")
+            #       
+            #       
+            #   ) # END fishing zone map box 
+            #   
               
-              # input box ----
-              box(width = 4,
-                  
-                  title = tags$strong("Adjust DDT Range:"),
-                  
-                  # sliderInputs ----
-                  sliderInput(inputId = "DDT_slider_input", label = "DDT (ng/g):",
-                              min = min(fish_data$AvgDDT), max = max(fish_data$AvgDDT),
-                              value = c(min(fish_data$AvgDDT), max(fish_data$AvgDDT)))
-                  
-              ), # END input box ----
-              
-              # leaflet box ----
-              box(width = 8,
-                  
-                  title = tags$strong("Fishing Zones:"),
-                  
-                  #leafleft output ----
-                  leafletOutput(outputId = "fish_map_output") %>%
-                    withSpinner(type = 1, color = "#4287f5")
-                  
-                  
-              ), # END leaflet box
-              
-              box(width = 6,
-                  
-                  title = tagList(strong("California Department of Fish and Wildlife")),
-                  "",
-                  tags$img(src = "fishing.png", 
-                           alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories.",
-                           style = "max-width: 80%; display: block; margin: 0 auto;")
-                  
-                  
-              ) # END fishing zone map box 
-              
-              
-            ) # END fluidRow
+            #) # END fluidRow
             
             
     ), #END fish_identification tabItem
@@ -195,8 +228,8 @@ body <- dashboardBody(
                          status = "primary", collapsible = TRUE,
                          "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination.",
                          textInput("CompositeCommonName", "Species:"),
-                         numericInput("CompositeTargetLatitude", "Latitude:", value = NULL),
-                         numericInput("CompositeTargetLongitude", "Longitude:", value = NULL),
+                         numericInput(verbatimTextOutput(outputId = "lat"), "Latitude:", value = NULL),
+                         numericInput(verbatimTextOutput(outputId = "long"), "Longitude:", value = NULL),
                          actionButton("predict_button", "Predict")
                      ), 
                      
@@ -222,9 +255,6 @@ body <- dashboardBody(
 #..................combine all in dashboardPage..................
 
 dashboardPage(header, sidebar, body, skin = "black")
-
-
-
 
 
 
