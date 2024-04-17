@@ -3,10 +3,10 @@ server <- function(input, output, session) {
   
   
   # filter fish data ----
-  filtered_fish_data <- reactive({
+  filtered_fish_data <- reactive(
     fish_data %>%
       filter(AvgDDT >= input$DDT_slider_input[1] & AvgDDT <= input$DDT_slider_input[2])
-  })
+  )}
   
   # build leaflet map ----
   output$fish_map_output <- renderLeaflet({
@@ -22,11 +22,22 @@ server <- function(input, output, session) {
                  lng = ~CompositeTargetLongitude, lat = ~CompositeTargetLatitude,
                  popup = ~paste("Site Name: ", CompositeStationArea, "<br>",
                                 "Avg DDT: ", AvgDDT, "<br>"))
+    
+    observeEvent(input$map_marker_click, {
+      data$clickedMarker <- input$map_marker_click
+      print(data$clickedMarker)
+    })
+    observeEvent(input$map_click, {
+      data$clickedMarker <- NULL
+      print(data$clickedMarker)
+    })
+
+    
   })
   
   # Bayesian regression model for prediction
   model <- brm.diet.habitat.year.fam.clean
-    
+
   ## Functions
   
   calculateDDTValue <- function(latitude, longitude) {
@@ -88,17 +99,3 @@ server <- function(input, output, session) {
       paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid")
     })
   })
-  
-  
-  output$lat <- renderPrint({
-    input$lat
-  })
-  
-  output$long <- renderPrint({
-    input$long
-  })
-  
-  output$geolocation <- renderPrint({
-    input$geolocation
-  })
-}
