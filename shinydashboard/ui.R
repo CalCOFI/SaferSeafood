@@ -169,39 +169,77 @@ body <- dashboardBody(
     # whats_in_my_catch tabItem
     tabItem(tabName = "whats_in_my_catch",
             
-            # Left-hand column content
-            column(width = 6,
-                   
-                   #other chemical advisory info box
-                   box(width = NULL,
-                       title = tagList(strong("Mercury and PCB Consumption Advice")),
-                       "",
-                       tags$img(src = "fish.png", 
-                                alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories.",
-                                style = "max-width: 90%; display: block; margin: 0 auto;")
-                   ), # END chemical advisory info box 
-                   
-                   box(width = NULL,
-                       title = tagList(strong("Following Guidelines")),
-                       "",
-                       tags$img(src = "advising-fish-guide.png",
-                                alt = "Guidelines",
-                                style = "max-width: 90%; display: block; margin: 0 auto;")
-                   ), # end GUIDELINES box 
-                   
-                   # add map box
-                   box(width = NULL,
+                     # fluidRow ----
+               fluidPage(
+                              
+                              titlePanel("Using Geolocation"),
+                              
+                              tags$script('
+                  $(document).ready(function () {
+                    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+            
+                    function onError (err) {
+                      Shiny.onInputChange("geolocation", false);
+                    }
+            
+                    function onSuccess (position) {
+                      setTimeout(function () {
+                        var coords = position.coords;
+                        console.log(coords.latitude + ", " + coords.longitude);
+                        Shiny.onInputChange("geolocation", true);
+                        Shiny.onInputChange("lat", coords.latitude);
+                        Shiny.onInputChange("long", coords.longitude);
+                      }, 1100)
+                    }
+                  });
+              '),
+              
+              # Left-hand column content
+              fluidRow(width = NULL,
                        
-                       leafletOutput(outputId = "fish_map_output")
-                       
+                       # add map box
+                       box(width = NULL,
+                           
+                           leafletOutput(outputId = "location_output")
+                           
+                           
                        ) # END of map box
+              )
+
+                            )
+              
+              
                    
-            ), #end left hand box
+                   # #other chemical advisory info box
+                   # box(width = NULL,
+                   #     title = tagList(strong("Mercury and PCB Consumption Advice")),
+                   #     "",
+                   #     tags$img(src = "fish.png", 
+                   #              alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories.",
+                   #              style = "max-width: 90%; display: block; margin: 0 auto;")
+                   # ), # END chemical advisory info box 
+                   # 
+                   # box(width = NULL,
+                   #     title = tagList(strong("Following Guidelines")),
+                   #     "",
+                   #     tags$img(src = "advising-fish-guide.png",
+                   #              alt = "Guidelines",
+                   #              style = "max-width: 90%; display: block; margin: 0 auto;")
+                   # ) # end GUIDELINES box 
+                   
+                   
+            ), #end map row
+            
+            # Show a plot of the generated distribution
+            fluidRow(column(width = 9,
+                            verbatimTextOutput("lat"),
+                            verbatimTextOutput("long"),
+                            verbatimTextOutput("geolocation"))
+            ),
             
             #right - hand column
-            column(width = 6,
-                   fluidRow(
-                     box(width = NULL,
+            fluidRow(width = 3,
+                   box(width = NULL,
                          title = tagList(icon("plus"), strong("Series of Consumer Inputs")), 
                          status = "primary", collapsible = TRUE,
                          "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination.",
@@ -218,88 +256,51 @@ body <- dashboardBody(
                      )  #END Prediction Box
                      
                    ) # END first fluidRow
-                   
-            ) # END right-hand column
             
     ), # end whats_in_my_catch tabItem
     
     # fish_identification tabItem ----
     tabItem(tabName = "fish_id",
             
-            
-            # fluidRow ----
-            column(width = 8,
-                   fluidPage(
-                     
-                     titlePanel("Using Geolocation"),
-                     
-                     tags$script('
-      $(document).ready(function () {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-
-        function onError (err) {
-          Shiny.onInputChange("geolocation", false);
-        }
-
-        function onSuccess (position) {
-          setTimeout(function () {
-            var coords = position.coords;
-            console.log(coords.latitude + ", " + coords.longitude);
-            Shiny.onInputChange("geolocation", true);
-            Shiny.onInputChange("lat", coords.latitude);
-            Shiny.onInputChange("long", coords.longitude);
-          }, 1100)
-        }
-      });
-              '),
-      
-      # Show a plot of the generated distribution
-      fluidRow(column(width = 2,
-                      verbatimTextOutput("lat"),
-                      verbatimTextOutput("long"),
-                      verbatimTextOutput("geolocation"))
-      )
-                   )
-            )
       
       # fluidRow(
-      #   
+      #
       #   # input box ----
       #   box(width = 4,
-      #       
+      #
       #       title = tags$strong("Adjust DDT Range:"),
-      #       
+      #
       #       # sliderInputs ----
       #       sliderInput(inputId = "DDT_slider_input", label = "DDT (ng/g):",
       #                   min = min(fish_data$AvgDDT), max = max(fish_data$AvgDDT),
       #                   value = c(min(fish_data$AvgDDT), max(fish_data$AvgDDT)))
-      #       
+      #
       #   ), # END input box ----
-      #   
+      #
       #   # leaflet box ----
       #   box(width = 2,
-      #       
+      #
       #       title = tags$strong("Fishing Zones:"),
-      #       
+      #
       #       #leafleft output ----
       #       leafletOutput(outputId = "fish_map_output") %>%
       #         withSpinner(type = 1, color = "#4287f5")
-      #       
-      #       
+      #
+      #
       #   ), # END leaflet box
-      #   
+      #
       #   box(width = 6,
-      #       
+      #
       #       title = tagList(strong("California Department of Fish and Wildlife")),
       #       "",
-      #       tags$img(src = "fishing.png", 
+      #       tags$img(src = "fishing.png",
       #                alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories.",
       #                style = "max-width: 80%; display: block; margin: 0 auto;")
-      #       
-      #       
-      #   ) # END fishing zone map box 
-      #   
-      
+      #
+      #
+      #   ) # END fishing zone map box
+      #
+
       #) # END fluidRow
       
       
