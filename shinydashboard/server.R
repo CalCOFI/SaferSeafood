@@ -4,8 +4,7 @@ server <- function(input, output, session) {
   
   # filter fish data ----
   filtered_fish_data <- reactive(
-    fish_data %>%
-      filter(AvgDDT >= input$DDT_slider_input[1] & AvgDDT <= input$DDT_slider_input[2])
+    fish_data
   )
   
   # build leaflet map ----
@@ -23,14 +22,14 @@ server <- function(input, output, session) {
                  popup = ~paste("Site Name: ", CompositeStationArea, "<br>",
                                 "Avg DDT: ", AvgDDT, "<br>"))
     
-    observeEvent(input$map_marker_click, {
-      data$clickedMarker <- input$map_marker_click
-      print(data$clickedMarker)
-    })
-    observeEvent(input$map_click, {
-      data$clickedMarker <- NULL
-      print(data$clickedMarker)
-    })
+    # observeEvent(input$map_marker_click, {
+    #   data$clickedMarker <- input$map_marker_click
+    #   print(data$clickedMarker)
+    # })
+    # observeEvent(input$map_click, {
+    #   data$clickedMarker <- NULL
+    #   print(data$clickedMarker)
+    # })
 
     
   })

@@ -62,6 +62,58 @@ body <- dashboardBody(
             
     ), # END about tabItem
     
+    # about tabItem ----
+    tabItem(tabName = "user_manual",
+            
+            # column ----
+            column(width = 12,
+                   
+                   #background info box ----
+                   box(width = NULL,
+                       title = tagList(strong("How to Use:")),
+                       "Different sections in this area can detail how to use the applciation and how to apply the outputs to your life."
+                   ), # END background info box 
+                   
+                   #section 1:  box ----
+                   box(width = 4,
+                       title = tagList(strong("Section 1:")),
+                       "This can be the first section"
+                   ), # END section 1: box
+                   
+                   #section 2:  box ----
+                   box(width = 4,
+                       title = tagList(strong("Section 2:")),
+                       "This can be another section"
+                   ), # END section 2: box
+                   
+                   #section 3:  box ----
+                   box(width = 4,
+                       title = tagList(strong("Section 3:")),
+                       "This can be another section"
+                   ) # END section 3: box
+                   
+            ), # END left-hand column 
+            
+    ), # END about tabItem
+    
+    # about tabItem ----
+    tabItem(tabName = "authors",
+            
+            # left - hand column ----
+            column(width = 12,
+                   
+                   #background info box ----
+                   box(width = NULL,
+                       title = tagList(strong("Authors")),
+                       p("This application was developed as part of a Masters in Environmental Data Science Capstone project as part of the Bren School, for Scripps and CalCOFI."),
+                       p("This project was completed by a group of graduate students at the Bren School of Environmental Science & Management, UC Santa Barbara. Team members include Hope Hahn, Luna Herschenfeld-Catalán, Benjamin Versteeg, and Kate Becker with guidance from our Faculty Advisor Bruce Kendall and Capstone Advisor Carmen Galaz-García.")
+                       
+                   ) # END author info box 
+                  
+            ) # END left-hand column 
+            
+    ), # END about tabItem
+    
     # data tabItem ----
     tabItem(tabName = "data",
             
@@ -114,87 +166,6 @@ body <- dashboardBody(
             
     ), #END data tabItem
     
-    # fish_identification tabItem ----
-    tabItem(tabName = "fish_identification",
-            
-            # fluidRow ----
-            column(width = 8,
-            fluidPage(
-              
-              titlePanel("Using Geolocation"),
-              
-              tags$script('
-      $(document).ready(function () {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-              
-        function onError (err) {
-          Shiny.onInputChange("geolocation", false);
-        }
-              
-        function onSuccess (position) {
-          setTimeout(function () {
-            var coords = position.coords;
-            console.log(coords.latitude + ", " + coords.longitude);
-            Shiny.onInputChange("geolocation", true);
-            Shiny.onInputChange("lat", coords.latitude);
-            Shiny.onInputChange("long", coords.longitude);
-          }, 1100)
-        }
-      });
-              '),
-      
-      # Show a plot of the generated distribution
-      fluidRow(column(width = 2,
-                      verbatimTextOutput("lat"),
-                      verbatimTextOutput("long"),
-                      verbatimTextOutput("geolocation"))
-      )
-            )
-            )
-            
-            # fluidRow(
-            #   
-            #   # input box ----
-            #   box(width = 4,
-            #       
-            #       title = tags$strong("Adjust DDT Range:"),
-            #       
-            #       # sliderInputs ----
-            #       sliderInput(inputId = "DDT_slider_input", label = "DDT (ng/g):",
-            #                   min = min(fish_data$AvgDDT), max = max(fish_data$AvgDDT),
-            #                   value = c(min(fish_data$AvgDDT), max(fish_data$AvgDDT)))
-            #       
-            #   ), # END input box ----
-            #   
-            #   # leaflet box ----
-            #   box(width = 2,
-            #       
-            #       title = tags$strong("Fishing Zones:"),
-            #       
-            #       #leafleft output ----
-            #       leafletOutput(outputId = "fish_map_output") %>%
-            #         withSpinner(type = 1, color = "#4287f5")
-            #       
-            #       
-            #   ), # END leaflet box
-            #   
-            #   box(width = 6,
-            #       
-            #       title = tagList(strong("California Department of Fish and Wildlife")),
-            #       "",
-            #       tags$img(src = "fishing.png", 
-            #                alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories.",
-            #                style = "max-width: 80%; display: block; margin: 0 auto;")
-            #       
-            #       
-            #   ) # END fishing zone map box 
-            #   
-              
-            #) # END fluidRow
-            
-            
-    ), #END fish_identification tabItem
-    
     # whats_in_my_catch tabItem
     tabItem(tabName = "whats_in_my_catch",
             
@@ -216,7 +187,14 @@ body <- dashboardBody(
                        tags$img(src = "advising-fish-guide.png",
                                 alt = "Guidelines",
                                 style = "max-width: 90%; display: block; margin: 0 auto;")
-                   ) # end GUIDELINES box 
+                   ), # end GUIDELINES box 
+                   
+                   # add map box
+                   box(width = NULL,
+                       
+                       leafletOutput(outputId = "fish_map_output")
+                       
+                       ) # END of map box
                    
             ), #end left hand box
             
@@ -243,7 +221,106 @@ body <- dashboardBody(
                    
             ) # END right-hand column
             
-    ) # end whats_in_my_catch tabItem
+    ), # end whats_in_my_catch tabItem
+    
+    # fish_identification tabItem ----
+    tabItem(tabName = "fish_id",
+            
+            
+            # fluidRow ----
+            column(width = 8,
+                   fluidPage(
+                     
+                     titlePanel("Using Geolocation"),
+                     
+                     tags$script('
+      $(document).ready(function () {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+        function onError (err) {
+          Shiny.onInputChange("geolocation", false);
+        }
+
+        function onSuccess (position) {
+          setTimeout(function () {
+            var coords = position.coords;
+            console.log(coords.latitude + ", " + coords.longitude);
+            Shiny.onInputChange("geolocation", true);
+            Shiny.onInputChange("lat", coords.latitude);
+            Shiny.onInputChange("long", coords.longitude);
+          }, 1100)
+        }
+      });
+              '),
+      
+      # Show a plot of the generated distribution
+      fluidRow(column(width = 2,
+                      verbatimTextOutput("lat"),
+                      verbatimTextOutput("long"),
+                      verbatimTextOutput("geolocation"))
+      )
+                   )
+            )
+      
+      # fluidRow(
+      #   
+      #   # input box ----
+      #   box(width = 4,
+      #       
+      #       title = tags$strong("Adjust DDT Range:"),
+      #       
+      #       # sliderInputs ----
+      #       sliderInput(inputId = "DDT_slider_input", label = "DDT (ng/g):",
+      #                   min = min(fish_data$AvgDDT), max = max(fish_data$AvgDDT),
+      #                   value = c(min(fish_data$AvgDDT), max(fish_data$AvgDDT)))
+      #       
+      #   ), # END input box ----
+      #   
+      #   # leaflet box ----
+      #   box(width = 2,
+      #       
+      #       title = tags$strong("Fishing Zones:"),
+      #       
+      #       #leafleft output ----
+      #       leafletOutput(outputId = "fish_map_output") %>%
+      #         withSpinner(type = 1, color = "#4287f5")
+      #       
+      #       
+      #   ), # END leaflet box
+      #   
+      #   box(width = 6,
+      #       
+      #       title = tagList(strong("California Department of Fish and Wildlife")),
+      #       "",
+      #       tags$img(src = "fishing.png", 
+      #                alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories.",
+      #                style = "max-width: 80%; display: block; margin: 0 auto;")
+      #       
+      #       
+      #   ) # END fishing zone map box 
+      #   
+      
+      #) # END fluidRow
+      
+      
+    ), #END fish_identification tabItem
+    
+    # research tabItem ----
+    tabItem(tabName = "research",
+            
+            # full column ----
+            column(width = 12,
+                   
+                   #collaboration info box ----
+                   box(width = NULL,
+                       title = tagList(strong("Research and Collaborations")),
+                       "Here we can add any future collaborations and research that may be added in the future. This could also be a place to have links to other sites and plug anyone else."
+                       
+                   ) # END collaboration info box 
+                   
+            ), # END column 
+            
+    ) # END research tabItem
     
     
   ) # END tabItems
