@@ -37,6 +37,9 @@ sidebar <- dashboardSidebar(
 #..........................dashboardBody.........................
 body <- dashboardBody(
   
+  # shinyjs::useShinyjs(),
+  # tags$script(src = "functions.js"),
+  
   tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
   
   # about tabItem ----
@@ -169,17 +172,25 @@ body <- dashboardBody(
     # whats_in_my_catch tabItem
     tabItem(tabName = "whats_in_my_catch",
             
-            # fluidRow ---- content
+              # fluidRow ---- content
             fluidRow(width = NULL,
                      
                      # add map box
                      box(width = NULL,
                          
-                         leafletOutput(outputId = "location_output")
-                         
-                         
-                     ) # END of map box
-            ), #end map row
+                         leafletOutput(outputId = "location_output"),
+                         absolutePanel(style = "max-width: 30%;background-color: rgba(255,255,255,0.7);padding: 0px 10px 0px 10px;border-radius: 10px",top = 10, right = 10,
+                                       selectizeInput(inputId = "selectSpecies_output", label = "Species_output",
+                                                      choices = species_name,
+                                         options = list(
+                                           placeholder = 'Please select a species',
+                                           onInitialize = I('function() { this.setValue(""); }')
+                                         )
+                                       )
+                                       
+                                       
+                         ) # END of map box
+            )), #end map row
             
     # #other chemical advisory info box
     # box(width = NULL,
@@ -197,14 +208,7 @@ body <- dashboardBody(
                    #              alt = "Guidelines",
                    #              style = "max-width: 90%; display: block; margin: 0 auto;")
                    # ) # end GUIDELINES box 
-                   
-            
-            # Show a plot of the generated distribution
-            fluidRow(column(width = 9,
-                            verbatimTextOutput("lat"),
-                            verbatimTextOutput("long"),
-                            verbatimTextOutput("geolocation"))
-            ),
+                  
             
             #right - hand column
             fluidRow(width = 3,
@@ -230,7 +234,6 @@ body <- dashboardBody(
     
     # fish_identification tabItem ----
     tabItem(tabName = "fish_id",
-            
       
       # fluidRow(
       #

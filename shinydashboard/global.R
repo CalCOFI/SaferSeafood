@@ -5,6 +5,7 @@ library(shinyjs)
 library(shinyWidgets)
 library(tidyverse)
 library(leaflet)
+library(leaflet.extras)
 library(shinycssloaders)
 library(extrafont)
 library(showtext)
@@ -24,6 +25,8 @@ library(rstanarm)
 library(sf)
 library(terra)
 library(leaflet)
+
+reactlog_enable()
 
 if("pacman" %in% installed.packages() == FALSE){install.packages("pacman")}
 pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
@@ -88,4 +91,6 @@ fish_lh <- read_csv("data/species_common_science.csv")
 
 # Loading Bayesian regression model for prediction
 brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "brm_mod.rda"))
+
+
 

@@ -29,6 +29,7 @@ server <- function(input, output, session) {
     
   })
   
+  
   # build data exploration leaflet map ----
   output$fish_map_output <- renderLeaflet({
     leaflet() %>%
@@ -43,6 +44,12 @@ server <- function(input, output, session) {
                  lng = ~CompositeTargetLongitude, lat = ~CompositeTargetLatitude,
                  popup = ~paste("Site Name: ", CompositeStationArea, "<br>",
                                 "Avg DDT: ", AvgDDT, "<br>"))
+    
+    # observeEvent(input$click, {
+    #   
+    #   session$sendCustomMessage("onMapClick", click)
+    #   
+    # })
     
     # observeEvent(input$map_marker_click, {
     #   data$clickedMarker <- input$map_marker_click
@@ -104,6 +111,8 @@ server <- function(input, output, session) {
     return(estimate_trans) # Adjust based on prediction result structure
   }
   
+  updateSelectizeInput(session, 'CompositeCommonName', choices = species_name_clean, server = TRUE)
+  
   # In your server function, when calling predict_DDT, ensure you pass the right arguments:
   observeEvent(input$predict_button, {
     
@@ -120,4 +129,25 @@ server <- function(input, output, session) {
       paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid")
     })
   })
+  
+  
+  
+  # Use clicked loction on map to find lat and long
+  data_of_click <- reactiveValues(clickedMarker = list())
+  
+  # observeEvent(input$my_location,{
+  #   #Only add new layers for bounded locations
+  #   found_in_bounds <- findLocations(shape = input$my_location
+  #                                    , location_coordinates = coordinates
+  #                                    , location_id_colname = "locationID")
+  #   
+  #   for(id in found_in_bounds){
+  #     if(id %in% data_of_click$clickedMarker){
+  #       # don't add id
+  #     } else {
+  #       # add id
+  #       data_of_click$clickedMarker<-append(data_of_click$clickedMarker, id, 0)
+  #     }
+  #   }
+  # })
 }
