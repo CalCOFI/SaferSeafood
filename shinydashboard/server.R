@@ -88,7 +88,7 @@ server <- function(input, output, session) {
     
     # filer the fish life history dataframe for the species inputted by the user
     input_species <- fish_lh %>% 
-      filter(CompositeCommonName %in% species)
+      filter(CompositeCommonName %in% str_to_lower(input$selectSpecies_input))
     
     # create data frame with values based on user input and life history
     new_data <- data.frame(

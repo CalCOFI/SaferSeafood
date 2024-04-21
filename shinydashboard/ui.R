@@ -179,17 +179,7 @@ body <- dashboardBody(
                      box(width = NULL,
                          
                          leafletOutput(outputId = "location_output"),
-                         absolutePanel(style = "max-width: 30%;background-color: rgba(255,255,255,0.7);padding: 0px 10px 0px 10px;border-radius: 10px",top = 10, right = 10,
-                                       selectizeInput(inputId = "selectSpecies_output", label = "Species_output",
-                                                      choices = species_name,
-                                         options = list(
-                                           placeholder = 'Please select a species',
-                                           onInitialize = I('function() { this.setValue(""); }')
-                                         )
-                                       )
-                                       
-                                       
-                         ) # END of map box
+                         
             )), #end map row
             
     # #other chemical advisory info box
@@ -216,7 +206,13 @@ body <- dashboardBody(
                          title = tagList(icon("plus"), strong("Series of Consumer Inputs")), 
                          status = "primary", collapsible = TRUE,
                          "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination.",
-                         textInput("CompositeCommonName", "Species:"),
+                       selectizeInput(inputId = "selectSpecies_input", label = "Select species: ",
+                                      choices = str_to_title(fish_lh$CompositeCommonName),
+                                      options = list(
+                                        placeholder = 'Please select a species',
+                                        onInitialize = I('function() { this.setValue(""); }')
+                                      )
+                       ),
                          numericInput(verbatimTextOutput(outputId = "lat"), "Latitude:", value = NULL),
                          numericInput(verbatimTextOutput(outputId = "long"), "Longitude:", value = NULL),
                          actionButton("predict_button", "Predict")
