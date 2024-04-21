@@ -178,7 +178,8 @@ body <- dashboardBody(
                      # add map box
                      box(width = NULL,
                          
-                         leafletOutput(outputId = "location_output"),
+                         leafletOutput(outputId = "locationMap"),
+                         htmlOutput(outputId = "text")
                          
             )), #end map row
             
@@ -230,46 +231,16 @@ body <- dashboardBody(
     
     # fish_identification tabItem ----
     tabItem(tabName = "fish_id",
-      
-      # fluidRow(
-      #
-      #   # input box ----
-      #   box(width = 4,
-      #
-      #       title = tags$strong("Adjust DDT Range:"),
-      #
-      #       # sliderInputs ----
-      #       sliderInput(inputId = "DDT_slider_input", label = "DDT (ng/g):",
-      #                   min = min(fish_data$AvgDDT), max = max(fish_data$AvgDDT),
-      #                   value = c(min(fish_data$AvgDDT), max(fish_data$AvgDDT)))
-      #
-      #   ), # END input box ----
-      #
-      #   # leaflet box ----
-      #   box(width = 2,
-      #
-      #       title = tags$strong("Fishing Zones:"),
-      #
-      #       #leafleft output ----
-      #       leafletOutput(outputId = "fish_map_output") %>%
-      #         withSpinner(type = 1, color = "#4287f5")
-      #
-      #
-      #   ), # END leaflet box
-      #
-      #   box(width = 6,
-      #
-      #       title = tagList(strong("California Department of Fish and Wildlife")),
-      #       "",
-      #       tags$img(src = "fishing.png",
-      #                alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories.",
-      #                style = "max-width: 80%; display: block; margin: 0 auto;")
-      #
-      #
-      #   ) # END fishing zone map box
-      #
-
-      #) # END fluidRow
+            
+          # fluidRow(width = 6,
+          #          useShinyjs(),
+          #           extendShinyjs(text = jscode, functions = c("backgroundCol")),
+          #           p(id = "name", "My name is Dean"),
+          #           p(id = "sport", "I like soccer"),
+          #           selectInput(inputId = "col", label = "Colour",
+          #                       c("green", "yellow", "red", "blue", "white")),
+          #           selectInput(inputId = "selector", label = "Element", c("sport", "name", "button")),
+          #           actionButton(inputId = "button", label = "Go"))
       
       
     ), #END fish_identification tabItem

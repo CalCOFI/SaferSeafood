@@ -92,3 +92,15 @@ fish_lh <- read_csv("data/species_common_science.csv")
 # Loading Bayesian regression model for prediction
 brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "brm_mod.rda"))
 
+# jscode <- '
+# shinyjs.backgroundCol = function(params) {
+#   var defaultParams = {
+#     id : null,
+#     col : "red"
+#   };
+#   params = shinyjs.getParams(params, defaultParams);
+# 
+#   var el = $("#" + params.id);
+#   el.css("background-color", params.col);
+# }'
+

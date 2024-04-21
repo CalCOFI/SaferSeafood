@@ -7,26 +7,33 @@ server <- function(input, output, session) {
     fish_data
   )
   
+  # Initialize current_markers
+  current_markers <- reactiveValues(lat = NULL, lon = NULL)
+  
   # build location selectionleaflet map ----
-  output$location_output <- renderLeaflet({
+  output$locationMap <- renderLeaflet({
     leaflet() %>%
       # add titles
       addProviderTiles(providers$Esri.WorldImagery) %>%
       # set view over CA
       setView(lng = -119.784, lat = 30.0906, zoom = 6) %>%
       # add mini map 
-      addMiniMap(toggleDisplay = TRUE, minimized = TRUE)
+      addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
+      addMarkers(lat = 30.0906,lng = -119.784, 
+                 options = markerOptions(draggable = TRUE))
     
-    # observeEvent(input$map_marker_click, {
-    #   data$clickedMarker <- input$map_marker_click
-    #   print(data$clickedMarker)
-    # })
-    # observeEvent(input$map_click, {
-    #   data$clickedMarker <- NULL
-    #   print(data$clickedMarker)
-    # })
-    
-    
+  })
+  
+  
+  observeEvent(input$locationMap_marker_dragend, {
+    # Update current_markers
+    current_markers$lat <- input$locationMap_marker_dragend$lat
+    current_markers$lon <- input$locationMap_marker_dragend$lng
+  })  
+  
+  output$text <- renderText({
+    paste0("Current marker latitude: ", current_markers$lat, " <br> ",
+           "Current marker longitude: ", current_markers$lon, " <br> ")
   })
   
   
@@ -130,10 +137,12 @@ server <- function(input, output, session) {
     })
   })
   
-  
+  # observeEvent(input$location_marker_click, {
+  #   js$backgroundCol(input$selector, input$col)
+  # })
   
   # Use clicked loction on map to find lat and long
-  data_of_click <- reactiveValues(clickedMarker = list())
+  # data_of_click <- reactiveValues(clickedMarker = list())
   
   # observeEvent(input$my_location,{
   #   #Only add new layers for bounded locations
