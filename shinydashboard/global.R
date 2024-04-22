@@ -5,6 +5,7 @@ library(shinyjs)
 library(shinyWidgets)
 library(tidyverse)
 library(leaflet)
+install.packages("leaflet.extras")
 library(leaflet.extras)
 library(shinycssloaders)
 library(extrafont)
@@ -25,6 +26,7 @@ library(rstanarm)
 library(sf)
 library(terra)
 
+install.packages("reactlog")
 library(reactlog)
 reactlog_enable()
 
@@ -33,7 +35,7 @@ pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
                MuMIn, lubridate, tidyr,ggh4x, lme4,sdmTMB,inlabru,cowplot,marmap,sjPlot, tidyverse, plyr, tidybayes, brms, bayesplot, loo,ggeffects,
                DHARMa)
 
-library(shiny.fluent)
+
 
 # READ IN DATA ----
 

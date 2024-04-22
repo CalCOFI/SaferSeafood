@@ -232,6 +232,21 @@ body <- dashboardBody(
     # fish_identification tabItem ----
     tabItem(tabName = "fish_id",
             
+            # left - hand column ----
+            column(width = 12,
+                   
+                   #background info box ----
+                   box(width = NULL,
+                       title = tagList(strong("Having trouble identifying your fish?")),
+                       tags$img(src = "fish-id.png", 
+                                alt = "Commerical fishing catches defined by the OEHHA",
+                                style = "max-width: 90%; display: block; margin: 0 auto;")
+                       
+                   ) # END background info box 
+                   
+            ) # END left-hand column , # drag mouse over fish and its name will pop up 
+            
+            
           # fluidRow(width = 6,
           #          useShinyjs(),
           #           extendShinyjs(text = jscode, functions = c("backgroundCol")),
