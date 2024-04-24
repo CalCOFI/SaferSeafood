@@ -14,7 +14,7 @@ server <- function(input, output, session) {
   output$locationMap <- renderLeaflet({
     leaflet() %>%
       # add titles
-      addProviderTiles(providers$Esri.WorldImagery) %>%
+      addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # added new map for visualize import treets
       # set view over CA
       setView(lng = -119.784, lat = 30.0906, zoom = 6) %>%
       # add mini map 
