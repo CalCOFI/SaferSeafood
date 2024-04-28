@@ -14,8 +14,9 @@ server <- function(input, output, session) {
   output$locationMap <- renderLeaflet({
     leaflet() %>%
       # add titles
-      addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # added new map for visualize import treets
+      addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # added new map for visualize import streets
       # set view over CA
+      #addPolygons(data = ventura, fillColor = "yellow", color = "black", weight = 2, opacity = 1,fillOpacity = 0.6) %>% 
       setView(lng = -119.784, lat = 30.0906, zoom = 6) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
@@ -24,7 +25,7 @@ server <- function(input, output, session) {
     
   })
   
-  
+
   observeEvent(input$locationMap_marker_dragend, {
     # Update current_markers
     current_markers$lat <- input$locationMap_marker_dragend$lat
@@ -42,6 +43,7 @@ server <- function(input, output, session) {
     leaflet() %>%
       # add titles
       addProviderTiles(providers$Esri.WorldImagery) %>%
+      #addPolygons(data = ventura, fillColor = "yellow", color = "black", weight = 2, opacity = 1) %>%
       # set view over CA
       setView(lng = -119.784, lat = 30.0906, zoom = 6) %>%
       # add mini map 
