@@ -11,7 +11,6 @@ library(shinycssloaders)
 library(extrafont)
 library(showtext)
 library(markdown)
-
 library(rfishbase)
 
 
@@ -37,14 +36,57 @@ pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
 
 library(sf)
 
-# polygons for map 
-ventura <- st_read("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/venturaharbor.kml") %>% st_transform(ventura, crs = 3857)
 
+# List of KML files
+#kml_files <- c("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/smbeach_to_sb.kml", 
+              # "/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash#/shinydashboard/data/polygons/smbeach_to_sb.kml", 
+               #"/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/sbpiersanmateopoint.kml",
+               #"/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/mission_bay.kml",
+               #"/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/san_diego_bay.kml"
+               
+               #)
+
+# Function to extract data from KML
+#extract_data <- function(kml_file) {
+  #kml <- st_read(kml_file)
+  #names <- kml$Name
+  #coords <- st_coordinates(kml)
+  #data.frame(Name = names, 
+             #Longitude = coords[, "X"], 
+             #Latitude = coords[, "Y"])
+#}
+
+# Read and extract data from each KML file
+#data_list <- lapply(kml_files, extract_data)
+
+# Combine data into one dataframe
+#combined_data <- do.call(rbind, data_list)
+
+
+# polygons for map 
+ventura <- st_read("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/venturaharbor.kml") %>%
+  st_zm()
+
+#ventura <- ventura %>%
+  #subset(ventura, select = -c("description"))
   
-smbeach <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/smbeach_to_sb.kml")
-sbpier <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/sbpiersanmateopoint.kml")
-mission <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/mission_bay.kml")
-sdbay <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/san_diego_bay.kml")
+poly <- st_geometry(ventura)
+  
+smbeach <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/smbeach_to_sb.kml") %>%
+  st_zm()
+  #st_as_sf()
+sbpier <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/sbpiersanmateopoint.kml") %>%
+  st_zm()
+
+mission <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/mission_bay.kml") %>%
+  st_zm()
+ 
+sd_bay <-mission <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/san_diego_bay.kml") %>%
+  st_zm()
+
+unique(mission)
+
+#sdbay <- read_sf("shinydashboard/data/polygons/san_diego_bay.kml")
 
 # READ IN DATA ----
 

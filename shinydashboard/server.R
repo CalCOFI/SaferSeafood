@@ -12,12 +12,41 @@ server <- function(input, output, session) {
   
   # build location selectionleaflet map ----
   output$locationMap <- renderLeaflet({
+    
+    #kml <- st_read("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/venturaharbor.kml") %>%
+      
+      #leaflet_data <- sf::as.data.frame(kml) 
+      
     leaflet() %>%
       # add titles
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # added new map for visualize import streets
-      # set view over CA
-      #addPolygons(data = ventura, fillColor = "yellow", color = "black", weight = 2, opacity = 1,fillOpacity = 0.6) %>% 
-      setView(lng = -119.784, lat = 30.0906, zoom = 6) %>%
+      #addKML("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/smbeach_to_sb.kml") %>%
+      # set view over CA 
+      # Check if sf_data contains polygons
+      
+      addPolygons(data= ventura,color = "red",weight = 1,smoothFactor = 1,
+                  opacity = 0.5, fillOpacity = 0.25,fillColor = "red",
+                  highlightOptions = highlightOptions(color = "blue",
+                                                      weight = 2,bringToFront = TRUE)) %>% 
+      addPolygons(data= mission,color = "black",weight = 1,smoothFactor = 1,
+                  opacity = 0.5, fillOpacity = 0.25,fillColor = "black",
+                  highlightOptions = highlightOptions(color = "blue",
+                                                      weight = 2,bringToFront = TRUE)) %>%
+      addPolygons(data= sbpier,color = "green",weight = 1,smoothFactor = 1,
+                  opacity = 0.5, fillOpacity = 0.25,fillColor = "green",
+                  highlightOptions = highlightOptions(color = "blue",
+                                                      weight = 2,bringToFront = TRUE)) %>%
+      addPolygons(data= smbeach,color = "hotpink",weight = 1,smoothFactor = 1,
+                  opacity = 0.5, fillOpacity = 0.25,fillColor = "hotpink",
+                  highlightOptions = highlightOptions(color = "blue",
+                                                      weight = 2,bringToFront = TRUE))%>%
+      addPolygons(data= sd_bay,color = "purple",weight = 1,smoothFactor = 1,
+                  opacity = 0.5, fillOpacity = 0.25,fillColor = "purple",
+                  highlightOptions = highlightOptions(color = "blue",
+                                                      weight = 2,bringToFront = TRUE)) %>%
+      
+      #addPolygons(data = leaflet_data, stroke = TRUE, weight = 1, color = "red") %>%
+      setView(lng = -119.112636297941, lat = 32.7981486713485, zoom = 7) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
       addMarkers(lat = 30.0906,lng = -119.784, 
@@ -43,7 +72,7 @@ server <- function(input, output, session) {
     leaflet() %>%
       # add titles
       addProviderTiles(providers$Esri.WorldImagery) %>%
-      #addPolygons(data = ventura, fillColor = "yellow", color = "black", weight = 2, opacity = 1) %>%
+      addPolygons(data = ventura, fillColor = "red", color = "black", weight = 2, opacity = 1) %>%
       # set view over CA
       setView(lng = -119.784, lat = 30.0906, zoom = 6) %>%
       # add mini map 
