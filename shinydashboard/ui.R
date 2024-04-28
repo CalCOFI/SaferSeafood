@@ -40,26 +40,115 @@ body <- dashboardBody(
   # shinyjs::useShinyjs(),
   # tags$script(src = "functions.js"),
   
-  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
+  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+            
+            # allow for user to use current location
+            tags$script('
+                $(document).ready(function () {
+                  navigator.geolocation.getCurrentPosition(onSuccess, onError);
+                
+                  function onError (err) {
+                    Shiny.onInputChange("geolocation", false);
+                  }
+                
+                  function onSuccess (position) {
+                    setTimeout(function () {
+                      var coords = position.coords;
+                      console.log(coords.latitude + ", " + coords.longitude);
+                      Shiny.onInputChange("geolocation", true);
+                      Shiny.onInputChange("lat", coords.latitude);
+                      Shiny.onInputChange("long", coords.longitude);
+                    }, 1100)
+                  }
+                });
+                ')),
+  
   
   # about tabItem ----
   tabItems(
     
+    # whats_in_my_catch tabItem
+    tabItem(tabName = "whats_in_my_catch",
+            
+            # fluidRow ---- content
+            fluidRow(width = NULL,
+                     
+                     # add map box
+                     box(width = NULL,
+                         
+                         leafletOutput(outputId = "locationMap"),
+                         htmlOutput(outputId = "text"),
+                         absolutePanel(
+                           top = 50, left = 70, draggable = TRUE, width = "20%",
+                           tags$style(HTML(".selectize-control.single .selectize-input {
+                          font-size: 16px;
+                     }")),
+                           selectizeInput(inputId = "selectSpecies_input", 
+                                          # change the font size
+                                          label = tags$span("Select species:", style = "font-size: 16px;"),
+                                          choices = str_to_title(fish_lh$CompositeCommonName),
+                                          options = list(
+                                            placeholder = 'Please select a species',
+                                            onInitialize = I('function() { this.setValue(""); }')
+                                          )
+                           ),
+                          # create checkbox to use current location
+                           checkboxInput(inputId = "use_location", "Use your current location?"),
+                          # add predict button below the locaiton selection
+                           actionButton("predict_button", "Predict!", class = "btn-primary")
+                         )
+                         
+                     )), #end map row
+            
+            #right - hand column
+            fluidRow(width = 3,
+                     box(width = NULL,
+                         title = tagList(icon("plus"), strong("Series of Consumer Inputs")), 
+                         status = "primary", collapsible = TRUE,
+                         "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination."
+                         # selectizeInput(inputId = "selectSpecies_input", label = "Select species: ",
+                         #                choices = str_to_title(fish_lh$CompositeCommonName),
+                         #                options = list(
+                         #                  placeholder = 'Please select a species',
+                         #                  onInitialize = I('function() { this.setValue(""); }')
+                         #                )
+                         # ),
+                         # numericInput(verbatimTextOutput(outputId = "lat"), "Latitude:", value = NULL),
+                         # numericInput(verbatimTextOutput(outputId = "long"), "Longitude:", value = NULL),
+                         # actionButton("predict_button", "Predict")
+                     ), 
+                     
+                     #START Prediction Box
+                     box(width = NULL, title = "Prediction Result", status = "success", solidHeader = TRUE,
+                         collapsible = TRUE,
+                         verbatimTextOutput("prediction")
+                     )  #END Prediction Box
+                     
+            ) # END first fluidRow
+            
+    ), # end whats_in_my_catch tabItem
+    
     # about tabItem ----
     tabItem(tabName = "project",
             
-            # left - hand column ----
-            column(width = 12,
+            # title row ----
+            fluidRow(width = 12,
+                   
+                   #title box ----
+                   box(width = NULL,
+                       title = tags$h2(strong("Improving Access to Fish Consumption Advisories and Maintaining Confidence in California's Healthy Seafood Products"))
+                       
+                   ), # END background info box 
                    
                    #background info box ----
                    box(width = NULL,
                        title = tagList(strong("Project Background")),
-                       "The harmful effects of Dichlorodiphenyltrichloroethane (DDT), and its breakdown products (DDX), have triggered widespread concerns, particularly due to the recent rediscovery of a barrel field containing DDT-laced sludge off the Southern California coast. This alarming find has not only captured the public's attention but has also highlighted its potential threats to human and environmental health. The negative side effects of DDT, including heightened cancer risks, premature births, developmental abnormalities, and neurological diseases in both humans and animals, have raised concerns of consuming seafood from the contaminated area. The consequences go beyond immediate health worries, also affecting the local economy and the well-being of recreational fishing communities.",
-                       tags$img(src = "dumpsite.png.jpeg", 
-                                alt = "Map of fishing zones and the number of fish samples through time, by region (inset). Nearshore 708 polygons are derived from McLaughlin et al. (2021) and pink blocks are California Department of Fish and Game 256 km2 709 fishing blocks.",
-                                style = "max-width: 90%; display: block; margin: 0 auto;")
+                       HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch."),
+                       # tags$img(src = "dumpsite.png.jpeg", 
+                       #          alt = "Map of fishing zones and the number of fish samples through time, by region (inset). Nearshore 708 polygons are derived from McLaughlin et al. (2021) and pink blocks are California Department of Fish and Game 256 km2 709 fishing blocks.",
+                       #          style = "max-width: 90%; display: block; margin: 0 auto;")
                        
-                   ) # END background info box 
+                   ) # END background info box
                    
             ), # END left-hand column 
             
@@ -106,9 +195,9 @@ body <- dashboardBody(
             column(width = 12,
                    
                    #background info box ----
-                   box(width = NULL,
+                   box(width = 3,
                        title = tagList(strong("Authors")),
-                       p("This application was developed as part of a Masters in Environmental Data Science Capstone project as part of the Bren School, for Scripps and CalCOFI."),
+                       p("This application was developed as part of a Masters in Environmental Data Science Capstone project as part of the Bren School, for Scripps and CalCOFI. "),
                        p("This project was completed by a group of graduate students at the Bren School of Environmental Science & Management, UC Santa Barbara. Team members include Hope Hahn, Luna Herschenfeld-Catalán, Benjamin Versteeg, and Kate Becker with guidance from our Faculty Advisor Bruce Kendall and Capstone Advisor Carmen Galaz-García.")
                        
                    ) # END author info box 
@@ -169,65 +258,6 @@ body <- dashboardBody(
             
     ), #END data tabItem
     
-    # whats_in_my_catch tabItem
-    tabItem(tabName = "whats_in_my_catch",
-            
-              # fluidRow ---- content
-            fluidRow(width = NULL,
-                     
-                     # add map box
-                     box(width = NULL,
-                         
-                         leafletOutput(outputId = "locationMap"),
-                         htmlOutput(outputId = "text")
-                         
-            )), #end map row
-            
-    # #other chemical advisory info box
-    # box(width = NULL,
-    #     title = tagList(strong("Mercury and PCB Consumption Advice")),
-    #     "",
-    #     tags$img(src = "fish.png", 
-    #              alt = "For more information regarding OEHHA fish advisory program, visit https://oehha.ca.gov/fish/advisories.",
-                   #              style = "max-width: 90%; display: block; margin: 0 auto;")
-                   # ), # END chemical advisory info box 
-                   # 
-                   # box(width = NULL,
-                   #     title = tagList(strong("Following Guidelines")),
-                   #     "",
-                   #     tags$img(src = "advising-fish-guide.png",
-                   #              alt = "Guidelines",
-                   #              style = "max-width: 90%; display: block; margin: 0 auto;")
-                   # ) # end GUIDELINES box 
-                  
-            
-            #right - hand column
-            fluidRow(width = 3,
-                   box(width = NULL,
-                         title = tagList(icon("plus"), strong("Series of Consumer Inputs")), 
-                         status = "primary", collapsible = TRUE,
-                         "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination.",
-                       selectizeInput(inputId = "selectSpecies_input", label = "Select species: ",
-                                      choices = str_to_title(fish_lh$CompositeCommonName),
-                                      options = list(
-                                        placeholder = 'Please select a species',
-                                        onInitialize = I('function() { this.setValue(""); }')
-                                      )
-                       ),
-                         numericInput(verbatimTextOutput(outputId = "lat"), "Latitude:", value = NULL),
-                         numericInput(verbatimTextOutput(outputId = "long"), "Longitude:", value = NULL),
-                         actionButton("predict_button", "Predict")
-                     ), 
-                     
-                     #START Prediction Box
-                     box(width = NULL, title = "Prediction Result", status = "success", solidHeader = TRUE,
-                         collapsible = TRUE,
-                         verbatimTextOutput("prediction")
-                     )  #END Prediction Box
-                     
-                   ) # END first fluidRow
-            
-    ), # end whats_in_my_catch tabItem
     
     # fish_identification tabItem ----
     tabItem(tabName = "fish_id",

@@ -53,3 +53,8 @@
   color: #191E24; /* text color */
   border: 1px solid black; /* Add border to box */
 }
+
+h2 {
+  font-size: 20px;
+}
+}
