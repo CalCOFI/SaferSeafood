@@ -107,10 +107,22 @@ server <- function(input, output, session) {
 
   ## Functions
   
+  # Function to calculate the DDT value based on latitude and longitude
   calculateDDTValue <- function(latitude, longitude) {
-    # Placeholder logic to calculate DDT value based on latitude and longitude
-    return(0.735932630)  # Placeholder constant value
+    # Fit a simple regression model using latitude and longitude to predict TotalDDT.sed.trans
+    lat_lon_model <- lm(TotalDDT.sed.trans ~ CompositeTargetLatitude + CompositeTargetLongitude, data = fish.clean.fam)
+    
+    # Create a new data frame for the prediction input
+    lat_lon_data <- data.frame(CompositeTargetLatitude = latitude, CompositeTargetLongitude = longitude)
+    
+    # Predict TotalDDT.sed.trans for the new latitude and longitude
+    predicted_ddt <- predict(lat_lon_model, newdata = lat_lon_data)
+    
+    return(predicted_ddt)
   }
+  
+  
+  
   
   getYear <- function(Year) {
     # Placeholder logic to get the year
@@ -125,11 +137,18 @@ server <- function(input, output, session) {
     TotalDDT_value = calculateDDTValue(latitude, longitude)  
     Year_value = getYear()  # function or logic
     
-    # filer the fish life history dataframe for the species inputted by the user
-    input_species <- fish_lh %>% 
-      filter(CompositeCommonName %in% str_to_lower(input$selectSpecies_input))
+    species_name <- tolower(input$species)
     
-    # create data frame with values based on user input and life history
+    # Filter the fish life history dataframe for the species provided as argument
+    input_species <- fish_lh %>% 
+      filter(CompositeCommonName %in% species_name)
+    
+    # Check if the filtered data frame is empty and handle appropriately
+    if (nrow(input_species) == 0) {
+      # Change depending on what we want to output
+      return(NA)
+    }
+    
     new_data <- data.frame(
       TotalDDT.sed.trans = TotalDDT_value,
       trophic_category = input_species$trophic_category,
@@ -138,26 +157,29 @@ server <- function(input, output, session) {
       Family = input_species$Family
     )
     
-    # Predict using the model and the new_data
+    # Check if all necessary data is available
+    if (anyNA(new_data)) {
+      # Change depending on what we want to output
+      return(NA)
+    }
+    
     prediction <- predict(model, newdata = new_data, re.form = NA)
-    
-    # access the Estimate from the resulting dataframe
     estimate <- prediction[1]
-    
-    # undo the transformation on the data of log1p()
     estimate_trans <- exp(estimate) - 1
     
-    return(estimate_trans) # Adjust based on prediction result structure
+    return(estimate_trans)
   }
   
-  updateSelectizeInput(session, 'CompositeCommonName', choices = species_name_clean, server = TRUE)
+  
+    updateSelectizeInput(session, 'CompositeCommonName', choices = species_name_clean, server = TRUE)
+  
   
   # In your server function, when calling predict_DDT, ensure you pass the right arguments:
   observeEvent(input$predict_button, {
     
     species <- input$CompositeCommonName
-    latitude <- input$lat 
-    longitude <- input$long
+    latitude <- current_markers$lat  # Use current latitude
+    longitude <- current_markers$lon  # Use current longitude
     
     # Call the prediction function
     prediction <- predict_DDT(species, latitude, longitude)
@@ -192,3 +214,4 @@ server <- function(input, output, session) {
   #   }
   # })
 }
+

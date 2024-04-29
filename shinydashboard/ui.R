@@ -67,24 +67,18 @@ body <- dashboardBody(
   # about tabItem ----
   tabItems(
     
-    # whats_in_my_catch tabItem
     tabItem(tabName = "whats_in_my_catch",
-            
-            # fluidRow ---- content
             fluidRow(width = NULL,
-                     
-                     # add map box
+                     # Add map box with point dragger
                      box(width = NULL,
-                         
                          leafletOutput(outputId = "locationMap"),
                          htmlOutput(outputId = "text"),
                          absolutePanel(
                            top = 50, left = 70, draggable = TRUE, width = "20%",
                            tags$style(HTML(".selectize-control.single .selectize-input {
-                          font-size: 16px;
-                     }")),
-                           selectizeInput(inputId = "selectSpecies_input", 
-                                          # change the font size
+                                        font-size: 16px;
+                                      }")),
+                           selectizeInput(inputId = "species", 
                                           label = tags$span("Select species:", style = "font-size: 16px;"),
                                           choices = str_to_title(fish_lh$CompositeCommonName),
                                           options = list(
@@ -92,41 +86,24 @@ body <- dashboardBody(
                                             onInitialize = I('function() { this.setValue(""); }')
                                           )
                            ),
-                          # create checkbox to use current location
                            checkboxInput(inputId = "use_location", "Use your current location?"),
-                          # add predict button below the locaiton selection
                            actionButton("predict_button", "Predict!", class = "btn-primary")
                          )
-                         
-                     )), #end map row
-            
-            #right - hand column
+                     )), # end map row
+            # right - hand column
             fluidRow(width = 3,
                      box(width = NULL,
                          title = tagList(icon("plus"), strong("Series of Consumer Inputs")), 
                          status = "primary", collapsible = TRUE,
                          "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination."
-                         # selectizeInput(inputId = "selectSpecies_input", label = "Select species: ",
-                         #                choices = str_to_title(fish_lh$CompositeCommonName),
-                         #                options = list(
-                         #                  placeholder = 'Please select a species',
-                         #                  onInitialize = I('function() { this.setValue(""); }')
-                         #                )
-                         # ),
-                         # numericInput(verbatimTextOutput(outputId = "lat"), "Latitude:", value = NULL),
-                         # numericInput(verbatimTextOutput(outputId = "long"), "Longitude:", value = NULL),
-                         # actionButton("predict_button", "Predict")
-                     ), 
-                     
-                     #START Prediction Box
+                     ),
+                     # Prediction Box
                      box(width = NULL, title = "Prediction Result", status = "success", solidHeader = TRUE,
                          collapsible = TRUE,
                          verbatimTextOutput("prediction")
-                     )  #END Prediction Box
-                     
-            ) # END first fluidRow
-            
-    ), # end whats_in_my_catch tabItem
+                     )  
+            ) 
+    ), # END what's in my catch tab item
     
     # about tabItem ----
     tabItem(tabName = "project",

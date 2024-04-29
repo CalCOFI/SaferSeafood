@@ -65,8 +65,10 @@ library(sf)
 
 
 
+
+
 # polygons for map 
-ventura <- st_read("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/venturaharbor.kml") %>%
+ventura <- st_read("data/polygons/venturaharbor.kml") %>%
   st_zm()
 
 #ventura <- ventura %>%
@@ -74,16 +76,16 @@ ventura <- st_read("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shi
   
 poly <- st_geometry(ventura)
   
-smbeach <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/smbeach_to_sb.kml") %>%
+smbeach <- read_sf("data/polygons/smbeach_to_sb.kml") %>%
   st_zm()
   #st_as_sf()
-sbpier <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/sbpiersanmateopoint.kml") %>%
+sbpier <- read_sf("data/polygons/sbpiersanmateopoint.kml") %>%
   st_zm()
 
-mission <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/mission_bay.kml") %>%
+mission <- read_sf("data/polygons/mission_bay.kml") %>%
   st_zm()
  
-sd_bay <-mission <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/san_diego_bay.kml") %>%
+sd_bay <-mission <- read_sf("data/polygons/san_diego_bay.kml") %>%
   st_zm()
 
 unique(mission)
@@ -165,3 +167,8 @@ brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "
 #   el.css("background-color", params.col);
 # }'
 
+
+## If application is in testing mode, will run all tests.
+if (Sys.getenv("SHINY_TEST") == "true") {
+  testthat::test_dir("tests/testthat")
+}
