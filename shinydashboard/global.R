@@ -63,6 +63,8 @@ library(sf)
 #combined_data <- do.call(rbind, data_list)
 
 
+
+
 # polygons for map 
 ventura <- st_read("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/venturaharbor.kml") %>%
   st_zm()
@@ -93,9 +95,15 @@ unique(mission)
 fish_data <- read_csv("data/fish_data_preprocessed.csv")
 #view(fish_data)
 
-fish_clean <- read_csv("data/fish_clean.csv")
+fish_clean <- read_csv("data/fish_clean.csv") 
 
 
+fish_data_clean <- na.omit(fish_data)  # Assuming columns 2 and 3 contain the coordinates
+
+# Convert dataframe to sf object
+#fish_coord <- st_as_sf(fish_data_clean, coords = c(1, 2))  
+
+fish_coord <- st_as_sf(fish_data_clean, coords = c(2,3))
 
 #covariates: weight, length, location, and species 
 # use a button for calucalting DDT 

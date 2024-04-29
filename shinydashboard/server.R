@@ -44,16 +44,17 @@ server <- function(input, output, session) {
                   opacity = 0.5, fillOpacity = 0.25,fillColor = "purple",
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2,bringToFront = TRUE)) %>%
-      
-      #addPolygons(data = leaflet_data, stroke = TRUE, weight = 1, color = "red") %>%
       setView(lng = -119.112636297941, lat = 32.7981486713485, zoom = 7) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
-      addMarkers(lat = 30.0906,lng = -119.784, 
-                 options = markerOptions(draggable = TRUE))
-    
+      addMarkers(lat = 33.2016761912433,lng = -118.321416825056, 
+                 options = markerOptions(draggable = TRUE)) %>%
+      addCircleMarkers(data = fish_data_clean, 
+                 lng = fish_data_clean$CompositeTargetLongitude, lat = fish_data_clean$CompositeTargetLatitude,
+                 popup = paste0("DDT: ", fish_data_clean$AvgDDT, "<br>",
+                                "Zone: ", fish_data_clean$CompositeStationArea, "<br>"),
+                 color = "white") # NOTE: Unicode for degree symbol icon
   })
-  
 
   observeEvent(input$locationMap_marker_dragend, {
     # Update current_markers
