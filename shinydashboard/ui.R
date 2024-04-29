@@ -19,8 +19,8 @@ header <- dashboardHeader(
 sidebar <- dashboardSidebar(
   
   #sidebarMenu ----
-  sidebarMenu(menuItem(text = "User Manual", tabName = "user_manual", icon = icon("circle-exclamation")),
-              menuItem(text = "What's In My Catch?", tabName = "whats_in_my_catch", icon = icon("gauge")), # previously dashboard
+  sidebarMenu(menuItem(text = "What's In My Catch?", tabName = "whats_in_my_catch", icon = icon("gauge")), # previously dashboard
+    menuItem(text = "User Manual", tabName = "user_manual", icon = icon("circle-exclamation")),
               menuItem(text = "About", tabName = "about", icon = icon("star"), # previously welcome
                        menuSubItem(text = "The Project", tabName = "project", icon = icon("star")),
                        menuSubItem(text = "Authors", tabName = "authors", icon = icon("gauge")),
