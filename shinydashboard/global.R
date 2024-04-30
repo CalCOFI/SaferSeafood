@@ -73,28 +73,29 @@ pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
 
 
 
-# polygons for map 
-ventura <- st_read("data/polygons/venturaharbor.kml") %>%
-  st_zm()
-
-#ventura <- ventura %>%
-  #subset(ventura, select = -c("description"))
+# the 3 OEHHA polygons for coastal health advisories
+ventura <- st_read("shinydashbaord/data/polygons/venturaharbor.kml") %>%
+  st_zm() %>% 
+  mutate(Name = "venturaharbor")
   
-poly <- st_geometry(ventura)
-  
-smbeach <- read_sf("data/polygons/smbeach_to_sb.kml") %>%
-  st_zm()
+smbeach <- read_sf("shinydashboard/data/polygons/smbeach_to_sb.kml") %>%
+  st_zm() %>% 
+  mutate(Name = "smbeach_to_sb")
   #st_as_sf()
-sbpier <- read_sf("data/polygons/sbpiersanmateopoint.kml") %>%
-  st_zm()
+sbpier <- read_sf("shinydashboard/data/polygons/sbpiersanmateopoint.kml") %>%
+  st_zm() %>% 
+  mutate(Name = "sbpiersanmateopoint")
 
-mission <- read_sf("data/polygons/mission_bay.kml") %>%
-  st_zm()
+# make dataframe of advisories
+advisory_areas <- rbind(ventura, smbeach, sbpier) %>% 
+  dplyr::select(!Description)
+
+# mission <- read_sf("shinydashboard/data/polygons/mission_bay.kml") %>%
+#   st_zm()
  
-sd_bay <-mission <- read_sf("data/polygons/san_diego_bay.kml") %>%
-  st_zm()
+# sd_bay <- read_sf("shinydashboard/data/polygons/san_diego_bay.kml") %>%
+#   st_zm()
 
-unique(mission)
 
 #sdbay <- read_sf("shinydashboard/data/polygons/san_diego_bay.kml")
 

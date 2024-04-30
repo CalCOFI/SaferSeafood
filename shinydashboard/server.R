@@ -103,6 +103,26 @@ server <- function(input, output, session) {
     
   })
   
+  #advisory function 
+  get_advisory <- function(lat, long) {
+    
+    # construct df out of lat and long inputs 
+    lonlat <- data.frame(cbind(long,lat))
+    # making the point into a dataframe / sf object
+    lonlat_sf = st_as_sf(lonlat, coords=c("long", "lat"), crs="EPSG:4326")
+    
+    # make the areas df into a spatial object
+    polsf <- sf::st_as_sf(advisory_areas)
+    
+    # assign the point to a fishing zone polygon based on nearest distance
+    nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
+    
+    # assign point a sediment DDT value
+    advisory_id <- lonlat_sf %>% 
+      mutate(name = nearest$Name)
+    
+  }
+  
   # Bayesian regression model for prediction
   model <- brm.diet.habitat.year.fam.clean
 
@@ -117,11 +137,6 @@ server <- function(input, output, session) {
     
     # make the areas df into a spatial object
     polsf <- sf::st_as_sf(areas)
-    
-    # out_points : user inputted long and lat (location as point)
-    # polsf is OEHHA/client polygon 
-    # psf are randomly assigned points to check if it's working as it should 
-    # ID is fishing zone name 
     
     # assign the point to a fishing zone polygon based on nearest distance
     nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
@@ -143,23 +158,6 @@ server <- function(input, output, session) {
     
   }
   
-  
-  # Function to calculate the DDT value based on latitude and longitude
-  #calculateDDTValue <- function(latitude, longitude) {
-    # Fit a simple regression model using latitude and longitude to predict TotalDDT.sed.trans
-    #lat_lon_model <- lm(TotalDDT.sed.trans ~ CompositeTargetLatitude + CompositeTargetLongitude, data = fish.clean.fam)
-    
-    # Create a new data frame for the prediction input
-    #lat_lon_data <- data.frame(CompositeTargetLatitude = latitude, CompositeTargetLongitude = longitude)
-    
-    # Predict TotalDDT.sed.trans for the new latitude and longitude
-    #predicted_ddt <- predict(lat_lon_model, newdata = lat_lon_data)
-    
-    #return(predicted_ddt)
-
-  
-  
-  
   getYear <- function(Year) {
     # Placeholder logic to get the year
     return(2)  # Placeholder constant value
@@ -170,7 +168,9 @@ server <- function(input, output, session) {
   predict_DDT <- function(species, lat, long) {
     # Determine predictor values based on input
     
-    TotalDDT_sed_value = calculateDDT(lat, long)  
+    # add in the current markers for DDT
+    TotalDDT_sed_value = calculateDDT(lat = input$locationMap_marker_dragend$lat, 
+                                      long = input$locationMap_marker_dragend$lng)  
     Year_value = getYear()  # function or logic
     
     species_name <- tolower(input$species)
@@ -216,6 +216,8 @@ server <- function(input, output, session) {
     species <- input$CompositeCommonName
     latitude <- current_markers$lat  # Use current latitude
     longitude <- current_markers$long  # Use current longitude
+    advisory_name <- get_advisory(lat = input$locationMap_marker_dragend$lat, 
+                                  long = input$locationMap_marker_dragend$lng)
     
     # Call the prediction function
     prediction <- predict_DDT(species, latitude, longitude)
@@ -223,7 +225,7 @@ server <- function(input, output, session) {
     
     # Render the prediction in the UI
     output$prediction <- renderPrint({
-      paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid")
+      paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid", advisory_name)
     })
   })
   
