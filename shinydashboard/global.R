@@ -164,6 +164,8 @@ fish.clean.fam <- fish_clean %>%
 fish_lh <- read_csv("data/species_common_science.csv") 
 
 
+set.seed(123)
+
 # Loading Bayesian regression model for prediction
 brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "brm_mod.rda"))
 

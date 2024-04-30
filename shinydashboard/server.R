@@ -23,15 +23,16 @@ server <- function(input, output, session) {
       #addKML("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/smbeach_to_sb.kml") %>%
       # set view over CA 
       # Check if sf_data contains polygons
+      # swan diego bay and mission bay aren't relevant for coastal advisories 
       
       addPolygons(data= ventura,color = "red",weight = 1,smoothFactor = 1,
                   opacity = 0.5, fillOpacity = 0.25,fillColor = "red",
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2,bringToFront = TRUE)) %>% 
-      addPolygons(data= mission,color = "black",weight = 1,smoothFactor = 1,
-                  opacity = 0.5, fillOpacity = 0.25,fillColor = "black",
-                  highlightOptions = highlightOptions(color = "blue",
-                                                      weight = 2,bringToFront = TRUE)) %>%
+      #addPolygons(data= mission,color = "black",weight = 1,smoothFactor = 1,
+                  #opacity = 0.5, fillOpacity = 0.25,fillColor = "black",
+                  #highlightOptions = highlightOptions(color = "blue",
+                                                      #weight = 2,bringToFront = TRUE)) %>%
       addPolygons(data= sbpier,color = "green",weight = 1,smoothFactor = 1,
                   opacity = 0.5, fillOpacity = 0.25,fillColor = "green",
                   highlightOptions = highlightOptions(color = "blue",
@@ -40,10 +41,10 @@ server <- function(input, output, session) {
                   opacity = 0.5, fillOpacity = 0.25,fillColor = "hotpink",
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2,bringToFront = TRUE))%>%
-      addPolygons(data= sd_bay,color = "purple",weight = 1,smoothFactor = 1,
-                  opacity = 0.5, fillOpacity = 0.25,fillColor = "purple",
-                  highlightOptions = highlightOptions(color = "blue",
-                                                      weight = 2,bringToFront = TRUE)) %>%
+      #addPolygons(data= sd_bay,color = "orange",weight = 1,smoothFactor = 1,
+                  #opacity = 0.5, fillOpacity = 0.25,fillColor = "orange",
+                  #highlightOptions = highlightOptions(color = "blue",
+                                                      #weight = 2,bringToFront = TRUE)) %>%
       setView(lng = -119.112636297941, lat = 32.7981486713485, zoom = 7) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
@@ -130,14 +131,15 @@ server <- function(input, output, session) {
       mutate(sedDDT = nearest$AvgDDT,
              zone = nearest$Name)
     
+    #sedDDT_trans <- exp(zone_id$sedDDT) - 1
+    
     # to add into the model we would call:
-    TotalSed.trans <- zone_id$sedDDT
+    TotalSed <- zone_id$sedDDT
     
-    lat_lon_model <- lm(TotalSed.trans ~ lat + long, data = zone_id)
+    # transform the data
+    Trans_sed <- log1p(TotalSed)
     
-    predicted_ddt <- predict(lat_lon_model, newdata = zone_id)
-    
-    return(predicted_ddt)
+    return(Trans_sed)
     
   }
   
@@ -168,7 +170,7 @@ server <- function(input, output, session) {
   predict_DDT <- function(species, lat, long) {
     # Determine predictor values based on input
     
-    TotalDDT_value = calculateDDT(lat, long)  
+    TotalDDT_sed_value = calculateDDT(lat, long)  
     Year_value = getYear()  # function or logic
     
     species_name <- tolower(input$species)
@@ -184,7 +186,7 @@ server <- function(input, output, session) {
     }
     
     new_data <- data.frame(
-      TotalDDT.sed.trans = TotalDDT_value,
+      TotalDDT.sed.trans = TotalDDT_sed_value,
       trophic_category = input_species$trophic_category,
       feeding_position = input_species$feeding_position,
       Year = Year_value,
