@@ -71,18 +71,16 @@ pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
 
 
 
-
-
 # the 3 OEHHA polygons for coastal health advisories
-ventura <- st_read("shinydashbaord/data/polygons/venturaharbor.kml") %>%
+ventura <- read_sf("data/polygons/venturaharbor.kml") %>%
   st_zm() %>% 
   mutate(Name = "venturaharbor")
   
-smbeach <- read_sf("shinydashboard/data/polygons/smbeach_to_sb.kml") %>%
+smbeach <- read_sf("data/polygons/smbeach_to_sb.kml") %>%
   st_zm() %>% 
   mutate(Name = "smbeach_to_sb")
   #st_as_sf()
-sbpier <- read_sf("shinydashboard/data/polygons/sbpiersanmateopoint.kml") %>%
+sbpier <- read_sf("data/polygons/sbpiersanmateopoint.kml") %>%
   st_zm() %>% 
   mutate(Name = "sbpiersanmateopoint")
 

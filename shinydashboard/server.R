@@ -119,7 +119,12 @@ server <- function(input, output, session) {
     
     # assign point a sediment DDT value
     advisory_id <- lonlat_sf %>% 
-      mutate(name = nearest$Name)
+      mutate(name = nearest$Name) %>% 
+      st_drop_geometry()
+    
+    name <- advisory_id[[1]]
+    
+    return(name)
     
   }
   
@@ -219,15 +224,33 @@ server <- function(input, output, session) {
     advisory_name <- get_advisory(lat = input$locationMap_marker_dragend$lat, 
                                   long = input$locationMap_marker_dragend$lng)
     
+    path = "data/OEHHA/"
+    species_name_img <- tolower(gsub(" ", "-", input$species))
+    
+    #Determine image path based on advisory name
+    image_path <- paste0(path, advisory_name, "/", species_name_img, ".png")
+    
     # Call the prediction function
     prediction <- predict_DDT(species, latitude, longitude)
     
     
     # Render the prediction in the UI
-    output$prediction <- renderPrint({
-      paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid", advisory_name)
+    output$prediction <- renderText({
+      paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid")
     })
-  })
+
+    
+    
+    output$advisory_image <- renderImage({
+      return(list(src = image_path,
+                  contentType = "image/png",
+                  alt = "Advisory Image",
+                  width = "300px",
+                  height = "300px"))
+    }, deleteFile = FALSE)
+    
+    })
+    
   
   # observeEvent(input$location_marker_click, {
   #   js$backgroundCol(input$selector, input$col)

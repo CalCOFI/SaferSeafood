@@ -100,7 +100,11 @@ body <- dashboardBody(
                      box(width = NULL, title = "Prediction Result", status = "success", solidHeader = TRUE,
                          collapsible = TRUE,
                          verbatimTextOutput("prediction")
-                     )  
+                     ),
+                     box(width = NULL, title = "Health Advisories", status = "success", solidHeader = TRUE,
+                         collapsible = TRUE,
+                         imageOutput(outputId = "advisory_image")
+                     ) 
             ) 
     ), # END what's in my catch tab item
     
