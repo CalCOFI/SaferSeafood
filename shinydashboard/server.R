@@ -276,7 +276,7 @@ server <- function(input, output, session) {
       return(list(src = image_path,
                   contentType = "image/png",
                   alt = "Advisory Image",
-                  width = "300px",
+                  width = "400px",
                   height = "300px"))
     }, deleteFile = FALSE)
     

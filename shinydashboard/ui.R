@@ -92,7 +92,7 @@ body <- dashboardBody(
             
             fluidRow(width = NULL,
                      
-                     box(width = 6,
+                     box(width = 8,
                          title = tagList("Prediction Result"),
                          status = "success", 
                          solidHeader = TRUE,
@@ -108,7 +108,7 @@ body <- dashboardBody(
                          bsTooltip(id = "info_button", 
                                    title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
                      ),
-                     box(width = 6, 
+                     box(width = 9, 
                          title = "Health Advisories", status = "success", solidHeader = TRUE,
                          collapsible = TRUE,
                          imageOutput(outputId = "advisory_image")
