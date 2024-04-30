@@ -8,7 +8,7 @@ server <- function(input, output, session) {
   )
   
   # Initialize current_markers
-  current_markers <- reactiveValues(lat = NULL, lon = NULL)
+  current_markers <- reactiveValues(lat = NULL, long = NULL)
   
   # build location selectionleaflet map ----
   output$locationMap <- renderLeaflet({
@@ -48,23 +48,23 @@ server <- function(input, output, session) {
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
       addMarkers(lat = 33.2016761912433,lng = -118.321416825056, 
-                 options = markerOptions(draggable = TRUE)) %>%
-      addCircleMarkers(data = fish_data_clean, 
-                 lng = fish_data_clean$CompositeTargetLongitude, lat = fish_data_clean$CompositeTargetLatitude,
-                 popup = paste0("DDT: ", fish_data_clean$AvgDDT, "<br>",
-                                "Zone: ", fish_data_clean$CompositeStationArea, "<br>"),
-                 color = "white") # NOTE: Unicode for degree symbol icon
+                 options = markerOptions(draggable = TRUE)) 
+      #addCircleMarkers(data = fish_data_clean, 
+                 #lng = fish_data_clean$CompositeTargetLongitude, lat = fish_data_clean$CompositeTargetLatitude,
+                 #popup = paste0("DDT: ", fish_data_clean$AvgDDT, "<br>",
+                               # "Zone: ", fish_data_clean$CompositeStationArea, "<br>"),
+                 #color = "white") # NOTE: Unicode for degree symbol icon
   })
 
   observeEvent(input$locationMap_marker_dragend, {
     # Update current_markers
     current_markers$lat <- input$locationMap_marker_dragend$lat
-    current_markers$lon <- input$locationMap_marker_dragend$lng
+    current_markers$long <- input$locationMap_marker_dragend$lng
   })  
   
   output$text <- renderText({
     paste0("Current marker latitude: ", current_markers$lat, " <br> ",
-           "Current marker longitude: ", current_markers$lon, " <br> ")
+           "Current marker longitude: ", current_markers$long, " <br> ")
   })
   
   
@@ -108,6 +108,8 @@ server <- function(input, output, session) {
   ## Functions
   
   calculateDDT <- function(lat, long){
+    
+    # construct df out of lat and long inputs 
     lonlat <-data.frame(cbind(long,lat))
     # making the point into a dataframe / sf object
     lonlat_sf = st_as_sf(lonlat, coords=c("long", "lat"), crs="EPSG:4326")
@@ -131,7 +133,7 @@ server <- function(input, output, session) {
     # to add into the model we would call:
     TotalSed.trans <- zone_id$sedDDT
     
-    lat_lon_model <- lm(TotalDDT.sed.trans ~ CompositeTargetLatitude + CompositeTargetLongitude, data = fish.clean.fam)
+    lat_lon_model <- lm(TotalSed.trans ~ lat + long, data = zone_id)
     
     predicted_ddt <- predict(lat_lon_model, newdata = zone_id)
     
@@ -211,7 +213,7 @@ server <- function(input, output, session) {
     
     species <- input$CompositeCommonName
     latitude <- current_markers$lat  # Use current latitude
-    longitude <- current_markers$lon  # Use current longitude
+    longitude <- current_markers$long  # Use current longitude
     
     # Call the prediction function
     prediction <- predict_DDT(species, latitude, longitude)

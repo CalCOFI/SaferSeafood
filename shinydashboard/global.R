@@ -116,8 +116,8 @@ fish_coord <- st_as_sf(fish_data_clean, coords = c(2,3))
 areas <- readRDS(here::here("shinydashboard","data", "pelagic_nearshore_fish_zones.rds")) %>% 
   left_join(fish_data, join_by(Name == CompositeStationArea))
 
-area <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>%
-  left_join(fish_data, join_by(Name == CompositeStationArea))
+#area <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>%
+  #left_join(fish_data, join_by(Name == CompositeStationArea))
 
 #covariates: weight, length, location, and species 
 # use a button for calucalting DDT 
