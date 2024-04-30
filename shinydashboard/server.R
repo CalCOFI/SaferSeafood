@@ -45,10 +45,10 @@ server <- function(input, output, session) {
                   #opacity = 0.5, fillOpacity = 0.25,fillColor = "orange",
                   #highlightOptions = highlightOptions(color = "blue",
                                                       #weight = 2,bringToFront = TRUE)) %>%
-      setView(lng = -119.112636297941, lat = 32.7981486713485, zoom = 7) %>%
+      setView(lng = -118.112636297941, lat = 33.7981486713485, zoom = 9) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
-      addMarkers(lat = 33.2016761912433,lng = -118.321416825056, 
+      addMarkers(lat = 33.5981486713485,lng = -118.812636297941, 
                  options = markerOptions(draggable = TRUE)) 
       #addCircleMarkers(data = fish_data_clean, 
                  #lng = fish_data_clean$CompositeTargetLongitude, lat = fish_data_clean$CompositeTargetLatitude,
@@ -212,7 +212,7 @@ server <- function(input, output, session) {
   }
   
   
-    updateSelectizeInput(session, 'CompositeCommonName', choices = species_name_clean, server = TRUE)
+  updateSelectizeInput(session, 'CompositeCommonName', choices = species_name_clean, server = TRUE)
   
   
   # In your server function, when calling predict_DDT, ensure you pass the right arguments:
@@ -236,10 +236,41 @@ server <- function(input, output, session) {
     
     # Render the prediction in the UI
     output$prediction <- renderText({
-      paste("Predicted DDT Concentration:", round(prediction, 2), "ng/g lipid")
+      paste(round(prediction, 2), "ng/g lipid")
+    })
+    
+    
+    # create assignment for serving size based on prediction value
+    assignment_of_serving <- data.frame(pred = prediction) %>% 
+      mutate(rec = ifelse(prediction <= 21,
+                          "Safe",
+                          ifelse(prediction > 21 & prediction <= 220,
+                                 7,
+                                 ifelse(prediction > 220 & prediction <= 260,
+                                        6,
+                                        ifelse(prediction > 260 & prediction <= 310,
+                                               5, 
+                                               ifelse(prediction > 310 & prediction <= 390,
+                                                      4, 
+                                                      ifelse(prediction > 390 & prediction <= 520,
+                                                             3,
+                                                             ifelse(prediction > 520 & prediction <= 1000,
+                                                                    2,
+                                                                    ifelse(prediction > 1000 & prediction <= 2100,
+                                                                           1,
+                                                                           ifelse(prediction > 2100,
+                                                                                  "Do Not Consume",
+                                                                                  NA))))))))))
+    
+    # Extract the value from the data frame
+    serving_size <- as.character(assignment_of_serving[1, 2])
+    
+    output$serving_size <- renderText({
+      
+      paste("The recomended serving size is ", serving_size, " per week.")
+      
     })
 
-    
     
     output$advisory_image <- renderImage({
       return(list(src = image_path,
