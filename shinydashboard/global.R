@@ -29,12 +29,18 @@ library(terra)
 library(reactlog)
 reactlog_enable()
 
+# packages for lat and long 
+library(geos)
+library(tidyverse)
+library(sf)
+library(raster)
+library(sp)
+
+
 if("pacman" %in% installed.packages() == FALSE){install.packages("pacman")}
 pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
                MuMIn, lubridate, tidyr,ggh4x, lme4,sdmTMB,inlabru,cowplot,marmap,sjPlot, tidyverse, plyr, tidybayes, brms, bayesplot, loo,ggeffects,
                DHARMa)
-
-library(sf)
 
 
 # List of KML files
@@ -106,6 +112,12 @@ fish_data_clean <- na.omit(fish_data)  # Assuming columns 2 and 3 contain the co
 #fish_coord <- st_as_sf(fish_data_clean, coords = c(1, 2))  
 
 fish_coord <- st_as_sf(fish_data_clean, coords = c(2,3))
+
+areas <- readRDS(here::here("shinydashboard","data", "pelagic_nearshore_fish_zones.rds")) %>% 
+  left_join(fish_data, join_by(Name == CompositeStationArea))
+
+area <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>%
+  left_join(fish_data, join_by(Name == CompositeStationArea))
 
 #covariates: weight, length, location, and species 
 # use a button for calucalting DDT 

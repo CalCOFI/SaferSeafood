@@ -107,20 +107,52 @@ server <- function(input, output, session) {
 
   ## Functions
   
-  # Function to calculate the DDT value based on latitude and longitude
-  calculateDDTValue <- function(latitude, longitude) {
-    # Fit a simple regression model using latitude and longitude to predict TotalDDT.sed.trans
+  calculateDDT <- function(lat, long){
+    lonlat <-data.frame(cbind(long,lat))
+    # making the point into a dataframe / sf object
+    lonlat_sf = st_as_sf(lonlat, coords=c("long", "lat"), crs="EPSG:4326")
+    
+    # make the areas df into a spatial object
+    polsf <- sf::st_as_sf(areas)
+    
+    # out_points : user inputted long and lat (location as point)
+    # polsf is OEHHA/client polygon 
+    # psf are randomly assigned points to check if it's working as it should 
+    # ID is fishing zone name 
+    
+    # assign the point to a fishing zone polygon based on nearest distance
+    nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
+    
+    # assign point a sediment DDT value
+    zone_id <- lonlat_sf %>% 
+      mutate(sedDDT = nearest$AvgDDT,
+             zone = nearest$Name)
+    
+    # to add into the model we would call:
+    TotalSed.trans <- zone_id$sedDDT
+    
     lat_lon_model <- lm(TotalDDT.sed.trans ~ CompositeTargetLatitude + CompositeTargetLongitude, data = fish.clean.fam)
     
-    # Create a new data frame for the prediction input
-    lat_lon_data <- data.frame(CompositeTargetLatitude = latitude, CompositeTargetLongitude = longitude)
-    
-    # Predict TotalDDT.sed.trans for the new latitude and longitude
-    predicted_ddt <- predict(lat_lon_model, newdata = lat_lon_data)
+    predicted_ddt <- predict(lat_lon_model, newdata = zone_id)
     
     return(predicted_ddt)
+    
   }
   
+  
+  # Function to calculate the DDT value based on latitude and longitude
+  #calculateDDTValue <- function(latitude, longitude) {
+    # Fit a simple regression model using latitude and longitude to predict TotalDDT.sed.trans
+    #lat_lon_model <- lm(TotalDDT.sed.trans ~ CompositeTargetLatitude + CompositeTargetLongitude, data = fish.clean.fam)
+    
+    # Create a new data frame for the prediction input
+    #lat_lon_data <- data.frame(CompositeTargetLatitude = latitude, CompositeTargetLongitude = longitude)
+    
+    # Predict TotalDDT.sed.trans for the new latitude and longitude
+    #predicted_ddt <- predict(lat_lon_model, newdata = lat_lon_data)
+    
+    #return(predicted_ddt)
+
   
   
   
@@ -131,10 +163,10 @@ server <- function(input, output, session) {
   
   
   # Prediction function using the Bayesian model
-  predict_DDT <- function(species, latitude, longitude) {
+  predict_DDT <- function(species, lat, long) {
     # Determine predictor values based on input
     
-    TotalDDT_value = calculateDDTValue(latitude, longitude)  
+    TotalDDT_value = calculateDDT(lat, long)  
     Year_value = getYear()  # function or logic
     
     species_name <- tolower(input$species)
