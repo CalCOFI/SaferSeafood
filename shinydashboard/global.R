@@ -4,6 +4,7 @@ library(shinydashboard)
 library(shinyjs)
 library(shinyWidgets)
 library(tidyverse)
+library(shinyBS)
 library(leaflet)
 #install.packages("leaflet.extras")
 library(leaflet.extras)
@@ -67,8 +68,6 @@ pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
 
 # Combine data into one dataframe
 #combined_data <- do.call(rbind, data_list)
-
-
 
 
 # the 3 OEHHA polygons for coastal health advisories
@@ -167,18 +166,6 @@ set.seed(123)
 
 # Loading Bayesian regression model for prediction
 brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "brm_mod.rda"))
-
-# jscode <- '
-# shinyjs.backgroundCol = function(params) {
-#   var defaultParams = {
-#     id : null,
-#     col : "red"
-#   };
-#   params = shinyjs.getParams(params, defaultParams);
-# 
-#   var el = $("#" + params.id);
-#   el.css("background-color", params.col);
-# }'
 
 
 ## If application is in testing mode, will run all tests.
