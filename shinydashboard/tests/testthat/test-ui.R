@@ -4,7 +4,7 @@ library(shiny)
 # This block defines a test case titled "Functionality of UI interactions"
 test_that("Functionality of UI interactions", {
   # Initializes a new ShinyDriver instance, pointing to the directory of the Shiny app
-  app <- ShinyDriver$new("./")
+  app <- AppDriver$new("./")
   # Ensures that the Shiny app is stopped when the test ends
   on.exit(app$stop())
   
@@ -28,6 +28,7 @@ test_that("Functionality of UI interactions", {
   # Verifies that the longitude input field updates to the new longitude (139.6917)
   expect_equal(app$get_value("longitude_input"), 139.6917)
 })
+
 
 
 
