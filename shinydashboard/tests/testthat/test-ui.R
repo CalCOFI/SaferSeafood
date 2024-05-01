@@ -1,7 +1,5 @@
 library(shinytest2)
-library(shinytest)
 library(shiny)
-library(testthat)
 
 # This block defines a test case titled "Functionality of UI interactions"
 test_that("Functionality of UI interactions", {
