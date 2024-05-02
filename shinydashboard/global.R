@@ -71,7 +71,6 @@ pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
 
 
 # the 3 OEHHA polygons for coastal health advisories
-<<<<<<< HEAD
 ventura <- read_sf("data/polygons/venturaharbor.kml") %>%
   st_zm() %>% 
   mutate(Name = "venturaharbor")
