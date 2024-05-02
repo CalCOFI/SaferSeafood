@@ -170,8 +170,8 @@ server <- function(input, output, session) {
     # Determine predictor values based on input
     
     # add in the current markers for DDT
-    TotalDDT_sed_value = calculateDDT(lat = input$locationMap_marker_dragend$lat, 
-                                      long = input$locationMap_marker_dragend$lng)  
+    TotalDDT_sed_value = calculateDDT(lat = current_markers$lat, 
+                                      long = current_markers$long)  
     Year_value = getYear()  # function or logic
     
     species_name <- tolower(input$species)
@@ -217,8 +217,8 @@ server <- function(input, output, session) {
     species <- input$CompositeCommonName
     latitude <- current_markers$lat  # Use current latitude
     longitude <- current_markers$long  # Use current longitude
-    advisory_name <- get_advisory(lat = input$locationMap_marker_dragend$lat, 
-                                  long = input$locationMap_marker_dragend$lng)
+    advisory_name <- get_advisory(lat = current_markers$lat, 
+                                  long = current_markers$long)
     
     path = "data/OEHHA/"
     species_name_img <- tolower(gsub(" ", "-", input$species))
@@ -320,3 +320,4 @@ server <- function(input, output, session) {
   #   }
   # })
 }
+

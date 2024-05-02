@@ -251,6 +251,9 @@ body <-dashboardBody(
     
     # User Manual tabItem ----
     tabItem(tabName = "user_manual",
+            fluidRow(
+              tags$style(HTML(".container-fluid { background-color: #ffffff; }")),
+            
             
             # column ----
             column(width = 12,
@@ -315,7 +318,7 @@ body <-dashboardBody(
           
 
             ), # END left-hand column 
-
+)
     ), # END User Manual tabItem
 
 
