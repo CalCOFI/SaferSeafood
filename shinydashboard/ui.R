@@ -122,7 +122,11 @@ body <-dashboardBody(
                          solidHeader = FALSE,
                          collapsible = FALSE,
                          verbatimTextOutput(outputId = "advisory_error"),
-                         imageOutput(outputId = "advisory_image")
+                         imageOutput(outputId = "advisory_image"),
+                         tags$style(type="text/css",
+                                    ".shiny-output-error { visibility: hidden; }",
+                                    ".shiny-output-error:before { visibility: hidden; }"
+                         )
                      )
 #-------------------------------------------------------------------------------------------------
                      )
