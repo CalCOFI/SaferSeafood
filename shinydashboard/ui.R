@@ -262,7 +262,7 @@ body <-dashboardBody(
                    box(
                      width = 12,
                      title = tagList(strong("Getting Started")),
-                     HTML("Navigate through the application using the tabs at the top of the dashboard. <br><br>
+                     HTML("Navigate through the application using the tabs to the right of the dashboard. <br><br>
           <strong>Initial Setup:</strong> Begin by identifying your fish species in the 'Fish Identification' tab under 'Resources'. This section provides detailed information about different fish species. <br> <br> Have a good idea of where the fish was caught. Accurately entering the catch location enhances the prediction accuracy.")
                    ), # END section 1: box
           
