@@ -230,11 +230,6 @@ server <- function(input, output, session) {
     prediction <- predict_DDT(species, latitude, longitude)
     
     
-    # Render the prediction in the UI
-    output$prediction <- renderText({
-      paste(round(prediction, 2), "ng/g lipid")
-    })
-    
     
     # create assignment for serving size based on prediction value
     assignment_of_serving <- data.frame(pred = prediction) %>% 
@@ -261,30 +256,55 @@ server <- function(input, output, session) {
     # Extract the value from the data frame
     serving_size <- as.character(assignment_of_serving[1, 2])
     
-    output$serving_size <- renderText({
-      
-      paste("The recomended serving size is ", serving_size, " per week.")
-      
-    })
-    #--------------------------------------------------------------------------------------------
-    if (!file.exists(image_path)) {
-      output$advisory_error <- renderText({ NULL })
-      output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
-      output$advisory_error <- renderText({
-        HTML("There currently aren't any relative advisories for this species of fish.")
+    
+###------------The Output----------------###
+    
+    # Check if the 'prediction' value is missing (NA)
+    if (is.na(prediction)) {
+      # Handle the case where prediction is NA by providing an informative message
+      output$prediction <- renderText({
+        "Prediction not available. Please select a fish species."
       })
-    } else {
+      # Clear any previous error messages
       output$advisory_error <- renderText({ NULL })
+      # Clear any previously displayed images without deleting the image file
       output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
-      output$advisory_image <- renderImage({
-        return(list(src = image_path,
-                    contentType = "image/png",
-                    alt = "Advisory Image",
-                    width = "400px",
-                    height = "300px"))
-      }, deleteFile = FALSE)
+    } else {
+      # If prediction is available, render the predicted value in the format of ng/g lipid
+      output$prediction <- renderText({
+        paste(round(prediction, 2), "ng/g lipid")
+      })
+      
+      # Display the recommended serving size using the value from 'serving_size'
+      output$serving_size <- renderText({
+        paste("The recommended serving size is ", serving_size, " per week.")
+      })
+      
+      # Check if the image associated with the current prediction exists
+      if (!file.exists(image_path)) {
+        # Clear any previous error messages
+        output$advisory_error <- renderText({ NULL })
+        # Clear any previously displayed images without deleting the image file
+        output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
+        # Display a custom message indicating that no advisory images are available
+        output$advisory_error <- renderText({
+          HTML("There currently aren't any relative advisories for this species of fish.")
+        })
+      } else {
+        # Clear any previous error messages
+        output$advisory_error <- renderText({ NULL })
+        # Clear any previously displayed images without deleting the image file
+        output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
+        # Display the advisory image with specified properties
+        output$advisory_image <- renderImage({
+          return(list(src = image_path,
+                      contentType = "image/png",
+                      alt = "Advisory Image",
+                      width = "400px",
+                      height = "300px"))
+        }, deleteFile = FALSE)
+      }
     }
-    #------------------------------------------------------------------------------------------------    
     
   })
   
