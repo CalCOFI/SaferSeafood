@@ -288,7 +288,7 @@ body <-dashboardBody(
               <li>Select a fish species from the dropdown menu.</li>
               <li>Use the interactive map to place the marker on your fish catch location or manually enter the coordinates. This helps in providing the most accurate prediction.</li>
               <li>Click the <strong>'Predict DDT'</strong> button to receive the forecast.</li>
-              <li>Results will be displayed below the map, indicating the predicted DDT concentration.</li>
+              <li>Results will be displayed below the map.</li>
           </ol>")
           ) # END section 2: box
                    ),
@@ -298,7 +298,7 @@ body <-dashboardBody(
           box(
             width = 12,
             title = tagList(strong("How To Interpret The Output")),
-            HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g lipid units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Understanding these results can help in assessing potential health risks and making informed decisions.")
+            HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g lipid units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommending serving size and relevent mercury advisories are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions.")
           ) # END section 3: box
                    ),
           
