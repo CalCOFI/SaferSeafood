@@ -40,10 +40,11 @@ server <- function(input, output, session) {
                   opacity = 0.5, fillOpacity = 0.25,fillColor = "hotpink",
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2,bringToFront = TRUE))%>%
-      #addPolygons(data= sd_bay,color = "orange",weight = 1,smoothFactor = 1,
-      #opacity = 0.5, fillOpacity = 0.25,fillColor = "orange",
-      #highlightOptions = highlightOptions(color = "blue",
-      #weight = 2,bringToFront = TRUE)) %>%
+      # addPolygons(data = kml_buffer, fill = FALSE, color = "red", weight = 2) %>%
+      # #addPolygons(data= sd_bay,color = "orange",weight = 1,smoothFactor = 1,
+      # #opacity = 0.5, fillOpacity = 0.25,fillColor = "orange",
+      # #highlightOptions = highlightOptions(color = "blue",
+      # #weight = 2,bringToFront = TRUE)) %>%
       setView(lng = -118.112636297941, lat = 33.7981486713485, zoom = 9) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
@@ -59,6 +60,24 @@ server <- function(input, output, session) {
     # Update current_markers
     current_markers$lat <- input$locationMap_marker_dragend$lat
     current_markers$long <- input$locationMap_marker_dragend$lng
+    
+    
+    #marker_point <- st_point(c(current_markers$long, current_markers$lat))
+    
+    #buffer_distance <- 10000  # Adjust the buffer distance as needed
+    #kml_buffer <- st_buffer(polsf, dist = buffer_distance)
+    
+    # Check if any of the polygons contain the marker point
+    # if (!any(contained)) {
+    #   # Show error message if the marker point is outside of the buffer zone
+    #   validate(
+    #     need(
+    #       FALSE,
+    #       "Selected point is outside of the buffer zone. Please select a point within the buffer zone."
+    # 
+    #     ))
+    # 
+    # }
   })  
   
   output$text <- renderText({
@@ -142,11 +161,19 @@ server <- function(input, output, session) {
     # assign the point to a fishing zone polygon based on nearest distance
     nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
     
-    # assign point a sediment DDT value
-    zone_id <- lonlat_sf %>% 
-      mutate(sedDDT = nearest$AvgDDT,
-             zone = nearest$Name)
-    
+    # # assign point a sediment DDT value
+    # zone_id <- lonlat_sf %>% 
+    #   mutate(sedDDT = nearest$AvgDDT,
+    #          zone = nearest$Name)
+    # 
+    # if (!st_contains(kml_buffer, nearest)) {
+    #   # Show error message if the marker point is outside of the buffer zone
+    #   validate(
+    #     need(
+    #       FALSE,
+    #       "Selected point is outside of the buffer zone. Please select a point within the buffer zone."
+    #       ))}
+          
     #sedDDT_trans <- exp(zone_id$sedDDT) - 1
     
     # to add into the model we would call:

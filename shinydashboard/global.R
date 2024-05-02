@@ -85,6 +85,9 @@ sbpier <- read_sf("data/polygons/sbpiersanmateopoint.kml") %>%
   mutate(Name = "sbpiersanmateopoint")
 
 
+# buffer_distance <- 10000  # Adjust the buffer distance as needed
+# kml_buffer <- st_buffer(polsf, dist = buffer_distance)
+
 #sbpier <- read_sf("shinydashboard/data/polygons/sbpiersanmateopoint.kml") %>%
   #st_zm() %>% 
   #mutate(Name = "sbpiersanmateopoint")
