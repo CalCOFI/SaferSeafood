@@ -1,7 +1,5 @@
 server <- function(input, output, session) {
   
-  filt
-  
   
   # filter fish data ----
   filtered_fish_data <- reactive(
@@ -276,7 +274,10 @@ server <- function(input, output, session) {
       
       paste("The recomended serving size is ", serving_size, " per week.")
       
-    })
+    }) 
+  }
+  )
+  
 #--------------------------------------------------------------------------------------------
     if (!file.exists(image_path)) {
       output$advisory_error <- renderText({ NULL })
@@ -295,17 +296,18 @@ server <- function(input, output, session) {
                     height = "300px"))
       }, deleteFile = FALSE)
     }
+
 #------------------------------------------------------------------------------------------------    
     
-    })
+    #})
   
-  observeEvent(input$show_info_message, {
-    showNotification(
-      input$show_info_message,
-      duration = 5000,
-      type = "message"
-    )
-  })
+  #observeEvent(input$show_info_message, {
+    #showNotification(
+      #input$show_info_message,
+      #duration = 5000,
+      #type = "message"
+    #)
+  #})
     
   
   # observeEvent(input$location_marker_click, {
@@ -330,5 +332,4 @@ server <- function(input, output, session) {
   #     }
   #   }
   # })
-}
 
