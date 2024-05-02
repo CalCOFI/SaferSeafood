@@ -13,9 +13,9 @@ server <- function(input, output, session) {
   output$locationMap <- renderLeaflet({
     
     #kml <- st_read("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/venturaharbor.kml") %>%
-      
-      #leaflet_data <- sf::as.data.frame(kml) 
-      
+    
+    #leaflet_data <- sf::as.data.frame(kml) 
+    
     leaflet() %>%
       # add titles
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # added new map for visualize import streets
@@ -29,9 +29,9 @@ server <- function(input, output, session) {
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2,bringToFront = TRUE)) %>% 
       #addPolygons(data= mission,color = "black",weight = 1,smoothFactor = 1,
-                  #opacity = 0.5, fillOpacity = 0.25,fillColor = "black",
-                  #highlightOptions = highlightOptions(color = "blue",
-                                                      #weight = 2,bringToFront = TRUE)) %>%
+      #opacity = 0.5, fillOpacity = 0.25,fillColor = "black",
+      #highlightOptions = highlightOptions(color = "blue",
+      #weight = 2,bringToFront = TRUE)) %>%
       addPolygons(data= sbpier,color = "green",weight = 1,smoothFactor = 1,
                   opacity = 0.5, fillOpacity = 0.25,fillColor = "green",
                   highlightOptions = highlightOptions(color = "blue",
@@ -41,21 +41,20 @@ server <- function(input, output, session) {
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2,bringToFront = TRUE))%>%
       #addPolygons(data= sd_bay,color = "orange",weight = 1,smoothFactor = 1,
-                  #opacity = 0.5, fillOpacity = 0.25,fillColor = "orange",
-                  #highlightOptions = highlightOptions(color = "blue",
-                                                      #weight = 2,bringToFront = TRUE)) %>%
+      #opacity = 0.5, fillOpacity = 0.25,fillColor = "orange",
+      #highlightOptions = highlightOptions(color = "blue",
+      #weight = 2,bringToFront = TRUE)) %>%
       setView(lng = -118.112636297941, lat = 33.7981486713485, zoom = 9) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
       addMarkers(lat = 33.5981486713485,lng = -118.812636297941, 
                  options = markerOptions(draggable = TRUE)) 
-      #addCircleMarkers(data = fish_data_clean, 
-                 #lng = fish_data_clean$CompositeTargetLongitude, lat = fish_data_clean$CompositeTargetLatitude,
-                 #popup = paste0("DDT: ", fish_data_clean$AvgDDT, "<br>",
-                               # "Zone: ", fish_data_clean$CompositeStationArea, "<br>"),
-                 #color = "white") # NOTE: Unicode for degree symbol icon
+    #addCircleMarkers(data = fish_data_clean, 
+    #lng = fish_data_clean$CompositeTargetLongitude, lat = fish_data_clean$CompositeTargetLatitude,
+    #popup = paste0("DDT: ", fish_data_clean$AvgDDT, "<br>",
+    # "Zone: ", fish_data_clean$CompositeStationArea, "<br>"),
+    #color = "white") # NOTE: Unicode for degree symbol icon
   })
-
   observeEvent(input$locationMap_marker_dragend, {
     # Update current_markers
     current_markers$lat <- input$locationMap_marker_dragend$lat
@@ -98,7 +97,6 @@ server <- function(input, output, session) {
     #   data$clickedMarker <- NULL
     #   print(data$clickedMarker)
     # })
-
     
   })
   
@@ -116,9 +114,6 @@ server <- function(input, output, session) {
     # assign the point to a fishing zone polygon based on nearest distance
     nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
     
-    }
-
-    
     # assign point a sediment DDT value
     advisory_id <- lonlat_sf %>% 
       mutate(name = nearest$Name) %>% 
@@ -128,14 +123,10 @@ server <- function(input, output, session) {
     
     return(name)
     
-    
-    
-    
   }
   
   # Bayesian regression model for prediction
   model <- brm.diet.habitat.year.fam.clean
-
   ## Functions
   
   calculateDDT <- function(lat, long){
@@ -274,11 +265,8 @@ server <- function(input, output, session) {
       
       paste("The recomended serving size is ", serving_size, " per week.")
       
-    }) 
-  }
-  )
-  
-#--------------------------------------------------------------------------------------------
+    })
+    #--------------------------------------------------------------------------------------------
     if (!file.exists(image_path)) {
       output$advisory_error <- renderText({ NULL })
       output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
@@ -296,19 +284,18 @@ server <- function(input, output, session) {
                     height = "300px"))
       }, deleteFile = FALSE)
     }
-
-#------------------------------------------------------------------------------------------------    
+    #------------------------------------------------------------------------------------------------    
     
-    #})
+  })
   
-  #observeEvent(input$show_info_message, {
-    #showNotification(
-      #input$show_info_message,
-      #duration = 5000,
-      #type = "message"
-    #)
-  #})
-    
+  observeEvent(input$show_info_message, {
+    showNotification(
+      input$show_info_message,
+      duration = 5000,
+      type = "message"
+    )
+  })
+  
   
   # observeEvent(input$location_marker_click, {
   #   js$backgroundCol(input$selector, input$col)
@@ -332,4 +319,5 @@ server <- function(input, output, session) {
   #     }
   #   }
   # })
+}
 
