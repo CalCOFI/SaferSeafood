@@ -121,8 +121,8 @@ body <-dashboardBody(
                          #status = "success", 
                          solidHeader = FALSE,
                          collapsible = FALSE,
-                         imageOutput(outputId = "advisory_image"),
-                         verbatimTextOutput(outputId = "advisory_error")
+                         verbatimTextOutput(outputId = "advisory_error"),
+                         imageOutput(outputId = "advisory_image")
                      )
 #-------------------------------------------------------------------------------------------------
                      )

@@ -272,12 +272,14 @@ server <- function(input, output, session) {
     })
 #--------------------------------------------------------------------------------------------
     if (!file.exists(image_path)) {
+      output$advisory_error <- renderText({ NULL })
+      output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
       output$advisory_error <- renderText({
-        "There currently aren't any relative advisories for this species of fish."
+        HTML("There currently aren't any relative advisories for this species of fish.")
       })
-      
-      
     } else {
+      output$advisory_error <- renderText({ NULL })
+      output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
       output$advisory_image <- renderImage({
         return(list(src = image_path,
                     contentType = "image/png",
