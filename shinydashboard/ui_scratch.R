@@ -7,7 +7,7 @@ header <- dashboardHeader(
              style = "position: absolute; top: 0px; right: -20px; width: 250px; height: 50px;"),
     tags$img(src = "calcofi-logo.png", 
              style = "position: absolute; top: 0px; right: 235px; width: 50px; height: 50px;")
-    ),
+  ),
   titleWidth = 1200
   
 ) # END dashboardHeader
@@ -32,30 +32,29 @@ sidebar <- dashboardSidebar(
 #..........................dashboardBody.........................
 body <-dashboardBody(
   
-  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"), 
-            ),
-            
-            
-            # # allow for user to use current location
-            # tags$script('
-            #     $(document).ready(function () {
-            #       navigator.geolocation.getCurrentPosition(onSuccess, onError);
-            #     
-            #       function onError (err) {
-            #         Shiny.onInputChange("geolocation", false);
-            #       }
-            #     
-            #       function onSuccess (position) {
-            #         setTimeout(function () {
-            #           var coords = position.coords;
-            #           console.log(coords.latitude + ", " + coords.longitude);
-            #           Shiny.onInputChange("geolocation", true);
-            #           Shiny.onInputChange("lat", coords.latitude);
-            #           Shiny.onInputChange("long", coords.longitude);
-            #         }, 1100)
-            #       }
-            #     });
-            #     ')),
+  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
+  
+  
+  # # allow for user to use current location
+  # tags$script('
+  #     $(document).ready(function () {
+  #       navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  #     
+  #       function onError (err) {
+  #         Shiny.onInputChange("geolocation", false);
+  #       }
+  #     
+  #       function onSuccess (position) {
+  #         setTimeout(function () {
+  #           var coords = position.coords;
+  #           console.log(coords.latitude + ", " + coords.longitude);
+  #           Shiny.onInputChange("geolocation", true);
+  #           Shiny.onInputChange("lat", coords.latitude);
+  #           Shiny.onInputChange("long", coords.longitude);
+  #         }, 1100)
+  #       }
+  #     });
+  #     ')),
   
   
   # about tabItem ----
@@ -83,10 +82,10 @@ body <-dashboardBody(
                                           onInitialize = I('function() { this.setValue(""); }')
                                         )
                          ),
-                        
+                         
                          checkboxInput(inputId = "use_location", "Use your current location?"),
                          actionButton("predict_button", "Predict!", class = "btn-primary")
-                         ),
+                     ),
                      box(width = NULL,
                          
                          title = tags$b("Prediction Results"), 
@@ -116,7 +115,7 @@ body <-dashboardBody(
                                    title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
                          
                      ),
-#----------------------------------------------------------------------------------------------                     
+                     #----------------------------------------------------------------------------------------------                     
                      box(width = NULL, 
                          title = tags$b("Other Health Advisories"), 
                          #status = "success", 
@@ -129,35 +128,35 @@ body <-dashboardBody(
                                     ".shiny-output-error:before { visibility: hidden; }"
                          )
                      )
-#-------------------------------------------------------------------------------------------------
-                     )
-            
-            # column(width = 4,
-            #          
-            #          box(width = NULL,
-            #              title = tagList("Prediction Result"),
-            #              status = "success", 
-            #              solidHeader = TRUE,
-            #              collapsible = TRUE,
-            #              verbatimTextOutput("prediction"),
-            #              tags$div(
-            #                style = "display: flex; align-items: center; word-wrap: break-word;",
-            #                verbatimTextOutput("serving_size"),
-            #                actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
-            #              ),
-            #              # create tooltip so that if you hover over the serving size the serving size info comes up
-            #              bsTooltip(id = "info_button", 
-            #                        title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
-            #              
-            #          ),
-            #          box(width = NULL, 
-            #              title = "Health Advisories", status = "success", solidHeader = TRUE,
-            #              collapsible = TRUE,
-            #              imageOutput(outputId = "advisory_image")
-            #          )
-            # ) # end map row
-            
-    )), # END what's in my catch tab item
+                     #-------------------------------------------------------------------------------------------------
+              )
+              
+              # column(width = 4,
+              #          
+              #          box(width = NULL,
+              #              title = tagList("Prediction Result"),
+              #              status = "success", 
+              #              solidHeader = TRUE,
+              #              collapsible = TRUE,
+              #              verbatimTextOutput("prediction"),
+              #              tags$div(
+              #                style = "display: flex; align-items: center; word-wrap: break-word;",
+              #                verbatimTextOutput("serving_size"),
+              #                actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
+              #              ),
+              #              # create tooltip so that if you hover over the serving size the serving size info comes up
+              #              bsTooltip(id = "info_button", 
+              #                        title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
+              #              
+              #          ),
+              #          box(width = NULL, 
+              #              title = "Health Advisories", status = "success", solidHeader = TRUE,
+              #              collapsible = TRUE,
+              #              imageOutput(outputId = "advisory_image")
+              #          )
+              # ) # end map row
+              
+            )), # END what's in my catch tab item
     
     # about tabItem ----
     tabItem(tabName = "about",
@@ -184,7 +183,7 @@ body <-dashboardBody(
                              
                          ) # END background info box
                 ),
-                         
+                
                 tabPanel("Authors", 
                          
                          #background info box ----
@@ -195,7 +194,7 @@ body <-dashboardBody(
                              
                          ) # END author info box 
                          
-                         ),
+                ),
                 tabPanel("Data", 
                          
                          #right - hand column ----
@@ -244,7 +243,7 @@ body <-dashboardBody(
                                 
                          ) # END right - hand column
                          
-                         )
+                )
               ))
             
     ), # END about tabItem
@@ -255,26 +254,22 @@ body <-dashboardBody(
             # column ----
             column(width = 12,
                    
-                   fluidRow(
+                   
                    # Background Information Box
                    box(
                      width = NULL,
                      title = tagList(strong("Fish DDT Concentration Prediction Dashboard User Manual")),
                      HTML("Welcome to the Fish DDT Concentration Prediction Dashboard! This user-friendly tool is designed to assist fishermen and environmental researchers by predicting DDT concentrations in various fish species based on their geographic catch location. This manual will guide you through initial setup, application operation, and understanding your results.")
-                   ) # END background info box 
-                   ),
+                   ), # END background info box 
                    
-                   fluidRow(
                    # Section 1: Getting Started
                    box(
                      width = 12,
                      title = tagList(strong("Getting Started")),
                      HTML("Navigate through the application using the tabs to the right of the dashboard. <br><br>
           <strong>Initial Setup:</strong> Begin by identifying your fish species in the 'Fish Identification' tab under 'Resources'. This section provides detailed information about different fish species. <br> <br> Have a good idea of where the fish was caught. Accurately entering the catch location enhances the prediction accuracy.")
-                   ) # END section 1: box
-                   ),
+                   ), # END section 1: box
           
-                   fluidRow(
           # Section 2: Running The Application
           box(
             width = 12,
@@ -285,21 +280,17 @@ body <-dashboardBody(
               <li>Select a fish species from the dropdown menu.</li>
               <li>Use the interactive map to place the marker on your fish catch location or manually enter the coordinates. This helps in providing the most accurate prediction.</li>
               <li>Click the <strong>'Predict DDT'</strong> button to receive the forecast.</li>
-              <li>Results will be displayed below the map, indicating the predicted DDT concentration.</li>
+              <li>Results will be displayed below the map.</li>
           </ol>")
-          ) # END section 2: box
-                   ),
-                   
-                   fluidRow(
+          ), # END section 2: box
+          
           # Section 3: How To Interpret The Output
           box(
             width = 12,
             title = tagList(strong("How To Interpret The Output")),
-            HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g lipid units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Understanding these results can help in assessing potential health risks and making informed decisions.")
-          ) # END section 3: box
-                   ),
+            HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g lipid units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommending serving size and relevent mercury advisories are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions.")
+          ), # END section 3: box
           
-                   fluidRow(
           # Section 4: Troubleshooting
           box(
             width = 12,
@@ -311,74 +302,64 @@ body <-dashboardBody(
           </ul>
           If problems persist, please contact the support team for further assistance.")
           ) # END section 4: box
-                   )
           
-
+          
             ), # END left-hand column 
-
+          
     ), # END User Manual tabItem
-
-
-# fish_identification tabItem ----
-tabItem(tabName = "fish_id",
-        
-        box(
-          width = NULL,
-          title = tagList(strong("Having trouble identifying your fish?")),
-        div(class = "well",
-            p("Use the link below to access the California Marine Species Portal, where you can find detailed information about various fish species. This resource may assist you in identifying the fish species by their common names, scientific names, and visual characteristics."),
-            tags$a(href = "https://marinespecies.wildlife.ca.gov/", target = "_blank", 
-                   class = "btn btn-primary", "Visit the California Marine Species Portal"),
-            br(), br(),
-            p("Instructions:"),
-            tags$ol(
-              tags$li("Use the search bar to enter the common name or scientific name of the fish."),
-              tags$li("Use the filters on the left to narrow down by category, group, region, or gear type."),
-              tags$li("Click on any fish entry to get more detailed information including photos and distinctive features.")
-            ),
-            p("These features will help you to effectively identify the fish species you encounter."),
-            img(src = "www/help-guide-image.png", height = "200px", alt = "Helpful Guide Image")
-        ),
-        p("For additional assistance, please refer to the tutorial videos and FAQs on the portal."),
-        div(class = "well",
-            p("Still having trouble? Contact our support team for personalized help."),
-            tags$a(href = "mailto:support@fishid.com", class = "btn btn-success", "Email Support")
-        ))
-        
-        
-        # fluidRow(width = 6,
-        #          useShinyjs(),
-        #           extendShinyjs(text = jscode, functions = c("backgroundCol")),
-        #           p(id = "name", "My name is Dean"),
-        #           p(id = "sport", "I like soccer"),
-        #           selectInput(inputId = "col", label = "Colour",
-        #                       c("green", "yellow", "red", "blue", "white")),
-        #           selectInput(inputId = "selector", label = "Element", c("sport", "name", "button")),
-        #           actionButton(inputId = "button", label = "Go"))
-        
-        
-), #END fish_identification tabItem
-
-# research tabItem ----
-tabItem(tabName = "research",
-        
-        # full column ----
-        column(width = 12,
-               
-               #collaboration info box ----
-               box(width = NULL,
-                   title = tagList(strong("Research and Collaborations")),
-                   "Here we can add any future collaborations and research that may be added in the future. This could also be a place to have links to other sites and plug anyone else."
+    
+    
+    # fish_identification tabItem ----
+    tabItem(tabName = "fish_id",
+            
+            # left - hand column ----
+            column(width = 12,
                    
-               ) # END collaboration info box 
-               
-        ), # END column 
-        
-) # END research tabItem
-
-
+                   #background info box ----
+                   box(width = NULL,
+                       title = tagList(strong("Having trouble identifying your fish?")),
+                       tags$img(src = "fish-id.png", 
+                                alt = "Commerical fishing catches defined by the OEHHA",
+                                style = "max-width: 90%; display: block; margin: 0 auto;")
+                       
+                   ) # END background info box 
+                   
+            ) # END left-hand column , # drag mouse over fish and its name will pop up 
+            
+            
+            # fluidRow(width = 6,
+            #          useShinyjs(),
+            #           extendShinyjs(text = jscode, functions = c("backgroundCol")),
+            #           p(id = "name", "My name is Dean"),
+            #           p(id = "sport", "I like soccer"),
+            #           selectInput(inputId = "col", label = "Colour",
+            #                       c("green", "yellow", "red", "blue", "white")),
+            #           selectInput(inputId = "selector", label = "Element", c("sport", "name", "button")),
+            #           actionButton(inputId = "button", label = "Go"))
+            
+            
+    ), #END fish_identification tabItem
+    
+    # research tabItem ----
+    tabItem(tabName = "research",
+            
+            # full column ----
+            column(width = 12,
+                   
+                   #collaboration info box ----
+                   box(width = NULL,
+                       title = tagList(strong("Research and Collaborations")),
+                       "Here we can add any future collaborations and research that may be added in the future. This could also be a place to have links to other sites and plug anyone else."
+                       
+                   ) # END collaboration info box 
+                   
+            ), # END column 
+            
+    ) # END research tabItem
+    
+    
   ) # END tabItems
-
+  
 ) # END dashboardBody 
 
 

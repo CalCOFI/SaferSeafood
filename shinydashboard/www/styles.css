@@ -21,16 +21,6 @@
     background-color: #191E24 !important;
 }
 
-/* Ensure the following styles are more specific or check if #user_manual is the correct ID */
-#user_manual .skin-black .content-wrapper,
-#user_manual .skin-black .right-side {
-    background-color: white !important;
-}
-
-#user_manual .tab-content {
-    min-height: 1000px !important; /* Adjust the height as needed */
-}
-
 /* Change body background for all content if needed */
 .skin-black .content-wrapper,
 .skin-black .right-side {
