@@ -8,7 +8,7 @@ server <- function(input, output, session) {
   )
   
   # Initialize current_markers
-  current_markers <- reactiveValues(lat = NULL, long = NULL)
+  current_markers <- reactiveValues(lat = 33.5981420198664, long = -118.81263256073)
   
   # build location selectionleaflet map ----
   output$locationMap <- renderLeaflet({
