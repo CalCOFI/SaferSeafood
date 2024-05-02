@@ -135,3 +135,7 @@ tabItem(tabName = "whats_in_my_catch",
         
         
 ), #end map row
+
+
+#-----
+plot(pol)
