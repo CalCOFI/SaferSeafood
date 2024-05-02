@@ -1,9 +1,10 @@
 /* styles.css */
 
 /* Change font family and size of the dashboard title */
+
 .skin-black .main-header .logo {
     text-align: left;
-    font-size: 15.2px;
+    font-size: 2px;
     font-weight: bold;
     background-color: #0c3D6E !important;
     color: #FFDB00;
@@ -56,8 +57,8 @@
 
 /* Customize the navigation bar */
 .navbar {
-    background-color: #006189 !important;
-    color: #191E24;
+    background-color: #0c3D6E !important;
+    color: #FFDB00;
     border: 1px solid black;
 }
 

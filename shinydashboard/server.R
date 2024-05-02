@@ -281,6 +281,14 @@ server <- function(input, output, session) {
     }, deleteFile = FALSE)
     
     })
+  
+  observeEvent(input$show_info_message, {
+    showNotification(
+      input$show_info_message,
+      duration = 5000,
+      type = "message"
+    )
+  })
     
   
   # observeEvent(input$location_marker_click, {

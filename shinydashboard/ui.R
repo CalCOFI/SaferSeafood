@@ -1,12 +1,13 @@
 #........................dashboardHeader.........................
 header <- dashboardHeader(
   title = tags$div(
-    style = "position: relative; width: 100%;",
+    style = "position: relative; width: 100%; font-size: 20px;",
+    "SaferSeafood",
     tags$img(src = "scripps-logo.png", 
              style = "position: absolute; top: 0px; right: -20px; width: 250px; height: 50px;"),
     tags$img(src = "calcofi-logo.png", 
-             style = "position: absolute; top: 0px; right: 235px; width: 50px; height: 50px;"),
-    "SeaferSeafood"),
+             style = "position: absolute; top: 0px; right: 235px; width: 50px; height: 50px;")
+    ),
   titleWidth = 1200
   
 ) # END dashboardHeader
@@ -29,34 +30,31 @@ sidebar <- dashboardSidebar(
 ) # end dashboard Sidebar
 
 #..........................dashboardBody.........................
-body <- dashboardBody(
+body <-dashboardBody(
   
-  # shinyjs::useShinyjs(),
-  # tags$script(src = "functions.js"),
-  
-  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
             
             
-            # allow for user to use current location
-            tags$script('
-                $(document).ready(function () {
-                  navigator.geolocation.getCurrentPosition(onSuccess, onError);
-                
-                  function onError (err) {
-                    Shiny.onInputChange("geolocation", false);
-                  }
-                
-                  function onSuccess (position) {
-                    setTimeout(function () {
-                      var coords = position.coords;
-                      console.log(coords.latitude + ", " + coords.longitude);
-                      Shiny.onInputChange("geolocation", true);
-                      Shiny.onInputChange("lat", coords.latitude);
-                      Shiny.onInputChange("long", coords.longitude);
-                    }, 1100)
-                  }
-                });
-                ')),
+            # # allow for user to use current location
+            # tags$script('
+            #     $(document).ready(function () {
+            #       navigator.geolocation.getCurrentPosition(onSuccess, onError);
+            #     
+            #       function onError (err) {
+            #         Shiny.onInputChange("geolocation", false);
+            #       }
+            #     
+            #       function onSuccess (position) {
+            #         setTimeout(function () {
+            #           var coords = position.coords;
+            #           console.log(coords.latitude + ", " + coords.longitude);
+            #           Shiny.onInputChange("geolocation", true);
+            #           Shiny.onInputChange("lat", coords.latitude);
+            #           Shiny.onInputChange("long", coords.longitude);
+            #         }, 1100)
+            #       }
+            #     });
+            #     ')),
   
   
   # about tabItem ----
@@ -64,58 +62,94 @@ body <- dashboardBody(
     
     tabItem(tabName = "whats_in_my_catch",
             "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination.",
-            fluidRow(width = NULL,
+            fluidRow(
+              
+              column(width = 12,
                      # Add map box with point dragger
                      box(width = NULL,
                          leafletOutput(outputId = "locationMap"),
-                         htmlOutput(outputId = "text"),
-                         absolutePanel(
-                           top = 50, left = 70, 
-                           draggable = TRUE, 
-                           width = "20%",
-                           tags$style(HTML(".selectize-control.single .selectize-input {
+                         htmlOutput(outputId = "text")
+                     ),
+                     box(width = NULL,
+                         tags$style(HTML(".selectize-control.single .selectize-input {
                                         font-size: 16px;
                                       }")),
-                           selectizeInput(inputId = "species", 
-                                          label = tags$span("Select species:", style = "font-size: 16px;"),
-                                          choices = str_to_title(fish_lh$CompositeCommonName),
-                                          options = list(
-                                            placeholder = 'Please select a species',
-                                            onInitialize = I('function() { this.setValue(""); }')
-                                          )
-                           ),
-                           checkboxInput(inputId = "use_location", "Use your current location?"),
-                           actionButton("predict_button", "Predict!", class = "btn-primary")
-                         )
-                     )
-                     ),
-            
-            fluidRow(width = NULL,
-                     
-                     box(width = 8,
-                         title = tagList("Prediction Result"),
-                         status = "success", 
+                         selectizeInput(inputId = "species", 
+                                        label = tags$span("Select species:", style = "font-size: 16px;"),
+                                        choices = str_to_title(fish_lh$CompositeCommonName),
+                                        options = list(
+                                          placeholder = 'Please select a species',
+                                          onInitialize = I('function() { this.setValue(""); }')
+                                        )
+                         ),
+                        
+                         checkboxInput(inputId = "use_location", "Use your current location?"),
+                         actionButton("predict_button", "Predict!", class = "btn-primary")
+                         ),
+                     box(width = NULL,
+                         
+                         title = tags$b("Prediction Results"), 
+                         #status = "warning", 
                          solidHeader = TRUE,
                          collapsible = TRUE,
                          verbatimTextOutput("prediction"),
-                         tags$div(
-                           style = "display: flex; align-items: center; word-wrap: break-word;",
-                           verbatimTextOutput("serving_size"),
-                           actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
-                         ),
+                         verbatimTextOutput("serving_size"),
+                         # tags$div(
+                         #   style = "display: flex; align-items: center; word-wrap: break-word;",
+                         #   verbatimTextOutput("serving_size"),
+                         #   actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
+                         # ),
+                         #create the serving size the serving size info comes up
+                         div(class = "info-button",
+                             icon("info-circle", lib = "font-awesome"), # Info icon
+                             actionButton("info_button", "", style = "display: none;")), # Hidden button
+                         tags$script(HTML('
+                            $(document).ready(function(){
+                              $(".info-button").click(function(){
+                                alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
+                              });
+                            });
+                          ')),
                          
-                         # create tooltip so that if you hover over the serving size the serving size info comes up
-                         bsTooltip(id = "info_button", 
+                         bsTooltip(id = "info-button", 
                                    title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
+                         
                      ),
-                     box(width = 9, 
-                         title = "Health Advisories", status = "success", solidHeader = TRUE,
-                         collapsible = TRUE,
+                     box(width = NULL, 
+                         title = tags$b("Other Health Advisories"), 
+                         #status = "success", 
+                         solidHeader = FALSE,
+                         collapsible = FALSE,
                          imageOutput(outputId = "advisory_image")
                      )
-            ) # end map row
+                     )
             
-    ), # END what's in my catch tab item
+            # column(width = 4,
+            #          
+            #          box(width = NULL,
+            #              title = tagList("Prediction Result"),
+            #              status = "success", 
+            #              solidHeader = TRUE,
+            #              collapsible = TRUE,
+            #              verbatimTextOutput("prediction"),
+            #              tags$div(
+            #                style = "display: flex; align-items: center; word-wrap: break-word;",
+            #                verbatimTextOutput("serving_size"),
+            #                actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
+            #              ),
+            #              # create tooltip so that if you hover over the serving size the serving size info comes up
+            #              bsTooltip(id = "info_button", 
+            #                        title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
+            #              
+            #          ),
+            #          box(width = NULL, 
+            #              title = "Health Advisories", status = "success", solidHeader = TRUE,
+            #              collapsible = TRUE,
+            #              imageOutput(outputId = "advisory_image")
+            #          )
+            # ) # end map row
+            
+    )), # END what's in my catch tab item
     
     # about tabItem ----
     tabItem(tabName = "about",
