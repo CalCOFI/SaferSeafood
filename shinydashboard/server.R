@@ -1,5 +1,6 @@
 server <- function(input, output, session) {
   
+  filt
   
   
   # filter fish data ----
@@ -117,6 +118,9 @@ server <- function(input, output, session) {
     # assign the point to a fishing zone polygon based on nearest distance
     nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
     
+    }
+
+    
     # assign point a sediment DDT value
     advisory_id <- lonlat_sf %>% 
       mutate(name = nearest$Name) %>% 
@@ -125,6 +129,9 @@ server <- function(input, output, session) {
     name <- advisory_id[[1]]
     
     return(name)
+    
+    
+    
     
   }
   
