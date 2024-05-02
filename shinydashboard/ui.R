@@ -115,13 +115,16 @@ body <-dashboardBody(
                                    title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
                          
                      ),
+#----------------------------------------------------------------------------------------------                     
                      box(width = NULL, 
                          title = tags$b("Other Health Advisories"), 
                          #status = "success", 
                          solidHeader = FALSE,
                          collapsible = FALSE,
-                         imageOutput(outputId = "advisory_image")
+                         imageOutput(outputId = "advisory_image"),
+                         verbatimTextOutput(outputId = "advisory_error")
                      )
+#-------------------------------------------------------------------------------------------------
                      )
             
             # column(width = 4,

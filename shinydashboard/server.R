@@ -270,15 +270,23 @@ server <- function(input, output, session) {
       paste("The recomended serving size is ", serving_size, " per week.")
       
     })
-
-    
-    output$advisory_image <- renderImage({
-      return(list(src = image_path,
-                  contentType = "image/png",
-                  alt = "Advisory Image",
-                  width = "400px",
-                  height = "300px"))
-    }, deleteFile = FALSE)
+#--------------------------------------------------------------------------------------------
+    if (!file.exists(image_path)) {
+      output$advisory_error <- renderText({
+        "There currently aren't any relative advisories for this species of fish."
+      })
+      
+      
+    } else {
+      output$advisory_image <- renderImage({
+        return(list(src = image_path,
+                    contentType = "image/png",
+                    alt = "Advisory Image",
+                    width = "400px",
+                    height = "300px"))
+      }, deleteFile = FALSE)
+    }
+#------------------------------------------------------------------------------------------------    
     
     })
   
