@@ -20,7 +20,7 @@ sidebar <- dashboardSidebar(
               menuItem(text = "User Manual", tabName = "user_manual"),
               menuItem(text = "About", tabName = "about"), # previously welcome
               menuItem(text = "Resources", tabName = "resources", # previously seafood_advisory
-                       menuSubItem(text = "Fish Identification", tabName = "fishs_id"),
+                       menuSubItem(text = "Fish Identification", tabName = "fish_id"),
                        menuSubItem(text = "Research", tabName = "research")
               
   ) # END sidebarMenu
