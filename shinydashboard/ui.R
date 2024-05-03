@@ -2,13 +2,7 @@
 header <- dashboardHeader(
   title = tags$div(
     style = "position: relative; width: 100%; font-size: 27px;",
-    "SaferSeafood",
-    tags$img(src = "white-scripps-logo.png", 
-             style = "position: absolute; top: 0px; right: 250px; width: 250px; height: auto;"),
-    tags$img(src = "calcofi-logo.png", 
-             style = "position: absolute; top: 0px; right: 510px; width: 50px; height: auto;"),
-    tags$img(src = "bren-white-logo.png", 
-             style = "position: absolute; top: 0px; right: 0px; width: 250px; height: auto;")
+    "SaferSeafood"
   ),
   
   titleWidth = 1200
@@ -397,16 +391,31 @@ tabItem(tabName = "research",
         
 ) # END research tabItem
 
-  ) # END tabItems
+  ),# END tabItems
+
+ # end body
 
 
-) # END dashboardBody 
-
-
-
+#.........................dashboardfooter.........................
+footer <- tags$footer("", align = "center", style = " 
+              position:relative;
+              width:100%;
+              height:50px;  
+              color: white;
+              padding: 10px;
+              background-color: black;",
+              tags$img(src = "white-scripps-logo.png",
+                       style = "position: absolute; bottom 0; right : 250px; width: 250px; height: auto;"),
+              tags$img(src = "calcofi-logo.png",
+                       style = "position: absolute; bottom 0; right: 510px; width: 250px; height: auto;"),
+              tags$img(src = "bren-white-logo.png",
+                       style = "position: absolute; bottom 0; right: 0px; width: 250px; height: auto;")
+              )
+)
+  
 #..................combine all in dashboardPage..................
 
-dashboardPage(header, sidebar, body, skin = "black")
+dashboardPage(header, sidebar, body, footer, skin = "black")
 
 
 
