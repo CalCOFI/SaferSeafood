@@ -1,13 +1,16 @@
 #........................dashboardHeader.........................
 header <- dashboardHeader(
   title = tags$div(
-    style = "position: relative; width: 100%; font-size: 20px;",
+    style = "position: relative; width: 100%; font-size: 27px;",
     "SaferSeafood",
-    tags$img(src = "scripps-logo.png", 
-             style = "position: absolute; top: 0px; right: -20px; width: 250px; height: 50px;"),
+    tags$img(src = "white-scripps-logo.png", 
+             style = "position: absolute; top: 0px; right: 250px; width: 250px; height: auto;"),
     tags$img(src = "calcofi-logo.png", 
-             style = "position: absolute; top: 0px; right: 235px; width: 50px; height: 50px;")
-    ),
+             style = "position: absolute; top: 0px; right: 510px; width: 50px; height: auto;"),
+    tags$img(src = "bren-white-logo.png", 
+             style = "position: absolute; top: 0px; right: 0px; width: 250px; height: auto;")
+  ),
+  
   titleWidth = 1200
   
 ) # END dashboardHeader
@@ -23,18 +26,19 @@ sidebar <- dashboardSidebar(
               menuItem(text = "User Manual", tabName = "user_manual"),
               menuItem(text = "About", tabName = "about"), # previously welcome
               menuItem(text = "Resources", tabName = "resources", # previously seafood_advisory
-                       menuSubItem(text = "Fish Identification", tabName = "fish_id"),
-                       menuSubItem(text = "Research", tabName = "research")) 
+                       menuSubItem(text = "Fish Identification", tabName = "fishs_id"),
+                       menuSubItem(text = "Research", tabName = "research")
               
   ) # END sidebarMenu
 ) # end dashboard Sidebar
+) 
 
 #..........................dashboardBody.........................
 body <-dashboardBody(
   
   tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"), 
-            ),
-            
+  ), 
+
             
             # # allow for user to use current location
             # tags$script('
@@ -58,19 +62,20 @@ body <-dashboardBody(
             #     ')),
   
   
+
   # about tabItem ----
   tabItems(
-    
+
     tabItem(tabName = "whats_in_my_catch",
             box(
-                width = NULL,
-                title = tagList(strong("What's In My Catch?")),
-            "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination."),
+              width = NULL,
+              title = tagList(strong("What's In My Catch?", style = "font-size: 35px;"))),
+
             fluidRow(
-              
               column(width = 12,
                      # Add map box with point dragger
-                     box(width = NULL,
+                     box(title = tagList(strong("Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination.", style = "font-size: 16px;", width = 12)),
+                          width = NULL,
                          leafletOutput(outputId = "locationMap"),
                          htmlOutput(outputId = "text")
                      ),
@@ -385,8 +390,8 @@ tabItem(tabName = "research",
         
 ) # END research tabItem
 
-
   ) # END tabItems
+
 
 ) # END dashboardBody 
 

@@ -19,7 +19,10 @@ server <- function(input, output, session) {
     leaflet() %>%
       # add titles
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # added new map for visualize import streets
-      #addKML("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/smbeach_to_sb.kml") %>%
+      addRasterImage(rstack, opacity = 0.5) %>%
+      
+      #addPolygons(data = rstack, fillColor = "blue", color = "black", weight = 1, opacity = 1) %>% 
+  
       # set view over CA 
       # Check if sf_data contains polygons
       # swan diego bay and mission bay aren't relevant for coastal advisories 
@@ -51,9 +54,9 @@ server <- function(input, output, session) {
       addMarkers(lat = 33.5981486713485,lng = -118.812636297941, 
                  options = markerOptions(draggable = TRUE)) 
     #addCircleMarkers(data = fish_data_clean, 
-    #lng = fish_data_clean$CompositeTargetLongitude, lat = fish_data_clean$CompositeTargetLatitude,
-    #popup = paste0("DDT: ", fish_data_clean$AvgDDT, "<br>",
-    # "Zone: ", fish_data_clean$CompositeStationArea, "<br>"),
+    # lng = fish_data_clean$CompositeTargetLongitude, lat = fish_data_clean$CompositeTargetLatitude,
+    # popup = paste0("DDT: ", fish_data_clean$AvgDDT, "<br>",
+    #  "Zone: ", fish_data_clean$CompositeStationArea, "<br>"),
     #color = "white") # NOTE: Unicode for degree symbol icon
   })
   observeEvent(input$locationMap_marker_dragend, {
@@ -64,8 +67,6 @@ server <- function(input, output, session) {
     
     #marker_point <- st_point(c(current_markers$long, current_markers$lat))
     
-    #buffer_distance <- 10000  # Adjust the buffer distance as needed
-    #kml_buffer <- st_buffer(polsf, dist = buffer_distance)
     
     # Check if any of the polygons contain the marker point
     # if (!any(contained)) {
@@ -130,9 +131,18 @@ server <- function(input, output, session) {
     # make the areas df into a spatial object
     polsf <- sf::st_as_sf(advisory_areas)
     
+    # Filter reference geometries based on distance
+    #max_distance <- 1000  # Maximum distance in meters
+    #filtered_polsf <- polsf[sf::st_within(polsf, st_buffer(lonlat_sf, max_distance)), ]
+    
+    # Find nearest feature from filtered reference geometries
+    #nearest <- filtered_polsf[sf::st_nearest_feature(lonlat_sf, filtered_polsf), ]
+    
     # assign the point to a fishing zone polygon based on nearest distance
+    
     nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
     
+
     # assign point a sediment DDT value
     advisory_id <- lonlat_sf %>% 
       mutate(name = nearest$Name) %>% 
@@ -305,7 +315,7 @@ server <- function(input, output, session) {
       
       # Display the recommended serving size using the value from 'serving_size'
       output$serving_size <- renderText({
-        paste("The recommended serving size is ", serving_size, " per week.")
+        paste("The recommended serving size is ",serving_size, " per week.")
       })
       
       # Check if the image associated with the current prediction exists
@@ -344,7 +354,7 @@ server <- function(input, output, session) {
     )
   })
   
-  
+
   # observeEvent(input$location_marker_click, {
   #   js$backgroundCol(input$selector, input$col)
   # })

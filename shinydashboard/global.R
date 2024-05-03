@@ -123,6 +123,11 @@ fish_coord <- st_as_sf(fish_data_clean, coords = c(2,3))
 areas <- readRDS(here::here("shinydashboard","data", "pelagic_nearshore_fish_zones.rds")) %>% 
   left_join(fish_data, join_by(Name == CompositeStationArea))
 
+
+files <- list.files(path="/Users/katebecker/Documents/Bren/Capstone/SaferSeafood/data/sediment_data/sediment_rasters",  pattern="\\.grd$", full.names=TRUE,recursive=TRUE)
+s <- stack(files)
+rstack <- raster(files[1])
+
 #area <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>%
   #left_join(fish_data, join_by(Name == CompositeStationArea))
 
@@ -181,3 +186,8 @@ brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "
 if (Sys.getenv("SHINY_TEST") == "true") {
   testthat::test_dir("tests/testthat")
 }
+
+
+
+buffer_distance <- 0.1  # Adjust this value according to your needs
+buffered_polsf <- st_buffer(polsf, buffer_distance)
