@@ -19,7 +19,7 @@ server <- function(input, output, session) {
     leaflet() %>%
       # add titles
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # added new map for visualize import streets
-      addRasterImage(rstack, opacity = 0.5) %>%
+      #addRasterImage(rstack, opacity = 0.5) %>%
       
       #addPolygons(data = rstack, fillColor = "blue", color = "black", weight = 1, opacity = 1) %>% 
   
