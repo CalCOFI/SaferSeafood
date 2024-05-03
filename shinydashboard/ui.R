@@ -1,11 +1,11 @@
 #........................dashboardHeader.........................
 header <- dashboardHeader(
   title = tags$div(
-    style = "position: relative; width: 100%; font-size: 27px;",
+    style = "position: relative; width: 100%; font-size: 30px;",
     "SaferSeafood"
   ),
   
-  titleWidth = 1200
+  titleWidth = 2000
   
 ) # END dashboardHeader
 
@@ -396,26 +396,58 @@ tabItem(tabName = "research",
  # end body
 
 
+
+
+# #.........................dashboardfooter.........................
+# footer <- tags$footer("", align = "bottom", style = " 
+#               position: absolute;        
+#               width:100%;
+#               height:100px;",  
+#               tags$img(src = "white-scripps-logo.png",
+#                        style = "position: absolute; width: 300px; height: auto;"),
+#               tags$img(src = "calcofi-logo.png",
+#                        style = "position: absolute; width: 70px; height: auto;"),
+#               tags$img(src = "bren-white-logo.png",
+#                        style = "position: absolute; width: 250px; height: auto;")
+# )
+# )
+# 
+# 
+# #..................combine all in dashboardPage..................
+# 
+# dashboardPage(header, sidebar, body, footer, skin = "black")
+
+
+
 #.........................dashboardfooter.........................
-footer <- tags$footer("", align = "center", style = " 
-              position:relative;
+footer <- tags$footer("", align = "bottom", style = " 
+              position: absolute;        
               width:100%;
-              height:50px;  
-              color: white;
-              padding: 10px;
-              background-color: black;",
+              height:100px;
+              display: flex;",  
               tags$img(src = "white-scripps-logo.png",
-                       style = "position: absolute; bottom 0; right : 250px; width: 250px; height: auto;"),
+                       style = "position: absolute; bottom: 25px; right : 575px; width: 300px; height: auto;"),
               tags$img(src = "calcofi-logo.png",
-                       style = "position: absolute; bottom 0; right: 510px; width: 250px; height: auto;"),
+                       style = "position: absolute; bottom: 10px; right: 900px; width: 70px; height: auto;"),
               tags$img(src = "bren-white-logo.png",
-                       style = "position: absolute; bottom 0; right: 0px; width: 250px; height: auto;")
-              )
+                       style = "position: absolute; bottom: 25px; right: 300px; width: 250px; height: auto;")
 )
-  
+)
+
+
+
+
 #..................combine all in dashboardPage..................
 
 dashboardPage(header, sidebar, body, footer, skin = "black")
+
+
+
+
+
+
+
+
 
 
 
