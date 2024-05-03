@@ -161,10 +161,10 @@ server <- function(input, output, session) {
     # assign the point to a fishing zone polygon based on nearest distance
     nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
     
-    # # assign point a sediment DDT value
-    # zone_id <- lonlat_sf %>% 
-    #   mutate(sedDDT = nearest$AvgDDT,
-    #          zone = nearest$Name)
+    # assign point a sediment DDT value
+    zone_id <- lonlat_sf %>%
+      mutate(sedDDT = nearest$AvgDDT,
+             zone = nearest$Name)
     # 
     # if (!st_contains(kml_buffer, nearest)) {
     #   # Show error message if the marker point is outside of the buffer zone
