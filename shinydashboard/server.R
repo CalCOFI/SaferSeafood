@@ -293,13 +293,14 @@ server <- function(input, output, session) {
         "Prediction not available. Please select a fish species."
       })
       # Clear any previous error messages
+      output$serving_size <- renderText({ NULL })
       output$advisory_error <- renderText({ NULL })
       # Clear any previously displayed images without deleting the image file
       output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
     } else {
       # If prediction is available, render the predicted value in the format of ng/g lipid
       output$prediction <- renderText({
-        paste(round(prediction, 2), "ng/g lipid")
+        paste(round(prediction, 2), "ng/g")
       })
       
       # Display the recommended serving size using the value from 'serving_size'

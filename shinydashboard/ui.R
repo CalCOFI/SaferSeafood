@@ -93,8 +93,8 @@ body <-dashboardBody(
                          #status = "warning", 
                          solidHeader = TRUE,
                          collapsible = TRUE,
-                         verbatimTextOutput("prediction"),
-                         verbatimTextOutput("serving_size"),
+                         textOutput("prediction"),
+                         textOutput("serving_size"),
                          # tags$div(
                          #   style = "display: flex; align-items: center; word-wrap: break-word;",
                          #   verbatimTextOutput("serving_size"),
@@ -122,7 +122,7 @@ body <-dashboardBody(
                          #status = "success", 
                          solidHeader = FALSE,
                          collapsible = FALSE,
-                         verbatimTextOutput(outputId = "advisory_error"),
+                         textOutput(outputId = "advisory_error"),
                          imageOutput(outputId = "advisory_image"),
                          tags$style(type="text/css",
                                     ".shiny-output-error { visibility: hidden; }",
@@ -339,13 +339,14 @@ tabItem(tabName = "fish_id",
               tags$li("Use the filters on the left to narrow down by category, group, region, or gear type."),
               tags$li("Click on any fish entry to get more detailed information including photos and distinctive features.")
             ),
-            p("These features will help you to effectively identify the fish species you encounter."),
-            img(src = "www/help-guide-image.png", height = "200px", alt = "Helpful Guide Image")
+            p("These features will help you to effectively identify the fish species you encounter.")
+            # ,
+            # img(src = "www/help-guide-image.png", height = "200px", alt = "Helpful Guide Image")
         ),
         p("For additional assistance, please refer to the tutorial videos and FAQs on the portal."),
         div(class = "well",
             p("Still having trouble? Contact our support team for personalized help."),
-            tags$a(href = "mailto:support@fishid.com", class = "btn btn-success", "Email Support")
+            tags$a(href = "bversteeg@ucsb.edu", class = "btn btn-success", "Email Support")
         ))
         
         
