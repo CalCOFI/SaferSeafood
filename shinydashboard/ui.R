@@ -62,7 +62,10 @@ body <-dashboardBody(
   tabItems(
     
     tabItem(tabName = "whats_in_my_catch",
-            "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination.",
+            box(
+                width = NULL,
+                title = tagList(strong("What's In My Catch?")),
+            "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination."),
             fluidRow(
               
               column(width = 12,
@@ -89,7 +92,7 @@ body <-dashboardBody(
                          ),
                      box(width = NULL,
                          
-                         title = tags$b("Prediction Results"), 
+                         title = tags$b("Prediction Results", style = "display: block; text-align: left;"), 
                          #status = "warning", 
                          solidHeader = TRUE,
                          collapsible = TRUE,
@@ -116,8 +119,10 @@ body <-dashboardBody(
                                    title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
                          
                      ),
+                     
 #----------------------------------------------------------------------------------------------                     
-                     box(width = NULL, 
+                     box(
+                       width = NULL, 
                          title = tags$b("Other Health Advisories"), 
                          #status = "success", 
                          solidHeader = FALSE,
