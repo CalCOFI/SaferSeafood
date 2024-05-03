@@ -48,7 +48,7 @@ server <- function(input, output, session) {
       # #opacity = 0.5, fillOpacity = 0.25,fillColor = "orange",
       # #highlightOptions = highlightOptions(color = "blue",
       # #weight = 2,bringToFront = TRUE)) %>%
-      setView(lng = -118.112636297941, lat = 33.7981486713485, zoom = 9) %>%
+      setView(lng = -118.50278377533, lat = 33.7536925268406, zoom = 9) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
       addMarkers(lat = 33.5981486713485,lng = -118.812636297941, 
@@ -59,14 +59,12 @@ server <- function(input, output, session) {
     #  "Zone: ", fish_data_clean$CompositeStationArea, "<br>"),
     #color = "white") # NOTE: Unicode for degree symbol icon
   })
+  
   observeEvent(input$locationMap_marker_dragend, {
     # Update current_markers
     current_markers$lat <- input$locationMap_marker_dragend$lat
     current_markers$long <- input$locationMap_marker_dragend$lng
-    
-    
-    #marker_point <- st_point(c(current_markers$long, current_markers$lat))
-    
+
     
     # Check if any of the polygons contain the marker point
     # if (!any(contained)) {
@@ -81,10 +79,10 @@ server <- function(input, output, session) {
     # }
   })  
   
-  output$text <- renderText({
-    paste0("Current marker latitude: ", current_markers$lat, " <br> ",
-           "Current marker longitude: ", current_markers$long, " <br> ")
-  })
+  # output$text <- renderText({
+  #   paste0("Current marker latitude: ", current_markers$lat, " <br> ",
+  #          "Current marker longitude: ", current_markers$long, " <br> ")
+  # })
   
   
   # build data exploration leaflet map ----
@@ -131,18 +129,9 @@ server <- function(input, output, session) {
     # make the areas df into a spatial object
     polsf <- sf::st_as_sf(advisory_areas)
     
-    # Filter reference geometries based on distance
-    #max_distance <- 1000  # Maximum distance in meters
-    #filtered_polsf <- polsf[sf::st_within(polsf, st_buffer(lonlat_sf, max_distance)), ]
-    
-    # Find nearest feature from filtered reference geometries
-    #nearest <- filtered_polsf[sf::st_nearest_feature(lonlat_sf, filtered_polsf), ]
-    
     # assign the point to a fishing zone polygon based on nearest distance
-    
     nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
     
-
     # assign point a sediment DDT value
     advisory_id <- lonlat_sf %>% 
       mutate(name = nearest$Name) %>% 
@@ -170,6 +159,7 @@ server <- function(input, output, session) {
     
     # assign the point to a fishing zone polygon based on nearest distance
     nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
+    
     
     # assign point a sediment DDT value
     zone_id <- lonlat_sf %>%
@@ -266,8 +256,6 @@ server <- function(input, output, session) {
     # Call the prediction function
     prediction <- predict_DDT(species, latitude, longitude)
     
-    
-    
     # create assignment for serving size based on prediction value
     assignment_of_serving <- data.frame(pred = prediction) %>% 
       mutate(rec = ifelse(prediction <= 21,
@@ -293,56 +281,77 @@ server <- function(input, output, session) {
     # Extract the value from the data frame
     serving_size <- as.character(assignment_of_serving[1, 2])
     
+    # construct df out of lat and long inputs 
+    lonlat <- data.frame(cbind(long = longitude,lat = latitude))
+    # making the point into a dataframe / sf object
+    lonlat_sf = st_as_sf(lonlat, coords=c("long", "lat"), crs="EPSG:4326")
+    # make the areas df into a spatial object
+    polsf <- sf::st_as_sf(areas)
+    # assign the point to a fishing zone polygon based on nearest distance
+    nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
+    # get the distance measurement from the point to the nearest polygon
+    meters <- st_distance(x = lonlat_sf, y = nearest) %>% 
+      as.numeric()
+    
     
 ###------------The Output----------------###
     
-    # Check if the 'prediction' value is missing (NA)
-    if (is.na(prediction)) {
-      # Handle the case where prediction is NA by providing an informative message
-      output$prediction <- renderText({
-        "Prediction not available. Please select a fish species."
+    # check if the location is valid
+    if (meters > 500) {
+      output$validation_result <- renderText({
+        "Invalid location selected. Location outside of area of study, please select a different location and try again."
       })
-      # Clear any previous error messages
-      output$serving_size <- renderText({ NULL })
-      output$advisory_error <- renderText({ NULL })
-      # Clear any previously displayed images without deleting the image file
-      output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
     } else {
-      # If prediction is available, render the predicted value in the format of ng/g lipid
-      output$prediction <- renderText({
-        paste(round(prediction, 2), "ng/g")
-      })
-      
-      # Display the recommended serving size using the value from 'serving_size'
-      output$serving_size <- renderText({
-        paste("The recommended serving size is ",serving_size, " per week.")
-      })
-      
-      # Check if the image associated with the current prediction exists
-      if (!file.exists(image_path)) {
-        # Clear any previous error messages
-        output$advisory_error <- renderText({ NULL })
-        # Clear any previously displayed images without deleting the image file
-        output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
-        # Display a custom message indicating that no advisory images are available
-        output$advisory_error <- renderText({
-          HTML("There currently aren't any relative advisories for this species of fish.")
+      # Check if the 'prediction' value is missing (NA)
+      if (is.na(prediction)) {
+        # Handle the case where prediction is NA by providing an informative message
+        output$prediction <- renderText({
+          "Prediction not available. Please select a fish species."
         })
-      } else {
         # Clear any previous error messages
+        output$serving_size <- renderText({ NULL })
         output$advisory_error <- renderText({ NULL })
         # Clear any previously displayed images without deleting the image file
         output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
-        # Display the advisory image with specified properties
-        output$advisory_image <- renderImage({
-          return(list(src = image_path,
-                      contentType = "image/png",
-                      alt = "Advisory Image",
-                      width = "400px",
-                      height = "300px"))
-        }, deleteFile = FALSE)
+      } else {
+        # If prediction is available, render the predicted value in the format of ng/g lipid
+        output$prediction <- renderText({
+          paste(round(prediction, 2), "ng/g")
+        })
+        
+        # Display the recommended serving size using the value from 'serving_size'
+        output$serving_size <- renderText({
+          paste("The recommended serving size is ",serving_size, " per week.")
+        })
+        
+        # Check if the image associated with the current prediction exists
+        if (!file.exists(image_path)) {
+          # Clear any previous error messages
+          output$advisory_error <- renderText({ NULL })
+          # Clear any previously displayed images without deleting the image file
+          output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
+          # Display a custom message indicating that no advisory images are available
+          output$advisory_error <- renderText({
+            HTML("There currently aren't any relative advisories for this species of fish.")
+          })
+        } else {
+          # Clear any previous error messages
+          output$advisory_error <- renderText({ NULL })
+          # Clear any previously displayed images without deleting the image file
+          output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
+          # Display the advisory image with specified properties
+          output$advisory_image <- renderImage({
+            return(list(src = image_path,
+                        contentType = "image/png",
+                        alt = "Advisory Image",
+                        width = "400px",
+                        height = "300px"))
+          }, deleteFile = FALSE)
+        }
       }
     }
+    
+    
     
   })
   

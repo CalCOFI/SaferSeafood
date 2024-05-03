@@ -74,10 +74,13 @@ body <-dashboardBody(
             fluidRow(
               column(width = 12,
                      # Add map box with point dragger
-                     box(title = tagList(strong("Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of contamination.", style = "font-size: 16px;", width = 12)),
+                     box(title = span("Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of DDT contamination in your catch.", style = "font-size: 16px;", width = 12),
                           width = NULL,
-                         leafletOutput(outputId = "locationMap"),
-                         htmlOutput(outputId = "text")
+                         div(
+                           class = "map-container",
+                           tags$b("Select location where your fish was caught:", style = "color:#0c3D6E; font-size: 16px;"),
+                           leafletOutput(outputId = "locationMap")  # Header below the title but above the map output
+                         )
                      ),
                      box(width = NULL,
                          tags$style(HTML(".selectize-control.single .selectize-input {
@@ -92,12 +95,25 @@ body <-dashboardBody(
                                         )
                          ),
                         
-                         checkboxInput(inputId = "use_location", "Use your current location?"),
-                         actionButton("predict_button", "Predict!", class = "btn-primary")
+                         #checkboxInput(inputId = "use_location", "Use your current location?"),
+                         actionButton("predict_button", "Predict!", class = "btn-primary"),
+                         span(textOutput("validation_result"), style = "color:red")
                          ),
                      box(width = NULL,
                          
-                         title = tags$b("Prediction Results", style = "display: block; text-align: left;"), 
+                         div(class = "prediction-title",
+                             tags$b("Prediction Results", style = "color:#0c3D6E; font-size: 16px;"),  # Prediction results title
+                             div(class = "info-button",
+                                 style = "display: flex; align-items: right;",
+                                 icon("info-circle", lib = "font-awesome"),  # Info icon
+                                 actionButton("info_button", "", style = "display: none;"))),  # Hidden button
+                         tags$script(HTML('
+                            $(document).ready(function(){
+                              $(".info-button").click(function(){
+                                alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
+                              });
+                            });
+                          ')),
                          #status = "warning", 
                          solidHeader = TRUE,
                          collapsible = TRUE,
@@ -109,16 +125,6 @@ body <-dashboardBody(
                          #   actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
                          # ),
                          #create the serving size the serving size info comes up
-                         div(class = "info-button",
-                             icon("info-circle", lib = "font-awesome"), # Info icon
-                             actionButton("info_button", "", style = "display: none;")), # Hidden button
-                         tags$script(HTML('
-                            $(document).ready(function(){
-                              $(".info-button").click(function(){
-                                alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
-                              });
-                            });
-                          ')),
                          
                          bsTooltip(id = "info-button", 
                                    title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
@@ -128,7 +134,8 @@ body <-dashboardBody(
 #----------------------------------------------------------------------------------------------                     
                      box(
                        width = NULL, 
-                         title = tags$b("Other Health Advisories"), 
+                       div(class = "prediction-title",
+                           tags$b("Other Health Advisories", style = "color:#0c3D6E; font-size: 16px;")), 
                          #status = "success", 
                          solidHeader = FALSE,
                          collapsible = FALSE,

@@ -8,7 +8,7 @@ fish_raw <- read_csv(here::here("raw_data", "fish_clean.csv"))
 
 # calculate average DDT and group_by lat and long ----
 avg_DDT <- fish_raw %>%
-  select(CompositeStationArea, TotalDDT) %>%
+  dplyr::select(CompositeStationArea, TotalDDT) %>%
   group_by(CompositeStationArea) %>%
   summarize(
     AvgDDT = round(mean(TotalDDT), 1)
