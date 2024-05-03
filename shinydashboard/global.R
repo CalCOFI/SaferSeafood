@@ -124,9 +124,6 @@ areas <- readRDS(here::here("shinydashboard","data", "pelagic_nearshore_fish_zon
   left_join(fish_data, join_by(Name == CompositeStationArea))
 
 
-# files <- list.files(path="data/sediment_data/sediment_rasters",  pattern="\\.grd$", full.names=TRUE,recursive=TRUE)
-# s <- stack(files)
-# rstack <- raster(files[1])
 
 #area <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>%
   #left_join(fish_data, join_by(Name == CompositeStationArea))
