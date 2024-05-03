@@ -37,3 +37,14 @@ advisory_id <- lonlat_sf %>%
   st_drop_geometry()
 
 name <- advisory_id[[1]]
+
+
+
+path = "shinydashboard/data/OEHHA/"
+species_name_img <- tolower(gsub(" ", "-", input$species))
+
+#Determine image path based on advisory name
+image_path <- read_csv(paste0(path, "venturaharbor", "/other_advisory.csv")) %>% 
+  filter(Species == "Sandbass")
+
+nrow(image_path)

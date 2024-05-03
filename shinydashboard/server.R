@@ -31,33 +31,23 @@ server <- function(input, output, session) {
                   opacity = 0.5, fillOpacity = 0.25,fillColor = "red",
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2,bringToFront = TRUE)) %>% 
-      #addPolygons(data= mission,color = "black",weight = 1,smoothFactor = 1,
-      #opacity = 0.5, fillOpacity = 0.25,fillColor = "black",
-      #highlightOptions = highlightOptions(color = "blue",
-      #weight = 2,bringToFront = TRUE)) %>%
+
       addPolygons(data= sbpier,color = "green",weight = 1,smoothFactor = 1,
                   opacity = 0.5, fillOpacity = 0.25,fillColor = "green",
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2,bringToFront = TRUE)) %>%
+      
       addPolygons(data= smbeach,color = "hotpink",weight = 1,smoothFactor = 1,
                   opacity = 0.5, fillOpacity = 0.25,fillColor = "hotpink",
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2,bringToFront = TRUE))%>%
-      # addPolygons(data = kml_buffer, fill = FALSE, color = "red", weight = 2) %>%
-      # #addPolygons(data= sd_bay,color = "orange",weight = 1,smoothFactor = 1,
-      # #opacity = 0.5, fillOpacity = 0.25,fillColor = "orange",
-      # #highlightOptions = highlightOptions(color = "blue",
-      # #weight = 2,bringToFront = TRUE)) %>%
+
       setView(lng = -118.50278377533, lat = 33.7536925268406, zoom = 9) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
       addMarkers(lat = 33.5981486713485,lng = -118.812636297941, 
                  options = markerOptions(draggable = TRUE)) 
-    #addCircleMarkers(data = fish_data_clean, 
-    # lng = fish_data_clean$CompositeTargetLongitude, lat = fish_data_clean$CompositeTargetLatitude,
-    # popup = paste0("DDT: ", fish_data_clean$AvgDDT, "<br>",
-    #  "Zone: ", fish_data_clean$CompositeStationArea, "<br>"),
-    #color = "white") # NOTE: Unicode for degree symbol icon
+
   })
   
   observeEvent(input$locationMap_marker_dragend, {
@@ -65,24 +55,8 @@ server <- function(input, output, session) {
     current_markers$lat <- input$locationMap_marker_dragend$lat
     current_markers$long <- input$locationMap_marker_dragend$lng
 
-    
-    # Check if any of the polygons contain the marker point
-    # if (!any(contained)) {
-    #   # Show error message if the marker point is outside of the buffer zone
-    #   validate(
-    #     need(
-    #       FALSE,
-    #       "Selected point is outside of the buffer zone. Please select a point within the buffer zone."
-    # 
-    #     ))
-    # 
-    # }
   })  
-  
-  # output$text <- renderText({
-  #   paste0("Current marker latitude: ", current_markers$lat, " <br> ",
-  #          "Current marker longitude: ", current_markers$long, " <br> ")
-  # })
+
   
   
   # build data exploration leaflet map ----
@@ -165,16 +139,6 @@ server <- function(input, output, session) {
     zone_id <- lonlat_sf %>%
       mutate(sedDDT = nearest$AvgDDT,
              zone = nearest$Name)
-    # 
-    # if (!st_contains(kml_buffer, nearest)) {
-    #   # Show error message if the marker point is outside of the buffer zone
-    #   validate(
-    #     need(
-    #       FALSE,
-    #       "Selected point is outside of the buffer zone. Please select a point within the buffer zone."
-    #       ))}
-          
-    #sedDDT_trans <- exp(zone_id$sedDDT) - 1
     
     # to add into the model we would call:
     TotalSed <- zone_id$sedDDT
@@ -221,11 +185,11 @@ server <- function(input, output, session) {
       Family = input_species$Family
     )
     
-    # Check if all necessary data is available
-    if (anyNA(new_data)) {
-      # Change depending on what we want to output
-      return(NA)
-    }
+    # # Check if all necessary data is available
+    # if (anyNA(new_data)) {
+    #   # Change depending on what we want to output
+    #   return(NA)
+    # }
     
     prediction <- predict(model, newdata = new_data, re.form = NA)
     estimate <- prediction[1]
@@ -248,10 +212,12 @@ server <- function(input, output, session) {
                                   long = current_markers$long)
     
     path = "data/OEHHA/"
+    species_name_advisory <- input$species
     species_name_img <- tolower(gsub(" ", "-", input$species))
     
     #Determine image path based on advisory name
-    image_path <- paste0(path, advisory_name, "/", species_name_img, ".png")
+    image_path <- read_csv(paste0(path, advisory_name, "/other_advisory.csv")) %>% 
+      filter(Species == species_name_advisory)
     
     # Call the prediction function
     prediction <- predict_DDT(species, latitude, longitude)
@@ -310,13 +276,13 @@ server <- function(input, output, session) {
         })
         # Clear any previous error messages
         output$serving_size <- renderText({ NULL })
-        output$advisory_error <- renderText({ NULL })
+        #output$advisory_error <- renderText({ NULL })
         # Clear any previously displayed images without deleting the image file
-        output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
+        #output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
       } else {
         # If prediction is available, render the predicted value in the format of ng/g lipid
         output$prediction <- renderText({
-          paste(round(prediction, 2), "ng/g")
+          paste(round(prediction, 2), "ng/g", species_name_advisory)
         })
         
         # Display the recommended serving size using the value from 'serving_size'
@@ -325,28 +291,17 @@ server <- function(input, output, session) {
         })
         
         # Check if the image associated with the current prediction exists
-        if (!file.exists(image_path)) {
-          # Clear any previous error messages
-          output$advisory_error <- renderText({ NULL })
-          # Clear any previously displayed images without deleting the image file
-          output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
-          # Display a custom message indicating that no advisory images are available
-          output$advisory_error <- renderText({
-            HTML("There currently aren't any relative advisories for this species of fish.")
+        # Check if the species exists in the column
+        if (nrow(image_path) > 0) {
+          # If species found, display the number of servings
+          output$advisory <- renderText({
+            paste("The recomended serving size for women 18-49 years and children 1-17 Years is ", image_path[[2]], ". The recomended serving size women 50 Years and older and men 18 years and older is ", image_path[[3]], ".")
           })
         } else {
-          # Clear any previous error messages
-          output$advisory_error <- renderText({ NULL })
-          # Clear any previously displayed images without deleting the image file
-          output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
-          # Display the advisory image with specified properties
-          output$advisory_image <- renderImage({
-            return(list(src = image_path,
-                        contentType = "image/png",
-                        alt = "Advisory Image",
-                        width = "400px",
-                        height = "300px"))
-          }, deleteFile = FALSE)
+          # If species not found, display "no advisories found"
+          output$advisory <- renderText({
+            HTML("No other advisories found.")
+          })
         }
       }
     }

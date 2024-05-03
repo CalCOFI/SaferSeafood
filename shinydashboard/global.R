@@ -177,6 +177,7 @@ set.seed(123)
 
 # Loading Bayesian regression model for prediction
 brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "brm_mod.rda"))
+#brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "speciesRandEffect.rda"))
 
 
 ## If application is in testing mode, will run all tests.

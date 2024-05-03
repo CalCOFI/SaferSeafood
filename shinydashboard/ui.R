@@ -133,8 +133,8 @@ body <-dashboardBody(
                          #status = "success", 
                          solidHeader = FALSE,
                          collapsible = FALSE,
-                         textOutput(outputId = "advisory_error"),
-                         imageOutput(outputId = "advisory_image"),
+                         textOutput(outputId = "advisory"),
+                         #imageOutput(outputId = "advisory_image"),
                          tags$style(type="text/css",
                                     ".shiny-output-error { visibility: hidden; }",
                                     ".shiny-output-error:before { visibility: hidden; }"
