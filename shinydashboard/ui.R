@@ -113,7 +113,7 @@ body <-dashboardBody(
             ')),
             #status = "warning", 
             solidHeader = TRUE,
-            collapsible = TRUE,
+            collapsible = FALSE,
             textOutput("prediction"),
             textOutput("serving_size"),
             # tags$div(
@@ -142,8 +142,13 @@ body <-dashboardBody(
                                 ".shiny-output-error:before { visibility: hidden; }"
                      )
                    )
+
+              ),
+            
+            column(width = 12,
+                  box(width = NULL))
+            
             )
-              )
                      
                      
 #                      box(width = NULL,
@@ -229,7 +234,7 @@ body <-dashboardBody(
               tabBox(
                 title = NULL, width = NULL,
                 # The id lets us use input$tabset1 on the server to find the current tab
-                id = "about", height = "250px",
+                id = "about", height = "100%",
                 tabPanel("Project Background",
                          
                          #title box ----
@@ -370,11 +375,14 @@ body <-dashboardBody(
               <li><strong>Map Interaction:</strong> If the map does not respond or the marker does not move, refresh the application or check your internet connection.</li>
           </ul>
           If problems persist, please contact the support team for further assistance.")
-          ) # END section 4: box
-                   )
+          ), # END section 4: box
+        
+        column(width = 12,
+                 box(
+                   width = 12))
           
-
-            ), # END left-hand column 
+            ) # END left-hand column 
+            )
 )
     ), # END User Manual tabItem
 
@@ -481,25 +489,41 @@ tabItem(tabName = "research",
 # )
 
 
+# footer <- tags$footer(
+#   style = "background-color: #0c3D6E;
+#   position: absolute;
+#   bottom: 0;
+#   width: 95%;
+#   height: 55px;
+#   display: flex;
+#   align-items: center;
+#   justify-content: space-around;",
+#   tags$img(src = "white-scripps-logo.png",
+#            style = "width: 200px; height: auto;"),
+#   tags$img(src = "calcofi-logo.png",
+#            style = "width: 60px; height: auto;"),
+#   tags$img(src = "bren-white-logo.png",
+#            style = "width: 200px; height: auto;")
+# )
+# )
+
+
 footer <- tags$footer(
   style = "background-color: #0c3D6E;
   position: absolute;
   bottom: 0;
   width: 90%;
-  height: 55px;
+  height: 7vh; /* 7% of the viewport height */
   display: flex;
   align-items: center;
   justify-content: space-around;",
   tags$img(src = "white-scripps-logo.png",
-           style = "width: 300px; height: auto;"),
-  tags$img(src = "calcofi-logo.png",
-           style = "width: 70px; height: auto;"),
-  tags$img(src = "bren-white-logo.png",
-           style = "width: 250px; height: auto;")
+           style = "width: 30vw; height: auto;"), 
+    tags$img(src = "calcofi-logo.png",
+             style = "width: 6vw; height: auto;"), 
+    tags$img(src = "bren-white-logo.png",
+             style = "width: 20vw; height: auto;"))
 )
-)
-
-
 
 
 
