@@ -1,7 +1,9 @@
 #........................dashboardHeader.........................
 header <- dashboardHeader(
   title = tags$div(
-    style = "position: relative; width: 100%; font-size: 30px;",
+    style = "position: relative; 
+    width: 100%; 
+    font-size: 40px;",
     "SaferSeafood"
   ),
   
@@ -63,12 +65,12 @@ body <-dashboardBody(
     tabItem(tabName = "whats_in_my_catch",
             box(
               width = NULL,
-              title = tagList(strong("What's In My Catch?", style = "font-size: 35px;"))),
+              title = tagList(strong("What's In My Catch?", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;"))),
 
             fluidRow(
               column(width = 12,
                      # Add map box with point dragger
-                     box(title = span("Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of DDT contamination in your catch.", style = "font-size: 16px;", width = 12),
+                     box(title = span("Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of DDT contamination in your catch.", style = "font-size: 16px; font-family: Tahoma, Geneva, sans-serif; ",  width = 12),
                           width = NULL,
                          div(
                            class = "map-container",
@@ -96,7 +98,7 @@ body <-dashboardBody(
                      box(width = NULL,
                          
                          div(class = "prediction-title",
-                             tags$b("Prediction Results", style = "color:#0c3D6E; font-size: 16px;"),  # Prediction results title
+                             tags$b("Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"),  # Prediction results title
                              div(class = "info-button",
                                  style = "display: flex; align-items: right;",
                                  icon("info-circle", lib = "font-awesome"),  # Info icon
@@ -210,7 +212,7 @@ body <-dashboardBody(
                 tabPanel("Data", 
                          
                          #right - hand column ----
-                         column(width = 8,
+                         column(width = 12,
                                 
                                 #first fluidRow ----
                                 
@@ -396,13 +398,13 @@ tabItem(tabName = "research",
  # end body
 
 
-
-
+# 
+# 
 # #.........................dashboardfooter.........................
-# footer <- tags$footer("", align = "bottom", style = " 
-#               position: absolute;        
+# footer <- tags$footer("", align = "bottom", style = "
+#               position: absolute;
 #               width:100%;
-#               height:100px;",  
+#               height:100px;",
 #               tags$img(src = "white-scripps-logo.png",
 #                        style = "position: absolute; width: 300px; height: auto;"),
 #               tags$img(src = "calcofi-logo.png",
@@ -420,24 +422,44 @@ tabItem(tabName = "research",
 
 
 #.........................dashboardfooter.........................
-footer <- tags$footer("", align = "bottom", style = " 
-              position: absolute;        
-              width:100%;
-              height:100px;
-              display: flex;",  
-              tags$img(src = "white-scripps-logo.png",
-                       style = "position: absolute; bottom: 25px; right : 575px; width: 300px; height: auto;"),
-              tags$img(src = "calcofi-logo.png",
-                       style = "position: absolute; bottom: 10px; right: 900px; width: 70px; height: auto;"),
-              tags$img(src = "bren-white-logo.png",
-                       style = "position: absolute; bottom: 25px; right: 300px; width: 250px; height: auto;")
+#  footer <- tags$footer("", align = "bottom", style = "
+#                position: absolute;
+#                width:100%;
+#                height:100px;
+#                display: flex;",
+#                tags$img(src = "white-scripps-logo.png",
+#                         style = "position: absolute; bottom: 25px; right : 575px; width: 300px; height: auto;"),
+#                tags$img(src = "calcofi-logo.png",
+#                        style = "position: absolute; bottom: 10px; right: 900px; width: 70px; height: auto;"),
+#               tags$img(src = "bren-white-logo.png",
+#                        style = "position: absolute; bottom: 25px; right: 300px; width: 250px; height: auto;")
+# )
+# )
+
+
+footer <- tags$footer(
+  style = "background-color: #0c3D6E;
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;",
+  tags$img(src = "white-scripps-logo.png",
+           style = "width: 300px; height: auto;"),
+  tags$img(src = "calcofi-logo.png",
+           style = "width: 70px; height: auto;"),
+  tags$img(src = "bren-white-logo.png",
+           style = "width: 250px; height: auto;")
 )
 )
 
 
 
 
-#..................combine all in dashboardPage..................
+
+#..................combine all in dashboardPage.............s.....
 
 dashboardPage(header, sidebar, body, footer, skin = "black")
 
