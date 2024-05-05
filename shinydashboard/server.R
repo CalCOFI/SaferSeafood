@@ -27,20 +27,20 @@ server <- function(input, output, session) {
       # Check if sf_data contains polygons
       # swan diego bay and mission bay aren't relevant for coastal advisories 
       
-      addPolygons(data= ventura,color = "red",weight = 1,smoothFactor = 1,
-                  opacity = 0.5, fillOpacity = 0.25,fillColor = "red",
-                  highlightOptions = highlightOptions(color = "blue",
-                                                      weight = 2,bringToFront = TRUE)) %>% 
-
-      addPolygons(data= sbpier,color = "green",weight = 1,smoothFactor = 1,
-                  opacity = 0.5, fillOpacity = 0.25,fillColor = "green",
-                  highlightOptions = highlightOptions(color = "blue",
-                                                      weight = 2,bringToFront = TRUE)) %>%
-      
-      addPolygons(data= smbeach,color = "hotpink",weight = 1,smoothFactor = 1,
-                  opacity = 0.5, fillOpacity = 0.25,fillColor = "hotpink",
-                  highlightOptions = highlightOptions(color = "blue",
-                                                      weight = 2,bringToFront = TRUE))%>%
+      # addPolygons(data= ventura,color = "red",weight = 1,smoothFactor = 1,
+      #             opacity = 0.5, fillOpacity = 0.25,fillColor = "red",
+      #             highlightOptions = highlightOptions(color = "blue",
+      #                                                 weight = 2,bringToFront = TRUE)) %>% 
+      # 
+      # addPolygons(data= sbpier,color = "green",weight = 1,smoothFactor = 1,
+      #             opacity = 0.5, fillOpacity = 0.25,fillColor = "green",
+      #             highlightOptions = highlightOptions(color = "blue",
+      #                                                 weight = 2,bringToFront = TRUE)) %>%
+      # 
+      # #addPolygons(data= smbeach,color = "hotpink",weight = 1,smoothFactor = 1,
+      #             opacity = 0.5, fillOpacity = 0.25,fillColor = "hotpink",
+      #             highlightOptions = highlightOptions(color = "blue",
+      #                                                 weight = 2,bringToFront = TRUE))%>%
 
       setView(lng = -118.50278377533, lat = 33.7536925268406, zoom = 9) %>%
       # add mini map 

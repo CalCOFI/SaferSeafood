@@ -247,13 +247,8 @@ body <-dashboardBody(
                          #background info box ----
                          box(width = NULL,
                              title = tagList(strong("Project Background")),
-                             HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch.")
-                             ) #END background box
-                         
-                          # box(width = 12,
-                          #     title = NULL),
-                          #"SaferSeafood is an educational tool to inform people about contamination in Seafood",
-                          
+                             HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch."),
+                         )
                           # END disclaimer box 
     
                              # tags$img(src = "dumpsite.png.jpeg", 
@@ -438,7 +433,7 @@ tabItem(tabName = "research",
                #collaboration info box ----
                box(width = NULL,
                    title = tagList(strong("Research and Collaborations")),
-                   "Here we can add any future collaborations and research that may be added in the future. This could also be a place to have links to other sites and plug anyone else."
+                   "Here we can add any future collaborations and research that may be added in the future. This could also be a place to have links to other sites and projects."
                    
                ) # END collaboration info box 
                
