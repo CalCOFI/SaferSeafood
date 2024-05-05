@@ -3,7 +3,8 @@ header <- dashboardHeader(
   title = tags$div(
     style = "position: relative; 
     width: 100%; 
-    font-size: 40px;",
+    font-size: 40px;,
+    font-family: Tahoma, Geneva, sans-serif;",
     "SaferSeafood"
   ),
   
@@ -70,7 +71,7 @@ body <-dashboardBody(
             fluidRow(
               column(width = 12,
                      # Add map box with point dragger
-                     box(title = span("Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of DDT contamination in your catch.", style = "font-size: 16px; font-family: Tahoma, Geneva, sans-serif; ",  width = 12),
+                     box(title = "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of DDT contamination in your catch.", style = "font-size: 16px; font-family: Tahoma, Geneva, sans-serif; ",
                           width = NULL,
                          div(
                            class = "map-container",
@@ -80,7 +81,7 @@ body <-dashboardBody(
                      ),
                      box(width = NULL,
                          tags$style(HTML(".selectize-control.single .selectize-input {
-                                        font-size: 16px;
+                                        font-size: 16px; 
                                       }")),
                          selectizeInput(inputId = "species", 
                                         label = tags$span("Select species:", style = "font-size: 16px;"),
