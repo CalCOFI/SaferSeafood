@@ -100,7 +100,7 @@ body <-dashboardBody(
                             box(
                               width = NULL,
                               div(class = "prediction-title",
-                                  tags$b("Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"),  # Prediction results title
+                                  tags$b("DDT Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"),  # Prediction results title
                                   div(class = "info-button",
                                       style = "display: flex; align-items: right;",
                                       icon("info-circle", lib = "font-awesome"),  # Info icon
@@ -132,7 +132,7 @@ body <-dashboardBody(
                    box(
                      width = NULL, 
                      div(class = "prediction-title",
-                         tags$b("Other Health Advisories", style = "color:#0c3D6E; font-size: 16px;")), 
+                         tags$b("Mercury/PCB Health Advisory", style = "color:#0c3D6E; font-size: 16px;")), 
                      #status = "success", 
                      solidHeader = FALSE,
                      collapsible = FALSE,
@@ -511,14 +511,15 @@ footer <- tags$footer(
   width: 90%;
   height: 7vh; /* 7% of the viewport height */
   display: flex;
-  align-items: center;
-  justify-content: space-around;",
+  align-items: flex;
+  justify-content: flex-start; /* align items to the left */
+  padding-left: 20px;",   # padding to the left for aesthetic spacing
   tags$img(src = "white-scripps-logo.png",
-           style = "width: 30vw; height: auto;"), 
-    tags$img(src = "calcofi-logo.png",
-             style = "width: 6vw; height: auto;"), 
-    tags$img(src = "bren-white-logo.png",
-             style = "width: 20vw; height: auto;"))
+           style = "width: 25vw; height: 4vw; margin-right: 80px;"), # margin for spacing between images
+  tags$img(src = "calcofi-logo.png",
+           style = "width: 4vw; height: 4vw; margin-right: 110px;"),
+  tags$img(src = "bren-white-logo.png",
+           style = "width: 16vw; height: 3vw; margin-top: 5px;"))
 )
 
 

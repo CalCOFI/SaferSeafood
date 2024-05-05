@@ -264,6 +264,9 @@ server <- function(input, output, session) {
     
     # check if the location is valid
     if (meters > 500) {
+      output$prediction <- renderText({ NULL })
+      output$serving_size <- renderText({ NULL })
+      output$advisory <- renderText({ NULL })
       output$validation_result <- renderText({
         "Invalid location selected. Location outside of area of study, please select a different location and try again."
       })
@@ -277,16 +280,15 @@ server <- function(input, output, session) {
       # Check if the 'prediction' value is missing (NA)
       if (is.na(prediction)) {
         # Handle the case where prediction is NA by providing an informative message
+        output$prediction <- renderText({ NULL })
         output$prediction <- renderText({
           "Prediction not available. Please select a fish species."
         })
         # Clear any previous error messages
         output$serving_size <- renderText({ NULL })
-        #output$advisory_error <- renderText({ NULL })
-        # Clear any previously displayed images without deleting the image file
-        #output$advisory_image <- renderImage({ NULL }, deleteFile = FALSE)
       } else {
         # If prediction is available, render the predicted value in the format of ng/g lipid
+        output$prediction <- renderText({ NULL })
         output$prediction <- renderText({
           paste(round(prediction, 2), "ng/g", species_name_advisory)
         })
@@ -298,18 +300,30 @@ server <- function(input, output, session) {
         
         # Check if the image associated with the current prediction exists
         # Check if the species exists in the column
-        if (nrow(image_path) > 0) {
+        if (nrow(image_path) > 0) {  # Check if there are any image paths found
           # If species found, display the number of servings
-          output$advisory <- renderText({
-            paste("The recomended serving size for women 18-49 years and children 1-17 Years is ", image_path[[2]], ". The recomended serving size women 50 Years and older and men 18 years and older is ", image_path[[3]], ".")
-          })
-        
-        } else {
+          if (length(image_path) >= 3) {  # Check if there are values for both age groups
+            if (image_path[[2]] == image_path[[3]]) {  # Check if serving sizes for both age groups are equal
+              output$advisory <- renderText({  # Render the advisory message
+                paste("The recommended serving size for all age groups is ", image_path[[2]], ".")
+              })
+            } else {  # If serving sizes for both age groups are different
+              output$advisory <- renderText({  # Render the advisory message
+                paste("The recommended serving size for women 18-49 years and children 1-17 years is ", image_path[[2]], ". The recommended serving size for women 50 years and older and men 18 years and older is ", image_path[[3]], ".")
+              })
+            }
+          } else {  # If only one serving size is found
+            output$advisory <- renderText({  # Render the advisory message
+              paste("The recommended serving size for all age and gender groups is ", image_path[[2]], ".")
+            })
+          }
+        } else {  # If no image paths are found
           # If species not found, display "no advisories found"
-          output$advisory <- renderText({
+          output$advisory <- renderText({  # Render the advisory message
             HTML("No other advisories found.")
           })
         }
+        
       }
     }
     
