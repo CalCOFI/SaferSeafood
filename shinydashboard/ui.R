@@ -280,7 +280,7 @@ body <-dashboardBody(
                                   # data source box ----
                                   
                                   box(width = NULL,
-                                      title = tagList(icon("database"), strong("The Data")),
+                                      title = tagList(strong("The Data")),
                                       "All resources employed in this study are provided by the client, Scripps Institute of Oceanography and California Cooperative Oceanic Fisheries Investigations (CalCOFI). Raster and tabular data collected across the Southern California Bight will be used to conduct this analysis."
                                       
                                   ) #END data source box  
@@ -290,7 +290,7 @@ body <-dashboardBody(
                                   
                                   box(width = NULL,
                                       
-                                      title = tagList(icon("table"), strong("Citation")),
+                                      title = tagList(strong("Citation")),
                                       "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. ",
                                       
                                       
@@ -304,7 +304,7 @@ body <-dashboardBody(
                                   #disclaimer box ----
                                   box(width = NULL,
                                       
-                                      title = tagList(icon("triangle-exclamation"), strong("Disclaimer")),
+                                      title = tagList(strong("Disclaimer")),
                                       "There are no restrictions on sharing the data and any outputs that result from this project, but all sources of data should be referenced.",
                                       
                                       #style = "background-color: #ff0000;"  # change color as needed

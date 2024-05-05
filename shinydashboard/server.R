@@ -267,7 +267,13 @@ server <- function(input, output, session) {
       output$validation_result <- renderText({
         "Invalid location selected. Location outside of area of study, please select a different location and try again."
       })
+    
     } else {
+      
+      # Clear the validation_result output if the location is valid
+      output$validation_result <- renderText({
+        NULL
+      })
       # Check if the 'prediction' value is missing (NA)
       if (is.na(prediction)) {
         # Handle the case where prediction is NA by providing an informative message
@@ -297,6 +303,7 @@ server <- function(input, output, session) {
           output$advisory <- renderText({
             paste("The recomended serving size for women 18-49 years and children 1-17 Years is ", image_path[[2]], ". The recomended serving size women 50 Years and older and men 18 years and older is ", image_path[[3]], ".")
           })
+        
         } else {
           # If species not found, display "no advisories found"
           output$advisory <- renderText({
