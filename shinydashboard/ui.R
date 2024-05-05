@@ -281,7 +281,7 @@ body <-dashboardBody(
                                       
                                   ), #END data source box
                                   
-                                  box(width = NULL,
+                                  box(width = 12,
                                       
                                       title = tagList(strong("Citation")),
                                       "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. "
@@ -290,7 +290,7 @@ body <-dashboardBody(
                                   ), #END data source box 
                                   
                                   #disclaimer box ----
-                                  box(width = NULL,
+                                  box(width = 12,
                                       
                                       title = tagList(strong("Disclaimer")),
                                       "There are no restrictions on sharing the data and any outputs that result from this project, but all sources of data should be referenced.",
