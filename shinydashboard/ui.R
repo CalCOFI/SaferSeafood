@@ -95,55 +95,106 @@ body <-dashboardBody(
                          actionButton("predict_button", "Predict!", class = "btn-primary"),
                          span(textOutput("validation_result"), style = "color:red")
                          ),
-                     box(width = NULL,
-                         
-                         div(class = "prediction-title",
-                             tags$b("Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"),  # Prediction results title
-                             div(class = "info-button",
-                                 style = "display: flex; align-items: right;",
-                                 icon("info-circle", lib = "font-awesome"),  # Info icon
-                                 actionButton("info_button", "", style = "display: none;"))),  # Hidden button
-                         tags$script(HTML('
-                            $(document).ready(function(){
-                              $(".info-button").click(function(){
-                                alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
-                              });
-                            });
-                          ')),
-                         #status = "warning", 
-                         solidHeader = TRUE,
-                         collapsible = TRUE,
-                         textOutput("prediction"),
-                         textOutput("serving_size"),
-                         # tags$div(
-                         #   style = "display: flex; align-items: center; word-wrap: break-word;",
-                         #   verbatimTextOutput("serving_size"),
-                         #   actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
-                         # ),
-                         #create the serving size the serving size info comes up
-                         
-                         bsTooltip(id = "info-button", 
-                                   title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
-                         
+              column(width = 6,
+                            box(
+                              width = NULL,
+                              div(class = "prediction-title",
+                                  tags$b("Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"),  # Prediction results title
+                                  div(class = "info-button",
+                                      style = "display: flex; align-items: right;",
+                                      icon("info-circle", lib = "font-awesome"),  # Info icon
+                                      actionButton("info_button", "", style = "display: none;"))),  # Hidden button
+                              tags$script(HTML('
+                $(document).ready(function(){
+                    $(".info-button").click(function(){
+                        alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
+                    });
+                });
+            ')),
+            #status = "warning", 
+            solidHeader = TRUE,
+            collapsible = TRUE,
+            textOutput("prediction"),
+            textOutput("serving_size"),
+            # tags$div(
+            #   style = "display: flex; align-items: center; word-wrap: break-word;",
+            #   verbatimTextOutput("serving_size"),
+            #   actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
+            # ),
+            #create the serving size the serving size info comes up
+            
+            bsTooltip(id = "info-button", 
+                      title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
+                            )
                      ),
+            column(width = 6,
+                   box(
+                     width = NULL, 
+                     div(class = "prediction-title",
+                         tags$b("Other Health Advisories", style = "color:#0c3D6E; font-size: 16px;")), 
+                     #status = "success", 
+                     solidHeader = FALSE,
+                     collapsible = FALSE,
+                     textOutput(outputId = "advisory"),
+                     #imageOutput(outputId = "advisory_image"),
+                     tags$style(type="text/css",
+                                ".shiny-output-error { visibility: hidden; }",
+                                ".shiny-output-error:before { visibility: hidden; }"
+                     )
+                   )
+            )
+              )
                      
-#----------------------------------------------------------------------------------------------                     
-                     box(
-                       width = NULL, 
-                       div(class = "prediction-title",
-                           tags$b("Other Health Advisories", style = "color:#0c3D6E; font-size: 16px;")), 
-                         #status = "success", 
-                         solidHeader = FALSE,
-                         collapsible = FALSE,
-                         textOutput(outputId = "advisory"),
-                         #imageOutput(outputId = "advisory_image"),
-                         tags$style(type="text/css",
-                                    ".shiny-output-error { visibility: hidden; }",
-                                    ".shiny-output-error:before { visibility: hidden; }"
-                         )
-                     )
-#-------------------------------------------------------------------------------------------------
-                     )
+                     
+#                      box(width = NULL,
+#                          
+#                          div(class = "prediction-title",
+#                              tags$b("Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"),  # Prediction results title
+#                              div(class = "info-button",
+#                                  style = "display: flex; align-items: right;",
+#                                  icon("info-circle", lib = "font-awesome"),  # Info icon
+#                                  actionButton("info_button", "", style = "display: none;"))),  # Hidden button
+#                          tags$script(HTML('
+#                             $(document).ready(function(){
+#                               $(".info-button").click(function(){
+#                                 alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
+#                               });
+#                             });
+#                           ')),
+#                          #status = "warning", 
+#                          solidHeader = TRUE,
+#                          collapsible = TRUE,
+#                          textOutput("prediction"),
+#                          textOutput("serving_size"),
+#                          # tags$div(
+#                          #   style = "display: flex; align-items: center; word-wrap: break-word;",
+#                          #   verbatimTextOutput("serving_size"),
+#                          #   actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
+#                          # ),
+#                          #create the serving size the serving size info comes up
+#                          
+#                          bsTooltip(id = "info-button", 
+#                                    title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
+#                          
+#                      ),
+#                      
+# #----------------------------------------------------------------------------------------------                     
+#                      box(
+#                        width = NULL, 
+#                        div(class = "prediction-title",
+#                            tags$b("Other Health Advisories", style = "color:#0c3D6E; font-size: 16px;")), 
+#                          #status = "success", 
+#                          solidHeader = FALSE,
+#                          collapsible = FALSE,
+#                          textOutput(outputId = "advisory"),
+#                          #imageOutput(outputId = "advisory_image"),
+#                          tags$style(type="text/css",
+#                                     ".shiny-output-error { visibility: hidden; }",
+#                                     ".shiny-output-error:before { visibility: hidden; }"
+#                          )
+#                      )
+# #-------------------------------------------------------------------------------------------------
+#                      )
             
             # column(width = 4,
             #          
@@ -190,14 +241,22 @@ body <-dashboardBody(
                          #background info box ----
                          box(width = 12,
                              title = tagList(strong("Project Background")),
-                             HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch."),
+                             HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch.")
+                             ) #END background box
+                         
+                          # box(width = 12,
+                          #     title = NULL),
+                          #"SaferSeafood is an educational tool to inform people about contamination in Seafood",
+                          
+                          # END disclaimer box 
+    
                              # tags$img(src = "dumpsite.png.jpeg", 
                              #          alt = "Map of fishing zones and the number of fish samples through time, by region (inset). Nearshore 708 polygons are derived from McLaughlin et al. (2021) and pink blocks are California Department of Fish and Game 256 km2 709 fishing blocks.",
                              #          style = "max-width: 90%; display: block; margin: 0 auto;")
                              
-                         ) # END background info box
                 ),
                          
+              
                 tabPanel("Authors", 
                          
                          #background info box ----
