@@ -227,19 +227,19 @@ body <-dashboardBody(
     tabItem(tabName = "about",
             fluidRow(
               tabBox(
-                title = NULL, width = 12,
+                title = NULL, width = NULL,
                 # The id lets us use input$tabset1 on the server to find the current tab
                 id = "about", height = "250px",
                 tabPanel("Project Background",
                          
                          #title box ----
-                         box(width = 12,
+                         box(width = NULL,
                              title = tags$h2(strong("Improving Access to Fish Consumption Advisories and Maintaining Confidence in California's Healthy Seafood Products"))
                              
                          ), # END background info box
                          
                          #background info box ----
-                         box(width = 12,
+                         box(width = NULL,
                              title = tagList(strong("Project Background")),
                              HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch.")
                              ) #END background box
@@ -260,7 +260,7 @@ body <-dashboardBody(
                 tabPanel("Authors", 
                          
                          #background info box ----
-                         box(width = 12,
+                         box(width = NULL,
                              title = tagList(strong("Authors")),
                              p("This application was developed as part of a Masters in Environmental Data Science Capstone project as part of the Bren School, for Scripps and CalCOFI. "),
                              p("This project was completed by a group of graduate students at the Bren School of Environmental Science & Management, UC Santa Barbara. Team members include Hope Hahn, Luna Herschenfeld-Catalán, Benjamin Versteeg, and Kate Becker with guidance from our Faculty Advisor Bruce Kendall and Capstone Advisor Carmen Galaz-García.")
@@ -271,11 +271,7 @@ body <-dashboardBody(
                 tabPanel("Data", 
                          
                          #right - hand column ----
-                         column(width = 12,
-                                
-                                #first fluidRow ----
-                                
-                                fluidRow(
+                         fluidRow(
                                   
                                   # data source box ----
                                   
@@ -283,23 +279,15 @@ body <-dashboardBody(
                                       title = tagList(strong("The Data")),
                                       "All resources employed in this study are provided by the client, Scripps Institute of Oceanography and California Cooperative Oceanic Fisheries Investigations (CalCOFI). Raster and tabular data collected across the Southern California Bight will be used to conduct this analysis."
                                       
-                                  ) #END data source box  
-                                ),
-                                
-                                fluidRow(
+                                  ), #END data source box
                                   
                                   box(width = NULL,
                                       
                                       title = tagList(strong("Citation")),
-                                      "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. ",
+                                      "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. "
                                       
                                       
-                                  ) #END data source box  
-                                  
-                                ), # END first fluidRow
-                                
-                                # second fluidRow ----
-                                fluidRow(
+                                  ), #END data source box 
                                   
                                   #disclaimer box ----
                                   box(width = NULL,
@@ -311,10 +299,7 @@ body <-dashboardBody(
                                       
                                       
                                   ) # END disclaimer box
-                                  
-                                ) # END second fluidRow
-                                
-                         ) # END right - hand column
+                                )
                          
                          )
               ))
