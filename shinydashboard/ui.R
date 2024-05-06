@@ -356,7 +356,7 @@ body <-dashboardBody(
           box(
             width = 12,
             title = tagList(strong("How To Interpret The Output")),
-            HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g lipid units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommending serving size and relevent mercury advisories are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions.")
+            HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommending serving size and relevent mercury advisories are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions.")
           ) # END section 3: box
                    ),
           
@@ -433,7 +433,8 @@ tabItem(tabName = "research",
                #collaboration info box ----
                box(width = NULL,
                    title = tagList(strong("Research and Collaborations")),
-                   "Here we can add any future collaborations and research that may be added in the future. This could also be a place to have links to other sites and projects."
+                   p("The data provided for this version of the dashboard was collected by the Southern California Bight Regional Monitoring Program, and rasters were processed by Dr. Lillian Mcgill at the Scripps Institue of Oceanography."),
+                   p("Further research and educational collaborators working on understanding the human and ecological impacts of the recently discovered DDT dumpsite will be highlighted here. We hope to provide a platform that enables researchers to connect with communities in a meaningful way.")
                    
                ) # END collaboration info box 
                

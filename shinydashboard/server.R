@@ -290,12 +290,12 @@ server <- function(input, output, session) {
         # If prediction is available, render the predicted value in the format of ng/g lipid
         output$prediction <- renderText({ NULL })
         output$prediction <- renderText({
-          paste(round(prediction, 2), "ng/g", species_name_advisory)
+          paste("There are ", round(prediction, 2), "ng of DDT per gram of ", species_name_advisory, ".")
         })
         
         # Display the recommended serving size using the value from 'serving_size'
         output$serving_size <- renderText({
-          paste("The recommended serving size is ",serving_size, " per week.")
+          paste("Based on these results, the recommended serving size for this fish at this location is ",serving_size, " per week. For information about serving size click the info button above.")
         })
         
         # Check if the image associated with the current prediction exists
