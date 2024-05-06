@@ -3,7 +3,7 @@ library(shiny)
 library(shinydashboard)
 library(shinyjs)
 library(shinyWidgets)
-library(tidyverse)
+
 #install.packages("shinyBS")
 library(shinyBS)
 library(leaflet)
@@ -24,7 +24,6 @@ library(corrplot)
 library(sjPlot)
 library(rstanarm)
 
-library(sf)
 library(terra)
 
 #install.packages("reactlog")
@@ -39,10 +38,10 @@ library(raster)
 library(sp)
 
 
-if("pacman" %in% installed.packages() == FALSE){install.packages("pacman")}
-pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
-               MuMIn, lubridate, tidyr,ggh4x, lme4,sdmTMB,inlabru,cowplot,marmap,sjPlot, tidyverse, plyr, tidybayes, brms, bayesplot, loo,ggeffects,
-               DHARMa)
+# if("pacman" %in% installed.packages() == FALSE){install.packages("pacman")}
+# pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
+#                MuMIn, lubridate, tidyr,ggh4x, lme4,sdmTMB,inlabru,cowplot,marmap,plyr, tidybayes, brms, bayesplot, loo,ggeffects,
+#                DHARMa)
 
 
 # List of KML files
