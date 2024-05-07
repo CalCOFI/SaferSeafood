@@ -206,7 +206,7 @@ server <- function(input, output, session) {
   observeEvent(input$predict_button, {
     
     # Clear the input field
-    updateTextInput(session, "CompositeCommonName", value = "")
+    updateTextInput(session, inputId = "species", value = "")
     
     species <- input$CompositeCommonName
     latitude <- current_markers$lat  # Use current latitude
