@@ -20,9 +20,9 @@ library(skimr)
 library(tidymodels)
 library(caret)
 # Load the corrplot package
-library(corrplot)
-library(sjPlot)
-library(rstanarm)
+#library(corrplot)
+#library(sjPlot)
+#library(rstanarm)
 
 library(terra)
 
@@ -36,7 +36,7 @@ library(tidyverse)
 library(sf)
 library(raster)
 library(sp)
-
+library(brms)
 
 # if("pacman" %in% installed.packages() == FALSE){install.packages("pacman")}
 # pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
@@ -93,7 +93,7 @@ sbpier <- read_sf("data/polygons/sbpiersanmateopoint.kml") %>%
 
 # make dataframe of advisories
 advisory_areas <- rbind(ventura, smbeach, sbpier) %>% 
-  dplyr::select(!Description)
+  dplyr::select(Name, geometry)
 
 # mission <- read_sf("shinydashboard/data/polygons/mission_bay.kml") %>%
 #   st_zm()
@@ -119,7 +119,7 @@ fish_data_clean <- na.omit(fish_data)  # Assuming columns 2 and 3 contain the co
 
 fish_coord <- st_as_sf(fish_data_clean, coords = c(2,3))
 
-areas <- readRDS(here::here("shinydashboard","data", "pelagic_nearshore_fish_zones.rds")) %>% 
+areas <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>% 
   left_join(fish_data, join_by(Name == CompositeStationArea))
 
 
@@ -175,7 +175,7 @@ fish_lh <- read_csv("data/species_common_science.csv")
 set.seed(123)
 
 # Loading Bayesian regression model for prediction
-brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "brm_mod.rda"))
+brm.diet.habitat.year.fam.clean = readRDS("data/brm_mod.rda")
 #brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "speciesRandEffect.rda"))
 
 

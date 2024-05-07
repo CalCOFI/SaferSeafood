@@ -185,11 +185,11 @@ server <- function(input, output, session) {
       Family = input_species$Family
     )
     
-    # # Check if all necessary data is available
-    # if (anyNA(new_data)) {
-    #   # Change depending on what we want to output
-    #   return(NA)
-    # }
+    # Check if all necessary data is available
+    if (anyNA(new_data)) {
+      # Change depending on what we want to output
+      return(NA)
+    }
     
     prediction <- predict(model, newdata = new_data, re.form = NA)
     estimate <- prediction[1]

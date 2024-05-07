@@ -1,12 +1,12 @@
-name: SaferSeafood
-title: SaferSeafood
+name: shinydashboard
+title: shinydashboard
 username: saferseafood
 account: saferseafood
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
-appId: 11939919
-bundleId: 8579646
-url: https://saferseafood.shinyapps.io/SaferSeafood/
+appId: 11940398
+bundleId: 8583843
+url: https://saferseafood.shinyapps.io/shinydashboard/
 version: 1
 asMultiple: FALSE
 asStatic: FALSE
