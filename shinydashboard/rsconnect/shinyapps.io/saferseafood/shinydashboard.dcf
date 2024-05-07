@@ -5,7 +5,7 @@ account: saferseafood
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11940398
-bundleId: 8583843
+bundleId: 8587638
 url: https://saferseafood.shinyapps.io/shinydashboard/
 version: 1
 asMultiple: FALSE

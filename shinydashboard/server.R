@@ -205,6 +205,9 @@ server <- function(input, output, session) {
   # In your server function, when calling predict_DDT, ensure you pass the right arguments:
   observeEvent(input$predict_button, {
     
+    # Clear the input field
+    updateTextInput(session, "CompositeCommonName", value = "")
+    
     species <- input$CompositeCommonName
     latitude <- current_markers$lat  # Use current latitude
     longitude <- current_markers$long  # Use current longitude
