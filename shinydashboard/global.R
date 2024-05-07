@@ -38,37 +38,6 @@ library(raster)
 library(sp)
 library(brms)
 
-# if("pacman" %in% installed.packages() == FALSE){install.packages("pacman")}
-# pacman::p_load(geojsonR, factoextra,sf,dplyr, ggplot2, maps, fields,raster,
-#                MuMIn, lubridate, tidyr,ggh4x, lme4,sdmTMB,inlabru,cowplot,marmap,plyr, tidybayes, brms, bayesplot, loo,ggeffects,
-#                DHARMa)
-
-
-# List of KML files
-#kml_files <- c("/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/smbeach_to_sb.kml", 
-              # "/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash#/shinydashboard/data/polygons/smbeach_to_sb.kml", 
-               #"/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/sbpiersanmateopoint.kml",
-               #"/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/mission_bay.kml",
-               #"/Users/katebecker/Documents/Bren/Capstone/shiny-map-dash/shinydashboard/data/polygons/san_diego_bay.kml"
-               
-               #)
-
-# Function to extract data from KML
-#extract_data <- function(kml_file) {
-  #kml <- st_read(kml_file)
-  #names <- kml$Name
-  #coords <- st_coordinates(kml)
-  #data.frame(Name = names, 
-             #Longitude = coords[, "X"], 
-             #Latitude = coords[, "Y"])
-#}
-
-# Read and extract data from each KML file
-#data_list <- lapply(kml_files, extract_data)
-
-# Combine data into one dataframe
-#combined_data <- do.call(rbind, data_list)
-
 
 # the 3 OEHHA polygons for coastal health advisories
 ventura <- read_sf("data/polygons/venturaharbor.kml") %>%
@@ -82,14 +51,6 @@ smbeach <- read_sf("data/polygons/smbeach_to_sb.kml") %>%
 sbpier <- read_sf("data/polygons/sbpiersanmateopoint.kml") %>%
   st_zm() %>% 
   mutate(Name = "sbpiersanmateopoint")
-
-
-# buffer_distance <- 10000  # Adjust the buffer distance as needed
-# kml_buffer <- st_buffer(polsf, dist = buffer_distance)
-
-#sbpier <- read_sf("shinydashboard/data/polygons/sbpiersanmateopoint.kml") %>%
-  #st_zm() %>% 
-  #mutate(Name = "sbpiersanmateopoint")
 
 # make dataframe of advisories
 advisory_areas <- rbind(ventura, smbeach, sbpier) %>% 
@@ -121,16 +82,6 @@ fish_coord <- st_as_sf(fish_data_clean, coords = c(2,3))
 
 areas <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>% 
   left_join(fish_data, join_by(Name == CompositeStationArea))
-
-
-
-#area <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>%
-  #left_join(fish_data, join_by(Name == CompositeStationArea))
-
-#covariates: weight, length, location, and species 
-# use a button for calucalting DDT 
-
-#need numeric inputboxes: weight, lenght, lat, long, species 
 
 
 # data and data wrangling for model 
