@@ -68,6 +68,8 @@ body <-dashboardBody(
               width = NULL,
               title = tagList(strong("What's In My Catch?", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;"))),
 
+            
+            
             fluidRow(
               column(width = 12,
                      # Add map box with point dragger
@@ -79,7 +81,10 @@ body <-dashboardBody(
                            leafletOutput(outputId = "locationMap")  # Header below the title but above the map output
                          )
                      ),
-                     box(width = NULL,
+                     
+                     
+                     
+                     box(width = 6,
                          tags$style(HTML(".selectize-control.single .selectize-input {
                                         font-size: 16px; 
                                       }")),
@@ -96,6 +101,28 @@ body <-dashboardBody(
                          actionButton("predict_button", "Predict!", class = "btn-primary"),
                          span(textOutput("validation_result"), style = "color:red")
                          ),
+                     
+                     
+                     
+                     column(width = 6,
+                            box(
+                              width = NULL, 
+                              height = "132px", # Adjust the height here
+                              div(class = "species-title",
+                                  tags$b("Photo of Species", style = "color:#0c3D6E; font-size: 16px;")), 
+                              #status = "success", 
+                              solidHeader = TRUE,
+                              collapsible = FALSE,
+                              imageOutput(outputId = "fish_image"), #change to fish images
+                              tags$style(type="text/css",
+                                         ".shiny-output-error { visibility: hidden; }",
+                                         ".shiny-output-error:before { visibility: hidden; }"
+                              )
+                            )
+                            
+                     ),
+                     
+                     
               column(width = 6,
                             box(
                               width = NULL,
@@ -128,9 +155,12 @@ body <-dashboardBody(
                       title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
                             )
                      ),
+            
+            
             column(width = 6,
                    box(
                      width = NULL, 
+                     height = "57px", # Adjust the height here
                      div(class = "prediction-title",
                          tags$b("Mercury/PCB Health Advisory", style = "color:#0c3D6E; font-size: 16px;")), 
                      #status = "success", 
@@ -146,86 +176,31 @@ body <-dashboardBody(
 
               ),
             
+            
+            column(width = 12,
+                   box(
+                     width = NULL, 
+                     height = "200px", # Adjust the height here
+                     div(class = "graph-title",
+                         tags$b("Distribution Graph", style = "color:#0c3D6E; font-size: 16px;")), 
+                     #status = "success", 
+                     solidHeader = FALSE,
+                     collapsible = FALSE,
+                     plotOutput("distPlot"),  # Adding the plot output here
+                     tags$style(type="text/css",
+                                ".shiny-output-error { visibility: hidden; }",
+                                ".shiny-output-error:before { visibility: hidden; }"
+                     )
+                   )
+                   
+            ),
+            
             column(width = 12,
                   box(width = NULL))
             
             )
                      
-                     
-#                      box(width = NULL,
-#                          
-#                          div(class = "prediction-title",
-#                              tags$b("Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"),  # Prediction results title
-#                              div(class = "info-button",
-#                                  style = "display: flex; align-items: right;",
-#                                  icon("info-circle", lib = "font-awesome"),  # Info icon
-#                                  actionButton("info_button", "", style = "display: none;"))),  # Hidden button
-#                          tags$script(HTML('
-#                             $(document).ready(function(){
-#                               $(".info-button").click(function(){
-#                                 alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
-#                               });
-#                             });
-#                           ')),
-#                          #status = "warning", 
-#                          solidHeader = TRUE,
-#                          collapsible = TRUE,
-#                          textOutput("prediction"),
-#                          textOutput("serving_size"),
-#                          # tags$div(
-#                          #   style = "display: flex; align-items: center; word-wrap: break-word;",
-#                          #   verbatimTextOutput("serving_size"),
-#                          #   actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
-#                          # ),
-#                          #create the serving size the serving size info comes up
-#                          
-#                          bsTooltip(id = "info-button", 
-#                                    title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
-#                          
-#                      ),
-#                      
-# #----------------------------------------------------------------------------------------------                     
-#                      box(
-#                        width = NULL, 
-#                        div(class = "prediction-title",
-#                            tags$b("Other Health Advisories", style = "color:#0c3D6E; font-size: 16px;")), 
-#                          #status = "success", 
-#                          solidHeader = FALSE,
-#                          collapsible = FALSE,
-#                          textOutput(outputId = "advisory"),
-#                          #imageOutput(outputId = "advisory_image"),
-#                          tags$style(type="text/css",
-#                                     ".shiny-output-error { visibility: hidden; }",
-#                                     ".shiny-output-error:before { visibility: hidden; }"
-#                          )
-#                      )
-# #-------------------------------------------------------------------------------------------------
-#                      )
-            
-            # column(width = 4,
-            #          
-            #          box(width = NULL,
-            #              title = tagList("Prediction Result"),
-            #              status = "success", 
-            #              solidHeader = TRUE,
-            #              collapsible = TRUE,
-            #              verbatimTextOutput("prediction"),
-            #              tags$div(
-            #                style = "display: flex; align-items: center; word-wrap: break-word;",
-            #                verbatimTextOutput("serving_size"),
-            #                actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
-            #              ),
-            #              # create tooltip so that if you hover over the serving size the serving size info comes up
-            #              bsTooltip(id = "info_button", 
-            #                        title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
-            #              
-            #          ),
-            #          box(width = NULL, 
-            #              title = "Health Advisories", status = "success", solidHeader = TRUE,
-            #              collapsible = TRUE,
-            #              imageOutput(outputId = "advisory_image")
-            #          )
-            # ) # end map row
+  
             
     )), # END what's in my catch tab item
     
