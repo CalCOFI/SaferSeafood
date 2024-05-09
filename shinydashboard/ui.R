@@ -66,9 +66,8 @@ body <-dashboardBody(
     tabItem(tabName = "whats_in_my_catch",
             box(
               width = NULL,
-              title = tagList(strong("What's In My Catch?", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;"))),
-
-            
+              title = tagList(strong("DDT Advisories For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
+              HTML("<strong style='font-size: 16px;'>Stay informed regarding the levels of insecticide contamination in your catch prior to consumption</strong>")), 
             
             fluidRow(
               column(width = 12,
