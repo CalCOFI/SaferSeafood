@@ -25,9 +25,9 @@ sidebar <- dashboardSidebar(
               menuItem(text = "Resources", tabName = "resources", # previously seafood_advisory
                        menuSubItem(text = "Fish Identification", tabName = "fish_id"),
                        menuSubItem(text = "DDT Research", tabName = "research")
-              
-  ) # END sidebarMenu
-) # end dashboard Sidebar
+                       
+              ) # END sidebarMenu
+  ) # end dashboard Sidebar
 ) 
 
 #..........................dashboardBody.........................
@@ -35,34 +35,34 @@ body <-dashboardBody(
   
   tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"), 
   ), 
-
-            
-            # # allow for user to use current location
-            # tags$script('
-            #     $(document).ready(function () {
-            #       navigator.geolocation.getCurrentPosition(onSuccess, onError);
-            #     
-            #       function onError (err) {
-            #         Shiny.onInputChange("geolocation", false);
-            #       }
-            #     
-            #       function onSuccess (position) {
-            #         setTimeout(function () {
-            #           var coords = position.coords;
-            #           console.log(coords.latitude + ", " + coords.longitude);
-            #           Shiny.onInputChange("geolocation", true);
-            #           Shiny.onInputChange("lat", coords.latitude);
-            #           Shiny.onInputChange("long", coords.longitude);
-            #         }, 1100)
-            #       }
-            #     });
-            #     ')),
   
   
-
+  # # allow for user to use current location
+  # tags$script('
+  #     $(document).ready(function () {
+  #       navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  #     
+  #       function onError (err) {
+  #         Shiny.onInputChange("geolocation", false);
+  #       }
+  #     
+  #       function onSuccess (position) {
+  #         setTimeout(function () {
+  #           var coords = position.coords;
+  #           console.log(coords.latitude + ", " + coords.longitude);
+  #           Shiny.onInputChange("geolocation", true);
+  #           Shiny.onInputChange("lat", coords.latitude);
+  #           Shiny.onInputChange("long", coords.longitude);
+  #         }, 1100)
+  #       }
+  #     });
+  #     ')),
+  
+  
+  
   # about tabItem ----
   tabItems(
-
+    
     tabItem(tabName = "whats_in_my_catch",
             box(
               width = NULL,
@@ -73,15 +73,14 @@ body <-dashboardBody(
               column(width = 12,
                      # Add map box with point dragger
                      box(title = "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of DDT, Mercurcy, and PCBs that may have accumulated in your seafood", style = "font-size: 16px; font-family: Tahoma, Geneva, sans-serif; ",
-                          width = NULL,
+                         width = NULL,
                          div(
                            class = "map-container",
-                           tags$b("Select location where your fish was caught:", style = "color:#0c3D6E; font-size: 16px;"),
+                           tags$b("Drag the marker to the location where your fish was caught:", style = "color:#0c3D6E; font-size: 16px;"),
                            leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
-                           HTML("<span style='color: red; font-size: 14px;'>Privacy Statement: This web application is not storing your data nor is it recording your location.</span>")
+                           HTML("<span style='color: green; font-size: 14px;'>Privacy Statement: This web application is not storing your data nor is it recording your location.</span>")
                          )
                      ),
-                     
                      
                      
                      box(width = 6,
@@ -96,11 +95,11 @@ body <-dashboardBody(
                                           onInitialize = I('function() { this.setValue(""); }')
                                         )
                          ),
-                        
+                         
                          #checkboxInput(inputId = "use_location", "Use your current location?"),
                          actionButton("predict_button", "Predict!", class = "btn-primary"),
                          span(textOutput("validation_result"), style = "color:red")
-                         ),
+                     ),
                      
                      
                      
@@ -123,7 +122,7 @@ body <-dashboardBody(
                      ),
                      
                      
-              column(width = 6,
+                     column(width = 6,
                             box(
                               width = NULL,
                               div(class = "prediction-title",
@@ -174,8 +173,8 @@ body <-dashboardBody(
                 });
             '))
                    )
-
-              ),
+                   
+            ),
             
             
             column(width = 12,
@@ -197,13 +196,13 @@ body <-dashboardBody(
             ),
             
             column(width = 12,
-                  box(width = NULL))
+                   box(width = NULL))
             
-            )
-                     
-  
+              )
             
-    )), # END what's in my catch tab item
+            
+            
+            )), # END what's in my catch tab item
     
     # about tabItem ----
     tabItem(tabName = "about",
@@ -225,15 +224,15 @@ body <-dashboardBody(
                              title = tagList(strong("Project Background")),
                              HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch."),
                          )
-                          # END disclaimer box 
-    
-                             # tags$img(src = "dumpsite.png.jpeg", 
-                             #          alt = "Map of fishing zones and the number of fish samples through time, by region (inset). Nearshore 708 polygons are derived from McLaughlin et al. (2021) and pink blocks are California Department of Fish and Game 256 km2 709 fishing blocks.",
-                             #          style = "max-width: 90%; display: block; margin: 0 auto;")
-                             
-                ),
+                         # END disclaimer box 
                          
-              
+                         # tags$img(src = "dumpsite.png.jpeg", 
+                         #          alt = "Map of fishing zones and the number of fish samples through time, by region (inset). Nearshore 708 polygons are derived from McLaughlin et al. (2021) and pink blocks are California Department of Fish and Game 256 km2 709 fishing blocks.",
+                         #          style = "max-width: 90%; display: block; margin: 0 auto;")
+                         
+                ),
+                
+                
                 tabPanel("Authors", 
                          
                          #background info box ----
@@ -244,41 +243,41 @@ body <-dashboardBody(
                              
                          ) # END author info box 
                          
-                         ),
+                ),
                 tabPanel("Data", 
                          
                          #right - hand column ----
                          fluidRow(
-                                  
-                                  # data source box ----
-                                  
-                                  box(width = NULL,
-                                      title = tagList(strong("The Data")),
-                                      ("All data employed in the up to date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps Institute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian Mcgill at the Scripps Institue of Oceanography.")
-                                      
-                                  ), #END data source box
-                                  
-                                  box(width = 12,
-                                      
-                                      title = tagList(strong("Citation")),
-                                      "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. "
-                                      
-                                      
-                                  ), #END data source box 
-                                  
-                                  #disclaimer box ----
-                                  box(width = 12,
-                                      
-                                      title = tagList(strong("Disclaimer")),
-                                      "There are no restrictions on sharing the data and any outputs that result from this project, but all sources of data should be referenced.",
-                                      
-                                      #style = "background-color: #ff0000;"  # change color as needed
-                                      
-                                      
-                                  ) # END disclaimer box
-                                )
-                         
+                           
+                           # data source box ----
+                           
+                           box(width = NULL,
+                               title = tagList(strong("The Data")),
+                               ("All data employed in the up to date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps Institute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian Mcgill at the Scripps Institue of Oceanography.")
+                               
+                           ), #END data source box
+                           
+                           box(width = 12,
+                               
+                               title = tagList(strong("Citation")),
+                               "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. "
+                               
+                               
+                           ), #END data source box 
+                           
+                           #disclaimer box ----
+                           box(width = 12,
+                               
+                               title = tagList(strong("Disclaimer")),
+                               "There are no restrictions on sharing the data and any outputs that result from this project, but all sources of data should be referenced.",
+                               
+                               #style = "background-color: #ff0000;"  # change color as needed
+                               
+                               
+                           ) # END disclaimer box
                          )
+                         
+                )
               ))
             
     ), # END about tabItem
@@ -287,36 +286,36 @@ body <-dashboardBody(
     tabItem(tabName = "user_manual",
             fluidRow(
               tags$style(HTML(".container-fluid { background-color: #ffffff; }")),
-            
-            
-            # column ----
-            column(width = 12,
-                   
-                   fluidRow(
-                   # Background Information Box
-                   box(
-                     width = NULL,
-                     title = tagList(strong("Fish DDT Concentration Prediction Dashboard User Manual")),
-                     HTML("Welcome to the Fish DDT Concentration Prediction Dashboard! This user-friendly tool is designed to assist fishermen and environmental researchers by predicting DDT concentrations in various fish species based on their geographic catch location. This manual will guide you through initial setup, application operation, and understanding your results.")
-                   ) # END background info box 
-                   ),
-                   
-                   fluidRow(
-                   # Section 1: Getting Started
-                   box(
-                     width = 12,
-                     title = tagList(strong("Getting Started")),
-                     HTML("Navigate through the application using the tabs to the right of the dashboard. <br><br>
+              
+              
+              # column ----
+              column(width = 12,
+                     
+                     fluidRow(
+                       # Background Information Box
+                       box(
+                         width = NULL,
+                         title = tagList(strong("Fish DDT Concentration Prediction Dashboard User Manual")),
+                         HTML("Welcome to the Fish DDT Concentration Prediction Dashboard! This user-friendly tool is designed to assist fishermen and environmental researchers by predicting DDT concentrations in various fish species based on their geographic catch location. This manual will guide you through initial setup, application operation, and understanding your results.")
+                       ) # END background info box 
+                     ),
+                     
+                     fluidRow(
+                       # Section 1: Getting Started
+                       box(
+                         width = 12,
+                         title = tagList(strong("Getting Started")),
+                         HTML("Navigate through the application using the tabs to the right of the dashboard. <br><br>
           <strong>Initial Setup:</strong> Begin by identifying your fish species in the 'Fish Identification' tab under 'Resources'. This section provides detailed information about different fish species. <br> <br> Have a good idea of where the fish was caught. Accurately entering the catch location enhances the prediction accuracy.")
-                   ) # END section 1: box
-                   ),
+                       ) # END section 1: box
+                     ),
           
-                   fluidRow(
-          # Section 2: Running The Application
-          box(
-            width = 12,
-            title = tagList(strong("Running The Application")),
-            HTML("To estimate the DDT concentration:
+          fluidRow(
+            # Section 2: Running The Application
+            box(
+              width = 12,
+              title = tagList(strong("Running The Application")),
+              HTML("To estimate the DDT concentration:
           <ol>
               <li>Navigate to the <em>'What's In My Catch'</em> tab.</li>
               <li>Select a fish species from the dropdown menu.</li>
@@ -324,164 +323,164 @@ body <-dashboardBody(
               <li>Click the <strong>'Predict DDT'</strong> button to receive the forecast.</li>
               <li>Results will be displayed below the map.</li>
           </ol>")
-          ) # END section 2: box
-                   ),
-                   
-                   fluidRow(
-          # Section 3: How To Interpret The Output
-          box(
-            width = 12,
-            title = tagList(strong("How To Interpret The Output")),
-            HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommending serving size and relevent mercury advisories are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions.")
-          ) # END section 3: box
-                   ),
+            ) # END section 2: box
+          ),
           
-                   fluidRow(
-          # Section 4: Troubleshooting
-          box(
-            width = 12,
-            title = tagList(strong("Troubleshooting")),
-            HTML("Encountering issues? Here are some tips to help you solve common problems:<br>
+          fluidRow(
+            # Section 3: How To Interpret The Output
+            box(
+              width = 12,
+              title = tagList(strong("How To Interpret The Output")),
+              HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommending serving size and relevent mercury advisories are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions.")
+            ) # END section 3: box
+          ),
+          
+          fluidRow(
+            # Section 4: Troubleshooting
+            box(
+              width = 12,
+              title = tagList(strong("Troubleshooting")),
+              HTML("Encountering issues? Here are some tips to help you solve common problems:<br>
           <ul>
               <li><strong>Input Validation:</strong> Ensure that the fish species and location details are correctly entered. Verify that the location is geographically plausible for the selected species.</li>
               <li><strong>Map Interaction:</strong> If the map does not respond or the marker does not move, refresh the application or check your internet connection.</li>
           </ul>
           If problems persist, please contact the support team for further assistance.")
-          ), # END section 4: box
-        
-        column(width = 12,
+            ), # END section 4: box
+          
+          column(width = 12,
                  box(
                    width = 12))
           
-            ) # END left-hand column 
+          ) # END left-hand column 
+              )
             )
-)
     ), # END User Manual tabItem
-
-
-# fish_identification tabItem ----
-tabItem(tabName = "fish_id",
-        
-        box(
-          width = NULL,
-          title = tagList(strong("Having trouble identifying your fish?")),
-        div(class = "well",
-            p("Use the link below to access the California Marine Species Portal, where you can find detailed information about various fish species. This resource may assist you in identifying the fish species by their common names, scientific names, and visual characteristics."),
-            tags$a(href = "https://marinespecies.wildlife.ca.gov/", target = "_blank", 
-                   class = "btn btn-primary", "Visit the California Marine Species Portal"),
-            br(), br(),
-            p("Instructions:"),
-            tags$ol(
-              tags$li("Use the search bar to enter the common name or scientific name of the fish."),
-              tags$li("Use the filters on the left to narrow down by category, group, region, or gear type."),
-              tags$li("Click on any fish entry to get more detailed information including photos and distinctive features.")
-            ),
-            p("These features will help you to effectively identify the fish species you encounter.")
-            # ,
-            # img(src = "www/help-guide-image.png", height = "200px", alt = "Helpful Guide Image")
-        ),
-        p("For additional assistance, please refer to the tutorial videos and FAQs on the portal."),
-        div(class = "well",
-            p("Still having trouble? Contact our support team for personalized help."),
-            tags$a(href = "bversteeg@ucsb.edu", class = "btn btn-success", "Email Support")
-        ))
-        
-        
-        # fluidRow(width = 6,
-        #          useShinyjs(),
-        #           extendShinyjs(text = jscode, functions = c("backgroundCol")),
-        #           p(id = "name", "My name is Dean"),
-        #           p(id = "sport", "I like soccer"),
-        #           selectInput(inputId = "col", label = "Colour",
-        #                       c("green", "yellow", "red", "blue", "white")),
-        #           selectInput(inputId = "selector", label = "Element", c("sport", "name", "button")),
-        #           actionButton(inputId = "button", label = "Go"))
-        
-        
-), #END fish_identification tabItem
-
-# research tabItem ----
-tabItem(tabName = "research",
-        
-        # full column ----
-        column(width = 12,
-               
-               #collaboration info box ----
-               box(width = NULL,
-                   title = tagList(strong("The Broader Picture")),
-                   p("Further research and educational collaborators working on understanding the human and ecological impacts of the recently discovered DDT dumpsite will be highlighted here. We hope to provide a platform that enables researchers to connect with communities in a meaningful way.")
+    
+    
+    # fish_identification tabItem ----
+    tabItem(tabName = "fish_id",
+            
+            box(
+              width = NULL,
+              title = tagList(strong("Having trouble identifying your fish?")),
+              div(class = "well",
+                  p("Use the link below to access the California Marine Species Portal, where you can find detailed information about various fish species. This resource may assist you in identifying the fish species by their common names, scientific names, and visual characteristics."),
+                  tags$a(href = "https://marinespecies.wildlife.ca.gov/", target = "_blank", 
+                         class = "btn btn-primary", "Visit the California Marine Species Portal"),
+                  br(), br(),
+                  p("Instructions:"),
+                  tags$ol(
+                    tags$li("Use the search bar to enter the common name or scientific name of the fish."),
+                    tags$li("Use the filters on the left to narrow down by category, group, region, or gear type."),
+                    tags$li("Click on any fish entry to get more detailed information including photos and distinctive features.")
+                  ),
+                  p("These features will help you to effectively identify the fish species you encounter.")
+                  # ,
+                  # img(src = "www/help-guide-image.png", height = "200px", alt = "Helpful Guide Image")
+              ),
+              p("For additional assistance, please refer to the tutorial videos and FAQs on the portal."),
+              div(class = "well",
+                  p("Still having trouble? Contact our support team for personalized help."),
+                  tags$a(href = "bversteeg@ucsb.edu", class = "btn btn-success", "Email Support")
+              ))
+            
+            
+            # fluidRow(width = 6,
+            #          useShinyjs(),
+            #           extendShinyjs(text = jscode, functions = c("backgroundCol")),
+            #           p(id = "name", "My name is Dean"),
+            #           p(id = "sport", "I like soccer"),
+            #           selectInput(inputId = "col", label = "Colour",
+            #                       c("green", "yellow", "red", "blue", "white")),
+            #           selectInput(inputId = "selector", label = "Element", c("sport", "name", "button")),
+            #           actionButton(inputId = "button", label = "Go"))
+            
+            
+    ), #END fish_identification tabItem
+    
+    # research tabItem ----
+    tabItem(tabName = "research",
+            
+            # full column ----
+            column(width = 12,
                    
-               ) # END collaboration info box 
-               
-        ), # END column 
-        
-) # END research tabItem
-
+                   #collaboration info box ----
+                   box(width = NULL,
+                       title = tagList(strong("The Broader Picture")),
+                       p("Further research and educational collaborators working on understanding the human and ecological impacts of the recently discovered DDT dumpsite will be highlighted here. We hope to provide a platform that enables researchers to connect with communities in a meaningful way.")
+                       
+                   ) # END collaboration info box 
+                   
+            ), # END column 
+            
+    ) # END research tabItem
+    
   ),# END tabItems
-
- # end body
-
-
-# 
-# 
-# #.........................dashboardfooter.........................
-# footer <- tags$footer("", align = "bottom", style = "
-#               position: absolute;
-#               width:100%;
-#               height:100px;",
-#               tags$img(src = "white-scripps-logo.png",
-#                        style = "position: absolute; width: 300px; height: auto;"),
-#               tags$img(src = "calcofi-logo.png",
-#                        style = "position: absolute; width: 70px; height: auto;"),
-#               tags$img(src = "bren-white-logo.png",
-#                        style = "position: absolute; width: 250px; height: auto;")
-# )
-# )
-# 
-# 
-# #..................combine all in dashboardPage..................
-# 
-# dashboardPage(header, sidebar, body, footer, skin = "black")
-
-
-
-#.........................dashboardfooter.........................
-#  footer <- tags$footer("", align = "bottom", style = "
-#                position: absolute;
-#                width:100%;
-#                height:100px;
-#                display: flex;",
-#                tags$img(src = "white-scripps-logo.png",
-#                         style = "position: absolute; bottom: 25px; right : 575px; width: 300px; height: auto;"),
-#                tags$img(src = "calcofi-logo.png",
-#                        style = "position: absolute; bottom: 10px; right: 900px; width: 70px; height: auto;"),
-#               tags$img(src = "bren-white-logo.png",
-#                        style = "position: absolute; bottom: 25px; right: 300px; width: 250px; height: auto;")
-# )
-# )
-
-
-# footer <- tags$footer(
-#   style = "background-color: #0c3D6E;
-#   position: absolute;
-#   bottom: 0;
-#   width: 95%;
-#   height: 55px;
-#   display: flex;
-#   align-items: center;
-#   justify-content: space-around;",
-#   tags$img(src = "white-scripps-logo.png",
-#            style = "width: 200px; height: auto;"),
-#   tags$img(src = "calcofi-logo.png",
-#            style = "width: 60px; height: auto;"),
-#   tags$img(src = "bren-white-logo.png",
-#            style = "width: 200px; height: auto;")
-# )
-# )
-
-
-footer <- tags$footer(
-  style = "background-color: #0c3D6E;
+  
+  # end body
+  
+  
+  # 
+  # 
+  # #.........................dashboardfooter.........................
+  # footer <- tags$footer("", align = "bottom", style = "
+  #               position: absolute;
+  #               width:100%;
+  #               height:100px;",
+  #               tags$img(src = "white-scripps-logo.png",
+  #                        style = "position: absolute; width: 300px; height: auto;"),
+  #               tags$img(src = "calcofi-logo.png",
+  #                        style = "position: absolute; width: 70px; height: auto;"),
+  #               tags$img(src = "bren-white-logo.png",
+  #                        style = "position: absolute; width: 250px; height: auto;")
+  # )
+  # )
+  # 
+  # 
+  # #..................combine all in dashboardPage..................
+  # 
+  # dashboardPage(header, sidebar, body, footer, skin = "black")
+  
+  
+  
+  #.........................dashboardfooter.........................
+  #  footer <- tags$footer("", align = "bottom", style = "
+  #                position: absolute;
+  #                width:100%;
+  #                height:100px;
+  #                display: flex;",
+  #                tags$img(src = "white-scripps-logo.png",
+  #                         style = "position: absolute; bottom: 25px; right : 575px; width: 300px; height: auto;"),
+  #                tags$img(src = "calcofi-logo.png",
+  #                        style = "position: absolute; bottom: 10px; right: 900px; width: 70px; height: auto;"),
+  #               tags$img(src = "bren-white-logo.png",
+  #                        style = "position: absolute; bottom: 25px; right: 300px; width: 250px; height: auto;")
+  # )
+  # )
+  
+  
+  # footer <- tags$footer(
+  #   style = "background-color: #0c3D6E;
+  #   position: absolute;
+  #   bottom: 0;
+  #   width: 95%;
+  #   height: 55px;
+  #   display: flex;
+  #   align-items: center;
+  #   justify-content: space-around;",
+  #   tags$img(src = "white-scripps-logo.png",
+  #            style = "width: 200px; height: auto;"),
+  #   tags$img(src = "calcofi-logo.png",
+  #            style = "width: 60px; height: auto;"),
+  #   tags$img(src = "bren-white-logo.png",
+  #            style = "width: 200px; height: auto;")
+  # )
+  # )
+  
+  
+  footer <- tags$footer(
+    style = "background-color: #0c3D6E;
   position: absolute;
   bottom: 0;
   width: 90%;
@@ -503,14 +502,3 @@ footer <- tags$footer(
 #..................combine all in dashboardPage.............s.....
 
 dashboardPage(header, sidebar, body, footer, skin = "black")
-
-
-
-
-
-
-
-
-
-
-

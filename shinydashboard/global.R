@@ -51,6 +51,11 @@ sbpier <- read_sf("data/polygons/sbpiersanmateopoint.kml") %>%
   st_zm() %>% 
   mutate(Name = "sbpiersanmateopoint")
 
+
+shelf <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-saferseafood/shinydashboard/data/polygons/Palos_Shelf.kml") %>%
+  st_zm() %>%
+  mutate(Name = "palosshelf")
+
 # make dataframe of advisories
 advisory_areas <- rbind(ventura, smbeach, sbpier) %>% 
   dplyr::select(Name, geometry)

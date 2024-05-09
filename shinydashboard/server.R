@@ -7,7 +7,7 @@ server <- function(input, output, session) {
   )
   
   # Initialize current_markers
-  current_markers <- reactiveValues(lat = 33.5981420198664, long = -118.81263256073)
+  current_markers <- reactiveValues(lat = 33.726973, long = -118.377620, zoom = 10)
   
   # build location selectionleaflet map ----
   output$locationMap <- renderLeaflet({
@@ -19,45 +19,48 @@ server <- function(input, output, session) {
     leaflet() %>%
       # add titles
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # added new map for visualize import streets
+      
+      addPolygons(data = shelf, color = "red") %>%
+      
       #addRasterImage(rstack, opacity = 0.5) %>%
       
-      #addPolygons(data = rstack, fillColor = "blue", color = "black", weight = 1, opacity = 1) %>% 
-  
-      # set view over CA 
-      # Check if sf_data contains polygons
-      # swan diego bay and mission bay aren't relevant for coastal advisories 
+      # addPolygons(data = rstack, fillColor = "blue", color = "black", weight = 1, opacity = 1) %>% 
       
-      # addPolygons(data= ventura,color = "red",weight = 1,smoothFactor = 1,
-      #             opacity = 0.5, fillOpacity = 0.25,fillColor = "red",
-      #             highlightOptions = highlightOptions(color = "blue",
-      #                                                 weight = 2,bringToFront = TRUE)) %>% 
-      # 
-      # addPolygons(data= sbpier,color = "green",weight = 1,smoothFactor = 1,
-      #             opacity = 0.5, fillOpacity = 0.25,fillColor = "green",
-      #             highlightOptions = highlightOptions(color = "blue",
-      #                                                 weight = 2,bringToFront = TRUE)) %>%
-      # 
-      # #addPolygons(data= smbeach,color = "hotpink",weight = 1,smoothFactor = 1,
-      #             opacity = 0.5, fillOpacity = 0.25,fillColor = "hotpink",
-      #             highlightOptions = highlightOptions(color = "blue",
-      #                                                 weight = 2,bringToFront = TRUE))%>%
+       #set view over CA
+       #Check if sf_data contains polygons
+       #swan diego bay and mission bay aren't relevant for coastal advisories
 
-      setView(lng = -118.50278377533, lat = 33.7536925268406, zoom = 9) %>%
+      addPolygons(data= ventura,color = "blue",weight = 3,smoothFactor = 1,
+                   opacity = 0.5, fillOpacity = 0.25,fillColor = "transparent",
+                   highlightOptions = highlightOptions(color = "blue",
+                                                     weight = 2)) %>%
+    
+    addPolygons(data= sbpier,color = "blue",weight = 3,smoothFactor = 1,
+                 opacity = 0.5, fillOpacity = 0.25,fillColor = "transparent",
+                 highlightOptions = highlightOptions(color = "blue",
+                                                     weight = 2)) %>%
+    
+    addPolygons(data= smbeach,color = "blue",weight = 3,smoothFactor = 1,
+                opacity = 0.5, fillOpacity = 0.25,fillColor = "transparent",
+                 highlightOptions = highlightOptions(color = "blue",
+                                                     weight = 2))%>%
+    
+    setView(lng = -118.377620, lat = 33.726973, zoom = 9) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
-      addMarkers(lat = 33.5981486713485,lng = -118.812636297941, 
+      addMarkers(lat = 33.726973,lng = -118.377620, 
                  options = markerOptions(draggable = TRUE)) 
-
+    
   })
   
   observeEvent(input$locationMap_marker_dragend, {
     # Update current_markers
     current_markers$lat <- input$locationMap_marker_dragend$lat
     current_markers$long <- input$locationMap_marker_dragend$lng
-
+    
   })  
-
-
+  
+  
   
   #advisory function 
   get_advisory <- function(lat, long) {
@@ -230,7 +233,7 @@ server <- function(input, output, session) {
       as.numeric()
     
     
-###------------The Output----------------###
+    ###------------The Output----------------###
     
     # check if the location is valid
     if (meters > 500) {
@@ -240,7 +243,7 @@ server <- function(input, output, session) {
       output$validation_result <- renderText({
         "Invalid location selected. Location outside of area of study, please select a different location and try again."
       })
-    
+      
     } else {
       
       # Clear the validation_result output if the location is valid
@@ -309,28 +312,16 @@ server <- function(input, output, session) {
     )
   })
   
+  
 
-  # observeEvent(input$location_marker_click, {
-  #   js$backgroundCol(input$selector, input$col)
-  # })
-  
-  # Use clicked loction on map to find lat and long
-  # data_of_click <- reactiveValues(clickedMarker = list())
-  
-  # observeEvent(input$my_location,{
-  #   #Only add new layers for bounded locations
-  #   found_in_bounds <- findLocations(shape = input$my_location
-  #                                    , location_coordinates = coordinates
-  #                                    , location_id_colname = "locationID")
-  #   
-  #   for(id in found_in_bounds){
-  #     if(id %in% data_of_click$clickedMarker){
-  #       # don't add id
-  #     } else {
-  #       # add id
-  #       data_of_click$clickedMarker<-append(data_of_click$clickedMarker, id, 0)
-  #     }
-  #   }
-  # })
-}
+
+
+
+
+
+
+
+
+
+
 
