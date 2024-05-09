@@ -19,12 +19,12 @@ header <- dashboardHeader(
 sidebar <- dashboardSidebar(
   
   #sidebarMenu ----
-  sidebarMenu(menuItem(text = "What's In My Catch?", tabName = "whats_in_my_catch"), # previously dashboard
+  sidebarMenu(menuItem(text = "Toxin Tracker", tabName = "whats_in_my_catch"), # previously dashboard
               menuItem(text = "User Manual", tabName = "user_manual"),
               menuItem(text = "About", tabName = "about"), # previously welcome
               menuItem(text = "Resources", tabName = "resources", # previously seafood_advisory
                        menuSubItem(text = "Fish Identification", tabName = "fish_id"),
-                       menuSubItem(text = "Research", tabName = "research")
+                       menuSubItem(text = "DDT Research", tabName = "research")
               
   ) # END sidebarMenu
 ) # end dashboard Sidebar
@@ -67,17 +67,18 @@ body <-dashboardBody(
             box(
               width = NULL,
               title = tagList(strong("DDT Advisories For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
-              HTML("<strong style='font-size: 16px;'>Stay informed regarding the levels of insecticide contamination in your catch prior to consumption</strong>")), 
+              HTML("<div style='text-align: center;'><strong style='font-size: 18px;'>From catch to consumption, stay informed regarding the levels of contamination in your fish</strong></div>")), 
             
             fluidRow(
               column(width = 12,
                      # Add map box with point dragger
-                     box(title = "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of DDT contamination in your catch.", style = "font-size: 16px; font-family: Tahoma, Geneva, sans-serif; ",
+                     box(title = "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of DDT, Mercurcy, and PCBs that may have accumulated in your seafood", style = "font-size: 16px; font-family: Tahoma, Geneva, sans-serif; ",
                           width = NULL,
                          div(
                            class = "map-container",
                            tags$b("Select location where your fish was caught:", style = "color:#0c3D6E; font-size: 16px;"),
-                           leafletOutput(outputId = "locationMap")  # Header below the title but above the map output
+                           leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
+                           HTML("<span style='color: red; font-size: 14px;'>Privacy Statement: This web application is not storing your data nor is it recording your location.</span>")
                          )
                      ),
                      
@@ -252,7 +253,7 @@ body <-dashboardBody(
                                   
                                   box(width = NULL,
                                       title = tagList(strong("The Data")),
-                                      "All resources employed in this study are provided by the client, Scripps Institute of Oceanography and California Cooperative Oceanic Fisheries Investigations (CalCOFI). Raster and tabular data collected across the Southern California Bight will be used to conduct this analysis."
+                                      ("All data employed in the up to date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps Institute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian Mcgill at the Scripps Institue of Oceanography.")
                                       
                                   ), #END data source box
                                   
@@ -406,8 +407,7 @@ tabItem(tabName = "research",
                
                #collaboration info box ----
                box(width = NULL,
-                   title = tagList(strong("Research and Collaborations")),
-                   p("The data provided for this version of the dashboard was collected by the Southern California Bight Regional Monitoring Program, and rasters were processed by Dr. Lillian Mcgill at the Scripps Institue of Oceanography."),
+                   title = tagList(strong("The Broader Picture")),
                    p("Further research and educational collaborators working on understanding the human and ecological impacts of the recently discovered DDT dumpsite will be highlighted here. We hope to provide a platform that enables researchers to connect with communities in a meaningful way.")
                    
                ) # END collaboration info box 
