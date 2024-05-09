@@ -15,7 +15,6 @@ library(showtext)
 library(markdown)
 library(rfishbase)
 
-
 library(skimr)
 library(tidymodels)
 library(caret)
