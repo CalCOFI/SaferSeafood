@@ -57,40 +57,7 @@ server <- function(input, output, session) {
 
   })  
 
-  
-  
-  # build data exploration leaflet map ----
-  output$fish_map_output <- renderLeaflet({
-    leaflet() %>%
-      # add titles
-      addProviderTiles(providers$Esri.WorldImagery) %>%
-      addPolygons(data = ventura, fillColor = "red", color = "black", weight = 2, opacity = 1) %>%
-      # set view over CA
-      setView(lng = -119.784, lat = 30.0906, zoom = 6) %>%
-      # add mini map 
-      addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
-      # add markers
-      addMarkers(data = filtered_fish_data(),
-                 lng = ~CompositeTargetLongitude, lat = ~CompositeTargetLatitude,
-                 popup = ~paste("Site Name: ", CompositeStationArea, "<br>",
-                                "Avg DDT: ", AvgDDT, "<br>"))
-    
-    # observeEvent(input$click, {
-    #   
-    #   session$sendCustomMessage("onMapClick", click)
-    #   
-    # })
-    
-    # observeEvent(input$map_marker_click, {
-    #   data$clickedMarker <- input$map_marker_click
-    #   print(data$clickedMarker)
-    # })
-    # observeEvent(input$map_click, {
-    #   data$clickedMarker <- NULL
-    #   print(data$clickedMarker)
-    # })
-    
-  })
+
   
   #advisory function 
   get_advisory <- function(lat, long) {
