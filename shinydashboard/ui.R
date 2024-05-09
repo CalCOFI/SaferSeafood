@@ -143,16 +143,7 @@ body <-dashboardBody(
             solidHeader = TRUE,
             collapsible = FALSE,
             textOutput("prediction"),
-            textOutput("serving_size"),
-            # tags$div(
-            #   style = "display: flex; align-items: center; word-wrap: break-word;",
-            #   verbatimTextOutput("serving_size"),
-            #   actionButton("info_button", style = "margin-left: 5px;", icon("info-circle"))
-            # ),
-            #create the serving size the serving size info comes up
-            
-            bsTooltip(id = "info-button", 
-                      title = "A serving size is defined by the OEHHA as an 8oz skinless fillet.")
+            textOutput("serving_size")
                             )
                      ),
             
@@ -160,7 +151,6 @@ body <-dashboardBody(
             column(width = 6,
                    box(
                      width = NULL, 
-                     height = "57px", # Adjust the height here
                      div(class = "prediction-title",
                          tags$b("Mercury/PCB Health Advisory", style = "color:#0c3D6E; font-size: 16px;")), 
                      #status = "success", 
@@ -171,7 +161,18 @@ body <-dashboardBody(
                      tags$style(type="text/css",
                                 ".shiny-output-error { visibility: hidden; }",
                                 ".shiny-output-error:before { visibility: hidden; }"
-                     )
+                     ),
+                     div(class = "info-button2",
+                         style = "display: flex; align-items: right;",
+                         icon("info-circle", lib = "font-awesome"),  # Info icon
+                                      actionButton("info_button", "", style = "display: none;")),  # Hidden button
+                              tags$script(HTML('
+                $(document).ready(function(){
+                    $(".info-button2").click(function(){
+                        alert("This advisory was provided from the OEHHA Fish Advisory webpage.");
+                    });
+                });
+            '))
                    )
 
               ),
