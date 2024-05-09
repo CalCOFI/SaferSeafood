@@ -30,18 +30,20 @@ server <- function(input, output, session) {
        #Check if sf_data contains polygons
        #swan diego bay and mission bay aren't relevant for coastal advisories
 
-      addPolygons(data= ventura,color = "blue",weight = 3,smoothFactor = 1,
-                   opacity = 0.5, fillOpacity = 0.25,fillColor = "transparent",
+      addPolygons(data= ventura, color = "white",weight = 3,smoothFactor = 1,
+                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5", 
                    highlightOptions = highlightOptions(color = "blue",
                                                      weight = 2)) %>%
     
-    addPolygons(data= sbpier,color = "blue",weight = 3,smoothFactor = 1,
-                 opacity = 0.5, fillOpacity = 0.25,fillColor = "transparent",
+    addPolygons(data= sbpier,color = "white",weight = 3,smoothFactor = 1,
+                 opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+                dashArray = "5, 5",
                  highlightOptions = highlightOptions(color = "blue",
                                                      weight = 2)) %>%
     
-    addPolygons(data= smbeach,color = "blue",weight = 3,smoothFactor = 1,
-                opacity = 0.5, fillOpacity = 0.25,fillColor = "transparent",
+    addPolygons(data= smbeach,color = "white",weight = 3,smoothFactor = 1,
+                opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+                dashArray = "5, 5",
                  highlightOptions = highlightOptions(color = "blue",
                                                      weight = 2))%>%
     
@@ -312,7 +314,14 @@ server <- function(input, output, session) {
     )
   })
   
-  
+}
+
+
+
+
+
+
+
 
 
 

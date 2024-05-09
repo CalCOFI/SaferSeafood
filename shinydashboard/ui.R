@@ -76,9 +76,9 @@ body <-dashboardBody(
                          width = NULL,
                          div(
                            class = "map-container",
-                           tags$b("Drag the marker to the location where your fish was caught:", style = "color:#0c3D6E; font-size: 16px;"),
+                           tags$b("Drag the marker to the location where your fish was caught within the study area:", style = "color:#0c3D6E; font-size: 16px;"),
                            leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
-                           HTML("<span style='color: green; font-size: 14px;'>Privacy Statement: This web application is not storing your data nor is it recording your location.</span>")
+                           HTML("<span style='color: green; font-size: 14px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.")
                          )
                      ),
                      
