@@ -25,8 +25,15 @@ sidebar <- dashboardSidebar(
               menuItem(text = "Resources", tabName = "resources", # previously seafood_advisory
                        menuSubItem(text = "Fish Identification", tabName = "fish_id"),
                        menuSubItem(text = "DDT Research", tabName = "research")
-                       
-              ) # END sidebarMenu
+              ),
+              
+  tags$div(
+    style = "display: flex; flex-direction: column; align-items: center; margin-top: 580px;",
+              tags$img(src = "white-scripps-logo.png", width = "100%"),
+              tags$img(src = "calcofi-logo.png",style = "width: 7vw; height: 7vw;"),
+              tags$img(src = "bren-white-logo.png", width = "100%"))
+              
+              # END sidebarMenu
   ) # end dashboard Sidebar
 ) 
 
@@ -76,9 +83,9 @@ body <-dashboardBody(
                          width = NULL,
                          div(
                            class = "map-container",
-                           tags$b("Drag the marker to the location where your fish was caught within the study area:", style = "color:#0c3D6E; font-size: 16px;"),
+                           tags$b("Drag the marker to the location where your fish was caught within the study area:", style = "color:#0c3D6E; font-size: 15px;"),
                            leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
-                           HTML("<span style='color: green; font-size: 14px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.")
+                           HTML("<b><span style='color: green; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span></b>")
                          )
                      ),
                      
@@ -416,8 +423,8 @@ body <-dashboardBody(
             
     ) # END research tabItem
     
-  ),# END tabItems
-  
+  )# END tabItems
+)
   # end body
   
   
@@ -479,26 +486,26 @@ body <-dashboardBody(
   # )
   
   
-  footer <- tags$footer(
-    style = "background-color: #0c3D6E;
-  position: absolute;
-  bottom: 0;
-  width: 90%;
-  height: 7vh; /* 7% of the viewport height */
-  display: flex;
-  align-items: flex;
-  justify-content: flex-start; /* align items to the left */
-  padding-left: 20px;",   # padding to the left for aesthetic spacing
-  tags$img(src = "white-scripps-logo.png",
-           style = "width: 25vw; height: 4vw; margin-right: 80px;"), # margin for spacing between images
-  tags$img(src = "calcofi-logo.png",
-           style = "width: 4vw; height: 4vw; margin-right: 110px;"),
-  tags$img(src = "bren-white-logo.png",
-           style = "width: 16vw; height: 3vw; margin-top: 5px;"))
-)
+#   footer <- tags$footer(
+#     style = "background-color: #0c3D6E;
+#   position: absolute;
+#   bottom: 0;
+#   width: 90%;
+#   height: 7vh; /* 7% of the viewport height */
+#   display: flex;
+#   align-items: flex;
+#   justify-content: flex-start; /* align items to the left */
+#   padding-left: 20px;",   # padding to the left for aesthetic spacing
+#   tags$img(src = "white-scripps-logo.png",
+#            style = "width: 25vw; height: 4vw; margin-right: 80px;"), # margin for spacing between images
+#   tags$img(src = "calcofi-logo.png",
+#            style = "width: 4vw; height: 4vw; margin-right: 110px;"),
+#   tags$img(src = "bren-white-logo.png",
+#            style = "width: 16vw; height: 3vw; margin-top: 5px;"))
+# )
 
 
 
 #..................combine all in dashboardPage.............s.....
 
-dashboardPage(header, sidebar, body, footer, skin = "black")
+dashboardPage(header, sidebar, body, skin = "black")

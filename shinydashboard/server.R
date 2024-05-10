@@ -45,7 +45,13 @@ server <- function(input, output, session) {
                 opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
                 dashArray = "5, 5",
                  highlightOptions = highlightOptions(color = "blue",
-                                                     weight = 2))%>%
+                                                     weight = 2)) %>% 
+      
+      addLegend(values = NULL,
+                title = '<small>Areas of Interest</small>',
+                position = 'topright',
+                colors = c("red", "white"),
+                labels = c("Palos Verdes Shelf", "Study Area")) %>%
     
     setView(lng = -118.377620, lat = 33.726973, zoom = 9) %>%
       # add mini map 
