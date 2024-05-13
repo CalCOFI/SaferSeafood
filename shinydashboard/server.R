@@ -20,54 +20,54 @@ server <- function(input, output, session) {
       # add titles
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # added new map for visualize import streets
       
-      addPolygons(data = shelf, color = "red") %>%
+      addPolygons(data = shelf, color = "darkorange") %>%
       
       #addRasterImage(rstack, opacity = 0.5) %>%
       
       # addPolygons(data = rstack, fillColor = "blue", color = "black", weight = 1, opacity = 1) %>% 
       
-       #set view over CA
-       #Check if sf_data contains polygons
-       #swan diego bay and mission bay aren't relevant for coastal advisories
-
+      #set view over CA
+      #Check if sf_data contains polygons
+      #swan diego bay and mission bay aren't relevant for coastal advisories
+      
       addPolygons(data= ventura, color = "white",weight = 3,smoothFactor = 1,
-                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5", 
-                   highlightOptions = highlightOptions(color = "blue",
-                                                     weight = 2)) %>%
-    
-    addPolygons(data= sbpier,color = "white",weight = 3,smoothFactor = 1,
-                 opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                dashArray = "5, 5",
-                 highlightOptions = highlightOptions(color = "blue",
-                                                     weight = 2)) %>%
-    
-    addPolygons(data= smbeach,color = "white",weight = 3,smoothFactor = 1,
-                opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                dashArray = "5, 5",
-                 highlightOptions = highlightOptions(color = "blue",
-                                                     weight = 2)) %>% 
+                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5", 
+                  highlightOptions = highlightOptions(color = "blue",
+                                                      weight = 2)) %>%
+      
+      addPolygons(data= sbpier,color = "white",weight = 3,smoothFactor = 1,
+                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+                  dashArray = "5, 5",
+                  highlightOptions = highlightOptions(color = "blue",
+                                                      weight = 2)) %>%
+      
+      addPolygons(data= smbeach,color = "white",weight = 3,smoothFactor = 1,
+                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+                  dashArray = "5, 5",
+                  highlightOptions = highlightOptions(color = "blue",
+                                                      weight = 2)) %>% 
       
       addLegend(values = NULL,
                 title = '<small>Areas of Interest</small>',
                 position = 'topright',
-                colors = c("red", "white"),
-                labels = c("Palos Verdes Shelf", "Study Area")) %>%
-    
-    setView(lng = -118.377620, lat = 33.726973, zoom = 9) %>%
+                colors = c("darkorange", "white", "red"),
+                labels = c("Palos Verdes Shelf", "Study Area", "Barrel field of DDT-laced sludge")) %>%
+      
+      setView(lng = -118.377620, lat = 33.726973, zoom = 9) %>%
       # add mini map 
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% 
-      addMarkers(lat = 33.726973,lng = -118.377620, 
-                 options = markerOptions(draggable = TRUE)) 
-    
-  })
-  
+      addMarkers(lat = 33.726973,lng = -118.377620,
+                 options = markerOptions(draggable = TRUE)) %>%
+      addCircleMarkers(lng = -118.48, lat = 33.55, color = "red",
+                       radius = 20)
+    })
+
   observeEvent(input$locationMap_marker_dragend, {
     # Update current_markers
     current_markers$lat <- input$locationMap_marker_dragend$lat
     current_markers$long <- input$locationMap_marker_dragend$lng
     
   })  
-  
   
   
   #advisory function 
