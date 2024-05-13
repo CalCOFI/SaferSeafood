@@ -29,9 +29,14 @@ sidebar <- dashboardSidebar(
               
               tags$div(
                 style = "display: flex; flex-direction: column; align-items: center; margin-top: 30px;",
+                
+                lapply(1:1, function(i) tags$br()),
                 tags$img(src = "white-scripps-logo.png", width = "100%"),
-                tags$img(src = "calcofi-logo.png",style = "width: 9vw; height: 9vw;"),
-                tags$img(src = "bren-white-logo.png", width = "100%"))
+                tags$br(),  # Insert line break
+                tags$img(src = "calcofi-logo.png", style = "width: 9vw; height: 9vw;"),
+                tags$br(),  # Insert line break
+                tags$img(src = "bren-white-logo.png", width = "100%")
+              )
               
               # END sidebarMenu
   ) # end dashboard Sidebar
