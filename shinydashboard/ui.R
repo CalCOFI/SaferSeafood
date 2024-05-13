@@ -3,7 +3,7 @@ header <- dashboardHeader(
   title = tags$div(
     style = "position: relative; 
     width: 100%; 
-    font-size: 40px;,
+    font-size: 50px;,
     font-family: Tahoma, Geneva, sans-serif;",
     "SaferSeafood"
   ),
@@ -43,6 +43,7 @@ body <-dashboardBody(
   tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"), 
   ), 
   
+  fluidPage(
   
   # # allow for user to use current location
   # tags$script('
@@ -66,11 +67,10 @@ body <-dashboardBody(
   #     ')),
   
   
-  
   # about tabItem ----
-  tabItems(
+    tabItems(
     
-    tabItem(tabName = "whats_in_my_catch",
+      tabItem(tabName = "whats_in_my_catch",
             box(
               width = NULL,
               title = tagList(strong("DDT Advisories For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
@@ -188,23 +188,6 @@ body <-dashboardBody(
                    )
                    
             ),
-
-            # column(
-            #   width = 12,
-            #   box(
-            #     width = NULL,
-            #     style = "position: relative;",
-            #     tags$img(src = "fish-hand.png",
-            #              style = "position: absolute; top: 0; left: 0; width: 100%; height: 300px; "),
-            #     style = "max-width: 100%;"
-            #   ),
-            #   tags$h6(
-            #     tags$em("Advisory Source:", 
-            #             tags$a(href = "https://www.fda.gov/food/consumers/advice-about-eating-fish", "FDA")),
-            #     style = "text-align: center; margin-top: 10px;"
-            #   )
-            # ),
-            
             
             column(
               width = 12,
@@ -212,10 +195,27 @@ body <-dashboardBody(
                 width = NULL,
                 # Apply CSS styling to the image tag
                 tags$img(src = "fish-hand.png",
-                         alt = "Source: https://www.fda.gov/food/consumers/advice-about-eating-fish",
-                         style = "max-width: 100%; max-height: 100%;")
-              )),
+                         alt = "Fish Hand Image",
+                         style = "max-width: 100%; max-height: 100%;"),
+                # Adding the source wording below the image
+                tags$p("Source: ", 
+                       tags$a(href = "https://www.fda.gov/food/consumers/advice-about-eating-fish", "FDA")),
+                style = "text-align: center;"  # Center-align the source wording
+              )
+            ),
+
+
             
+            # column(
+            #   width = 12,
+            #   box(
+            #     width = NULL,
+            #     # Apply CSS styling to the image tag
+            #     tags$img(src = "fish-hand.png",
+            #              alt = "Source: https://www.fda.gov/food/consumers/advice-about-eating-fish",
+            #              style = "max-width: 100%; max-height: 100%;")
+            #   )),
+            # 
             column(
               width = 12,
               box(
@@ -269,7 +269,7 @@ body <-dashboardBody(
                          #background info box ----
                          box(width = NULL,
                              title = tagList(strong("Project Background")),
-                             HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch. Advisories for Mercurcy and PCBs (Polychlorinated byphenyl) consumption will also be provded to the user sourced from the California Office of Environmental Health Hazard Assessment. It should be emphasized that this dashboard is a research project designed to educate and inform. The informaiton provided here does not come from any public agency and we are not making health recommendations.")
+                             HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch. Advisories for Mercury and PCBs (Polychlorinated biphenyl) consumption will also be provided to the user sourced from the California Office of Environmental Health Hazard Assessment. It should be emphasized that this dashboard is a research project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.")
                          )
                          # END disclaimer box 
                          
@@ -285,7 +285,7 @@ body <-dashboardBody(
                          #background info box ----
                          box(width = NULL,
                              title = tagList(strong("Authors")),
-                             p("This application was developed as part of a Masters in Environmental Data Science Capstone project as part of the Bren School, for Scripps and CalCOFI. "),
+                             p("This application was developed as a Masters in Environmental Data Science Capstone project for the Scripps Institute of Oceanography and the California Cooperative Oceanic Fisheries Investigation."),
                              p("This project was completed by a group of graduate students at the Bren School of Environmental Science & Management, UC Santa Barbara. Team members include Hope Hahn, Luna Herschenfeld-Catalán, Benjamin Versteeg, and Kate Becker with guidance from our Faculty Advisor Bruce Kendall and Capstone Advisor Carmen Galaz-García.")
                              
                          ) # END author info box 
@@ -353,7 +353,7 @@ body <-dashboardBody(
                          width = 12,
                          title = tagList(strong("Getting Started")),
                          HTML("Navigate through the application using the tabs to the left of the dashboard. <br><br>
-          <strong>Initial Setup:</strong> Begin by identifying your fish species in the 'Fish Identification' tab under 'Resources'. This platform provides detailed information about a wide range of california marine species. <br> <br> Have a good idea of where the fish was caught. Accurately entering the catch location enhances the prediction accuracy. This study focuses on a particular area with defined bounds so be sure that your location falls within the specified study area for the app to work effectively.")
+          <strong>Initial Setup:</strong> Begin by identifying your fish species in the 'Fish Identification' tab under 'Resources'. This platform provides detailed information about a wide range of California marine species. <br> <br> Have a good idea of where the fish was caught. Accurately entering the catch location enhances the prediction accuracy. This study focuses on a particular area with defined bounds so be sure that your location falls within the specified study area for the app to work effectively.")
                        ) # END section 1: box
                      ),
           
@@ -367,7 +367,7 @@ body <-dashboardBody(
               <li>Navigate to the <em>'Toxin Tracker'</em> tab.</li>
               <li>Select a fish species from the dropdown menu.</li>
               </li>Confirm that your fish species is correct with the provided photo </li>
-              <li>Use the interactive map to drag the marker to your fish catch location. This helps in providing the most accurate predictions. Your location must be within the highlighted study area in order to recieve a prediction.</li>
+              <li>Use the interactive map to drag the marker to your fish catch location. This helps in providing the most accurate predictions. Your location must be within the highlighted study area in order to receive a prediction.</li>
               <li>Click the <strong>'Predict DDT'</strong> button to receive the forecast.</li>
               <li>Results will be displayed below the map.</li>
           </ol>")
@@ -379,7 +379,8 @@ body <-dashboardBody(
             box(
               width = 12,
               title = tagList(strong("How To Interpret The Output")),
-              HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommended serving size and relevent Mercury/PCB advisories are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions. These results do not come from any federal agency and should be used in conjunction with advisories provided by the California Office of Environmental Health Hazard Assessment, the Food and Drug Administration, and the Fish Contamintion Education Collaborative. These are NOT FDA sectioned advisories. For women and children relaetd advice defer to this link https://oehha.ca.gov/fish/women-and-children " )
+              HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommended serving size and relevant Mercury/PCB advisories are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions. These results do not come from any federal agency and should be used in conjunction with advisories provided by the California Office of Environmental Health Hazard Assessment, the Food and Drug Administration, and the Fish Contamination Education Collaborative. These are NOT FDA sectioned advisories. For women and children related advice refer to this link: <a href='https://oehha.ca.gov/fish/women-and-children'>https://oehha.ca.gov/fish/women-and-children</a>" )
+              
             ) # END section 3: box
           ),
           
@@ -390,7 +391,7 @@ body <-dashboardBody(
               title = tagList(strong("Troubleshooting")),
               HTML("Encountering issues? Here are some tips to help you solve common problems:<br>
           <ul>
-              <li><strong>Input Validation:</strong> Ensure that the fish species and location details are correctly entered. Verify that the location is geographically plausible for the selected species.</li>
+              <li><strong>Input Validation:</strong> Ensure that the fish species and location details are correctly entered. Verify that the location is geographically plausible for the selected species and study area.</li>
               <li><strong>Map Interaction:</strong> If the map does not respond or the marker does not move, refresh the application or check your internet connection.</li>
           </ul>
           If problems persist, please contact the support team for further assistance.")
@@ -456,7 +457,7 @@ body <-dashboardBody(
                    #collaboration info box ----
                    box(width = NULL,
                        title = tagList(strong("The Broader Picture")),
-                       p("Further research and educational collaborators working on understanding the human and ecological impacts of the recently discovered DDT dumpsite will be highlighted here. We hope to provide a platform that enables researchers to connect with communities in a meaningful way.")
+                       p("Further research and educational collaborators, working to understand the human and ecological impacts of the recently discovered DDT dumpsite, will be highlighted here. We aim to provide a platform that enables researchers to connect with communities in a meaningful way.")
                        
                    ) # END collaboration info box 
                    
@@ -465,7 +466,9 @@ body <-dashboardBody(
     ) # END research tabItem
     
   )# END tabItems
-))
+)
+)
+)
   # end body
   
   
