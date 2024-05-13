@@ -3,6 +3,7 @@ library(shiny)
 library(shinydashboard)
 library(shinyjs)
 library(shinyWidgets)
+library(shinytest2)
 
 #install.packages("shinyBS")
 library(shinyBS)
