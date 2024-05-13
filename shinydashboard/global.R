@@ -1,4 +1,5 @@
 # LOAD LIBRARIES ----
+suppressPackageStartupMessages({
 library(shiny)
 library(shinydashboard)
 library(shinyjs)
@@ -35,23 +36,23 @@ library(sf)
 library(raster)
 library(sp)
 library(brms)
-
+})
 
 # the 3 OEHHA polygons for coastal health advisories
-ventura <- read_sf("data/polygons/venturaharbor.kml") %>%
+ventura <- read_sf("data/polygons/venturaharbor.kml", layer = "VenturaHarbortoSMPier.kmz") %>%
   st_zm() %>% 
   mutate(Name = "venturaharbor")
   
-smbeach <- read_sf("data/polygons/smbeach_to_sb.kml") %>%
+smbeach <- read_sf("data/polygons/smbeach_to_sb.kml", layer = "SMPiertoSBPier.kmz") %>%
   st_zm() %>% 
   mutate(Name = "smbeach_to_sb")
   #st_as_sf()
-sbpier <- read_sf("data/polygons/sbpiersanmateopoint.kml") %>%
+sbpier <- read_sf("data/polygons/sbpiersanmateopoint.kml", layer = "SBPiertoSanMateoPoint.kmz") %>%
   st_zm() %>% 
   mutate(Name = "sbpiersanmateopoint")
 
 
-shelf <- read_sf("data/polygons/Palos_Shelf.kml") %>%
+shelf <- read_sf("data/polygons/Palos_Shelf.kml", layer = "Palos Verdes Shelf") %>%
   st_zm() %>%
   mutate(Name = "palosshelf")
 
@@ -122,10 +123,3 @@ set.seed(123)
 # Loading Bayesian regression model for prediction
 brm.diet.habitat.year.fam.clean = readRDS("data/brm_mod.rda")
 #brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "speciesRandEffect.rda"))
-
-
-## If application is in testing mode, will run all tests.
-if (Sys.getenv("SHINY_TEST") == "true") {
-  testthat::test_dir("tests/testthat")
-}
-
