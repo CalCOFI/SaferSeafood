@@ -249,7 +249,7 @@ body <-dashboardBody(
             
             
             
-            )), # END what's in my catch tab item
+            ))), # END what's in my catch tab item
     
     # about tabItem ----
     tabItem(tabName = "about",
@@ -468,7 +468,7 @@ body <-dashboardBody(
   )# END tabItems
 )
 )
-)
+
   # end body
   
   
