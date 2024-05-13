@@ -50,27 +50,6 @@ body <-dashboardBody(
   
   fluidPage(
   
-  # # allow for user to use current location
-  # tags$script('
-  #     $(document).ready(function () {
-  #       navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  #     
-  #       function onError (err) {
-  #         Shiny.onInputChange("geolocation", false);
-  #       }
-  #     
-  #       function onSuccess (position) {
-  #         setTimeout(function () {
-  #           var coords = position.coords;
-  #           console.log(coords.latitude + ", " + coords.longitude);
-  #           Shiny.onInputChange("geolocation", true);
-  #           Shiny.onInputChange("lat", coords.latitude);
-  #           Shiny.onInputChange("long", coords.longitude);
-  #         }, 1100)
-  #       }
-  #     });
-  #     ')),
-  
   
   # about tabItem ----
     tabItems(
@@ -210,17 +189,6 @@ body <-dashboardBody(
             ),
 
 
-            
-            # column(
-            #   width = 12,
-            #   box(
-            #     width = NULL,
-            #     # Apply CSS styling to the image tag
-            #     tags$img(src = "fish-hand.png",
-            #              alt = "Source: https://www.fda.gov/food/consumers/advice-about-eating-fish",
-            #              style = "max-width: 100%; max-height: 100%;")
-            #   )),
-            # 
             column(
               width = 12,
               box(
@@ -277,10 +245,7 @@ body <-dashboardBody(
                              HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch. Advisories for Mercury and PCBs (Polychlorinated biphenyl) consumption will also be provided to the user sourced from the California Office of Environmental Health Hazard Assessment. It should be emphasized that this dashboard is a research project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.")
                          )
                          # END disclaimer box 
-                         
-                         # tags$img(src = "dumpsite.png.jpeg", 
-                         #          alt = "Map of fishing zones and the number of fish samples through time, by region (inset). Nearshore 708 polygons are derived from McLaughlin et al. (2021) and pink blocks are California Department of Fish and Game 256 km2 709 fishing blocks.",
-                         #          style = "max-width: 90%; display: block; margin: 0 auto;")
+
                          
                 ),
                 
@@ -440,17 +405,6 @@ body <-dashboardBody(
               ))
             
             
-            # fluidRow(width = 6,
-            #          useShinyjs(),
-            #           extendShinyjs(text = jscode, functions = c("backgroundCol")),
-            #           p(id = "name", "My name is Dean"),
-            #           p(id = "sport", "I like soccer"),
-            #           selectInput(inputId = "col", label = "Colour",
-            #                       c("green", "yellow", "red", "blue", "white")),
-            #           selectInput(inputId = "selector", label = "Element", c("sport", "name", "button")),
-            #           actionButton(inputId = "button", label = "Go"))
-            
-            
     ), #END fish_identification tabItem
     
     # research tabItem ----
@@ -475,83 +429,6 @@ body <-dashboardBody(
 )
 
   # end body
-  
-  
-  # 
-  # 
-  # #.........................dashboardfooter.........................
-  # footer <- tags$footer("", align = "bottom", style = "
-  #               position: absolute;
-  #               width:100%;
-  #               height:100px;",
-  #               tags$img(src = "white-scripps-logo.png",
-  #                        style = "position: absolute; width: 300px; height: auto;"),
-  #               tags$img(src = "calcofi-logo.png",
-  #                        style = "position: absolute; width: 70px; height: auto;"),
-  #               tags$img(src = "bren-white-logo.png",
-  #                        style = "position: absolute; width: 250px; height: auto;")
-  # )
-  # )
-  # 
-  # 
-  # #..................combine all in dashboardPage..................
-  # 
-  # dashboardPage(header, sidebar, body, footer, skin = "black")
-  
-  
-  
-  #.........................dashboardfooter.........................
-  #  footer <- tags$footer("", align = "bottom", style = "
-  #                position: absolute;
-  #                width:100%;
-  #                height:100px;
-  #                display: flex;",
-  #                tags$img(src = "white-scripps-logo.png",
-  #                         style = "position: absolute; bottom: 25px; right : 575px; width: 300px; height: auto;"),
-  #                tags$img(src = "calcofi-logo.png",
-  #                        style = "position: absolute; bottom: 10px; right: 900px; width: 70px; height: auto;"),
-  #               tags$img(src = "bren-white-logo.png",
-  #                        style = "position: absolute; bottom: 25px; right: 300px; width: 250px; height: auto;")
-  # )
-  # )
-  
-  
-  # footer <- tags$footer(
-  #   style = "background-color: #0c3D6E;
-  #   position: absolute;
-  #   bottom: 0;
-  #   width: 95%;
-  #   height: 55px;
-  #   display: flex;
-  #   align-items: center;
-  #   justify-content: space-around;",
-  #   tags$img(src = "white-scripps-logo.png",
-  #            style = "width: 200px; height: auto;"),
-  #   tags$img(src = "calcofi-logo.png",
-  #            style = "width: 60px; height: auto;"),
-  #   tags$img(src = "bren-white-logo.png",
-  #            style = "width: 200px; height: auto;")
-  # )
-  # )
-  
-  
-#   footer <- tags$footer(
-#     style = "background-color: #0c3D6E;
-#   position: absolute;
-#   bottom: 0;
-#   width: 90%;
-#   height: 7vh; /* 7% of the viewport height */
-#   display: flex;
-#   align-items: flex;
-#   justify-content: flex-start; /* align items to the left */
-#   padding-left: 20px;",   # padding to the left for aesthetic spacing
-#   tags$img(src = "white-scripps-logo.png",
-#            style = "width: 25vw; height: 4vw; margin-right: 80px;"), # margin for spacing between images
-#   tags$img(src = "calcofi-logo.png",
-#            style = "width: 4vw; height: 4vw; margin-right: 110px;"),
-#   tags$img(src = "bren-white-logo.png",
-#            style = "width: 16vw; height: 3vw; margin-top: 5px;"))
-# )
 
 
 
