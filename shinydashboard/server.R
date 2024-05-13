@@ -30,18 +30,18 @@ server <- function(input, output, session) {
       #Check if sf_data contains polygons
       #swan diego bay and mission bay aren't relevant for coastal advisories
       
-      addPolygons(data= ventura, color = "white",weight = 3,smoothFactor = 1,
+      addPolygons(data= ventura, color = "yellow",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5", 
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2)) %>%
       
-      addPolygons(data= sbpier,color = "white",weight = 3,smoothFactor = 1,
+      addPolygons(data= sbpier,color = "yellow",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
                   dashArray = "5, 5",
                   highlightOptions = highlightOptions(color = "blue",
                                                       weight = 2)) %>%
       
-      addPolygons(data= smbeach,color = "white",weight = 3,smoothFactor = 1,
+      addPolygons(data= smbeach,color = "yellow",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
                   dashArray = "5, 5",
                   highlightOptions = highlightOptions(color = "blue",
@@ -49,8 +49,8 @@ server <- function(input, output, session) {
       
       addLegend(values = NULL,
                 title = '<small>Areas of Interest</small>',
-                position = 'topright',
-                colors = c("darkorange", "white", "red"),
+                position = "topleft",
+                colors = c("darkorange", "yellow", "red"),
                 labels = c("Palos Verdes Shelf", "Study Area", "Barrel field of DDT-laced sludge")) %>%
       
       setView(lng = -118.377620, lat = 33.726973, zoom = 9) %>%
