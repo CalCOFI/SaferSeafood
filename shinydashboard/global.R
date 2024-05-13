@@ -5,10 +5,8 @@ library(shinyjs)
 library(shinyWidgets)
 library(shinytest2)
 
-#install.packages("shinyBS")
 library(shinyBS)
 library(leaflet)
-#install.packages("leaflet.extras")
 library(leaflet.extras)
 library(shinycssloaders)
 library(extrafont)
@@ -61,14 +59,6 @@ shelf <- read_sf("data/polygons/Palos_Shelf.kml") %>%
 advisory_areas <- rbind(ventura, smbeach, sbpier) %>% 
   dplyr::select(Name, geometry)
 
-# mission <- read_sf("shinydashboard/data/polygons/mission_bay.kml") %>%
-#   st_zm()
- 
-# sd_bay <- read_sf("shinydashboard/data/polygons/san_diego_bay.kml") %>%
-#   st_zm()
-
-
-#sdbay <- read_sf("shinydashboard/data/polygons/san_diego_bay.kml")
 
 # READ IN DATA ----
 
@@ -81,7 +71,6 @@ fish_clean <- read_csv("data/fish_clean.csv")
 fish_data_clean <- na.omit(fish_data)  # Assuming columns 2 and 3 contain the coordinates
 
 # Convert dataframe to sf object
-#fish_coord <- st_as_sf(fish_data_clean, coords = c(1, 2))  
 
 fish_coord <- st_as_sf(fish_data_clean, coords = c(2,3))
 
