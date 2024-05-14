@@ -189,6 +189,7 @@ body <-dashboardBody(
             ),
 
 
+<<<<<<< HEAD
             column(
               width = 12,
               box(
@@ -214,7 +215,43 @@ body <-dashboardBody(
                 "Content of the box below the distribution graph"
               )
             ),
-            
+
+            # column(
+            #   width = 12,
+            #   box(
+            #     width = NULL,
+            #     # Apply CSS styling to the image tag
+            #     tags$img(src = "fish-hand.png",
+            #              alt = "Source: https://www.fda.gov/food/consumers/advice-about-eating-fish",
+            #              style = "max-width: 100%; max-height: 100%;")
+            #   )),
+            # 
+            # column(
+            #   width = 12,
+            #   box(
+            #     width = NULL, 
+            #     height = "200px", # Adjust the height here
+            #     div(class = "graph-title",
+            #         tags$b("Distribution Graph", style = "color:#0c3D6E; font-size: 16px;")), 
+            #     solidHeader = FALSE,
+            #     collapsible = FALSE,
+            #     plotOutput("distPlot"),  # Adding the plot output here
+            #     tags$style(
+            #       type="text/css",
+            #       ".shiny-output-error { visibility: hidden; }",
+            #       ".shiny-output-error:before { visibility: hidden; }"
+            #     )
+            #   )
+            # ),
+            # 
+            # column(
+            #   width = 12,
+            #   box(
+            #     width = NULL,
+            #     "Content of the box below the distribution graph"
+            #   )
+            # ),
+
             column(width = 12,
                    box(width = NULL))
             
@@ -270,7 +307,8 @@ body <-dashboardBody(
                            
                            box(width = NULL,
                                title = tagList(strong("The Data")),
-                               ("All data employed in the up to date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps Institute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian Mcgill at the Scripps Institue of Oceanography.")
+                               ("All data employed in the up to date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps I
+                                nstitute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian Mcgill at the Scripps Institute of Oceanography.")
                                
                            ), #END data source box
                            
