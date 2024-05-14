@@ -189,32 +189,31 @@ body <-dashboardBody(
             ),
 
 
-<<<<<<< HEAD
-            column(
-              width = 12,
-              box(
-                width = NULL, 
-                height = "200px", # Adjust the height here
-                div(class = "graph-title",
-                    tags$b("Distribution Graph", style = "color:#0c3D6E; font-size: 16px;")), 
-                solidHeader = FALSE,
-                collapsible = FALSE,
-                plotOutput("distPlot"),  # Adding the plot output here
-                tags$style(
-                  type="text/css",
-                  ".shiny-output-error { visibility: hidden; }",
-                  ".shiny-output-error:before { visibility: hidden; }"
-                )
-              )
-            ),
-
-            column(
-              width = 12,
-              box(
-                width = NULL,
-                "Content of the box below the distribution graph"
-              )
-            ),
+#             column(
+#               width = 12,
+#               box(
+#                 width = NULL, 
+#                 height = "200px", # Adjust the height here
+#                 div(class = "graph-title",
+#                     tags$b("Distribution Graph", style = "color:#0c3D6E; font-size: 16px;")), 
+#                 solidHeader = FALSE,
+#                 collapsible = FALSE,
+#                 plotOutput("distPlot"),  # Adding the plot output here
+#                 tags$style(
+#                   type="text/css",
+#                   ".shiny-output-error { visibility: hidden; }",
+#                   ".shiny-output-error:before { visibility: hidden; }"
+#                 )
+#               )
+#             ),
+# 
+#             column(
+#               width = 12,
+#               box(
+#                 width = NULL,
+#                 "Content of the box below the distribution graph"
+#               )
+#             ),
 
             # column(
             #   width = 12,
