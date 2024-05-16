@@ -4,7 +4,6 @@ library(shiny)
 library(shinydashboard)
 library(shinyjs)
 library(shinyWidgets)
-library(shinytest2)
 
 library(shinyBS)
 library(leaflet)
