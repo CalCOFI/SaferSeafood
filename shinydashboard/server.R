@@ -212,7 +212,57 @@ server <- function(input, output, session) {
                                                                            ifelse(prediction > 2100,
                                                                                   "Do Not Consume",
                                                                                   NA))))))))))
+  
+    
     serving_size <- as.character(assignment_of_serving[1, 2]) # Get the serving size recommendation
+    
+    # make the serving size bar
+    # composite score v2
+    assignment_df <- reactive(assignment_of_serving)
+    # Function to create gradient data frame
+    create_gradient_df <- function(n = 8) {
+      data.frame(
+        x = seq(0, 8, length.out = n),
+        color = colorRampPalette(c("red", "green"))(n)
+      )
+    }
+    
+    
+    output$servings <- renderPlot({
+      gradient_df <- create_gradient_df()
+      
+      ggplot(assignment_df(), aes(y = as.factor(1))) +  # need to create a dummy y-axis
+        
+        geom_tile(data = gradient_df, aes(x = x, y = 1, fill = color), 
+                  color = "black",
+                  height = 0.75,
+                  width = 2) +
+        scale_fill_identity() +  # Use the fill color directly
+        # plot a red line at the value of the hazard score
+        geom_segment(aes(y = 0.5, yend = 1.5, x = rec, xend = rec),
+                     color = "black",
+                     linewidth = 1.5) +
+        # label the hazard score
+        geom_text(aes(x = rec, y = 1, label = rec),
+                  hjust = -.2, color = "black", size = 8) +
+        xlim(0, 8) +
+        labs(y = NULL,
+             x = NULL,
+             title = "Serving Size") +
+        scale_x_continuous(
+          breaks = c(0, 8),  # specify where to place the labels
+          labels = c("Do Not Eat", "Safe")  # specify the labels
+        ) +
+        theme(plot.margi4n = unit(c(0, 0, 0, 0), "lines")) +
+        theme_minimal() +
+        theme(aspect.ratio = 1/10, # adjust aspect ratio to move the plot title and x-axis labels closer
+              panel.grid.major.x = element_blank(),
+              panel.grid.minor.x = element_blank(),
+              panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              axis.text.y = element_blank(),
+              axis.text.x = element_text(size = 14))
+    })
     
     # Check if location is valid
     lonlat <- data.frame(cbind(long = longitude,lat = latitude)) # Create data frame with longitude and latitude

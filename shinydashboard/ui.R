@@ -136,7 +136,8 @@ body <-dashboardBody(
             collapsible = FALSE,
             textOutput("prediction"),
             textOutput("serving_size")
-                            )
+                            ),
+            plotOutput(outputId = "servings", height = "100px")
                      ),
             
             
