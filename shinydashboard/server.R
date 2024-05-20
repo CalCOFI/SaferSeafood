@@ -236,7 +236,7 @@ server <- function(input, output, session) {
         geom_tile(data = gradient_df, aes(x = x, y = 1, fill = color), 
                   color = "black",
                   height = 0.75,
-                  width = 2) +
+                  width = 1.14) +
         scale_fill_identity() +  # Use the fill color directly
         # plot a red line at the value of the hazard score
         geom_segment(aes(y = 0.5, yend = 1.5, x = rec, xend = rec),
@@ -276,8 +276,8 @@ server <- function(input, output, session) {
     
     if (meters > 500) {
       # If location is invalid (distance > 500 meters), display an error message
-      output$prediction <- renderText({ NULL })
       output$serving_size <- renderText({ NULL })
+      output$prediction <- renderText({ NULL })
       output$advisory <- renderText({ NULL })
       output$validation_result <- renderText({
         "Invalid location selected. Location outside of area of study, please select a different location and try again."
@@ -299,15 +299,15 @@ server <- function(input, output, session) {
         # Clear any previous error messages
         output$serving_size <- renderText({ NULL })
       } else {
+        # Display the recommended serving size using the value from 'serving_size'
+        output$serving_size <- renderText({
+          paste("Based on these results, the recommended serving size for this fish at this location is ",serving_size, " per week. For information about serving size click the info button above.")
+        })
+        
         # If prediction is available, render the predicted value in the format of ng/g lipid
         output$prediction <- renderText({ NULL })
         output$prediction <- renderText({
           paste("There are ", round(prediction, 2), "ng of DDT per gram of ", species_name_advisory, ".")
-        })
-        
-        # Display the recommended serving size using the value from 'serving_size'
-        output$serving_size <- renderText({
-          paste("Based on these results, the recommended serving size for this fish at this location is ",serving_size, " per week. For information about serving size click the info button above.")
         })
         output$fish_image <- renderImage({
           if (!file.exists(image_path2)) {

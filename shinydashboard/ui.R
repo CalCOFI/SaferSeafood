@@ -131,14 +131,13 @@ body <-dashboardBody(
                     });
                 });
             ')),
-            #status = "warning", 
+            #status = "warning",
+            
             solidHeader = TRUE,
             collapsible = FALSE,
             textOutput("prediction"),
             textOutput("serving_size")
-                            ),
-            plotOutput(outputId = "servings", height = "100px")
-                     ),
+                            ),),
             
             
             column(width = 6,
@@ -174,6 +173,22 @@ body <-dashboardBody(
                    
             ),
             
+            ### Serving size plot
+            column(
+              width = 12,
+              box(
+                width = NULL,
+                solidHeader = FALSE,
+                collapsible = FALSE,
+                plotOutput(outputId = "servings", height = "100px"),  # Adding the plot output here
+                tags$style(
+                  type="text/css",
+                  ".shiny-output-error { visibility: hidden; }",
+                  ".shiny-output-error:before { visibility: hidden; }"
+                )
+              )
+            ),
+            
             column(
               width = 12,
               box(
@@ -189,33 +204,6 @@ body <-dashboardBody(
               )
             ),
 
-
-#             column(
-#               width = 12,
-#               box(
-#                 width = NULL, 
-#                 height = "200px", # Adjust the height here
-#                 div(class = "graph-title",
-#                     tags$b("Distribution Graph", style = "color:#0c3D6E; font-size: 16px;")), 
-#                 solidHeader = FALSE,
-#                 collapsible = FALSE,
-#                 plotOutput("distPlot"),  # Adding the plot output here
-#                 tags$style(
-#                   type="text/css",
-#                   ".shiny-output-error { visibility: hidden; }",
-#                   ".shiny-output-error:before { visibility: hidden; }"
-#                 )
-#               )
-#             ),
-# 
-#             column(
-#               width = 12,
-#               box(
-#                 width = NULL,
-#                 "Content of the box below the distribution graph"
-#               )
-#             ),
-
             # column(
             #   width = 12,
             #   box(
@@ -225,14 +213,14 @@ body <-dashboardBody(
             #              alt = "Source: https://www.fda.gov/food/consumers/advice-about-eating-fish",
             #              style = "max-width: 100%; max-height: 100%;")
             #   )),
-            # 
+            #
             # column(
             #   width = 12,
             #   box(
-            #     width = NULL, 
+            #     width = NULL,
             #     height = "200px", # Adjust the height here
             #     div(class = "graph-title",
-            #         tags$b("Distribution Graph", style = "color:#0c3D6E; font-size: 16px;")), 
+            #         tags$b("Distribution Graph", style = "color:#0c3D6E; font-size: 16px;")),
             #     solidHeader = FALSE,
             #     collapsible = FALSE,
             #     plotOutput("distPlot"),  # Adding the plot output here
@@ -243,7 +231,7 @@ body <-dashboardBody(
             #     )
             #   )
             # ),
-            # 
+            #
             # column(
             #   width = 12,
             #   box(
