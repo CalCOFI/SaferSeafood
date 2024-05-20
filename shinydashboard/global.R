@@ -13,29 +13,36 @@ library(extrafont)
 library(showtext)
 library(markdown)
 library(rfishbase)
+library(sf)
 
 library(skimr)
 library(tidymodels)
 library(caret)
 # Load the corrplot package
-#library(corrplot)
-#library(sjPlot)
-#library(rstanarm)
+library(corrplot)
+library(sjPlot)
+#install.packages("rstanarm")
+library(rstanarm)
 
+options(timeout = 300)  # Set timeout to 600 seconds
+#install.packages("terra")
 library(terra)
 
-#install.packages("reactlog")
 library(reactlog)
 reactlog_enable()
 
 # packages for lat and long 
+
 library(geos)
 library(tidyverse)
-library(sf)
+
 library(raster)
 library(sp)
 library(brms)
 })
+
+
+
 
 # the 3 OEHHA polygons for coastal health advisories
 ventura <- read_sf("data/polygons/venturaharbor.kml", layer = "VenturaHarbortoSMPier.kmz") %>%

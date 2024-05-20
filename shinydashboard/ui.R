@@ -67,12 +67,16 @@ body <-dashboardBody(
                          width = NULL,
                          div(
                            class = "map-container",
-                           tags$b("Drag the marker to the location where your fish was caught within the study area:", style = "color:#0c3D6E; font-size: 15px;"),
+                           tags$b("Step 1: Drag the marker to the location where your fish was caught within the study area", style = "color:#0c3D6E; font-size: 19px;"),
                            leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
-                           HTML("<b><span style='color: green; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span></b>")
+                           HTML("<b><span style='color: green; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span></b>"),
+                           tags$br(),  # Line break
+                           tags$div(tags$b("Step 2: Please select your catch species ", 
+                                    style = "font-size: 19px; color:#0c3D6E;"))
                          )
                      ),
                      
+                    
                      
                      box(width = 6,
                          height = "168px",
@@ -180,7 +184,7 @@ body <-dashboardBody(
                      ,  # Hidden button
                               tags$script(HTML('
                 $(document).ready(function(){
-                    $(".info-button2").click(function(){
+                    $(".info-.button2").click(function(){
                         alert("This advisory was provided from the OEHHA Fish Advisory webpage.");
                     });
                 });
