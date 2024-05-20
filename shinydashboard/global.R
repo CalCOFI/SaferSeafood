@@ -62,6 +62,12 @@ shelf <- read_sf("data/polygons/Palos_Shelf.kml", layer = "Palos Verdes Shelf") 
   st_zm() %>%
   mutate(Name = "palosshelf")
 
+
+channel_islands <- st_read("data/polygons/cinms_py2")
+
+channel_islands <- channel_islands[-1, , drop = FALSE]
+  
+
 # make dataframe of advisories
 advisory_areas <- rbind(ventura, smbeach, sbpier) %>% 
   dplyr::select(Name, geometry)

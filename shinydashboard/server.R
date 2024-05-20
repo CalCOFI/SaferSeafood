@@ -127,28 +127,27 @@ server <- function(input, output, session) {
       addPolygons(data = shelf, color = "darkorange") %>% # Add polygons for Palos Verdes Shelf
       
       addPolygons(data= ventura, color = "white",weight = 3,smoothFactor = 1,
-                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5", 
-                  highlightOptions = highlightOptions(color = "blue",
-                                                      weight = 2)) %>% # Add polygons for Ventura
+                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5") %>% # Add polygons for Ventura
       
       addPolygons(data= sbpier,color = "white",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                  dashArray = "5, 5",
-                  highlightOptions = highlightOptions(color = "blue",
-                                                      weight = 2)) %>% # Add polygons for Santa Barbara Pier
+                  dashArray = "5, 5") %>% # Add polygons for Santa Barbara Pier
       
       addPolygons(data= smbeach,color = "white",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                  dashArray = "5, 5",
-                  highlightOptions = highlightOptions(color = "blue",
-                                                      weight = 2)) %>% # Add polygons for Santa Monica Beach
+                  dashArray = "5, 5") %>% # Add polygons for Santa Monica Beach
       
-      addLegend(values = NULL,
-                title = '<small>Areas of Interest</small>',
-                position = 'topright',
-                colors = c("darkorange", "white", "red"),
-                labels = c("Palos Verdes Shelf", "Study Area", "Barrel field of DDT-laced sludge")) %>% # Add legend
       
+      addPolygons(data = channel_islands, color = "white",weight = 3,smoothFactor = 1,
+                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+                  dashArray = "5, 5") %>%
+      
+      # addLegend(values = NULL,
+      #           title = '<small>Areas of Interest</small>',
+      #           position = 'topright',
+      #           colors = c("darkorange", "white", "red"),
+      #           labels = c("Palos Verdes Shelf", "Study Area", "Barrel field of DDT-laced sludge")) %>% # Add legend
+      # 
       setView(lng = -118.377620, lat = 33.726973, zoom = 9) %>% # Set initial view
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% # Add mini map
       addMarkers(lat = 33.726973,lng = -118.377620,
