@@ -113,6 +113,22 @@ body <-dashboardBody(
                             
                      ),
                      
+                     ### Serving size plot
+                     column(
+                       width = 12,
+                       box(
+                         width = NULL,
+                         solidHeader = FALSE,
+                         collapsible = FALSE,
+                         plotOutput(outputId = "servings", height = "100px"),  # Adding the plot output here
+                         tags$style(
+                           type="text/css",
+                           ".shiny-output-error { visibility: hidden; }",
+                           ".shiny-output-error:before { visibility: hidden; }"
+                         )
+                       )
+                     ),
+                     
                 fluidRow(
                      column(width = 6,
                             box(
@@ -173,22 +189,7 @@ body <-dashboardBody(
                    
             ),
             
-            ### Serving size plot
-            column(
-              width = 12,
-              box(
-                width = NULL,
-                solidHeader = FALSE,
-                collapsible = FALSE,
-                plotOutput(outputId = "servings", height = "100px"),  # Adding the plot output here
-                tags$style(
-                  type="text/css",
-                  ".shiny-output-error { visibility: hidden; }",
-                  ".shiny-output-error:before { visibility: hidden; }"
-                )
-              )
-            ),
-            
+      
             column(
               width = 12,
               box(
