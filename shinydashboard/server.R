@@ -194,7 +194,7 @@ server <- function(input, output, session) {
     prediction <- predict_DDT(species, latitude, longitude) # Call the prediction function
     assignment_of_serving <- data.frame(pred = prediction) %>% 
       mutate(rec = ifelse(prediction <= 21,
-                          "7+",
+                          8,
                           ifelse(prediction > 21 & prediction <= 220,
                                  7,
                                  ifelse(prediction > 220 & prediction <= 260,
@@ -211,7 +211,10 @@ server <- function(input, output, session) {
                                                                            1,
                                                                            ifelse(prediction > 2100,
                                                                                   0,
-                                                                                  NA))))))))))
+                                                                                  NA))))))))),
+             label = ifelse(rec == 8,
+                            "7+",
+                            rec))
   
     
     serving_size <- as.character(assignment_of_serving[1, 2]) # Get the serving size recommendation
@@ -243,7 +246,7 @@ server <- function(input, output, session) {
                      color = "black",
                      linewidth = 1.5) +
         # label the hazard score
-        geom_text(aes(x = rec, y = 1, label = rec),
+        geom_text(aes(x = rec, y = 1, label = label),
                   hjust = -.2, color = "black", size = 8) +
         xlim(0, 8) +
         labs(y = NULL,
