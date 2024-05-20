@@ -194,7 +194,7 @@ server <- function(input, output, session) {
     prediction <- predict_DDT(species, latitude, longitude) # Call the prediction function
     assignment_of_serving <- data.frame(pred = prediction) %>% 
       mutate(rec = ifelse(prediction <= 21,
-                          "Safe",
+                          "7+",
                           ifelse(prediction > 21 & prediction <= 220,
                                  7,
                                  ifelse(prediction > 220 & prediction <= 260,
@@ -210,7 +210,7 @@ server <- function(input, output, session) {
                                                                     ifelse(prediction > 1000 & prediction <= 2100,
                                                                            1,
                                                                            ifelse(prediction > 2100,
-                                                                                  "Do Not Consume",
+                                                                                  0,
                                                                                   NA))))))))))
   
     
