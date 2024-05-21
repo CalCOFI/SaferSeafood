@@ -20,7 +20,7 @@ sidebar <- dashboardSidebar(
   
   #sidebarMenu ----
   sidebarMenu(menuItem(text = "Toxin Tracker", tabName = "whats_in_my_catch"), # previously dashboard
-              menuItem(text = "User Manual", tabName = "user_manual"),
+              menuItem(text = "Help", tabName = "user_manual"),
               menuItem(text = "About", tabName = "about"), # previously welcome
               menuItem(text = "Resources", tabName = "resources", # previously seafood_advisory
                        menuSubItem(text = "Fish Identification", tabName = "fish_id"),
@@ -58,7 +58,12 @@ body <-dashboardBody(
             box(
               width = NULL,
               title = tagList(strong("DDT Advisories For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
-              HTML("<div style='text-align: center;'><strong style='font-size: 18px;'>From catch to consumption, stay informed regarding the levels of contamination in your fish</strong></div>")), 
+              HTML("<div style='text-align: center;'><span style='font-size: 18px;'>From catch to consumption, stay informed regarding the levels of contamination in your fish</span></div>"),
+              HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This dashboard is a resrach project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
+              
+              ), 
+            
+            
             
             fluidRow(
               column(width = 12,
@@ -67,7 +72,7 @@ body <-dashboardBody(
                          width = NULL,
                          div(
                            class = "map-container",
-                           tags$b("Step 1: Drag the marker to the location where your fish was caught within the study area", style = "color:#0c3D6E; font-size: 19px;"),
+                           tags$b("Step 1: Drag the marker to the location where your fish was caught within the study area (outlined in white)", style = "color:#0c3D6E; font-size: 20px;"),
                            leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
                            HTML("<b><span style='color: green; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span></b>")
                          )
@@ -75,7 +80,7 @@ body <-dashboardBody(
                      column(width = 12,
                             box(width = 12,
                                 tags$div(tags$b("Step 2: Please select your catch species"), 
-                                         style = "font-size: 19px; color:#0c3D6E;"))),
+                                         style = "font-size: 20px; color:#0c3D6E;"))),
                      
 
                      
@@ -124,7 +129,7 @@ body <-dashboardBody(
                        box(
                          width = NULL,
                          solidHeader = FALSE,
-                         collapsible = FALSE,
+                         collapsible = TRUE,
                          plotOutput(outputId = "servings", height = "100px"),  # Adding the plot output here
                          tags$style(
                            type="text/css",
@@ -138,7 +143,7 @@ body <-dashboardBody(
                      column(width = 6,
                             box(
                               width = NULL,
-                              height = "170px",
+                              height = "190px",
                               div(class = "prediction-title",
                                   tags$b("DDT Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"),  # Prediction results title
                                   div(class = "info-button",
@@ -164,7 +169,7 @@ body <-dashboardBody(
             column(width = 6,
                    box(
                      width = NULL, 
-                     height = "170px",
+                     height = "190px",
                      div(class = "prediction-title",
                          tags$b("Mercury/PCB Health Advisory", style = "color:#0c3D6E; font-size: 16px;")), 
                      #status = "success", 
@@ -273,9 +278,9 @@ body <-dashboardBody(
                          #background info box ----
                          box(width = NULL,
                              title = tagList(strong("Project Background")),
-                             HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch. Advisories for Mercury and PCBs (Polychlorinated biphenyl) consumption will also be provided to the user sourced from the California Office of Environmental Health Hazard Assessment. It should be emphasized that this dashboard is a research project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.")
+                             HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and <strong>can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals </strong> . A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch. Advisories for Mercury and PCBs (Polychlorinated biphenyl) consumption will also be provided to the user sourced from the California Office of Environmental Health Hazard Assessment. It should be emphasized that this dashboard is a research project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.")
                          )
-                         # END disclaimer box 
+                         # END disclaimer box <strong>'Predict DDT'</strong>
 
                          
                 ),

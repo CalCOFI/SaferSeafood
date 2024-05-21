@@ -124,7 +124,7 @@ server <- function(input, output, session) {
       # add titles
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # Add map tiles
       
-      addPolygons(data = shelf, color = "darkorange") %>% # Add polygons for Palos Verdes Shelf
+      addPolygons(data = shelf, color = "darkblue", popup = "Palos Verdes Superfund Site") %>% # Add polygons for Palos Verdes Shelf
       
       addPolygons(data= ventura, color = "white",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5") %>% # Add polygons for Ventura
@@ -152,9 +152,18 @@ server <- function(input, output, session) {
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% # Add mini map
       addMarkers(lat = 33.726973,lng = -118.377620,
                  options = markerOptions(draggable = TRUE)) %>% # Add draggable marker
-      addCircleMarkers(lng = -118.48, lat = 33.55, color = "red",
-                       radius = 20) # Add circle marker for barrel field
-  })
+      addCircleMarkers(lng = -118.48, 
+                       lat = 33.55, 
+                       color = "red",
+                       radius = 20,
+                       popup = "Barrel field of DDT-laced sludge")
+                       # fill = TRUE, 
+                       # fillColor = "red",
+                       # fillOpacity = 0.7,
+                       # stroke = FALSE,
+                       # options = pathOptions(pane = "fixed"))# Add circle marker for barrel field
+  
+                       })
   
   ### Observe Marker Drag Event ###--------------
   
