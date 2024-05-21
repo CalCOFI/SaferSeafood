@@ -59,7 +59,7 @@ body <-dashboardBody(
               width = NULL,
               title = tagList(strong("DDT Advisories For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
               HTML("<div style='text-align: center;'><span style='font-size: 18px;'>From catch to consumption, stay informed regarding the levels of contamination in your fish</span></div>"),
-              HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This dashboard is a research project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
+              HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This research project is/was produced for educational purposes and designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
               
               ), 
             
@@ -131,6 +131,7 @@ body <-dashboardBody(
                          solidHeader = FALSE,
                          collapsible = TRUE,
                          plotOutput(outputId = "servings", height = "100px"),  # Adding the plot output here
+                         
                          tags$style(
                            type="text/css",
                            ".shiny-output-error { visibility: hidden; }",
@@ -139,31 +140,35 @@ body <-dashboardBody(
                        )
                      ),
                      
-                fluidRow(
-                     column(width = 6,
-                            box(
-                              width = NULL,
-                              height = "190px",
+                     fluidRow(
+                       column(width = 6,
+                              box(
+                                width = NULL,
+                                height = "190px",
                               div(class = "prediction-title",
                                   tags$b("DDT Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"),  # Prediction results title
-                                  div(class = "info-button",
-                                      style = "display: flex; align-items: right;",
-                                      icon("info-circle", lib = "font-awesome"),  # Info icon
-                                      actionButton("info_button", "", style = "display: none;"))),  # Hidden button
-                              tags$script(HTML('
+                                  ),  
+            #status = "warning",
+            
+            solidHeader = TRUE,
+            collapsible = FALSE,
+            textOutput("prediction"),
+            textOutput("serving_size"),
+            
+            div(class = "info-button",
+                style = "display: flex; align-items: right;",
+                icon("info-circle", lib = "font-awesome"),  # Info icon
+                actionButton("info_button", "", style = "display: none;")),
+            # Hidden button
+            tags$script(HTML('
                 $(document).ready(function(){
                     $(".info-button").click(function(){
                         alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
                     });
                 });
             ')),
-            #status = "warning",
-            
-            solidHeader = TRUE,
-            collapsible = FALSE,
-            textOutput("prediction"),
-            textOutput("serving_size")
-                            ),),
+                            
+            ),),
             
             
             column(width = 6,

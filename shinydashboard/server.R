@@ -337,7 +337,7 @@ server <- function(input, output, session) {
       } else {
         # Display the recommended serving size using the value from 'serving_size'
         output$serving_size <- renderText({
-          paste("Based on these results, the recommended serving size for this fish at this location is ",serving_size, " per week. For information about serving size click the info button above.")
+          paste("Based on these results, the recommended serving size for this fish at this location is ",serving_size, " per week. For information about serving size click the info button below.")
         })
         
         # If prediction is available, render the predicted value in the format of ng/g lipid
@@ -390,5 +390,7 @@ server <- function(input, output, session) {
       type = "message"
     )
   })
+  
+  
   
 }

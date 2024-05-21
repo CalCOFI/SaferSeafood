@@ -47,23 +47,28 @@ library(brms)
 # the 3 OEHHA polygons for coastal health advisories
 ventura <- read_sf("data/polygons/venturaharbor.kml", layer = "VenturaHarbortoSMPier.kmz") %>%
   st_zm() %>% 
-  mutate(Name = "venturaharbor")
+  mutate(Name = "venturaharbor") %>% 
+  st_transform(crs = 4326)
   
 smbeach <- read_sf("data/polygons/smbeach_to_sb.kml", layer = "SMPiertoSBPier.kmz") %>%
   st_zm() %>% 
-  mutate(Name = "smbeach_to_sb")
+  mutate(Name = "smbeach_to_sb") %>% 
+  st_transform(crs = 4326)
   #st_as_sf()
 sbpier <- read_sf("data/polygons/sbpiersanmateopoint.kml", layer = "SBPiertoSanMateoPoint.kmz") %>%
   st_zm() %>% 
-  mutate(Name = "sbpiersanmateopoint")
+  mutate(Name = "sbpiersanmateopoint") %>% 
+  st_transform(crs = 4326)
 
 
 shelf <- read_sf("data/polygons/Palos_Shelf.kml", layer = "Palos Verdes Shelf") %>%
   st_zm() %>%
-  mutate(Name = "palosshelf")
+  mutate(Name = "palosshelf") %>% 
+  st_transform(crs = 4326)
 
 
-channel_islands <- st_read("data/polygons/cinms_py2")
+channel_islands <- st_read("data/polygons/cinms_py2") %>% 
+  st_transform(crs = 4326)
 
 channel_islands <- channel_islands[-1, , drop = FALSE]
   
