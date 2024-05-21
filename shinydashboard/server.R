@@ -142,6 +142,31 @@ server <- function(input, output, session) {
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
                   dashArray = "5, 5") %>%
       
+      htmlwidgets::onRender("
+        function(el, x) {
+          var map = this;
+
+          // Create a custom control button
+          var resetButton = L.control({position: 'topright'});
+          
+          resetButton.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+            div.innerHTML = '<button type=\"button\">Reset Zoom</button>';
+            div.style.width = '90px';
+            div.style.height = '30px';
+            div.style.lineHeight = '30px';
+            div.style.textAlign = 'center';
+            div.style.cursor = 'pointer';
+            div.onclick = function(){
+              map.setView([33.726973, -118.377620], 8.5);
+            };
+            return div;
+          };
+          
+          resetButton.addTo(map);
+        }
+      ") %>% 
+      
       # addLegend(values = NULL,
       #           title = '<small>Areas of Interest</small>',
       #           position = 'topright',
