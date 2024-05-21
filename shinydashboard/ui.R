@@ -59,7 +59,7 @@ body <-dashboardBody(
               width = NULL,
               title = tagList(strong("DDT Advisories For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
               HTML("<div style='text-align: center;'><span style='font-size: 18px;'>From catch to consumption, stay informed regarding the levels of contamination in your fish</span></div>"),
-              HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This dashboard is a resrach project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
+              HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This dashboard is a research project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
               
               ), 
             
