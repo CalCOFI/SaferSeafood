@@ -115,6 +115,34 @@ server <- function(input, output, session) {
     return(estimate_trans)
   }
   
+  #13: 32.7, 119.1
+  # 12: 33, 118.9
+  #11: 33.3, 118.8
+  # 10 : 33.6 (lat), 119.5 (long)
+  # 9  : 32. 5 ,117.2 (long)
+  # 8 : 32.6, 117.3, 
+  # 7 : 32.7 , 117.7
+  # 6 : 32.8, 117.6
+  # 5: 33.3, 117.8
+  # 4 : 33.4, 118.1
+  # 3 : 33.5, 118.4
+  # 2 : 33.6, 118.5
+  # 1 : 33.6, 118.6
+  
+dumpsite_area <- data.frame(
+    lat = c(33.6, 33.6, 33.5, 33.4, 33.3, 32.8, 32.7, 32.6, 32.5, 33.6, 33.3, 33, 32.7, 33.55),
+    lng = c(-118.6,-118.5,-118.4,-118.1, -117.8, -117.6, -117.7, -117.3, -117.2, -119.5, -118.8, -118.9, -119.1, -118.48),
+    label = c("#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10", "#11", "#12", "#13", "Most recent")
+  )
+
+# Custom icon for a specific marker
+customIcon <- makeIcon(
+  iconUrl = "https://leafletjs.com/examples/custom-icons/leaf-red.png",
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94
+)
+
+
   ### Leaflet Map Rendering ###------------------
   
   output$locationMap <- renderLeaflet({
@@ -124,7 +152,9 @@ server <- function(input, output, session) {
       # add titles
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # Add map tiles
       
-      addPolygons(data = shelf, color = "darkblue", popup = "Palos Verdes Superfund Site") %>% # Add polygons for Palos Verdes Shelf
+      addPolygons(data = shelf, color = "darkblue", 
+                  popup = "Palos Verdes Superfund Site",
+                  popupOptions = popupOptions(maxWidth ="100%", closeOnClick = TRUE)) %>% # Add polygons for Palos Verdes Shelf
       
       addPolygons(data= ventura, color = "white",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5") %>% # Add polygons for Ventura
@@ -135,12 +165,29 @@ server <- function(input, output, session) {
       
       addPolygons(data= smbeach,color = "white",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                  dashArray = "5, 5") %>% # Add polygons for Santa Monica Beach
-      
-      
+                  dashArray = "5, 5") %>%  # Add polygons for Santa Monica Beach
+#       
+#       
       addPolygons(data = channel_islands, color = "white",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
                   dashArray = "5, 5") %>%
+      
+      addCircleMarkers(data = dumpsite_area, 
+                 ~lng, ~lat, 
+                 label = ~label,
+                 group = "DDT Dumpsites") %>%
+      
+
+# # 
+#       addPolygons(data = catalina, color = "white",weight = 3,smoothFactor = 1,
+#                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+#                   dashArray = "5, 5") %>%
+#       
+    
+      addLayersControl(
+        overlayGroups = c("DDT Dumpsites"),
+        options = layersControlOptions(collapsed = FALSE)) %>%
+      
       
       htmlwidgets::onRender("
         function(el, x) {
@@ -180,7 +227,6 @@ server <- function(input, output, session) {
       addCircleMarkers(lng = -118.48, 
                        lat = 33.55, 
                        color = "red",
-                       radius = 20,
                        popup = "Barrel field of DDT-laced sludge")
                        # fill = TRUE, 
                        # fillColor = "red",

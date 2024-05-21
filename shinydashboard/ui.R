@@ -59,7 +59,7 @@ body <-dashboardBody(
               width = NULL,
               title = tagList(strong("DDT Advisories For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
               HTML("<div style='text-align: center;'><span style='font-size: 18px;'>From catch to consumption, stay informed regarding the levels of contamination in your fish</span></div>"),
-              HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This research project is designed for educational purposes. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
+              HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This research project was designed for educational purposes. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
               
               ), 
             
@@ -283,25 +283,29 @@ body <-dashboardBody(
                          #background info box ----
                          box(width = NULL,
                              title = tagList(strong("Project Background")),
-                             HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and <strong>can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals </strong> . A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch. Advisories for Mercury and PCBs (Polychlorinated biphenyl) consumption will also be provided to the user sourced from the California Office of Environmental Health Hazard Assessment. It should be emphasized that this dashboard is a research project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.")
-                         )
-                         # END disclaimer box <strong>'Predict DDT'</strong>
-
+                             HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and <strong>can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals </strong> . A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood.The DDT dumping in the Southern California coast, specifically, is an important current issue due to there not being enough information about the DDT concentration in the fish caught there. The California Environmental Protection Agency Office of Environmental Health Hazard Assessment (OEHHA) currently issues statewide consumption advisories for coastal communities. However, these advisories are severely limited as they are site and species-specific, covering only two chemicals: Mercury and Polychlorinated biphenyl (PCB)s. In order to improve consumption advisory accessibility, SaferSeafood has partnered with Scripps Institution of Oceanography and the California Cooperative Oceanic Fisheries Investigations, who have collected and analyzed fish and sediment monitoring data to understand the extensive human and ecological impacts resulting from legacy DDT dumping. Their current model accurately predicts localized risk of DDT in sport fish off the Southern California coast. This risk encompasses the potential adverse effects on human health due to exposure to these contaminants (Marjadi et al. 2021). The goal of this project, SaferSeafood, was to expand on this by creating various models that predict fish DDT levels using factors like sediment DDT, capture year, and fish characteristics. These then were used to develop a spatiotemporal statistical model to predict DDT concentrations for species and locations that were not included in the sample collected by Scripps. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities.  The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch. Advisories for Mercury and PCBs (Polychlorinated biphenyl) consumption will also be provided to the user sourced from the California Office of Environmental Health Hazard Assessment. It should be emphasized that this dashboard is a research project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.")
+                         ),
                          
-                ),
-                
-                
-                tabPanel("Authors", 
-                         
-                         #background info box ----
                          box(width = NULL,
                              title = tagList(strong("Authors")),
                              p("This application was developed as a Masters in Environmental Data Science Capstone project for the Scripps Institute of Oceanography and the California Cooperative Oceanic Fisheries Investigation."),
                              p("This project was completed by a group of graduate students at the Bren School of Environmental Science & Management, UC Santa Barbara. Team members include Hope Hahn, Luna Herschenfeld-Catalán, Benjamin Versteeg, and Kate Becker with guidance from our Faculty Advisor Bruce Kendall and Capstone Advisor Carmen Galaz-García.")
                              
-                         ) # END author info box 
-                         
-                ),
+                         )), # END author info box
+                        
+
+                
+                # tabPanel("Authors", 
+                #          
+                #          #background info box ----
+                         # box(width = NULL,
+                         #     title = tagList(strong("Authors")),
+                         #     p("This application was developed as a Masters in Environmental Data Science Capstone project for the Scripps Institute of Oceanography and the California Cooperative Oceanic Fisheries Investigation."),
+                         #     p("This project was completed by a group of graduate students at the Bren School of Environmental Science & Management, UC Santa Barbara. Team members include Hope Hahn, Luna Herschenfeld-Catalán, Benjamin Versteeg, and Kate Becker with guidance from our Faculty Advisor Bruce Kendall and Capstone Advisor Carmen Galaz-García.")
+                         # 
+                         # ) # END author info box
+                         # 
+                # ),
                 tabPanel("Data", 
                          
                          #right - hand column ----
@@ -311,8 +315,7 @@ body <-dashboardBody(
                            
                            box(width = NULL,
                                title = tagList(strong("The Data")),
-                               ("All data employed in the up to date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps I
-                                nstitute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian Mcgill at the Scripps Institute of Oceanography.")
+                               ("All data employed in the up-to-date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps Institute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian McGill at the Scripps Institute of Oceanography and the data used for this project was publicly available to us on Dr. Lillian McGill’s GitHub repository.  The data includes four comprehensive databases:  Sediment Data, Sediment Raster’s, DDT Monitoring Data, and Species Life History Characteristics. All data points were collected in the coastal waters of the Southern California Bight, a stretch of coastline that extends more than 600 km from the United States – Mexico border northwards to Point Conception. The metadata can be found in the totalDDX_fish_metadata.csv and the totalDDX_fish_southernCA.csv. All of the data used for this project has been collected from public data files, and all code and future data/modeling iswill be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. A more detailed description of the data used in this project can be found in the SaferSeafood <a href='https://github.com/SaferSeafood/Shiny-Dashboard'>GitHub</a>.")
                                
                            ), #END data source box
                            
@@ -354,7 +357,7 @@ body <-dashboardBody(
                        # Background Information Box
                        box(
                          width = NULL,
-                         title = tagList(strong("Fish DDT Concentration Prediction Dashboard User Manual")),
+                         title = tagList(strong("Dashboard User Manual")),
                          HTML("Welcome to the Fish DDT Concentration Prediction Dashboard! This user-friendly tool is designed to assist fishermen and environmental researchers by predicting DDT concentrations in various fish species based on their geographic catch location and catch species. This manual will guide you through initial setup, application operation, and understanding your results.")
                        ) # END background info box 
                      ),

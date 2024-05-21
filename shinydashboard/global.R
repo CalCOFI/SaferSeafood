@@ -71,7 +71,13 @@ channel_islands <- st_read("data/polygons/cinms_py2") %>%
   st_transform(crs = 4326)
 
 channel_islands <- channel_islands[-1, , drop = FALSE]
-  
+
+# catalina <- st_read("/Users/katebecker/Documents/Bren/Capstone/shiny-saferseafood/shinydashboard/data/polygons/Coastn83") %>%
+#   st_transform(crs = 4326)
+#   
+
+# catalina <- read_sf("/Users/katebecker/Documents/Bren/Capstone/shiny-saferseafood/shinydashboard/data/polygons/5a8a4dd1e4b00f54eb4049f4.xml")
+#   
 
 # make dataframe of advisories
 advisory_areas <- rbind(ventura, smbeach, sbpier) %>% 
