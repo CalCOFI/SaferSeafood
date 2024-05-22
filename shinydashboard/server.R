@@ -135,12 +135,12 @@ dumpsite_area <- data.frame(
     label = c("#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10", "#11", "#12", "#13", "Most recent")
   )
 
-# Custom icon for a specific marker
-customIcon <- makeIcon(
-  iconUrl = "https://leafletjs.com/examples/custom-icons/leaf-red.png",
-  iconWidth = 38, iconHeight = 95,
-  iconAnchorX = 22, iconAnchorY = 94
-)
+# # Custom icon for a specific marker
+# customIcon <- makeIcon(
+#   iconUrl = "https://leafletjs.com/examples/custom-icons/leaf-red.png",
+#   iconWidth = 38, iconHeight = 95,
+#   iconAnchorX = 22, iconAnchorY = 94
+# )
 
 
   ### Leaflet Map Rendering ###------------------
