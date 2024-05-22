@@ -189,13 +189,13 @@ body <-dashboardBody(
                      div(class = "info-button2",
                          style = "display: flex; align-items: right;",
                          icon("info-circle", lib = "font-awesome"),  # Info icon
-                         actionButton("info_button", "", style = "display: none;"))
+                         actionButton("info_button", "", style = "display: none;")),
                      
                      
-                     ,  # Hidden button
-                              tags$script(HTML('
+                     # Hidden button
+                     tags$script(HTML('
                 $(document).ready(function(){
-                    $("info-button2").click(function(){
+                    $(".info-button2").click(function(){
                         alert("This advisory was provided from the OEHHA Fish Advisory webpage.");
                     });
                 });
