@@ -476,7 +476,8 @@ body <-dashboardBody(
   # end body
 
 
+# href css
 
 #..................combine all in dashboardPage.............s.....
 
-dashboardPage(header, sidebar, body, skin = "black")
+dashboardPage(header, sidebar, body, skin = "black", title = "SaferSeafood")
