@@ -187,6 +187,7 @@ customIcon <- makeIcon(
       addLayersControl(
         overlayGroups = c("DDT Dumpsites"),
         options = layersControlOptions(collapsed = FALSE)) %>%
+        hideGroup("DDT Dumpsites") %>% 
       
       
       htmlwidgets::onRender("
@@ -383,7 +384,7 @@ customIcon <- makeIcon(
       } else {
         # Display the recommended serving size using the value from 'serving_size'
         output$serving_size <- renderText({
-          paste("Based on these results, the recommended serving size for this fish at this location is ",serving_size, " per week. For information about serving size click the info button below.")
+          paste("Based on these results, the recommended number of servings per week for this fish at this location is ",serving_size, ". For information about serving size, click the info button below.")
         })
         
         # If prediction is available, render the predicted value in the format of ng/g lipid
@@ -405,16 +406,16 @@ customIcon <- makeIcon(
           if (length(image_path) >= 3) {  # Check if there are values for both age groups
             if (image_path[[2]] == image_path[[3]]) {  # Check if serving sizes for both age groups are equal
               output$advisory <- renderText({  # Render the advisory message
-                paste("The recommended serving size for all age groups is ", image_path[[2]], ".")
+                paste("The recommended number of servings per week for all age groups is ", image_path[[2]], ".")
               })
             } else {  # If serving sizes for both age groups are different
               output$advisory <- renderText({  # Render the advisory message
-                paste("The recommended serving size for women 18-49 years and children 1-17 years is ", image_path[[2]], ". The recommended serving size for women 50 years and older and men 18 years and older is ", image_path[[3]], ".")
+                paste("The recommended number of servings per week for women 18-49 years and children 1-17 years is ", image_path[[2]], ". The recommended number of servings per week for women 50 years and older and men 18 years and older is ", image_path[[3]], ".")
               })
             }
           } else {  # If only one serving size is found
             output$advisory <- renderText({  # Render the advisory message
-              paste("The recommended serving size for all age and gender groups is ", image_path[[2]], ".")
+              paste("The recommended number of servings per week for all age and gender groups is ", image_path[[2]], ".")
             })
           }
         } else {  # If no image paths are found
