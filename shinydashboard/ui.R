@@ -205,20 +205,20 @@ body <-dashboardBody(
             ),
             
       
-            # column(
-            #   width = 12,
-            #   box(
-            #     width = NULL,
-            #     # Apply CSS styling to the image tag
-            #     tags$img(src = "fish-hand.png",
-            #              alt = "Fish Hand Image",
-            #              style = "max-width: 100%; max-height: 100%;"),
-            #     # Adding the source wording below the image
-            #     tags$p("Source: ", 
-            #            tags$a(href = "https://www.fda.gov/food/consumers/advice-about-eating-fish", "FDA")),
-            #     style = "text-align: center;"  # Center-align the source wording
-            #   )
-            # ),
+            column(
+              width = 12,
+              box(
+                width = NULL,
+                # Apply CSS styling to the image tag
+                tags$img(src = "fish-serving.png",
+                         alt = "Fish Hand Image",
+                         style = "max-width: 200%; max-height: 200%;"),
+                # Adding the source wording below the image
+                tags$p("Source: ",
+                       tags$a(href = "https://www.fda.gov/food/consumers/advice-about-eating-fish", "FDA")),
+                style = "text-align: center;"  # Center-align the source wording
+              )
+            ),
 
             # column(
             #   width = 12,
