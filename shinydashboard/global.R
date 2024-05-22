@@ -24,11 +24,11 @@ library(sjPlot)
 #install.packages("rstanarm")
 library(rstanarm)
 
-options(timeout = 300)  # Set timeout to 600 seconds
+#options(timeout = 300)  # Set timeout to 600 seconds
 #install.packages("terra")
 library(terra)
 
-library(reactlog)
+library(reactlog)s
 reactlog_enable()
 
 # packages for lat and long 
@@ -67,7 +67,7 @@ shelf <- read_sf("data/polygons/Palos_Shelf.kml", layer = "Palos Verdes Shelf") 
   st_transform(crs = 4326)
 
 
-channel_islands <- st_read("data/polygons/cinms_py2") %>% 
+channel_islands <- st_read("data/polygons/cinms_py2/cinms_py.kml") %>% 
   st_transform(crs = 4326)
 
 channel_islands <- channel_islands[-1, , drop = FALSE]

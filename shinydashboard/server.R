@@ -215,7 +215,7 @@ dumpsite_area <- data.frame(
         }
       ") %>% 
       
-      # addLegend(values = NULL,
+      # addLegend(values = NULL,git st
       #           title = '<small>Areas of Interest</small>',
       #           position = 'topright',
       #           colors = c("darkorange", "white", "red"),
