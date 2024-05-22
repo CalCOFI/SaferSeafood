@@ -160,22 +160,22 @@ dumpsite_area <- data.frame(
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
                   dashArray = "5, 5") %>%  # Add polygons for Santa Monica Beach
 #       
+# #       
+#       addPolygons(data = channel_islands, color = "white",weight = 3,smoothFactor = 1,
+#                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+#                   dashArray = "5, 5") %>%
 #       
-      addPolygons(data = channel_islands, color = "white",weight = 3,smoothFactor = 1,
-                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                  dashArray = "5, 5") %>%
-      
-      addCircleMarkers(data = dumpsite_area, 
-                 ~lng, ~lat, 
-                 label = ~label,
-                 group = "DDT Dumpsites") %>%
-      
-    
-      addLayersControl(
-        overlayGroups = c("DDT Dumpsites"),
-        options = layersControlOptions(collapsed = FALSE)) %>%
-        hideGroup("DDT Dumpsites") %>% 
-      
+#       addCircleMarkers(data = dumpsite_area, 
+#                  ~lng, ~lat, 
+#                  label = ~label,
+#                  group = "DDT Dumpsites") %>%
+#       
+#     
+#       addLayersControl(
+#         overlayGroups = c("DDT Dumpsites"),
+#         options = layersControlOptions(collapsed = FALSE)) %>%
+#         hideGroup("DDT Dumpsites") %>% 
+#       
       
       htmlwidgets::onRender("
         function(el, x) {
