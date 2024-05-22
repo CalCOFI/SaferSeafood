@@ -67,12 +67,13 @@ body <-dashboardBody(
             
             fluidRow(
               column(width = 12,
-                     # Add map box with point dragger
+                     # Add map box with point dragger 
                      box(title = "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of DDT, Mercurcy, and PCBs that may have accumulated in your seafood", style = "font-size: 16px; font-family: Tahoma, Geneva, sans-serif; ",
                          width = NULL,
                          div(
                            class = "map-container",
                            tags$b("Step 1: Drag the marker to the location where your fish was caught within the study area (outlined in white)", style = "color:#0c3D6E; font-size: 20px;"),
+                           HTML("<div style='text-align: center;'><span style='font-size: 16px;'>Click through map layers to gather more information</span></div>"),
                            leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
                            HTML("<b><span style='color: green; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span></b>")
                          )
@@ -314,7 +315,7 @@ body <-dashboardBody(
                            
                            box(width = NULL,
                                title = tagList(strong("The Data")),
-                               ("All data employed in the up-to-date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps Institute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian McGill at the Scripps Institute of Oceanography and the data used for this project was publicly available to us on Dr. Lillian McGill’s GitHub repository.  The data includes four comprehensive databases:  Sediment Data, Sediment Raster’s, DDT Monitoring Data, and Species Life History Characteristics. All data points were collected in the coastal waters of the Southern California Bight, a stretch of coastline that extends more than 600 km from the United States – Mexico border northwards to Point Conception. The metadata can be found in the totalDDX_fish_metadata.csv and the totalDDX_fish_southernCA.csv. All of the data used for this project has been collected from public data files, and all code and future data/modeling iswill be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. A more detailed description of the data used in this project can be found in the SaferSeafood <a href='https://github.com/SaferSeafood/Shiny-Dashboard'>GitHub</a>.")
+                               ("All data employed in the up-to-date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps Institute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian McGill at the Scripps Institute of Oceanography and the data used for this project was publicly available to us on Dr. Lillian McGill’s GitHub repository.  The data includes four comprehensive databases:  Sediment Data, Sediment Raster’s, DDT Monitoring Data, and Species Life History Characteristics. All data points were collected in the coastal waters of the Southern California Bight, a stretch of coastline that extends more than 600 km from the United States – Mexico border northwards to Point Conception. The metadata can be found in the totalDDX_fish_metadata.csv and the totalDDX_fish_southernCA.csv. All of the data used for this project has been collected from public data files, and all code and future data/modeling iswill be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. A more detailed description of the data used in this project can be found in the SaferSeafood <a>href='https://github.com/SaferSeafood/Shiny-Dashboard'>GitHub</a>.")
                                
                            ), #END data source box
                            
