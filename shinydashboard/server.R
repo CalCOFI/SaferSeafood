@@ -135,13 +135,6 @@ dumpsite_area <- data.frame(
     label = c("#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10", "#11", "#12", "#13", "Most recent")
   )
 
-# # Custom icon for a specific marker
-# customIcon <- makeIcon(
-#   iconUrl = "https://leafletjs.com/examples/custom-icons/leaf-red.png",
-#   iconWidth = 38, iconHeight = 95,
-#   iconAnchorX = 22, iconAnchorY = 94
-# )
-
 
   ### Leaflet Map Rendering ###------------------
   
@@ -177,12 +170,6 @@ dumpsite_area <- data.frame(
                  label = ~label,
                  group = "DDT Dumpsites") %>%
       
-
-# # 
-#       addPolygons(data = catalina, color = "white",weight = 3,smoothFactor = 1,
-#                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-#                   dashArray = "5, 5") %>%
-#       
     
       addLayersControl(
         overlayGroups = c("DDT Dumpsites"),
