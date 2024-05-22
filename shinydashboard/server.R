@@ -331,14 +331,14 @@ customIcon <- makeIcon(
         xlim(0, 8) +
         labs(y = NULL,
              x = NULL,
-             title = "Serving Size") +
+             title = "Number of Servings Per Week") +
         scale_x_continuous(
           breaks = c(0, 8),  # specify where to place the labels
           labels = c("Do Not Eat", "Safe")  # specify the labels
         ) +
-        theme(plot.margi4n = unit(c(0, 0, 0, 0), "lines")) +
         theme_minimal() +
         theme(aspect.ratio = 1/10, # adjust aspect ratio to move the plot title and x-axis labels closer
+              plot.title = element_text(face = "bold", size = 20),
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
               panel.grid.major.y = element_blank(),
