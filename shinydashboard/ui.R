@@ -211,7 +211,7 @@ body <-dashboardBody(
               box(
                 width = NULL,
                 # Apply CSS styling to the image tag
-                tags$img(src = "fish-serving-box.png",
+                tags$img(src = "OEHHA-serv.png",
                          alt = "Fish Hand Image",
                          style = "max-width: 100%; max-height: 100%;"),
                 # Adding the source wording below the image
