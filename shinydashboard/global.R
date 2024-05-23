@@ -66,7 +66,12 @@ shelf <- read_sf("data/polygons/Palos_Shelf.kml", layer = "Palos Verdes Shelf") 
   mutate(Name = "palosshelf") %>% 
   st_transform(crs = 4326)
 
-# 
+
+piers <- read_sf("data/polygons/Piers.kml") %>%
+  st_transform(crs = 4326) 
+
+
+
 channel_islands <- sf::st_read("data/polygons/cinms_py2") %>%
   st_transform(crs = 4326)
 

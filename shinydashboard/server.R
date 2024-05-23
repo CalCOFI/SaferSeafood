@@ -164,17 +164,32 @@ dumpsite_area <- data.frame(
       addPolygons(data = channel_islands, color = "white",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
                   dashArray = "5, 5") %>%
+      # # 
+      # addPolygons(data = piers, color = "white",weight = 3,smoothFactor = 1,
+      #             opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+      #             dashArray = "5, 5") %>%
 
       addCircleMarkers(data = dumpsite_area,
                  ~lng, ~lat,
                  label = ~label,
                  group = "DDT Dumpsites") %>%
+      
+      addCircleMarkers(
+        data = piers,
+        lng = ~st_coordinates(piers)[,1],
+        lat = ~st_coordinates(piers)[,2],
+        popup = ~paste("Name:", Name, "<br>", "Description:", Description),
+        radius = 5,
+        color = "darkgreen",
+        group = "Piers"
+      ) %>%
 
 
       addLayersControl(
-        overlayGroups = c("DDT Dumpsites"),
+        overlayGroups = c("DDT Dumpsites", "Piers"),
         options = layersControlOptions(collapsed = FALSE)) %>%
         hideGroup("DDT Dumpsites") %>%
+        hideGroup("Piers") %>%
 
       
       htmlwidgets::onRender("
