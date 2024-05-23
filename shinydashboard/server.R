@@ -68,7 +68,7 @@ server <- function(input, output, session) {
   
   getYear <- function(Year) {
     # Placeholder logic to get the year
-    return(2)  # Placeholder constant value
+    return(24)  # Placeholder constant value
   }
   
   # Prediction function using the Bayesian model
@@ -349,6 +349,8 @@ dumpsite_area <- data.frame(
       output$serving_size <- renderText({ NULL })
       output$prediction <- renderText({ NULL })
       output$advisory <- renderText({ NULL })
+      output$servings <- renderPlot({ NULL })
+      output$fish_image <- renderImage({ NULL })
       output$validation_result <- renderText({
         "Invalid location selected. Location outside of area of study, please select a different location and try again."
       })
@@ -363,7 +365,9 @@ dumpsite_area <- data.frame(
       if (is.na(prediction)) {
         # Handle the case where prediction is NA by providing an informative message
         output$prediction <- renderText({ NULL })
-        output$prediction <- renderText({
+        output$advisory <- renderText({ NULL })
+        output$fish_image <- renderImage({ NULL })
+        output$fish_error <- renderText({
           "Prediction not available. Please select a fish species."
         })
         # Clear any previous error messages
@@ -371,13 +375,14 @@ dumpsite_area <- data.frame(
       } else {
         # Display the recommended serving size using the value from 'serving_size'
         output$serving_size <- renderText({
-          paste("Based on these results, the recommended number of servings per week for this fish at this location is ",serving_size, ". For information about serving size, click the info button below.")
+          paste0("Based on these results, the recommended number of servings per week for this fish at this location is ",serving_size,". For information about serving size, click the info button below.")
         })
         
         # If prediction is available, render the predicted value in the format of ng/g lipid
         output$prediction <- renderText({ NULL })
+        output$fish_error <- renderText({ NULL })
         output$prediction <- renderText({
-          paste("There are ", round(prediction, 2), "ng of DDT per gram of ", species_name_advisory, ".")
+          paste0("There are ", round(prediction, 2), "ng of DDT per gram of ", species_name_advisory,".")
         })
         output$fish_image <- renderImage({
           if (!file.exists(image_path2)) {
@@ -393,7 +398,7 @@ dumpsite_area <- data.frame(
           if (length(image_path) >= 3) {  # Check if there are values for both age groups
             if (image_path[[2]] == image_path[[3]]) {  # Check if serving sizes for both age groups are equal
               output$advisory <- renderText({  # Render the advisory message
-                paste("The recommended number of servings per week for all age groups is ", image_path[[2]], ".")
+                paste0("The recommended number of servings per week for all age groups is ", image_path[[2]], ".")
               })
             } else {  # If serving sizes for both age groups are different
               output$advisory <- renderText({  # Render the advisory message

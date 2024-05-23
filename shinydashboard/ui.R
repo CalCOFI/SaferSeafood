@@ -155,6 +155,7 @@ body <-dashboardBody(
             collapsible = FALSE,
             textOutput("prediction"),
             textOutput("serving_size"),
+            span(textOutput("fish_error"), style = "color:red"),
             
             div(class = "info-button",
                 style = "display: flex; align-items: right;",
