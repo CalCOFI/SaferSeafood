@@ -14,19 +14,17 @@ header <- dashboardHeader(
 
 #........................dashboardSidebar........................
 
-# add a how to use box to homepage 
-
 sidebar <- dashboardSidebar(
   
   #sidebarMenu ----
-  sidebarMenu(menuItem(text = "Toxin Tracker", tabName = "whats_in_my_catch"), # previously dashboard
+  sidebarMenu(menuItem(text = "Toxin Tracker", tabName = "whats_in_my_catch"), 
               menuItem(text = "Help", tabName = "user_manual"),
-              menuItem(text = "About", tabName = "about"), # previously welcome
-              menuItem(text = "Resources", tabName = "resources", # previously seafood_advisory
+              menuItem(text = "About", tabName = "about"), 
+              menuItem(text = "Resources", tabName = "resources", #
                        menuSubItem(text = "Fish Identification", tabName = "fish_id"),
                        menuSubItem(text = "DDT Research", tabName = "research")
               ),
-              
+              # Add logos to sidebar 
               tags$div(
                 style = "display: flex; flex-direction: column; align-items: center; margin-top: 30px;",
                 
@@ -39,7 +37,7 @@ sidebar <- dashboardSidebar(
               )
               
               # END sidebarMenu
-  ) # end dashboard Sidebar
+  ) # End dashboard Sidebar
 ) 
 
 #..........................dashboardBody.........................
@@ -51,7 +49,7 @@ body <-dashboardBody(
   fluidPage(
   
   
-  # about tabItem ----
+  # Toxin Tracker tabItem ----
     tabItems(
     
       tabItem(tabName = "whats_in_my_catch",
@@ -62,7 +60,6 @@ body <-dashboardBody(
               HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This research project was designed for educational purposes. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
               
               ), 
-            
             
             
             fluidRow(
@@ -218,55 +215,19 @@ body <-dashboardBody(
                 tags$p("Source: ",
                        tags$a(href = "https://oehha.ca.gov/advisories/statewide-advisory-eating-fish-california-coastal-locations-without-site-specific-advice", "OEHHA")),
                 style = "text-align: center;"  # Center-align the source wording
-              )
-            ),
-
-            # column(
-            #   width = 12,
-            #   box(
-            #     width = NULL,
-            #     # Apply CSS styling to the image tag
-            #     tags$img(src = "fish-hand.png",
-            #              alt = "Source: https://www.fda.gov/food/consumers/advice-about-eating-fish",
-            #              style = "max-width: 100%; max-height: 100%;")
-            #   )),
-            #
-            # column(
-            #   width = 12,
-            #   box(
-            #     width = NULL,
-            #     height = "200px", # Adjust the height here
-            #     div(class = "graph-title",
-            #         tags$b("Distribution Graph", style = "color:#0c3D6E; font-size: 16px;")),
-            #     solidHeader = FALSE,
-            #     collapsible = FALSE,
-            #     plotOutput("distPlot"),  # Adding the plot output here
-            #     tags$style(
-            #       type="text/css",
-            #       ".shiny-output-error { visibility: hidden; }",
-            #       ".shiny-output-error:before { visibility: hidden; }"
-            #     )
-            #   )
-            # ),
-            #
-            # column(
-            #   width = 12,
-            #   box(
-            #     width = NULL,
-            #     "Content of the box below the distribution graph"
-            #   )
-            # ),
-
-            # column(width = 12,
-            #        box(width = NULL))
+              ) # END serving size box
+              
+            ), # END serving size column
             
-              )
+              ) # END prediciton results box 
             
+            ) # END prediction results fluidRow 
             
+            ) # END what's in my catch fluidROW
             
-            ))), # END what's in my catch tab item
+            ), # END what's in my catch tab item
     
-    # about tabItem ----
+    # About tabItem ----
     tabItem(tabName = "about",
             fluidRow(
               tabBox(
@@ -295,18 +256,6 @@ body <-dashboardBody(
                          )), # END author info box
                         
 
-                
-                # tabPanel("Authors", 
-                #          
-                #          #background info box ----
-                         # box(width = NULL,
-                         #     title = tagList(strong("Authors")),
-                         #     p("This application was developed as a Masters in Environmental Data Science Capstone project for the Scripps Institute of Oceanography and the California Cooperative Oceanic Fisheries Investigation."),
-                         #     p("This project was completed by a group of graduate students at the Bren School of Environmental Science & Management, UC Santa Barbara. Team members include Hope Hahn, Luna Herschenfeld-Catalán, Benjamin Versteeg, and Kate Becker with guidance from our Faculty Advisor Bruce Kendall and Capstone Advisor Carmen Galaz-García.")
-                         # 
-                         # ) # END author info box
-                         # 
-                # ),
                 tabPanel("Data", 
                          
                          #right - hand column ----
@@ -338,10 +287,11 @@ body <-dashboardBody(
                                
                                
                            ) # END disclaimer box
-                         )
-                         
-                )
-              ))
+                         ) # END Data fluidRow
+                          
+                ) # END data panel 
+              ) # END tab box
+              ) # END about fluidrow
             
     ), # END about tabItem
     
@@ -361,7 +311,7 @@ body <-dashboardBody(
                          title = tagList(strong("Dashboard User Manual")),
                          HTML("Welcome to the Fish DDT Concentration Prediction Dashboard! This user-friendly tool is designed to assist fishermen and environmental researchers by predicting DDT concentrations in various fish species based on their geographic catch location and catch species. This manual will guide you through initial setup, application operation, and understanding your results.")
                        ) # END background info box 
-                     ),
+                     ), # END fluidRow 
                      
                      fluidRow(
                        # Section 1: Getting Started
@@ -371,7 +321,7 @@ body <-dashboardBody(
                          HTML("Navigate through the application using the tabs to the left of the dashboard. <br><br>
           <strong>Initial Setup:</strong> Begin by identifying your fish species in the 'Fish Identification' tab under 'Resources'. This platform provides detailed information about a wide range of California marine species. <br> <br> Have a good idea of where the fish was caught. Accurately entering the catch location enhances the prediction accuracy. This study focuses on a particular area with defined bounds so be sure that your location falls within the specified study area for the app to work effectively.")
                        ) # END section 1: box
-                     ),
+                     ), # END fluidRow for getting started 
           
           fluidRow(
             # Section 2: Running The Application
@@ -388,7 +338,8 @@ body <-dashboardBody(
               <li>Results will be displayed below the map.</li>
           </ol>")
             ) # END section 2: box
-          ),
+          
+          ), # END fluidRow for Running the Application 
           
           fluidRow(
             # Section 3: How To Interpret The Output
@@ -398,7 +349,8 @@ body <-dashboardBody(
               HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommended serving size and relevant Mercury/PCB advisories are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions. These results do not come from any federal agency and should be used in conjunction with advisories provided by the California Office of Environmental Health Hazard Assessment, the Food and Drug Administration, and the Fish Contamination Education Collaborative. These are NOT FDA sectioned advisories. For women and children related advice refer to this link: <a href='https://oehha.ca.gov/fish/women-and-children'>https://oehha.ca.gov/fish/women-and-children</a>" )
               
             ) # END section 3: box
-          ),
+            
+          ), # End how to interpret output FluidRow
           
           fluidRow(
             # Section 4: Troubleshooting
@@ -418,8 +370,11 @@ body <-dashboardBody(
                    width = 12))
           
           ) # END left-hand column 
-              )
-            )
+          
+              ) # END fluidRow for troubleshopping 
+          
+            ) # END fluidRow for User Manual
+          
     ), # END User Manual tabItem
     
     
@@ -447,8 +402,8 @@ body <-dashboardBody(
               p("For additional assistance, please refer to the tutorial videos and FAQs on the portal."),
               div(class = "well",
                   p("Still having trouble? Contact our support team for personalized help."),
-                  tags$a(href = "bversteeg@ucsb.edu", class = "btn btn-success", "Email Support")
-              ))
+                  tags$a(href = "bversteeg@ucsb.edu", class = "btn btn-success", "Email Support"))
+              ) # End Fish Identification box 
             
             
     ), #END fish_identification tabItem
@@ -470,14 +425,13 @@ body <-dashboardBody(
             
     ) # END research tabItem
     
-  )# END tabItems
-)
-)
+  ) # END tabItems
+  
+) # END fluid page 
 
-  # end body
+)   # END dashboard body
 
 
-# href css
 
 #..................combine all in dashboardPage.............s.....
 

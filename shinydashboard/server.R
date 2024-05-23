@@ -115,20 +115,7 @@ server <- function(input, output, session) {
     return(estimate_trans)
   }
   
-  #13: 32.7, 119.1
-  # 12: 33, 118.9
-  #11: 33.3, 118.8
-  # 10 : 33.6 (lat), 119.5 (long)
-  # 9  : 32. 5 ,117.2 (long)
-  # 8 : 32.6, 117.3, 
-  # 7 : 32.7 , 117.7
-  # 6 : 32.8, 117.6
-  # 5: 33.3, 117.8
-  # 4 : 33.4, 118.1
-  # 3 : 33.5, 118.4
-  # 2 : 33.6, 118.5
-  # 1 : 33.6, 118.6
-  
+# Create map layer manually for pre-existing dump sites based on lat and long coordinates
 dumpsite_area <- data.frame(
     lat = c(33.6, 33.6, 33.5, 33.4, 33.3, 32.8, 32.7, 32.6, 32.5, 33.6, 33.3, 33, 32.7, 33.55),
     lng = c(-118.6,-118.5,-118.4,-118.1, -117.8, -117.6, -117.7, -117.3, -117.2, -119.5, -118.8, -118.9, -119.1, -118.48),
@@ -144,35 +131,30 @@ dumpsite_area <- data.frame(
     leaflet() %>%
       # add titles
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # Add map tiles
-      
+
       addPolygons(data = shelf, color = "darkblue", 
                   popup = "Palos Verdes Superfund Site",
-                  popupOptions = popupOptions(maxWidth ="100%", closeOnClick = TRUE)) %>% # Add polygons for Palos Verdes Shelf
+                  popupOptions = popupOptions(maxWidth ="100%", closeOnClick = TRUE)) %>% # Add polygon for palos verde shelf with advisories
       
       addPolygons(data= ventura, color = "white",weight = 3,smoothFactor = 1,
-                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5") %>% # Add polygons for Ventura
+                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5") %>% # Add polygon for Ventura with advisories
       
       addPolygons(data= sbpier,color = "white",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                  dashArray = "5, 5") %>% # Add polygons for Santa Barbara Pier
-      
+                  dashArray = "5, 5") %>% # Add polygons for Santa Barbara Pier with advisories
+    
       addPolygons(data= smbeach,color = "white",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                  dashArray = "5, 5") %>%  # Add polygons for Santa Monica Beach
-#       
-# #       
+                  dashArray = "5, 5") %>%  # Add polygons for Santa Monica Beach with advisories
+     
       addPolygons(data = channel_islands, color = "white",weight = 3,smoothFactor = 1,
                   opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                  dashArray = "5, 5") %>%
-      # # 
-      # addPolygons(data = piers, color = "white",weight = 3,smoothFactor = 1,
-      #             opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-      #             dashArray = "5, 5") %>%
+                  dashArray = "5, 5") %>% # Add polygons for Channel Islands 
 
       addCircleMarkers(data = dumpsite_area,
                  ~lng, ~lat,
                  label = ~label,
-                 group = "DDT Dumpsites") %>%
+                 group = "DDT Dumpsites") %>% # Add circle markers of existing dumpsites
       
       addCircleMarkers(
         data = piers,
@@ -182,16 +164,16 @@ dumpsite_area <- data.frame(
         radius = 5,
         color = "darkgreen",
         group = "Piers"
-      ) %>%
+      ) %>% # Add circle markers for fishing pier 
 
 
       addLayersControl(
         overlayGroups = c("DDT Dumpsites", "Piers"),
         options = layersControlOptions(collapsed = FALSE)) %>%
         hideGroup("DDT Dumpsites") %>%
-        hideGroup("Piers") %>%
+        hideGroup("Piers") %>% # Add circle markers to map as layers 
 
-      
+      # Add setting so when dashbaord is rendered map reverts to study area
       htmlwidgets::onRender("
         function(el, x) {
           var map = this;
@@ -216,13 +198,7 @@ dumpsite_area <- data.frame(
           resetButton.addTo(map);
         }
       ") %>% 
-      
-      # addLegend(values = NULL,git st
-      #           title = '<small>Areas of Interest</small>',
-      #           position = 'topright',
-      #           colors = c("darkorange", "white", "red"),
-      #           labels = c("Palos Verdes Shelf", "Study Area", "Barrel field of DDT-laced sludge")) %>% # Add legend
-      # 
+
       setView(lng = -118.377620, lat = 33.726973, zoom = 9) %>% # Set initial view
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% # Add mini map
       addMarkers(lat = 33.726973,lng = -118.377620,
@@ -230,12 +206,7 @@ dumpsite_area <- data.frame(
       addCircleMarkers(lng = -118.48, 
                        lat = 33.55, 
                        color = "red",
-                       popup = "Barrel field of DDT-laced sludge")
-                       # fill = TRUE, 
-                       # fillColor = "red",
-                       # fillOpacity = 0.7,
-                       # stroke = FALSE,
-                       # options = pathOptions(pane = "fixed"))# Add circle marker for barrel field
+                       popup = "Barrel field of DDT-laced sludge") # Add circle marker for most recent barrel field 
   
                        })
   
