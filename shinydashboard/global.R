@@ -141,3 +141,5 @@ set.seed(123)
 brm.diet.habitat.year.fam.clean = readRDS("data/brm_mod.rda")
 #brm.diet.habitat.year.fam.clean = readRDS(here::here("shinydashboard", "data", "speciesRandEffect.rda"))
 
+db_disconnect()
+
