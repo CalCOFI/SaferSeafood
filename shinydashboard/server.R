@@ -132,24 +132,31 @@ dumpsite_area <- data.frame(
       # add titles
       addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # Add map tiles
 
+      addPolygons(data = non_overlapping_sf, 
+                  color = "blue", weight = 3, smoothFactor = 1, opacity = .8, fillOpacity = 0.2, fillColor = "orange", dashArray = "3, 8") %>%
+      
+      
       addPolygons(data = shelf, color = "darkblue", 
                   popup = "Palos Verdes Superfund Site",
                   popupOptions = popupOptions(maxWidth ="100%", closeOnClick = TRUE)) %>% # Add polygon for palos verde shelf with advisories
       
-      addPolygons(data= ventura, color = "white",weight = 3,smoothFactor = 1,
-                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5") %>% # Add polygon for Ventura with advisories
       
-      addPolygons(data= sbpier,color = "white",weight = 3,smoothFactor = 1,
-                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                  dashArray = "5, 5") %>% # Add polygons for Santa Barbara Pier with advisories
-    
-      addPolygons(data= smbeach,color = "white",weight = 3,smoothFactor = 1,
-                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                  dashArray = "5, 5") %>%  # Add polygons for Santa Monica Beach with advisories
-     
-      addPolygons(data = channel_islands, color = "white",weight = 3,smoothFactor = 1,
-                  opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-                  dashArray = "5, 5") %>% # Add polygons for Channel Islands 
+      ## Advisory Border Code:
+      
+      # addPolygons(data= ventura, color = "white",weight = 3,smoothFactor = 1,
+      #             opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5") %>% # Add polygon for Ventura with advisories
+      # 
+      # addPolygons(data= sbpier,color = "white",weight = 3,smoothFactor = 1,
+      #             opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+      #             dashArray = "5, 5") %>% # Add polygons for Santa Barbara Pier with advisories
+      # 
+      # addPolygons(data= smbeach,color = "white",weight = 3,smoothFactor = 1,
+      #             opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+      #             dashArray = "5, 5") %>%  # Add polygons for Santa Monica Beach with advisories
+      # 
+      # addPolygons(data = channel_islands, color = "white",weight = 3,smoothFactor = 1,
+      #             opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
+      #             dashArray = "5, 5") %>% # Add polygons for Channel Islands 
 
       addCircleMarkers(data = dumpsite_area,
                  ~lng, ~lat,
@@ -161,8 +168,9 @@ dumpsite_area <- data.frame(
         lng = ~st_coordinates(piers)[,1],
         lat = ~st_coordinates(piers)[,2],
         popup = ~paste("Name:", Name, "<br>", "Description:", Description),
-        radius = 5,
-        color = "darkgreen",
+        radius = 7,
+        color = "#5C4033",
+        opacity = .7,
         group = "Piers"
       ) %>% # Add circle markers for fishing pier 
 
@@ -196,13 +204,30 @@ dumpsite_area <- data.frame(
           };
           
           resetButton.addTo(map);
-        }
+        
+        
+        // Add event listener for map click
+        map.on('click', function(e) {
+          // Pass the clicked latitude and longitude back to Shiny
+          Shiny.setInputValue('clicked_lat', e.latlng.lat);
+          Shiny.setInputValue('clicked_lng', e.latlng.lng);
+          
+          // Remove existing markers
+          map.eachLayer(function (layer) {
+            if (layer instanceof L.Marker) {
+              map.removeLayer(layer);
+            }
+          });
+          
+          // Add a new marker at the clicked location
+          var marker = L.marker(e.latlng).addTo(map);
+        });
+      }
       ") %>% 
 
       setView(lng = -118.377620, lat = 33.726973, zoom = 9) %>% # Set initial view
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% # Add mini map
-      addMarkers(lat = 33.726973,lng = -118.377620,
-                 options = markerOptions(draggable = TRUE)) %>% # Add draggable marker
+      addMarkers(lat = 33.726973,lng = -118.377620,) %>% # Add marker
       addCircleMarkers(lng = -118.48, 
                        lat = 33.55, 
                        color = "red",
@@ -210,13 +235,13 @@ dumpsite_area <- data.frame(
   
                        })
   
-  ### Observe Marker Drag Event ###--------------
+  ### Observe Marker Click Event ###--------------
   
-  observeEvent(input$locationMap_marker_dragend, {
-    # Update current_markers latitude and longitude when marker is dragged
-    current_markers$lat <- input$locationMap_marker_dragend$lat
-    current_markers$long <- input$locationMap_marker_dragend$lng
-  })  
+observeEvent(input$clicked_lat, {
+  # Update current_markers latitude and longitude when marker is clicked
+  current_markers$lat <- input$clicked_lat
+  current_markers$long <- input$clicked_lng
+})  
   
   ### Update Selectize Input Choices ###---------
   
@@ -330,7 +355,7 @@ dumpsite_area <- data.frame(
     
     ###------------The Output----------------###
     
-    if (meters > 500) {
+    if (meters > 0) {
       # If location is invalid (distance > 500 meters), display an error message
       output$serving_size <- renderText({ NULL })
       output$prediction <- renderText({ NULL })

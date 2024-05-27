@@ -85,7 +85,43 @@ fish_clean <- read_csv("data/fish_clean.csv")
 areas <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>% 
   left_join(fish_data, join_by(Name == CompositeStationArea))
 
-# Data cleaning and wrangling 
+fish_zones <- readRDS("data/pelagic_nearshore_fish_zones.rds")
+
+fish_zones_sf <- st_as_sf(fish_zones, wkt = "geometry", crs = 4326) %>%
+  mutate(Name = ifelse(grepl("^[0-9]+$", Name), "na", Name))
+
+
+
+## Remove Overlapping polygon
+if (!inherits(fish_zones_sf, "sf")) {
+  fish_zones_sf <- st_as_sf(fish_zones_sf)
+}
+
+if (is.null(st_geometry(fish_zones_sf))) {
+  stop("No geometry column found in the data.")
+}
+
+# Create a function to remove overlapping areas
+remove_overlaps <- function(sf_object) {
+  # Calculate the union of all geometries to find overlapping regions
+  non_overlapping <- st_make_valid(sf_object) %>%
+    st_union() %>%
+    st_collection_extract("POLYGON") # Extracting polygons in case of MultiPolygon results
+  
+  return(non_overlapping)
+}
+
+# Apply the function to remove overlaps
+non_overlapping_zones <- remove_overlaps(fish_zones_sf)
+
+# Create an sf object from the non-overlapping zones
+non_overlapping_sf <- st_sf(data = data.frame(id = seq(length(non_overlapping_zones))), 
+                            geometry = non_overlapping_zones)
+
+
+
+
+## Data cleaning and wrangling 
 fish_data_clean <- na.omit(fish_data) # remove NA's
 
 fish_coord <- st_as_sf(fish_data_clean, coords = c(2,3)) # convert to sf object
