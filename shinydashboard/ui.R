@@ -85,21 +85,22 @@ body <-dashboardBody(
                      box(width = 6,
                          height = "168px",
                          tags$style(HTML(".selectize-control.single .selectize-input {
-                                        font-size: 16px; 
-                                      }")),
-                         selectizeInput(inputId = "species", 
-                                        label = tags$span("Select species:", style = "font-size: 16px;"),
-                                        choices = str_to_title(fish_lh$CompositeCommonName),
-                                        options = list(
-                                          placeholder = 'Please select a species',
-                                          onInitialize = I('function() { this.setValue(""); }')
-                                        )
-                         ),
-                         
-                         #checkboxInput(inputId = "use_location", "Use your current location?"),
-                         actionButton("predict_button", "Predict!", class = "btn-primary"),
-                         span(textOutput("validation_result"), style = "color:red")
+                     font-size: 16px; 
+                   }")),
+                   selectizeInput(inputId = "species", 
+                                  label = tags$span("Select species:", style = "font-size: 16px;"),
+                                  choices = sort(str_to_title(fish_lh$CompositeCommonName)),
+                                  options = list(
+                                    placeholder = 'Please select a species',
+                                    onInitialize = I('function() { this.setValue(""); }')
+                                  )
+                   ),
+                   
+                   #checkboxInput(inputId = "use_location", "Use your current location?"),
+                   actionButton("predict_button", "Predict!", class = "btn-primary"),
+                   span(textOutput("validation_result"), style = "color:red")
                      ),
+                   
                      
                      
                      
