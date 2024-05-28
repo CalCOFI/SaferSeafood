@@ -175,7 +175,9 @@ fish.clean.fam <- fish_clean %>%
 fish_lh <- read_csv("data/species_common_science.csv")
 
 # Loading Bayesian regression model for prediction
-brm.diet.habitat.year.fam.clean <- readRDS("data/brm_mod.rda")
+# brm.diet.habitat.year.fam.clean <- readRDS("data/brm_mod.rda")
+
+brm_mod <- readRDS("data/brm_species_model.rda")
 
 # Disconnecting from database (assuming dbDisconnect() function exists)
 db_disconnect()

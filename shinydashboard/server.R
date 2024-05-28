@@ -35,7 +35,7 @@ server <- function(input, output, session) {
   }
   
   # Bayesian regression model for prediction
-  model <- brm.diet.habitat.year.fam.clean # Load the Bayesian regression model
+  model <- brm_mod # Load the Bayesian regression model
   
   calculateDDT <- function(lat, long){
     # Function to calculate DDT value based on latitude and longitude
@@ -71,7 +71,6 @@ server <- function(input, output, session) {
     return(24)  # Placeholder constant value
   }
   
-  # Prediction function using the Bayesian model
   predict_DDT <- function(species, lat, long) {
     # Function to predict DDT value using the Bayesian model
     
@@ -99,7 +98,7 @@ server <- function(input, output, session) {
       trophic_category = input_species$trophic_category, # Trophic category of the species
       feeding_position = input_species$feeding_position, # Feeding position of the species
       Year = Year_value, # Year value
-      Family = input_species$Family # Family of the species
+      CompositeCommonName = input_species$CompositeCommonName # Family of the species
     )
     
     # Check if all necessary data is available
@@ -108,12 +107,102 @@ server <- function(input, output, session) {
       return(NA)
     }
     
-    prediction <- predict(model, newdata = new_data, re.form = NA) # Predict using the Bayesian model
+    prediction <- as.data.frame(fitted(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
     estimate <- prediction[1]
     estimate_trans <- exp(estimate) - 1 # Transform the estimate
     
     return(estimate_trans)
   }
+  
+  
+  
+  # Prediction function using the Bayesian model
+  predict_DDT1 <- function(species, lat, long) {
+    # Function to predict DDT value using the Bayesian model
+    
+    # Determine predictor values based on input
+    
+    # add in the current markers for DDT
+    TotalDDT_sed_value = calculateDDT(lat = current_markers$lat, 
+                                      long = current_markers$long)  
+    Year_value = getYear()  # function or logic
+    
+    species_name <- tolower(input$species) # Convert species name to lowercase
+    
+    # Filter the fish life history dataframe for the species provided as argument
+    input_species <- fish_lh %>% 
+      filter(CompositeCommonName %in% species_name)
+    
+    # Check if the filtered data frame is empty and handle appropriately
+    if (nrow(input_species) == 0) {
+      # Change depending on what we want to output
+      return(NA)
+    }
+    
+    new_data <- data.frame(
+      TotalDDT.sed.trans = TotalDDT_sed_value, # Transformed DDT value
+      trophic_category = input_species$trophic_category, # Trophic category of the species
+      feeding_position = input_species$feeding_position, # Feeding position of the species
+      Year = Year_value, # Year value
+      CompositeCommonName = input_species$CompositeCommonName # Family of the species
+    )
+    
+    # Check if all necessary data is available
+    if (anyNA(new_data)) {
+      # Change depending on what we want to output
+      return(NA)
+    }
+    
+    prediction <- as.data.frame(fitted(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
+    estimate <- prediction[3]
+    estimate_trans1 <- exp(estimate) - 1 # Transform the estimate
+    
+    return(estimate_trans1)
+  }
+  
+  predict_DDT2 <- function(species, lat, long) {
+    # Function to predict DDT value using the Bayesian model
+    
+    # Determine predictor values based on input
+    
+    # add in the current markers for DDT
+    TotalDDT_sed_value = calculateDDT(lat = current_markers$lat, 
+                                      long = current_markers$long)  
+    Year_value = getYear()  # function or logic
+    
+    species_name <- tolower(input$species) # Convert species name to lowercase
+    
+    # Filter the fish life history dataframe for the species provided as argument
+    input_species <- fish_lh %>% 
+      filter(CompositeCommonName %in% species_name)
+    
+    # Check if the filtered data frame is empty and handle appropriately
+    if (nrow(input_species) == 0) {
+      # Change depending on what we want to output
+      return(NA)
+    }
+    
+    new_data <- data.frame(
+      TotalDDT.sed.trans = TotalDDT_sed_value, # Transformed DDT value
+      trophic_category = input_species$trophic_category, # Trophic category of the species
+      feeding_position = input_species$feeding_position, # Feeding position of the species
+      Year = Year_value, # Year value
+      CompositeCommonName = input_species$CompositeCommonName # Family of the species
+    )
+    
+    # Check if all necessary data is available
+    if (anyNA(new_data)) {
+      # Change depending on what we want to output
+      return(NA)
+    }
+    
+    prediction <- as.data.frame(fitted(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
+    estimate <- prediction[4]
+    estimate_trans2 <- exp(estimate) - 1 # Transform the estimate
+    
+    return(estimate_trans2)
+  }
+  
   
   # Create map layer manually for pre-existing dump sites based on lat and long coordinates
   dumpsite_area <- data.frame(
@@ -278,6 +367,9 @@ server <- function(input, output, session) {
     
     # Calculate prediction and serving size
     prediction <- predict_DDT(species, latitude, longitude) # Call the prediction function
+    prediction1 <- predict_DDT1(species, latitude, longitude) # Call the prediction2 function
+    prediction2 <- predict_DDT2(species, latitude, longitude) # Call the prediction3 function
+    
     assignment_of_serving <- data.frame(pred = prediction) %>% 
       mutate(rec = ifelse(prediction <= 21,
                           8,
@@ -412,7 +504,7 @@ server <- function(input, output, session) {
         output$prediction <- renderText({ NULL })
         output$fish_error <- renderText({ NULL })
         output$prediction <- renderText({
-          paste0("There are ", round(prediction, 2), "ng of DDT per gram of ", species_name_advisory,".")
+          paste0("There are ", round(prediction1, 2), " - ", round(prediction2, 2),"ng of DDT per gram of ", species_name_advisory,".")
         })
         output$fish_image <- renderImage({
           if (!file.exists(image_path2)) {
