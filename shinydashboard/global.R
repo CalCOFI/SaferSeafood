@@ -1,6 +1,7 @@
 # global.R
 
-# LOAD LIBRARIES ----
+ ## LOAD LIBRARIES ----
+ 
 # Suppressing package startup messages to keep the console clean
 suppressPackageStartupMessages({
   library(shiny)
@@ -34,7 +35,10 @@ suppressPackageStartupMessages({
 # Enabling Reactlog for debugging
 reactlog_enable()
 
-# LOAD SPATIAL DATA ----
+
+
+ ## LOAD SPATIAL DATA ----
+
 # Loading spatial data for coastal health advisories and other geographic features
 
 # Ventura harbor advisory polygons
@@ -74,7 +78,10 @@ channel_islands <- channel_islands[-1, , drop = FALSE]
 advisory_areas <- rbind(ventura, smbeach, sbpier) %>% 
   dplyr::select(Name, geometry)
 
-# LOAD AND PROCESS DATA ----
+
+
+ ## LOAD AND PROCESS DATA ----
+
 # Reading in fish data and associated geographic zones
 
 # Fish data
@@ -113,7 +120,10 @@ non_overlapping_zones <- remove_overlaps(fish_zones_sf)
 non_overlapping_sf <- st_sf(data = data.frame(id = seq(length(non_overlapping_zones))), 
                             geometry = non_overlapping_zones)
 
-# DATA CLEANING AND WRANGLING ----
+
+
+ ## DATA CLEANING AND WRANGLING ----
+
 # Cleaning and preparing data for analysis
 
 # Removing NA values from fish data
