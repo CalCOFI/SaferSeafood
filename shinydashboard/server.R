@@ -8,7 +8,7 @@ server <- function(input, output, session) {
   
   ### Utility Functions ###------------
   
-  #advisory function 
+  # Advisory function 
   get_advisory <- function(lat, long) {
     # Function to get the advisory area based on latitude and longitude
     
@@ -124,65 +124,68 @@ dumpsite_area <- data.frame(
 
 
   ### Leaflet Map Rendering ###------------------
-  
-  output$locationMap <- renderLeaflet({
-    # Code for rendering the Leaflet map
+
+output$locationMap <- renderLeaflet({
+  # Initialize the Leaflet map
+  leaflet() %>%
+    # Add base map tiles from Esri NatGeo World Map
+    addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
     
-    leaflet() %>%
-      # add titles
-      addProviderTiles(providers$Esri.NatGeoWorldMap) %>% # Add map tiles
-
-      addPolygons(data = non_overlapping_sf, 
-                  color = "blue", weight = 3, smoothFactor = 1, opacity = .8, fillOpacity = 0.2, fillColor = "orange", dashArray = "3, 8") %>%
-      
-      
-      addPolygons(data = shelf, color = "darkblue", 
-                  popup = "Palos Verdes Superfund Site",
-                  popupOptions = popupOptions(maxWidth ="100%", closeOnClick = TRUE)) %>% # Add polygon for palos verde shelf with advisories
-      
-      
-      ## Advisory Border Code:
-      
-      # addPolygons(data= ventura, color = "white",weight = 3,smoothFactor = 1,
-      #             opacity = 1, fillOpacity = 0.25,fillColor = "transparent", dashArray = "5, 5") %>% # Add polygon for Ventura with advisories
-      # 
-      # addPolygons(data= sbpier,color = "white",weight = 3,smoothFactor = 1,
-      #             opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-      #             dashArray = "5, 5") %>% # Add polygons for Santa Barbara Pier with advisories
-      # 
-      # addPolygons(data= smbeach,color = "white",weight = 3,smoothFactor = 1,
-      #             opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-      #             dashArray = "5, 5") %>%  # Add polygons for Santa Monica Beach with advisories
-      # 
-      # addPolygons(data = channel_islands, color = "white",weight = 3,smoothFactor = 1,
-      #             opacity = 1, fillOpacity = 0.25,fillColor = "transparent",
-      #             dashArray = "5, 5") %>% # Add polygons for Channel Islands 
-
-      addCircleMarkers(data = dumpsite_area,
-                 ~lng, ~lat,
-                 label = ~label,
-                 group = "DDT Dumpsites") %>% # Add circle markers of existing dumpsites
-      
-      addCircleMarkers(
-        data = piers,
-        lng = ~st_coordinates(piers)[,1],
-        lat = ~st_coordinates(piers)[,2],
-        popup = ~paste("Name:", Name, "<br>", "Description:", Description),
-        radius = 7,
-        color = "#5C4033",
-        opacity = .7,
-        group = "Piers"
-      ) %>% # Add circle markers for fishing pier 
-
-
-      addLayersControl(
-        overlayGroups = c("DDT Dumpsites", "Piers"),
-        options = layersControlOptions(collapsed = FALSE)) %>%
-        hideGroup("DDT Dumpsites") %>%
-        hideGroup("Piers") %>% # Add circle markers to map as layers 
-
-      # Add setting so when dashbaord is rendered map reverts to study area
-      htmlwidgets::onRender("
+    # Add polygons for non-overlapping zones with specified styles
+    addPolygons(data = non_overlapping_sf, 
+                color = "blue", weight = 3, smoothFactor = 1, opacity = .8, fillOpacity = 0.2, fillColor = "orange", dashArray = "3, 8") %>%
+    
+    # Add polygon for Palos Verdes Shelf with a popup
+    addPolygons(data = shelf, color = "darkblue", 
+                popup = "Palos Verdes Superfund Site",
+                popupOptions = popupOptions(maxWidth = "100%", closeOnClick = TRUE)) %>%
+    
+  ## Uncommented code for advisory borders (if needed in future) ##
+    
+    # Add polygons for Ventura with advisories
+    # addPolygons(data= ventura, color = "white", weight = 3, smoothFactor = 1,
+    #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
+    
+    # Add polygons for Santa Barbara Pier with advisories
+    # addPolygons(data= sbpier, color = "white", weight = 3, smoothFactor = 1,
+    #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
+    
+    # Add polygons for Santa Monica Beach with advisories
+  # addPolygons(data= smbeach, color = "white", weight = 3, smoothFactor = 1,
+  #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
+  
+  # Add polygons for Channel Islands
+  # addPolygons(data = channel_islands, color = "white", weight = 3, smoothFactor = 1,
+  #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
+  
+  # Add circle markers for existing DDT dumpsites
+  addCircleMarkers(data = dumpsite_area, 
+                   ~lng, ~lat, 
+                   label = ~label, 
+                   group = "DDT Dumpsites") %>%
+    
+    # Add circle markers for fishing piers with popup information
+    addCircleMarkers(
+      data = piers,
+      lng = ~st_coordinates(piers)[, 1],
+      lat = ~st_coordinates(piers)[, 2],
+      popup = ~paste("Name:", Name, "<br>", "Description:", Description),
+      radius = 7,
+      color = "#5C4033",
+      opacity = .7,
+      group = "Piers"
+    ) %>%
+    
+    # Add layer control for toggling visibility of DDT dumpsites and piers
+    addLayersControl(
+      overlayGroups = c("DDT Dumpsites", "Piers"),
+      options = layersControlOptions(collapsed = FALSE)
+    ) %>%
+    hideGroup("DDT Dumpsites") %>%
+    hideGroup("Piers") %>%
+    
+    # Add custom control button for resetting map zoom and view
+    htmlwidgets::onRender("
         function(el, x) {
           var map = this;
 
@@ -197,7 +200,7 @@ dumpsite_area <- data.frame(
             div.style.lineHeight = '30px';
             div.style.textAlign = 'center';
             div.style.cursor = 'pointer';
-            div.onclick = function(){
+            div.onclick = function() {
               map.setView([33.726973, -118.377620], 8);
             };
             return div;
@@ -205,35 +208,40 @@ dumpsite_area <- data.frame(
           
           resetButton.addTo(map);
         
-        
-        // Add event listener for map click
-        map.on('click', function(e) {
-          // Pass the clicked latitude and longitude back to Shiny
-          Shiny.setInputValue('clicked_lat', e.latlng.lat);
-          Shiny.setInputValue('clicked_lng', e.latlng.lng);
-          
-          // Remove existing markers
-          map.eachLayer(function (layer) {
-            if (layer instanceof L.Marker) {
-              map.removeLayer(layer);
-            }
+          // Add event listener for map click
+          map.on('click', function(e) {
+            // Pass the clicked latitude and longitude back to Shiny
+            Shiny.setInputValue('clicked_lat', e.latlng.lat);
+            Shiny.setInputValue('clicked_lng', e.latlng.lng);
+            
+            // Remove existing markers
+            map.eachLayer(function (layer) {
+              if (layer instanceof L.Marker) {
+                map.removeLayer(layer);
+              }
+            });
+            
+            // Add a new marker at the clicked location
+            var marker = L.marker(e.latlng).addTo(map);
           });
-          
-          // Add a new marker at the clicked location
-          var marker = L.marker(e.latlng).addTo(map);
-        });
-      }
-      ") %>% 
-
-      setView(lng = -118.377620, lat = 33.726973, zoom = 8) %>% # Set initial view
-      addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% # Add mini map
-      addMarkers(lat = 33.726973,lng = -118.377620,) %>% # Add marker
-      addCircleMarkers(lng = -118.48, 
-                       lat = 33.55, 
-                       color = "red",
-                       popup = "Barrel field of DDT-laced sludge") # Add circle marker for most recent barrel field 
-  
-                       })
+        }
+      ") %>%
+    
+    # Set initial map view to a specific latitude, longitude, and zoom level
+    setView(lng = -118.377620, lat = 33.726973, zoom = 8) %>%
+    
+    # Add a mini map with toggle display
+    addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
+    
+    # Add marker at a specific location
+    addMarkers(lat = 33.726973, lng = -118.377620) %>%
+    
+    # Add circle marker for the most recent barrel field
+    addCircleMarkers(lng = -118.48, 
+                     lat = 33.55, 
+                     color = "red",
+                     popup = "Barrel field of DDT-laced sludge")
+})
   
   ### Observe Marker Click Event ###--------------
   
@@ -297,45 +305,56 @@ observeEvent(input$clicked_lat, {
     
     serving_size <- as.character(assignment_of_serving[1, 2]) # Get the serving size recommendation
     
-    # make the serving size bar
-    # composite score v2
-    assignment_df <- reactive(assignment_of_serving)
+    # Make the serving size bar
+    # Composite score v2
+    assignment_df <- reactive(assignment_of_serving)  # Reactive expression for assignment data frame
+    
     # Function to create gradient data frame
     create_gradient_df <- function(n = 8) {
       data.frame(
-        x = seq(0, 8, length.out = n),
-        color = colorRampPalette(c("red", "green"))(n)
+        x = seq(0, 8, length.out = n),  # Generate sequence of x values
+        color = colorRampPalette(c("red", "green"))(n)  # Create gradient from red to green
       )
     }
     
-    
     output$servings <- renderPlot({
-      gradient_df <- create_gradient_df()
+      gradient_df <- create_gradient_df()  # Create gradient data frame
       
-      ggplot(assignment_df(), aes(y = as.factor(1))) +  # need to create a dummy y-axis
+      ggplot(assignment_df(), aes(y = as.factor(1))) +  # Create dummy y-axis
         
+        # Add gradient tiles
         geom_tile(data = gradient_df, aes(x = x, y = 1, fill = color), 
                   color = "black",
                   height = 0.75,
                   width = 1.14) +
         scale_fill_identity() +  # Use the fill color directly
-        # plot a red line at the value of the hazard score
+        
+        # Plot a black line at the value of the hazard score
         geom_segment(aes(y = 0.5, yend = 1.5, x = rec, xend = rec),
                      color = "black",
                      linewidth = 1.5) +
-        # label the hazard score
+        
+        # Label the hazard score
         geom_text(aes(x = rec, y = 1, label = label),
                   hjust = -.2, color = "black", size = 8) +
+        
+        # Set x-axis limits
         xlim(0, 8) +
+        
+        # Add plot labels
         labs(y = NULL,
              x = NULL,
              title = "Number of Servings Per Week Based on DDT") +
+        
+        # Customize x-axis labels
         scale_x_continuous(
-          breaks = c(0, 8),  # specify where to place the labels
-          labels = c("Do Not Eat", "Safe")  # specify the labels
+          breaks = c(0, 8),  # Specify where to place the labels
+          labels = c("Do Not Eat", "Safe")  # Specify the labels
         ) +
+        
+        # Apply minimal theme and customize appearance
         theme_minimal() +
-        theme(aspect.ratio = 1/10, # adjust aspect ratio to move the plot title and x-axis labels closer
+        theme(aspect.ratio = 1/10,  # Adjust aspect ratio to move the plot title and x-axis labels closer
               plot.title = element_text(face = "bold", size = 20),
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
