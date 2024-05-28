@@ -198,7 +198,7 @@ dumpsite_area <- data.frame(
             div.style.textAlign = 'center';
             div.style.cursor = 'pointer';
             div.onclick = function(){
-              map.setView([33.726973, -118.377620], 8.5);
+              map.setView([33.726973, -118.377620], 8);
             };
             return div;
           };
@@ -225,7 +225,7 @@ dumpsite_area <- data.frame(
       }
       ") %>% 
 
-      setView(lng = -118.377620, lat = 33.726973, zoom = 9) %>% # Set initial view
+      setView(lng = -118.377620, lat = 33.726973, zoom = 8) %>% # Set initial view
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>% # Add mini map
       addMarkers(lat = 33.726973,lng = -118.377620,) %>% # Add marker
       addCircleMarkers(lng = -118.48, 
@@ -329,7 +329,7 @@ observeEvent(input$clicked_lat, {
         xlim(0, 8) +
         labs(y = NULL,
              x = NULL,
-             title = "Number of Servings Per Week") +
+             title = "Number of Servings Per Week Based on DDT") +
         scale_x_continuous(
           breaks = c(0, 8),  # specify where to place the labels
           labels = c("Do Not Eat", "Safe")  # specify the labels
@@ -363,7 +363,7 @@ observeEvent(input$clicked_lat, {
       output$servings <- renderPlot({ NULL })
       output$fish_image <- renderImage({ NULL })
       output$validation_result <- renderText({
-        "Invalid location selected. Location outside of area of study, please select a different location and try again."
+        "We’re sorry, but we are not able to make predictions for that location. We can only make valid predictions for the area outlined on the map."
       })
       
     } else {
@@ -379,7 +379,7 @@ observeEvent(input$clicked_lat, {
         output$advisory <- renderText({ NULL })
         output$fish_image <- renderImage({ NULL })
         output$fish_error <- renderText({
-          "Prediction not available. Please select a fish species."
+          "Please select a fish species before pressing the Predict button."
         })
         # Clear any previous error messages
         output$serving_size <- renderText({ NULL })
@@ -424,7 +424,7 @@ observeEvent(input$clicked_lat, {
         } else {  # If no image paths are found
           # If species not found, display "no advisories found"
           output$advisory <- renderText({  # Render the advisory message
-            HTML("No other advisories found.")
+            HTML("No other advisories found for your species at your location.")
           })
         }
         
