@@ -115,77 +115,77 @@ server <- function(input, output, session) {
     return(estimate_trans)
   }
   
-# Create map layer manually for pre-existing dump sites based on lat and long coordinates
-dumpsite_area <- data.frame(
+  # Create map layer manually for pre-existing dump sites based on lat and long coordinates
+  dumpsite_area <- data.frame(
     lat = c(33.6, 33.6, 33.5, 33.4, 33.3, 32.8, 32.7, 32.6, 32.5, 33.6, 33.3, 33, 32.7, 33.55),
     lng = c(-118.6,-118.5,-118.4,-118.1, -117.8, -117.6, -117.7, -117.3, -117.2, -119.5, -118.8, -118.9, -119.1, -118.48),
     label = c("#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10", "#11", "#12", "#13", "Most recent")
   )
-
-
+  
+  
   ### Leaflet Map Rendering ###------------------
-
-output$locationMap <- renderLeaflet({
-  # Initialize the Leaflet map
-  leaflet() %>%
-    # Add base map tiles from Esri NatGeo World Map
-    addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
-    
-    # Add polygons for non-overlapping zones with specified styles
-    addPolygons(data = non_overlapping_sf, 
-                color = "blue", weight = 3, smoothFactor = 1, opacity = .8, fillOpacity = 0.2, fillColor = "orange", dashArray = "3, 8") %>%
-    
-    # Add polygon for Palos Verdes Shelf with a popup
-    addPolygons(data = shelf, color = "darkblue", 
-                popup = "Palos Verdes Superfund Site",
-                popupOptions = popupOptions(maxWidth = "100%", closeOnClick = TRUE)) %>%
-    
-  ## Uncommented code for advisory borders (if needed in future) ##
-    
-    # Add polygons for Ventura with advisories
-    # addPolygons(data= ventura, color = "white", weight = 3, smoothFactor = 1,
-    #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
-    
-    # Add polygons for Santa Barbara Pier with advisories
-    # addPolygons(data= sbpier, color = "white", weight = 3, smoothFactor = 1,
-    #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
-    
+  
+  output$locationMap <- renderLeaflet({
+    # Initialize the Leaflet map
+    leaflet() %>%
+      # Add base map tiles from Esri NatGeo World Map
+      addProviderTiles(providers$Esri.NatGeoWorldMap) %>%
+      
+      # Add polygons for non-overlapping zones with specified styles
+      addPolygons(data = non_overlapping_sf, 
+                  color = "blue", weight = 3, smoothFactor = 1, opacity = .8, fillOpacity = 0.2, fillColor = "orange", dashArray = "3, 8") %>%
+      
+      # Add polygon for Palos Verdes Shelf with a popup
+      addPolygons(data = shelf, color = "darkblue", 
+                  popup = "Palos Verdes Superfund Site",
+                  popupOptions = popupOptions(maxWidth = "100%", closeOnClick = TRUE)) %>%
+      
+      ## Uncommented code for advisory borders (if needed in future) ##
+      
+      # Add polygons for Ventura with advisories
+      # addPolygons(data= ventura, color = "white", weight = 3, smoothFactor = 1,
+      #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
+      
+      # Add polygons for Santa Barbara Pier with advisories
+      # addPolygons(data= sbpier, color = "white", weight = 3, smoothFactor = 1,
+      #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
+      
     # Add polygons for Santa Monica Beach with advisories
-  # addPolygons(data= smbeach, color = "white", weight = 3, smoothFactor = 1,
-  #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
-  
-  # Add polygons for Channel Islands
-  # addPolygons(data = channel_islands, color = "white", weight = 3, smoothFactor = 1,
-  #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
-  
-  # Add circle markers for existing DDT dumpsites
-  addCircleMarkers(data = dumpsite_area, 
-                   ~lng, ~lat, 
-                   label = ~label, 
-                   group = "DDT Dumpsites") %>%
+    # addPolygons(data= smbeach, color = "white", weight = 3, smoothFactor = 1,
+    #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
     
-    # Add circle markers for fishing piers with popup information
-    addCircleMarkers(
-      data = piers,
-      lng = ~st_coordinates(piers)[, 1],
-      lat = ~st_coordinates(piers)[, 2],
-      popup = ~paste("Name:", Name, "<br>", "Description:", Description),
-      radius = 7,
-      color = "#5C4033",
-      opacity = .7,
-      group = "Piers"
-    ) %>%
+    # Add polygons for Channel Islands
+    # addPolygons(data = channel_islands, color = "white", weight = 3, smoothFactor = 1,
+    #             opacity = 1, fillOpacity = 0.25, fillColor = "transparent", dashArray = "5, 5") %>%
     
-    # Add layer control for toggling visibility of DDT dumpsites and piers
-    addLayersControl(
-      overlayGroups = c("DDT Dumpsites", "Piers"),
-      options = layersControlOptions(collapsed = FALSE)
-    ) %>%
-    hideGroup("DDT Dumpsites") %>%
-    hideGroup("Piers") %>%
-    
-    # Add custom control button for resetting map zoom and view
-    htmlwidgets::onRender("
+    # Add circle markers for existing DDT dumpsites
+    addCircleMarkers(data = dumpsite_area, 
+                     ~lng, ~lat, 
+                     label = ~label, 
+                     group = "DDT Dumpsites") %>%
+      
+      # Add circle markers for fishing piers with popup information
+      addCircleMarkers(
+        data = piers,
+        lng = ~st_coordinates(piers)[, 1],
+        lat = ~st_coordinates(piers)[, 2],
+        popup = ~paste("Name:", Name, "<br>", "Description:", Description),
+        radius = 7,
+        color = "#5C4033",
+        opacity = .7,
+        group = "Piers"
+      ) %>%
+      
+      # Add layer control for toggling visibility of DDT dumpsites and piers
+      addLayersControl(
+        overlayGroups = c("DDT Dumpsites", "Piers"),
+        options = layersControlOptions(collapsed = FALSE)
+      ) %>%
+      hideGroup("DDT Dumpsites") %>%
+      hideGroup("Piers") %>%
+      
+      # Add custom control button for resetting map zoom and view
+      htmlwidgets::onRender("
         function(el, x) {
           var map = this;
 
@@ -226,30 +226,30 @@ output$locationMap <- renderLeaflet({
           });
         }
       ") %>%
-    
-    # Set initial map view to a specific latitude, longitude, and zoom level
-    setView(lng = -118.377620, lat = 33.726973, zoom = 8) %>%
-    
-    # Add a mini map with toggle display
-    addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
-    
-    # Add marker at a specific location
-    addMarkers(lat = 33.726973, lng = -118.377620) %>%
-    
-    # Add circle marker for the most recent barrel field
-    addCircleMarkers(lng = -118.48, 
-                     lat = 33.55, 
-                     color = "red",
-                     popup = "Barrel field of DDT-laced sludge")
-})
+      
+      # Set initial map view to a specific latitude, longitude, and zoom level
+      setView(lng = -118.377620, lat = 33.726973, zoom = 8) %>%
+      
+      # Add a mini map with toggle display
+      addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
+      
+      # Add marker at a specific location
+      addMarkers(lat = 33.726973, lng = -118.377620) %>%
+      
+      # Add circle marker for the most recent barrel field
+      addCircleMarkers(lng = -118.48, 
+                       lat = 33.55, 
+                       color = "red",
+                       popup = "Barrel field of DDT-laced sludge")
+  })
   
   ### Observe Marker Click Event ###--------------
   
-observeEvent(input$clicked_lat, {
-  # Update current_markers latitude and longitude when marker is clicked
-  current_markers$lat <- input$clicked_lat
-  current_markers$long <- input$clicked_lng
-})  
+  observeEvent(input$clicked_lat, {
+    # Update current_markers latitude and longitude when marker is clicked
+    current_markers$lat <- input$clicked_lat
+    current_markers$long <- input$clicked_lng
+  })  
   
   ### Update Selectize Input Choices ###---------
   
@@ -301,7 +301,7 @@ observeEvent(input$clicked_lat, {
              label = ifelse(rec == 8,
                             "7+",
                             rec))
-  
+    
     
     serving_size <- as.character(assignment_of_serving[1, 2]) # Get the serving size recommendation
     
@@ -450,7 +450,7 @@ observeEvent(input$clicked_lat, {
       }
     }
   })
-  
+  s
   ### Observe Info Message Show Event ###--------
   observeEvent(input$show_info_message, {
     showNotification( # Show a notification when the info message is clicked

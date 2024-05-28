@@ -120,7 +120,12 @@ non_overlapping_zones <- remove_overlaps(fish_zones_sf)
 non_overlapping_sf <- st_sf(data = data.frame(id = seq(length(non_overlapping_zones))), 
                             geometry = non_overlapping_zones)
 
-
+# fishIcon <- makeIcon(
+#   iconUrl = "/Users/katebecker/Documents/Bren/Capstone/shiny-saferseafood/shinydashboard/www/fishIcon.png",
+#   iconWidth = 38, iconHeight = 40,
+#   iconAnchorX = 22, iconAnchorY = 20
+# )
+# 
 
  ## DATA CLEANING AND WRANGLING ----
 
