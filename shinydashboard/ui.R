@@ -3,9 +3,9 @@ header <- dashboardHeader(
   title = tags$div(
     style = "position: relative; 
     width: 100%; 
-    font-size: 50px;,
+    font-size: 35px;,
     font-family: Tahoma, Geneva, sans-serif;",
-    "SaferSeafood"
+    "Fish DDT Advisory"
   ),
   
   titleWidth = 2000
@@ -55,8 +55,8 @@ body <-dashboardBody(
       tabItem(tabName = "whats_in_my_catch",
               box(
                 width = NULL,
-                title = tagList(strong("DDT Advisories For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
-                HTML("<div style='text-align: center;'><span style='font-size: 18px;'>From catch to consumption, stay informed regarding the levels of contamination in your fish</span></div>"),
+                title = tagList(strong("From catch to consumption, stay informed regarding the levels of contamination in your fish", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
+                HTML("<br>"), 
                 HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This research project was designed for educational purposes. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
                 
               ), 
@@ -65,11 +65,13 @@ body <-dashboardBody(
               fluidRow(
                 column(width = 12,
                        # Add map box with point dragger 
-                       box(title = "Caught a fish off the coast of Southern California? Fill the required fields below to better understand the levels of DDT, Mercurcy, and PCBs that may have accumulated in your seafood", style = "font-size: 16px; font-family: Tahoma, Geneva, sans-serif; ",
+                       box(
                            width = NULL,
                            div(
                              class = "map-container",
-                             tags$b("Step 1: Drag the marker to the location where your fish was caught within the study area (outlined in white)", style = "color:#3b9a58; font-size: 20px;"),
+                             HTML("<div style='text-align: center;'><span style='font-size: 20px;'>Caught a fish off the coast of Southern California? Fill in the required fields below to understand the DDT levels in your seafood and receive serving size recommendations based on DDT, Mercury, and PCB advisories.</span></div>"),
+                             HTML("<br><br>"), 
+                             tags$b("Step 1: Click the location on the map where your fish was caught within the study area (outlined in blue)", style = "color:#3b9a58; font-size: 20px;"),
                              HTML("<br><br>"), 
                              HTML("<div style='text-align: center;'><span style='font-size: 16px;'>Click through map layers to gather more information</span></div>"),
                              leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
