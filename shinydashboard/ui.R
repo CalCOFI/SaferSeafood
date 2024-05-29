@@ -3,7 +3,7 @@ header <- dashboardHeader(
   title = tags$div(
     style = "position: relative; 
     width: 100%; 
-    font-size: 35px;,
+    font-size: 45px;,
     font-family: Tahoma, Geneva, sans-serif;",
     "SaferSeafood"
   ),
@@ -55,7 +55,7 @@ body <-dashboardBody(
       tabItem(tabName = "whats_in_my_catch",
               box(
                 width = NULL,
-                title = tagList(strong("From catch to consumption, stay informed regarding the levels of contamination in your fish", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
+                title = tagList(strong("DDT Advisory For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
                 HTML("<br>"), 
                 HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This research project was designed for educational purposes. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
                 
@@ -71,7 +71,14 @@ body <-dashboardBody(
                              class = "map-container",
                              HTML("<div style='text-align: center;'><span style='font-size: 20px;'>Caught a fish off the coast of Southern California? Fill in the required fields below to understand the DDT levels in your seafood and receive serving size recommendations based on DDT, Mercury, and PCB advisories.</span></div>"),
                              HTML("<br><br>"), 
-                             tags$b("Step 1: Click the location on the map where your fish was caught within the study area (outlined in blue)", style = "color:#3b9a58; font-size: 20px;"),
+                             tags$b("Step 1: Click the location on the map where your fish was caught within the study area (outlined in blue)", 
+                                    style = "color: #f3ac08; font-size: 20px; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;")
+                             
+                             HTML("<br><br>"), 
+                             
+                             tags$div(tags$b("Step 2: Please select your catch species"), 
+                                      style = "font-size: 20px; color:#3b9a58;"),
+                             
                              HTML("<br><br>"), 
                              HTML("<div style='text-align: center;'><span style='font-size: 16px;'>Click through map layers to gather more information</span></div>"),
                              leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
@@ -80,8 +87,6 @@ body <-dashboardBody(
                        ),
                        column(width = 12,
                               box(width = 12,
-                                  tags$div(tags$b("Step 2: Please select your catch species"), 
-                                           style = "font-size: 20px; color:#3b9a58;"),
                                   
                                   HTML("<div><span style='color: black; font-size: 14px;'><b>Need help identifying your catch? Check out this <a href='https://marinespecies.wildlife.ca.gov'>resource!</a></b></span></div>"), 
                                   
