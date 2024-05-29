@@ -282,7 +282,13 @@ body <-dashboardBody(
                              
                              box(width = NULL,
                                  title = tagList(strong("The Data")),
-                                 ("All data employed in the up-to-date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps Institute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian McGill at the Scripps Institute of Oceanography and the data used for this project was publicly available to us on Dr. Lillian McGill’s GitHub repository.  The data includes four comprehensive databases:  Sediment Data, Sediment Raster’s, DDT Monitoring Data, and Species Life History Characteristics. All data points were collected in the coastal waters of the Southern California Bight, a stretch of coastline that extends more than 600 km from the United States – Mexico border northwards to Point Conception. The metadata can be found in the totalDDX_fish_metadata.csv and the totalDDX_fish_southernCA.csv. All of the data used for this project has been collected from public data files, and all code and future data/modeling iswill be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. A more detailed description of the data used in this project can be found in the SaferSeafood <a>href='https://github.com/SaferSeafood/Shiny-Dashboard'>GitHub</a>.")
+                                 HTML("All data employed in the up-to-date version of this dashboard was collected by the Southern California Bight Regional Monitoring Program and provided by Scripps Institute of Oceanography as well as California Cooperative Oceanic Fisheries Investigations (CalCOFI). All rasters were processed by Dr. Lillian McGill at the Scripps Institute of Oceanography and the data used for this project was publicly available to us on Dr. Lillian McGill’s GitHub repository.  The data includes four comprehensive databases:  Sediment Data, Sediment Raster’s, DDT Monitoring Data, and Species Life History Characteristics. All data points were collected in the coastal waters of the Southern California Bight, a stretch of coastline that extends more than 600 km from the United States – Mexico border northwards to Point Conception. The metadata can be found in the tfotalDDX_fish_metadata.csv and the totalDDX_fish_southernCA.csv. All of the data used for this project has been collected from public data files, and all code and future data/modeling iswill be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. A more detailed description of the data used in this project can be found in the SaferSeafood"),
+                                 HTML("<br><br>"), 
+                                 HTML("<br><br>"), 
+                                 HTML("<div style='text-align: center;'><span style='color: black; font-size: 14px;'>A more detailed description of the data used in this project can be found in the SaferSeafood <a href='https://github.com/SaferSeafood/Shiny-Dashboard'>Github!</a></span></div>")
+
+                                 # 
+                                 # HTML("<div style='text-align: center;'><span style='font-size: 18px;'>From catch to consumption, stay informed regarding the levels of contamination in your fish</span></div>"),
                                  
                              ), #END data source box
                              
@@ -290,8 +296,7 @@ body <-dashboardBody(
                                  
                                  title = tagList(strong("Citation")),
                                  "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. "
-                                 
-                                 
+                                
                              ), #END data source box 
                              
                              #disclaimer box ----
