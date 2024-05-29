@@ -430,7 +430,7 @@ server <- function(input, output, session) {
         
         # Label the hazard score
         geom_text(aes(x = rec, y = 1, label = label),
-                  hjust = -1.1,
+                  hjust = -0.1,
                   color = "black", size = 8) +
         
         # Set x-axis limits
@@ -444,7 +444,7 @@ server <- function(input, output, session) {
         # Customize x-axis labels
         scale_x_continuous(
           breaks = c(0, 8),  # Specify where to place the labels
-          labels = c("Do Not Eat", "Safe")  # Specify the labels
+          labels = c("Unsafe", "Safe")  # Specify the labels
         ) +
         
         # Apply minimal theme and customize appearance
