@@ -72,7 +72,7 @@ body <-dashboardBody(
                              HTML("<div style='text-align: center;'><span style='font-size: 20px;'>Caught a fish off the coast of Southern California? Fill in the required fields below to understand the DDT levels in your seafood and receive serving size recommendations based on DDT, Mercury, and PCB advisories.</span></div>"),
                              HTML("<br><br>"), 
                              tags$b("Step 1: Click the location on the map where your fish was caught within the study area (outlined in blue)", 
-                                    style = "color: #f3ac08; font-size: 20px; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;")
+                                    style = "color: #FFDB00; font-size: 20px; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"),
                              
                              HTML("<br><br>"), 
                              
