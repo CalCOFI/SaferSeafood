@@ -297,22 +297,32 @@ server <- function(input, output, session) {
           
           resetButton.addTo(map);
         
-          // Add event listener for map click
-          map.on('click', function(e) {
-            // Pass the clicked latitude and longitude back to Shiny
-            Shiny.setInputValue('clicked_lat', e.latlng.lat);
-            Shiny.setInputValue('clicked_lng', e.latlng.lng);
-            
-            // Remove existing markers
-            map.eachLayer(function (layer) {
-              if (layer instanceof L.Marker) {
-                map.removeLayer(layer);
-              }
-            });
-            
-            // Add a new marker at the clicked location
-            var marker = L.marker(e.latlng).addTo(map);
-          });
+// Add event listener for map click
+map.on('click', function(e) {
+  // Pass the clicked latitude and longitude back to Shiny
+  Shiny.setInputValue('clicked_lat', e.latlng.lat);
+  Shiny.setInputValue('clicked_lng', e.latlng.lng);
+  
+  // Remove existing markers
+  map.eachLayer(function (layer) {
+    if (layer instanceof L.Marker) {
+      map.removeLayer(layer);
+    }
+  });
+  
+  // Define a custom icon with the desired color
+  var customIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+    iconSize: [25, 41], // size of the icon
+    iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+    popupAnchor: [1, -34], // point from which the popup should open relative to the iconAnchor
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    shadowSize: [41, 41] // size of the shadow
+  });
+  
+  // Add a new marker at the clicked location with the custom icon
+  var marker = L.marker(e.latlng, { icon: customIcon }).addTo(map);
+});
         }
       ") %>%
       
@@ -323,7 +333,12 @@ server <- function(input, output, session) {
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
       
       # Add marker at a specific location
-      addMarkers(lat = 33.726973, lng = -118.377620) %>%
+      addMarkers(lat = 33.726973, lng = -118.377620,
+                 icon = makeIcon(
+                   iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png", 
+                   iconWidth = 25, iconHeight = 41, 
+                   iconAnchorX = 12, iconAnchorY = 41
+                 )) %>%
       
       # Add circle marker for the most recent barrel field
       addCircleMarkers(lng = -118.48, 
@@ -507,7 +522,7 @@ server <- function(input, output, session) {
         output$prediction <- renderText({ NULL })
         output$fish_error <- renderText({ NULL })
         output$prediction <- renderText({
-          paste0("There are ", round(prediction1, 2), " - ", round(prediction2, 2),"ng of DDT per gram of ", species_name_advisory,".")
+          paste0("The range of predicted DDT concentration is between ", round(prediction1, 2), " to ", round(prediction2, 2),"ng of per gram of ", species_name_advisory,".")
         })
         output$fish_image <- renderImage({
           if (!file.exists(image_path2)) {

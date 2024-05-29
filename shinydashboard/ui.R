@@ -57,6 +57,8 @@ body <-dashboardBody(
                 width = NULL,
                 title = tagList(strong("DDT Advisory For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
                 HTML("<br>"), 
+                HTML("<div style='text-align: center;'><span style='font-size: 20px;'>Caught a fish off the coast of Southern California? Fill in the required fields below to understand the DDT levels in your seafood and receive serving size recommendations based on DDT, Mercury, and PCB advisories.</span></div>"),
+                HTML("<br>"), 
                 HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This research project was designed for educational purposes. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
                 
               ), 
@@ -69,29 +71,18 @@ body <-dashboardBody(
                            width = NULL,
                            div(
                              class = "map-container",
-                             HTML("<div style='text-align: center;'><span style='font-size: 20px;'>Caught a fish off the coast of Southern California? Fill in the required fields below to understand the DDT levels in your seafood and receive serving size recommendations based on DDT, Mercury, and PCB advisories.</span></div>"),
-                             HTML("<br><br>"), 
                              tags$b("Step 1: Click the location on the map where your fish was caught within the study area (outlined in blue)", style = "color:#f2570f; font-size: 20px;"),
-                             HTML("<br><br>"), 
+                             HTML("<br> <br>"), 
                              
-                             tags$div(tags$b("Step 2: Please select your catch species"), 
+                             tags$div(tags$b("Step 2: Please select your catch species in the dropdown below the map"), 
                                       style = "font-size: 20px; color:#f2570f;"),
                              
-                             HTML("<br><br>"), 
+                             HTML("<br>"), 
                              HTML("<div style='text-align: center;'><span style='font-size: 16px;'>Click through map layers to gather more information</span></div>"),
                              leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
                              HTML("<span style='color: black; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span>")
                            )
                        ),
-                       column(width = 12,
-                              box(width = 12,
-                                  
-                                  HTML("<div><span style='color: black; font-size: 14px;'><b>Need help identifying your catch? Check out this <a href='https://marinespecies.wildlife.ca.gov'>resource!</a></b></span></div>"), 
-                                  
-                                  
-                                  HTML("<br><br>"))
-                       
-                        ),
                        
                        box(width = 6,
                            height = "168px",
@@ -99,14 +90,16 @@ body <-dashboardBody(
                      font-size: 16px; 
                    }")),
                    selectizeInput(inputId = "species", 
-                                  label = tags$span("Select species:", style = "font-size: 16px;"),
+                                  label = tags$span("Select Species:", style = "font-size: 16px;"),
                                   choices = sort(str_to_title(fish_lh$CompositeCommonName)),
                                   options = list(
                                     placeholder = 'Please select a species',
                                     onInitialize = I('function() { this.setValue(""); }')
                                   )
                    ),
+                   HTML("<div><span style='color: black; font-size: 14px;'><b>Need help identifying your catch? Check out this <a href='https://marinespecies.wildlife.ca.gov'>resource!</a></b></span></div>"), 
                    
+                   HTML("<br>"), 
                    #checkboxInput(inputId = "use_location", "Use your current location?"),
                    actionButton("predict_button", "Predict!", class = "btn-primary"),
                    span(textOutput("validation_result"), style = "color:red")
