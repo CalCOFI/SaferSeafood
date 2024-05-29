@@ -5,7 +5,7 @@ header <- dashboardHeader(
     width: 100%; 
     font-size: 35px;,
     font-family: Tahoma, Geneva, sans-serif;",
-    "Fish DDT Advisory"
+    "SaferSeafood"
   ),
   
   titleWidth = 2000
