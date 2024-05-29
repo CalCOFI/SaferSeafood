@@ -30,20 +30,20 @@ suppressPackageStartupMessages({
   library(raster)
   library(sp)
   library(brms)
-  install.packages("shiny.i18n")
-  library(shiny.i18n)
+  # install.packages("shiny.i18n")
+  # library(shiny.i18n)
 })
 
 # Enabling Reactlog for debugging
 reactlog_enable()
 
-customIcon <- makeIcon(
-  iconUrl = "https://fontawesome.com/icons/fishing-rod?f=classic&s=thin",  # URL to the marker icon image
-  iconWidth = 38,  # Width of the icon image
-  iconHeight = 95,  # Height of the icon image
-  iconAnchorX = 22,  # X coordinate of the "tip" of the icon (relative to its top left corner)
-  iconAnchorY = 94   # Y coordinate of the "tip" of the icon (relative to its top left corner)
-)
+# customIcon <- makeIcon(
+#   iconUrl = "https://fontawesome.com/icons/fishing-rod?f=classic&s=thin",  # URL to the marker icon image
+#   iconWidth = 38,  # Width of the icon image
+#   iconHeight = 95,  # Height of the icon image
+#   iconAnchorX = 22,  # X coordinate of the "tip" of the icon (relative to its top left corner)
+#   iconAnchorY = 94   # Y coordinate of the "tip" of the icon (relative to its top left corner)
+# )
 
  ## LOAD SPATIAL DATA ----s
 
@@ -77,7 +77,7 @@ shelf <- read_sf("data/polygons/Palos_Shelf.kml", layer = "Palos Verdes Shelf") 
 piers <- read_sf("data/polygons/Piers.kml") %>%
   st_transform(crs = 4326)
 
-# Channel islands polygons
+# Channel islands polygons``
 channel_islands <- sf::st_read("data/polygons/cinms_py2") %>%
   st_transform(crs = 4326)
 channel_islands <- channel_islands[-1, , drop = FALSE]
