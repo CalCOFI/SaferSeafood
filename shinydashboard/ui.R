@@ -69,18 +69,25 @@ body <-dashboardBody(
                            width = NULL,
                            div(
                              class = "map-container",
-                             tags$b("Step 1: Drag the marker to the location where your fish was caught within the study area (outlined in white)", style = "color:#0c3D6E; font-size: 20px;"),
+                             tags$b("Step 1: Drag the marker to the location where your fish was caught within the study area (outlined in white)", style = "color:#3b9a58; font-size: 20px;"),
+                             HTML("<br><br>"), 
+                             HTML("<br><br>"), 
                              HTML("<div style='text-align: center;'><span style='font-size: 16px;'>Click through map layers to gather more information</span></div>"),
                              leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
-                             HTML("<b><span style='color: green; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span></b>")
+                             HTML("<span style='color: black; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span>")
                            )
                        ),
                        column(width = 12,
                               box(width = 12,
                                   tags$div(tags$b("Step 2: Please select your catch species"), 
-                                           style = "font-size: 20px; color:#0c3D6E;"))),
+                                           style = "font-size: 20px; color:#3b9a58;"),
+                                  
+                                  HTML("<div><span style='color: black; font-size: 14px;'><b>Need help IDing your catch? Check out this <a href='https://marinespecies.wildlife.ca.gov'>resource!</a></b></span></div>"), 
+                                  
+                                  
+                                  HTML("<br><br>"))
                        
-                       
+                        ),
                        
                        box(width = 6,
                            height = "168px",
@@ -109,7 +116,7 @@ body <-dashboardBody(
                             width = NULL, 
                             height = "168px", # Adjust the height here
                             div(class = "species-title",
-                                tags$b("Photo of Species", style = "color:#0c3D6E; font-size: 16px;")), 
+                                tags$b("Image of Species", style = "color:#0c3D6E; font-size: 16px;")), 
                             #status = "success", 
                             solidHeader = TRUE,
                             collapsible = FALSE,
@@ -145,7 +152,8 @@ body <-dashboardBody(
                               width = NULL,
                               height = "190px",
                               div(class = "prediction-title",
-                                  tags$b("DDT Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"),  # Prediction results title
+                                  tags$b("DDT Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"), 
+                                  HTML("<div><span style='color: black; font-size: 12px;'>*A serving size is defined by the OEHHA as an 8oz skinless fillet*</span></div>")# Prediction results title
                               ),  
                               #status = "warning",
                               
@@ -155,18 +163,18 @@ body <-dashboardBody(
                               textOutput("serving_size"),
                               span(textOutput("fish_error"), style = "color:red"),
                               
-                              div(class = "info-button",
-                                  style = "display: flex; align-items: right;",
-                                  icon("info-circle", lib = "font-awesome"),  # Info icon
-                                  actionButton("info_button", "", style = "display: none;")),
-                              # Hidden button
-                              tags$script(HTML('
-                $(document).ready(function(){
-                    $(".info-button").click(function(){
-                        alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
-                    });
-                });
-            ')),        
+                              # div(class = "info-button",
+                              #     style = "display: flex; align-items: right;",
+                              #     icon("info-circle", lib = "font-awesome"),  # Info icon
+                              #     actionButton("info_button", "", style = "display: none;")),
+                              # # Hidden button
+                              # tags$script(HTML('
+            #     $(document).ready(function(){
+            #         $(".info-button").click(function(){
+            #             alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
+            #         });
+            #     });
+            # ')),        
                             ),),
             
             
@@ -176,7 +184,8 @@ body <-dashboardBody(
                      width = NULL, 
                      height = "190px",
                      div(class = "prediction-title",
-                         tags$b("Mercury/PCB Health Advisory", style = "color:#0c3D6E; font-size: 16px;")), 
+                         tags$b("Mercury/PCB Health Advisory", style = "color:0c3D6x; font-size: 16px;")), 
+                     HTML("<div><span style='color: black; font-size: 12px;'>*This advisory was provided from the OEHHA Fish Advisory webpage*</span></div>"),
                      #status = "success", 
                      solidHeader = FALSE,
                      collapsible = FALSE,
@@ -186,20 +195,20 @@ body <-dashboardBody(
                                 ".shiny-output-error { visibility: hidden; }",
                                 ".shiny-output-error:before { visibility: hidden; }"
                      ),
-                     div(class = "info-button2",
-                         style = "display: flex; align-items: right;",
-                         icon("info-circle", lib = "font-awesome"),  # Info icon
-                         actionButton("info_button", "", style = "display: none;")),
-                     
-                     
-                     # Hidden button
-                     tags$script(HTML('
-                $(document).ready(function(){
-                    $(".info-button2").click(function(){
-                        alert("This advisory was provided from the OEHHA Fish Advisory webpage.");
-                    });
-                });
-            '))
+            #          div(class = "info-button2",
+            #              style = "display: flex; align-items: right;",
+            #              icon("info-circle", lib = "font-awesome"),  # Info icon
+            #              actionButton("info_button", "", style = "display: none;")),
+            #          
+            #          
+            #          # Hidden button
+            #          tags$script(HTML('
+            #     $(document).ready(function(){
+            #         $(".info-button2").click(function(){
+            #             alert("This advisory was provided from the OEHHA Fish Advisory webpage.");
+            #         });
+            #     });
+            # '))
                    )
             
             ),

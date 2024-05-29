@@ -30,14 +30,22 @@ suppressPackageStartupMessages({
   library(raster)
   library(sp)
   library(brms)
+  install.packages("shiny.i18n")
+  library(shiny.i18n)
 })
 
 # Enabling Reactlog for debugging
 reactlog_enable()
 
+customIcon <- makeIcon(
+  iconUrl = "https://fontawesome.com/icons/fishing-rod?f=classic&s=thin",  # URL to the marker icon image
+  iconWidth = 38,  # Width of the icon image
+  iconHeight = 95,  # Height of the icon image
+  iconAnchorX = 22,  # X coordinate of the "tip" of the icon (relative to its top left corner)
+  iconAnchorY = 94   # Y coordinate of the "tip" of the icon (relative to its top left corner)
+)
 
-
- ## LOAD SPATIAL DATA ----
+ ## LOAD SPATIAL DATA ----s
 
 # Loading spatial data for coastal health advisories and other geographic features
 

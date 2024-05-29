@@ -344,8 +344,10 @@ server <- function(input, output, session) {
   
   updateSelectizeInput(session, 'CompositeCommonName', choices = species_name_clean, server = TRUE) # Update selectize input choices for fish species
   
+
   
   ### Observe Predict Button Click ###-----------
+  
   
   observeEvent(input$predict_button, {
     # Retrieve user input and calculate prediction
@@ -428,7 +430,8 @@ server <- function(input, output, session) {
         
         # Label the hazard score
         geom_text(aes(x = rec, y = 1, label = label),
-                  hjust = -.2, color = "black", size = 8) +
+                  hjust = -1.1,
+                  color = "black", size = 8) +
         
         # Set x-axis limits
         xlim(0, 8) +
