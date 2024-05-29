@@ -71,7 +71,6 @@ body <-dashboardBody(
                              class = "map-container",
                              tags$b("Step 1: Drag the marker to the location where your fish was caught within the study area (outlined in white)", style = "color:#3b9a58; font-size: 20px;"),
                              HTML("<br><br>"), 
-                             HTML("<br><br>"), 
                              HTML("<div style='text-align: center;'><span style='font-size: 16px;'>Click through map layers to gather more information</span></div>"),
                              leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
                              HTML("<span style='color: black; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span>")
@@ -82,7 +81,7 @@ body <-dashboardBody(
                                   tags$div(tags$b("Step 2: Please select your catch species"), 
                                            style = "font-size: 20px; color:#3b9a58;"),
                                   
-                                  HTML("<div><span style='color: black; font-size: 14px;'><b>Need help IDing your catch? Check out this <a href='https://marinespecies.wildlife.ca.gov'>resource!</a></b></span></div>"), 
+                                  HTML("<div><span style='color: black; font-size: 14px;'><b>Need help identifying your catch? Check out this <a href='https://marinespecies.wildlife.ca.gov'>resource!</a></b></span></div>"), 
                                   
                                   
                                   HTML("<br><br>"))
