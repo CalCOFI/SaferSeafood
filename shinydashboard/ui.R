@@ -85,7 +85,7 @@ body <-dashboardBody(
                        ),
                        
                        box(width = 6,
-                           height = "168px",
+                           height = "185px",
                            tags$style(HTML(".selectize-control.single .selectize-input {
                      font-size: 16px; 
                    }")),
@@ -112,7 +112,7 @@ body <-dashboardBody(
                    column(width = 6,
                           box(
                             width = NULL, 
-                            height = "168px", # Adjust the height here
+                            height = "185px", # Adjust the height here
                             div(class = "species-title",
                                 tags$b("Image of Species", style = "color:#0c3D6E; font-size: 16px;")), 
                             #status = "success", 
