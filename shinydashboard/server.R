@@ -463,7 +463,7 @@ map.on('click', function(e) {
         # Add plot labels
         labs(y = NULL,
              x = NULL,
-             title = "Number of Servings Per Week Based on DDT") +
+             title = "Number of Servings Per Week") +
         
         # Customize x-axis labels
         scale_x_continuous(
@@ -525,7 +525,7 @@ map.on('click', function(e) {
         # Add plot labels
         labs(y = NULL,
              x = NULL,
-             title = "Number of Servings Per Week Based on DDT") +
+             title = "Number of Servings Per Week") +
         
         # Customize x-axis labels
         scale_x_continuous(
