@@ -111,7 +111,10 @@ server <- function(input, output, session) {
     estimate <- prediction[1]
     estimate_trans <- exp(estimate) - 1 # Transform the estimate
     
-    return(estimate_trans)
+    if ((estimate_trans) < 0) {
+      return(0)
+    } else {
+      return(estimate_trans)}
   }
   
   
@@ -157,7 +160,10 @@ server <- function(input, output, session) {
     estimate <- prediction[3]
     estimate_trans1 <- exp(estimate) - 1 # Transform the estimate
     
-    return(estimate_trans1)
+    if ((estimate_trans1) < 0) {
+      return(0)
+    } else {
+    return(estimate_trans1)}
   }
   
   predict_DDT2 <- function(species, lat, long) {
@@ -200,7 +206,10 @@ server <- function(input, output, session) {
     estimate <- prediction[4]
     estimate_trans2 <- exp(estimate) - 1 # Transform the estimate
     
-    return(estimate_trans2)
+    if ((estimate_trans2) < 0) {
+      return(0)
+    } else {
+      return(estimate_trans2)}
   }
   
   
@@ -474,6 +483,69 @@ map.on('click', function(e) {
               axis.text.x = element_text(size = 14))
     })
     
+    
+    
+    # Make the serving size bar
+    # Composite score v2
+    assignment_df <- reactive(assignment_of_serving)  # Reactive expression for assignment data frame
+    
+    #plot for advisory
+    create_gradient_df <- function(n = 8) {
+      data.frame(
+        x = seq(0, 8, length.out = n),  # Generate sequence of x values
+        color = colorRampPalette(c("red", "green"))(n)  # Create gradient from red to green
+      )
+    }
+    
+    output$servings <- renderPlot({
+      gradient_df <- create_gradient_df()  # Create gradient data frame
+      
+      ggplot(assignment_df(), aes(y = as.factor(1))) +  # Create dummy y-axis
+        
+        # Add gradient tiles
+        geom_tile(data = gradient_df, aes(x = x, y = 1, fill = color), 
+                  color = "black",
+                  height = 0.75,
+                  width = 1.14) +
+        scale_fill_identity() +  # Use the fill color directly
+        
+        # Plot a black line at the value of the hazard score
+        geom_segment(aes(y = 0.5, yend = 1.5, x = rec, xend = rec),
+                     color = "black",
+                     linewidth = 1.5) +
+        
+        # Label the hazard score
+        geom_text(aes(x = rec, y = 1, label = label),
+                  hjust = -0.1,
+                  color = "black", size = 8) +
+        
+        # Set x-axis limits
+        xlim(0, 8) +
+        
+        # Add plot labels
+        labs(y = NULL,
+             x = NULL,
+             title = "Number of Servings Per Week Based on DDT") +
+        
+        # Customize x-axis labels
+        scale_x_continuous(
+          breaks = c(0, 8),  # Specify where to place the labels
+          labels = c("Unsafe", "Safe")  # Specify the labels
+        ) +
+        
+        # Apply minimal theme and customize appearance
+        theme_minimal() +
+        theme(aspect.ratio = 1/10,  # Adjust aspect ratio to move the plot title and x-axis labels closer
+              plot.title = element_text(face = "bold", size = 20),
+              panel.grid.major.x = element_blank(),
+              panel.grid.minor.x = element_blank(),
+              panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              axis.text.y = element_blank(),
+              axis.text.x = element_text(face = "bold",size = 14))
+    })
+    
+    
     # Check if location is valid
     lonlat <- data.frame(cbind(long = longitude,lat = latitude)) # Create data frame with longitude and latitude
     lonlat_sf = st_as_sf(lonlat, coords=c("long", "lat"), crs="EPSG:4326") # Convert to spatial object
@@ -491,6 +563,7 @@ map.on('click', function(e) {
       output$advisory <- renderText({ NULL })
       output$servings <- renderPlot({ NULL })
       output$fish_image <- renderImage({ NULL })
+      output$fish_error <- renderText({ NULL })
       output$validation_result <- renderText({
         "We’re sorry, but we are not able to make predictions for that location. We can only make valid predictions for the area outlined on the map."
       })
@@ -515,14 +588,14 @@ map.on('click', function(e) {
       } else {
         # Display the recommended serving size using the value from 'serving_size'
         output$serving_size <- renderText({
-          paste0("Based on these results, the recommended number of servings per week for this fish at this location is ",serving_size,". For information about serving size, click the info button below.")
+          paste0("The recommended number of servings per week for ", species_name_advisory, " at this location is ",serving_size,".")
         })
         
         # If prediction is available, render the predicted value in the format of ng/g lipid
         output$prediction <- renderText({ NULL })
         output$fish_error <- renderText({ NULL })
         output$prediction <- renderText({
-          paste0("The range of predicted DDT concentration is between ", round(prediction1, 2), " to ", round(prediction2, 2),"ng of per gram of ", species_name_advisory,".")
+          paste0("The range of predicted DDT concentration is between ", round(prediction1, 2), " to ", round(prediction2, 2)," ng of per gram of fish.")
         })
         output$fish_image <- renderImage({
           if (!file.exists(image_path2)) {

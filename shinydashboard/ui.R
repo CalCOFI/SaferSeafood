@@ -127,40 +127,26 @@ body <-dashboardBody(
                           
                    ),
                    
-                   ### Serving size plot
-                   column(
-                     width = 12,
-                     span(textOutput("validation_result"), style = "color:red"),
-                     span(textOutput("fish_error"), style = "color:red"),
-                     box(
-                       width = NULL,
-                       solidHeader = FALSE,
-                       collapsible = TRUE,
-                       plotOutput(outputId = "servings", height = "100px"),  # Adding the plot output here
-                       
-                       tags$style(
-                         type="text/css",
-                         ".shiny-output-error { visibility: hidden; }",
-                         ".shiny-output-error:before { visibility: hidden; }"
-                       )
-                     )
-                   ),
-                   
                    fluidRow(
                      column(width = 6,
                             box(
                               width = NULL,
-                              height = "190px",
+                              height = "260px",
                               div(class = "prediction-title",
-                                  tags$b("DDT Prediction Results", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"), 
-                                  HTML("<div><span style='color: black; font-size: 12px;'>*A serving size is defined by the OEHHA as an 8oz skinless fillet*</span></div>")# Prediction results title
+                                  tags$b("DDT Prediction Results *", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;")
                               ),  
                               #status = "warning",
                               
                               solidHeader = TRUE,
                               collapsible = FALSE,
-                              textOutput("prediction"),
-                              textOutput("serving_size"),
+                              span(textOutput("validation_result"), style = "color:red"),
+                              span(textOutput("fish_error"), style = "color:red"),
+                              span(textOutput("serving_size"), style = "color:black"),
+                              span(textOutput("prediction"), style = "color:black"),
+                              HTML("<br>"), 
+                              plotOutput(outputId = "servings", height = "100px"),  # Adding the plot output here
+                              
+                              
                               
                               
                               # div(class = "info-button",
@@ -182,14 +168,13 @@ body <-dashboardBody(
             column(width = 6,
                    box(
                      width = NULL, 
-                     height = "190px",
+                     height = "260px",
                      div(class = "prediction-title",
-                         tags$b("Mercury/PCB Health Advisory", style = "color:0c3D6x; font-size: 16px;")), 
-                     HTML("<div><span style='color: black; font-size: 12px;'>*This advisory was provided from the OEHHA Fish Advisory webpage*</span></div>"),
+                         tags$b("Mercury/PCB Health Advisory **", style = "color:0c3D6x; font-size: 16px;")), 
                      #status = "success", 
                      solidHeader = FALSE,
                      collapsible = FALSE,
-                     textOutput(outputId = "advisory"),
+                     span(textOutput(outputId = "advisory"), style = "color:black"),
                      #imageOutput(outputId = "advisory_image"),
                      tags$style(type="text/css",
                                 ".shiny-output-error { visibility: hidden; }",
@@ -226,7 +211,14 @@ body <-dashboardBody(
                 tags$p("Source: ",
                        tags$a(href = "https://oehha.ca.gov/advisories/statewide-advisory-eating-fish-california-coastal-locations-without-site-specific-advice", "OEHHA")),
                 style = "text-align: center;"  # Center-align the source wording
-              ) # END serving size box
+              ), # END serving size box
+              
+              HTML("<div><span style='color: black; font-size: 12px;'>*  A serving size is defined by the OEHHA as an 8oz skinless fillet</span></div>"),# Prediction results title
+              
+              HTML("<div><span style='color: black; font-size: 12px;'>** This advisory was provided from the OEHHA Fish Advisory webpage</span></div>"),
+              
+              
+              HTML("<br>")
               
             ), # END serving size column
             
