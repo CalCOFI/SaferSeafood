@@ -283,57 +283,57 @@ server <- function(input, output, session) {
       hideGroup("Piers") %>%
       
       # Add custom control button for resetting map zoom and view
-      htmlwidgets::onRender("
-        function(el, x) {
-          var map = this;
-
-          // Create a custom control button
-          var resetButton = L.control({position: 'topright'});
-          
-          resetButton.onAdd = function(map) {
-            var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-            div.innerHTML = '<button type=\"button\">Reset Zoom</button>';
-            div.style.width = '90px';
-            div.style.height = '30px';
-            div.style.lineHeight = '30px';
-            div.style.textAlign = 'center';
-            div.style.cursor = 'pointer';
-            div.onclick = function() {
-              map.setView([33.726973, -118.377620], 8);
-            };
-            return div;
-          };
-          
-          resetButton.addTo(map);
-        
-// Add event listener for map click
-map.on('click', function(e) {
-  // Pass the clicked latitude and longitude back to Shiny
-  Shiny.setInputValue('clicked_lat', e.latlng.lat);
-  Shiny.setInputValue('clicked_lng', e.latlng.lng);
-  
-  // Remove existing markers
-  map.eachLayer(function (layer) {
-    if (layer instanceof L.Marker) {
-      map.removeLayer(layer);
-    }
-  });
-  
-  // Define a custom icon with the desired color
-  var customIcon = L.icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-    iconSize: [25, 41], // size of the icon
-    iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
-    popupAnchor: [1, -34], // point from which the popup should open relative to the iconAnchor
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    shadowSize: [41, 41] // size of the shadow
-  });
-  
-  // Add a new marker at the clicked location with the custom icon
-  var marker = L.marker(e.latlng, { icon: customIcon }).addTo(map);
-});
-        }
-      ") %>%
+#       htmlwidgets::onRender("
+#         function(el, x) {
+#           var map = this;
+# 
+#           // Create a custom control button
+#           var resetButton = L.control({position: 'topright'});
+#           
+#           resetButton.onAdd = function(map) {
+#             var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+#             div.innerHTML = '<button type=\"button\">Reset Zoom</button>';
+#             div.style.width = '90px';
+#             div.style.height = '30px';
+#             div.style.lineHeight = '30px';
+#             div.style.textAlign = 'center';
+#             div.style.cursor = 'pointer';
+#             div.onclick = function() {
+#               map.setView([33.726973, -118.377620], 8);
+#             };
+#             return div;
+#           };
+#           
+#           resetButton.addTo(map);
+#         
+# // Add event listener for map click
+# map.on('click', function(e) {
+#   // Pass the clicked latitude and longitude back to Shiny
+#   Shiny.setInputValue('clicked_lat', e.latlng.lat);
+#   Shiny.setInputValue('clicked_lng', e.latlng.lng);
+#   
+#   // Remove existing markers
+#   map.eachLayer(function (layer) {
+#     if (layer instanceof L.Marker) {
+#       map.removeLayer(layer);
+#     }
+#   });
+#   
+#   // Define a custom icon with the desired color
+#   var customIcon = L.icon({
+#     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+#     iconSize: [25, 41], // size of the icon
+#     iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+#     popupAnchor: [1, -34], // point from which the popup should open relative to the iconAnchor
+#     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+#     shadowSize: [41, 41] // size of the shadow
+#   });
+#   
+#   // Add a new marker at the clicked location with the custom icon
+#   var marker = L.marker(e.latlng, { icon: customIcon }).addTo(map);
+# });
+#         }
+#       ") %>%
       
       # Set initial map view to a specific latitude, longitude, and zoom level
       setView(lng = -118.377620, lat = 33.726973, zoom = 8) %>%
@@ -342,7 +342,8 @@ map.on('click', function(e) {
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
       
       # Add marker at a specific location
-      addMarkers(lat = 33.726973, lng = -118.377620,
+      addMarkers(lat = 33.726973,lng = -118.377620,
+                 options = markerOptions(draggable = TRUE),
                  icon = makeIcon(
                    iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png", 
                    iconWidth = 25, iconHeight = 41, 

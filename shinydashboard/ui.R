@@ -80,7 +80,7 @@ body <-dashboardBody(
                            HTML("<br>"), 
                            HTML("<div style='text-align: center;'><span style='font-size: 16px;'>Click through map layers to gather more information</span></div>"),
                            leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
-                           HTML("<span style='color: black; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span>")
+                           HTML("<span style='color: black; font-size: 12px;'>Privacy Statement: No data shared with us will be given to third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span>")
                          )
                        ),
                        
