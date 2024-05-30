@@ -89,6 +89,8 @@ body <-dashboardBody(
                            tags$style(HTML(".selectize-control.single .selectize-input {
                      font-size: 16px; 
                    }")),
+                   
+                
                    selectizeInput(inputId = "species", 
                                   label = tags$span("Select Species:", style = "font-size: 16px;"),
                                   choices = sort(str_to_title(fish_lh$CompositeCommonName)),
@@ -101,8 +103,7 @@ body <-dashboardBody(
                    
                    HTML("<br>"), 
                    #checkboxInput(inputId = "use_location", "Use your current location?"),
-                   actionButton("predict_button", "Predict!", class = "btn-primary"),
-                   span(textOutput("validation_result"), style = "color:red")
+                   actionButton("predict_button", "Predict!", class = "btn-primary")
                        ),
                    
                    
@@ -129,6 +130,8 @@ body <-dashboardBody(
                    ### Serving size plot
                    column(
                      width = 12,
+                     span(textOutput("validation_result"), style = "color:red"),
+                     span(textOutput("fish_error"), style = "color:red"),
                      box(
                        width = NULL,
                        solidHeader = FALSE,
@@ -158,7 +161,7 @@ body <-dashboardBody(
                               collapsible = FALSE,
                               textOutput("prediction"),
                               textOutput("serving_size"),
-                              span(textOutput("fish_error"), style = "color:red"),
+                              
                               
                               # div(class = "info-button",
                               #     style = "display: flex; align-items: right;",
