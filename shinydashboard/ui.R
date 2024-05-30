@@ -68,20 +68,20 @@ body <-dashboardBody(
                 column(width = 12,
                        # Add map box with point dragger 
                        box(
-                           width = NULL,
-                           div(
-                             class = "map-container",
-                             tags$b("Step 1: Click the location on the map where your fish was caught within the study area (outlined in blue)", style = "color:#f2570f; font-size: 20px;"),
-                             HTML("<br> <br>"), 
-                             
-                             tags$div(tags$b("Step 2: Please select your catch species in the dropdown below the map"), 
-                                      style = "font-size: 20px; color:#f2570f;"),
-                             
-                             HTML("<br>"), 
-                             HTML("<div style='text-align: center;'><span style='font-size: 16px;'>Click through map layers to gather more information</span></div>"),
-                             leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
-                             HTML("<span style='color: black; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span>")
-                           )
+                         width = NULL,
+                         div(
+                           class = "map-container",
+                           tags$b("Step 1: Click the location on the map where your fish was caught within the study area (outlined in blue)", style = "color:#f2570f; font-size: 20px;"),
+                           HTML("<br> <br>"), 
+                           
+                           tags$div(tags$b("Step 2: Please select your catch species in the dropdown below the map"), 
+                                    style = "font-size: 20px; color:#f2570f;"),
+                           
+                           HTML("<br>"), 
+                           HTML("<div style='text-align: center;'><span style='font-size: 16px;'>Click through map layers to gather more information</span></div>"),
+                           leafletOutput(outputId = "locationMap"),# Header below the title but above the map output
+                           HTML("<span style='color: black; font-size: 12px;'>Privacy Statement: No data shared with us will be given third parties or stored in any way. Your data will never be used by us for any purpose other than DDT concentration predictions.</span>")
+                         )
                        ),
                        
                        box(width = 6,
@@ -90,7 +90,7 @@ body <-dashboardBody(
                      font-size: 16px; 
                    }")),
                    
-                
+                   
                    selectizeInput(inputId = "species", 
                                   label = tags$span("Select Species:", style = "font-size: 16px;"),
                                   choices = sort(str_to_title(fish_lh$CompositeCommonName)),
@@ -155,79 +155,79 @@ body <-dashboardBody(
                               #     actionButton("info_button", "", style = "display: none;")),
                               # # Hidden button
                               # tags$script(HTML('
-            #     $(document).ready(function(){
-            #         $(".info-button").click(function(){
-            #             alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
-            #         });
-            #     });
-            # ')),        
+                              #     $(document).ready(function(){
+                              #         $(".info-button").click(function(){
+                              #             alert("A serving size is defined by the OEHHA as an 8oz skinless fillet.");
+                              #         });
+                              #     });
+                              # ')),        
                             ),),
-            
-            
-            
-            column(width = 6,
-                   box(
-                     width = NULL, 
-                     height = "260px",
-                     div(class = "prediction-title",
-                         tags$b("Mercury/PCB Health Advisory **", style = "color:0c3D6x; font-size: 16px;")), 
-                     #status = "success", 
-                     solidHeader = FALSE,
-                     collapsible = FALSE,
-                     span(textOutput(outputId = "advisory"), style = "color:black"),
-                     #imageOutput(outputId = "advisory_image"),
-                     tags$style(type="text/css",
-                                ".shiny-output-error { visibility: hidden; }",
-                                ".shiny-output-error:before { visibility: hidden; }"
+                     
+                     
+                     
+                     column(width = 6,
+                            box(
+                              width = NULL, 
+                              height = "260px",
+                              div(class = "prediction-title",
+                                  tags$b("Mercury/PCB Health Advisory **", style = "color:0c3D6x; font-size: 16px;")), 
+                              #status = "success", 
+                              solidHeader = FALSE,
+                              collapsible = FALSE,
+                              span(textOutput(outputId = "advisory"), style = "color:black"),
+                              #imageOutput(outputId = "advisory_image"),
+                              tags$style(type="text/css",
+                                         ".shiny-output-error { visibility: hidden; }",
+                                         ".shiny-output-error:before { visibility: hidden; }"
+                              ),
+                              #          div(class = "info-button2",
+                              #              style = "display: flex; align-items: right;",
+                              #              icon("info-circle", lib = "font-awesome"),  # Info icon
+                              #              actionButton("info_button", "", style = "display: none;")),
+                              #          
+                              #          
+                              #          # Hidden button
+                              #          tags$script(HTML('
+                              #     $(document).ready(function(){
+                              #         $(".info-button2").click(function(){
+                              #             alert("This advisory was provided from the OEHHA Fish Advisory webpage.");
+                              #         });
+                              #     });
+                              # '))
+                            )
+                            
                      ),
-            #          div(class = "info-button2",
-            #              style = "display: flex; align-items: right;",
-            #              icon("info-circle", lib = "font-awesome"),  # Info icon
-            #              actionButton("info_button", "", style = "display: none;")),
-            #          
-            #          
-            #          # Hidden button
-            #          tags$script(HTML('
-            #     $(document).ready(function(){
-            #         $(".info-button2").click(function(){
-            #             alert("This advisory was provided from the OEHHA Fish Advisory webpage.");
-            #         });
-            #     });
-            # '))
-                   )
-            
-            ),
-            
-            
-            column(
-              width = 12,
-              box(
-                width = NULL,
-                # Apply CSS styling to the image tag
-                tags$img(src = "fish-serving-box.png",
-                         alt = "Fish Hand Image",
-                         style = "max-width: 100%; max-height: 100%;"),
-                # Adding the source wording below the image
-                tags$p("Source: ",
-                       tags$a(href = "https://oehha.ca.gov/advisories/statewide-advisory-eating-fish-california-coastal-locations-without-site-specific-advice", "OEHHA")),
-                style = "text-align: center;"  # Center-align the source wording
-              ), # END serving size box
-              
-              HTML("<div><span style='color: black; font-size: 12px;'>*  A serving size is defined by the OEHHA as an 8oz skinless fillet</span></div>"),# Prediction results title
-              
-              HTML("<div><span style='color: black; font-size: 12px;'>** This advisory was provided from the OEHHA Fish Advisory webpage</span></div>"),
-              
-              
-              HTML("<br>")
-              
-            ), # END serving size column
-            
+                     
+                     
+                     column(
+                       width = 12,
+                       box(
+                         width = NULL,
+                         # Apply CSS styling to the image tag
+                         tags$img(src = "fish-serving-box.png",
+                                  alt = "Fish Hand Image",
+                                  style = "max-width: 100%; max-height: 100%;"),
+                         # Adding the source wording below the image
+                         tags$p("Source: ",
+                                tags$a(href = "https://oehha.ca.gov/advisories/statewide-advisory-eating-fish-california-coastal-locations-without-site-specific-advice", "OEHHA")),
+                         style = "text-align: center;"  # Center-align the source wording
+                       ), # END serving size box
+                       
+                       HTML("<div><span style='color: black; font-size: 12px;'>*  A serving size is defined by the OEHHA as an 8oz skinless fillet</span></div>"),# Prediction results title
+                       
+                       HTML("<div><span style='color: black; font-size: 12px;'>** This advisory was provided from the OEHHA Fish Advisory webpage</span></div>"),
+                       
+                       
+                       HTML("<br>")
+                       
+                     ), # END serving size column
+                     
                    ) # END prediciton results box 
-            
+                   
                 ) # END prediction results fluidRow 
-            
+                
               ) # END what's in my catch fluidROW
-            
+              
       ), # END what's in my catch tab item
       
       # About tabItem ----
@@ -272,7 +272,7 @@ body <-dashboardBody(
                                  HTML("<br><br>"), 
                                  HTML("<br><br>"), 
                                  HTML("<div style='text-align: center;'><span style='color: black; font-size: 14px;'>A more detailed description of the data used in this project can be found in the SaferSeafood <a href='https://github.com/SaferSeafood/Shiny-Dashboard'>Github!</a></span></div>")
-
+                                 
                                  # 
                                  # HTML("<div style='text-align: center;'><span style='font-size: 18px;'>From catch to consumption, stay informed regarding the levels of contamination in your fish</span></div>"),
                                  
@@ -282,7 +282,7 @@ body <-dashboardBody(
                                  
                                  title = tagList(strong("Citation")),
                                  "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. "
-                                
+                                 
                              ), #END data source box 
                              
                              #disclaimer box ----

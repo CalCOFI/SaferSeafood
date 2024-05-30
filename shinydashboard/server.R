@@ -163,7 +163,7 @@ server <- function(input, output, session) {
     if ((estimate_trans1) < 0) {
       return(0)
     } else {
-    return(estimate_trans1)}
+      return(estimate_trans1)}
   }
   
   predict_DDT2 <- function(species, lat, long) {
@@ -368,7 +368,7 @@ map.on('click', function(e) {
   
   updateSelectizeInput(session, 'CompositeCommonName', choices = species_name_clean, server = TRUE) # Update selectize input choices for fish species
   
-
+  
   
   ### Observe Predict Button Click ###-----------
   
@@ -633,7 +633,7 @@ map.on('click', function(e) {
       }
     }
   })
-  s
+  
   ### Observe Info Message Show Event ###--------
   observeEvent(input$show_info_message, {
     showNotification( # Show a notification when the info message is clicked
