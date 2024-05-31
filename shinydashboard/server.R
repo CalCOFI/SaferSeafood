@@ -267,7 +267,7 @@ server <- function(input, output, session) {
         data = piers,
         lng = ~st_coordinates(piers)[, 1],
         lat = ~st_coordinates(piers)[, 2],
-        popup = ~paste("Name:", Name, "<br>", "Description:", Description),
+        #popup = ~paste("Name:", Name, "<br>", "Description:", Description),
         radius = 7,
         color = "#5C4033",
         opacity = .7,
@@ -283,57 +283,57 @@ server <- function(input, output, session) {
       hideGroup("Piers") %>%
       
       # Add custom control button for resetting map zoom and view
-#       htmlwidgets::onRender("
-#         function(el, x) {
-#           var map = this;
-# 
-#           // Create a custom control button
-#           var resetButton = L.control({position: 'topright'});
-#           
-#           resetButton.onAdd = function(map) {
-#             var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-#             div.innerHTML = '<button type=\"button\">Reset Zoom</button>';
-#             div.style.width = '90px';
-#             div.style.height = '30px';
-#             div.style.lineHeight = '30px';
-#             div.style.textAlign = 'center';
-#             div.style.cursor = 'pointer';
-#             div.onclick = function() {
-#               map.setView([33.726973, -118.377620], 8);
-#             };
-#             return div;
-#           };
-#           
-#           resetButton.addTo(map);
-#         
-# // Add event listener for map click
-# map.on('click', function(e) {
-#   // Pass the clicked latitude and longitude back to Shiny
-#   Shiny.setInputValue('clicked_lat', e.latlng.lat);
-#   Shiny.setInputValue('clicked_lng', e.latlng.lng);
-#   
-#   // Remove existing markers
-#   map.eachLayer(function (layer) {
-#     if (layer instanceof L.Marker) {
-#       map.removeLayer(layer);
-#     }
-#   });
-#   
-#   // Define a custom icon with the desired color
-#   var customIcon = L.icon({
-#     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-#     iconSize: [25, 41], // size of the icon
-#     iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
-#     popupAnchor: [1, -34], // point from which the popup should open relative to the iconAnchor
-#     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-#     shadowSize: [41, 41] // size of the shadow
-#   });
-#   
-#   // Add a new marker at the clicked location with the custom icon
-#   var marker = L.marker(e.latlng, { icon: customIcon }).addTo(map);
-# });
-#         }
-#       ") %>%
+      htmlwidgets::onRender("
+        function(el, x) {
+          var map = this;
+
+          // Create a custom control button
+          var resetButton = L.control({position: 'topright'});
+
+          resetButton.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+            div.innerHTML = '<button type=\"button\">Reset Zoom</button>';
+            div.style.width = '90px';
+            div.style.height = '30px';
+            div.style.lineHeight = '30px';
+            div.style.textAlign = 'center';
+            div.style.cursor = 'pointer';
+            div.onclick = function() {
+              map.setView([33.726973, -118.377620], 8);
+            };
+            return div;
+          };
+
+          resetButton.addTo(map);
+
+// Add event listener for map click
+map.on('click', function(e) {
+  // Pass the clicked latitude and longitude back to Shiny
+  Shiny.setInputValue('clicked_lat', e.latlng.lat);
+  Shiny.setInputValue('clicked_lng', e.latlng.lng);
+
+  // Remove existing markers
+  map.eachLayer(function (layer) {
+    if (layer instanceof L.Marker) {
+      map.removeLayer(layer);
+    }
+  });
+
+  // Define a custom icon with the desired color
+  var customIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+    iconSize: [25, 41], // size of the icon
+    iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+    popupAnchor: [1, -34], // point from which the popup should open relative to the iconAnchor
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    shadowSize: [41, 41] // size of the shadow
+  });
+
+  // Add a new marker at the clicked location with the custom icon
+  var marker = L.marker(e.latlng, { icon: customIcon }).addTo(map);
+});
+        }
+      ") %>%
       
       # Set initial map view to a specific latitude, longitude, and zoom level
       setView(lng = -118.377620, lat = 33.726973, zoom = 8) %>%
@@ -343,7 +343,7 @@ server <- function(input, output, session) {
       
       # Add marker at a specific location
       addMarkers(lat = 33.726973,lng = -118.377620,
-                 options = markerOptions(draggable = TRUE),
+                 #options = markerOptions(draggable = TRUE),
                  icon = makeIcon(
                    iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png", 
                    iconWidth = 25, iconHeight = 41, 
@@ -359,11 +359,20 @@ server <- function(input, output, session) {
   
   ### Observe Marker Click Event ###--------------
   
+  ### For Dragging
+  # observeEvent(input$locationMap_marker_dragend, {
+  #   # Update current_markers latitude and longitude when marker is dragged
+  #   current_markers$lat <- input$locationMap_marker_dragend$lat
+  #   current_markers$long <- input$locationMap_marker_dragend$lng
+  # })  
+  
+  
+  ###For Clicking
   observeEvent(input$clicked_lat, {
     # Update current_markers latitude and longitude when marker is clicked
     current_markers$lat <- input$clicked_lat
     current_markers$long <- input$clicked_lng
-  })  
+  })
   
   ### Update Selectize Input Choices ###---------
   
@@ -572,9 +581,7 @@ server <- function(input, output, session) {
     } else {
       
       # Clear the validation_result output if the location is valid
-      output$validation_result <- renderText({
-        NULL
-      })
+      output$validation_result <- renderText({NULL})
       # Check if the 'prediction' value is missing (NA)
       if (is.na(prediction)) {
         # Handle the case where prediction is NA by providing an informative message
