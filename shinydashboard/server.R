@@ -235,8 +235,14 @@ server <- function(input, output, session) {
       
       # Add polygon for Palos Verdes Shelf with a popup
       addPolygons(data = shelf, color = "darkblue", 
-                  popup = "Palos Verdes Superfund Site",
+                  label = "Palos Verdes Superfund Site",
                   popupOptions = popupOptions(maxWidth = "100%", closeOnClick = TRUE)) %>%
+      
+      # Add circle marker for the most recent barrel field
+      addCircleMarkers(lng = -118.48, 
+                       lat = 33.55, 
+                       color = "red",
+                       label = "Barrel field of DDT-laced sludge") %>% 
       
       ## Uncommented code for advisory borders (if needed in future) ##
       
@@ -258,8 +264,7 @@ server <- function(input, output, session) {
     
     # Add circle markers for existing DDT dumpsites
     addCircleMarkers(data = dumpsite_area, 
-                     ~lng, ~lat, 
-                     label = ~label, 
+                     ~lng, ~lat,
                      group = "DDT Dumpsites") %>%
       
       # Add circle markers for fishing piers with popup information
@@ -348,13 +353,7 @@ map.on('click', function(e) {
                    iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png", 
                    iconWidth = 25, iconHeight = 41, 
                    iconAnchorX = 12, iconAnchorY = 41
-                 )) %>%
-      
-      # Add circle marker for the most recent barrel field
-      addCircleMarkers(lng = -118.48, 
-                       lat = 33.55, 
-                       color = "red",
-                       popup = "Barrel field of DDT-laced sludge")
+                 )) 
   })
   
   ### Observe Marker Click Event ###--------------
