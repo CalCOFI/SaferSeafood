@@ -272,7 +272,11 @@ server <- function(input, output, session) {
         data = piers,
         lng = ~st_coordinates(piers)[, 1],
         lat = ~st_coordinates(piers)[, 2],
+
         #popup = ~paste("Name:", Name, "<br>", "Description:", Description),
+
+        # popup = ~paste("Name:", Name, "<br>", "Description:", Description),
+
         radius = 7,
         color = "#5C4033",
         opacity = .7,

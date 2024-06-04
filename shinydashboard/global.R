@@ -30,8 +30,6 @@ suppressPackageStartupMessages({
   library(raster)
   library(sp)
   library(brms)
-  # install.packages("shiny.i18n")
-  # library(shiny.i18n)
 })
 
 # Enabling Reactlog for debugging
