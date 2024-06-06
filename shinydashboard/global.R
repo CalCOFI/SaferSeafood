@@ -94,10 +94,25 @@ advisory_areas <- rbind(ventura, smbeach, sbpier) %>%
 fish_data <- read_csv("data/fish_data_preprocessed.csv")
 fish_clean <- read_csv("data/fish_clean.csv")
 
+
+
 # Pelagic and nearshore fish zones
 areas <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>% 
-  left_join(fish_data, by = c("Name" = "CompositeStationArea"))
+  left_join(fish_data, by = c("Name" = "CompositeStationArea")) 
+
+values_to_remove <- c("849", "850")
+
 fish_zones <- readRDS("data/pelagic_nearshore_fish_zones.rds")
+fish_zones <- fish_zones %>% 
+  filter(!(Name %in% values_to_remove))
+
+
+fish_zones <- fish_zones %>% 
+  filter(!(Name %in% values_to_remove))
+
+areas <- areas %>% 
+  filter(!(Name %in% values_to_remove))
+
 
 # Converting fish zones to sf object
 fish_zones_sf <- st_as_sf(fish_zones, wkt = "geometry", crs = 4326) %>%
@@ -125,6 +140,8 @@ non_overlapping_zones <- remove_overlaps(fish_zones_sf)
 # Creating sf object from non-overlapping zones
 non_overlapping_sf <- st_sf(data = data.frame(id = seq(length(non_overlapping_zones))), 
                             geometry = non_overlapping_zones)
+
+#850 and 849
 
 # fishIcon <- makeIcon(
 #   iconUrl = "/Users/katebecker/Documents/Bren/Capstone/shiny-saferseafood/shinydashboard/www/fishIcon.png",
