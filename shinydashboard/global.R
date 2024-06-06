@@ -103,8 +103,6 @@ areas <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>%
 values_to_remove <- c("849", "850")
 
 fish_zones <- readRDS("data/pelagic_nearshore_fish_zones.rds")
-fish_zones <- fish_zones %>% 
-  filter(!(Name %in% values_to_remove))
 
 
 fish_zones <- fish_zones %>% 
@@ -140,6 +138,25 @@ non_overlapping_zones <- remove_overlaps(fish_zones_sf)
 # Creating sf object from non-overlapping zones
 non_overlapping_sf <- st_sf(data = data.frame(id = seq(length(non_overlapping_zones))), 
                             geometry = non_overlapping_zones)
+
+# trying to clip piers
+clip_kml <- st_as_sfc(st_bbox(non_overlapping_sf))
+clipped_sf <- st_intersection(clip_kml, piers)
+
+clip_coords <- do.call(rbind, st_geometry(clipped_sf)) %>% 
+  as_tibble() %>% setNames(c("lon","lat"))
+# min_lat <- 32.53521
+# max_lat <- 34.4999
+# min_long <- -120.5548
+# min_lat <- -117.1008
+# 
+# coords <- st_coordinates(sf_df$geometry)
+# 
+# # Filter based on the specified ranges
+# filtered_sf_df <- sf_df[
+#   coords[,1] >= min_lon & coords[,1] <= max_lon &
+#     coords[,2] >= min_lat & coords[,2] <= max_lat, 
+# ]
 
 #850 and 849
 

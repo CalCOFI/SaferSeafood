@@ -269,9 +269,9 @@ server <- function(input, output, session) {
       
       # Add circle markers for fishing piers with popup information
       addCircleMarkers(
-        data = piers,
-        lng = ~st_coordinates(piers)[, 1],
-        lat = ~st_coordinates(piers)[, 2],
+        data = clip_coords,
+        # lng = ~st_coordinates(clip_coords)[, 1],
+        # lat = ~st_coordinates(clipped_sf)[, 2],
 
         #popup = ~paste("Name:", Name, "<br>", "Description:", Description),
 
