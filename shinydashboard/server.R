@@ -291,11 +291,34 @@ server <- function(input, output, session) {
       hideGroup("DDT Dumpsites") %>%
       hideGroup("Piers") %>%
       
+      # Set initial map view to a specific latitude, longitude, and zoom level
+      setView(lng = -118.377620, lat = 33.726973, zoom = 8) %>%
+      
+      # Set the maximum bounds
+      # setMaxBounds(lng1 = -130, lat1 = 20, lng2 = -100, lat2 = 45) %>%
+      
+      # Add a mini map with toggle display
+      addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
+      
+      # Add marker at a specific location
+      addMarkers(lat = 33.726973,lng = -118.377620,
+                 #options = markerOptions(draggable = TRUE),
+                 icon = makeIcon(
+                   iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png", 
+                   iconWidth = 25, iconHeight = 41, 
+                   iconAnchorX = 12, iconAnchorY = 41
+                 )) %>% 
+      
       # Add custom control button for resetting map zoom and view
       htmlwidgets::onRender("
         function(el, x) {
           var map = this;
 
+        // Set max and min zoom levels
+        map.options.maxZoom = 16;
+        map.options.minZoom = 6;
+        
+        
           // Create a custom control button
           var resetButton = L.control({position: 'topright'});
 
@@ -341,23 +364,10 @@ map.on('click', function(e) {
   // Add a new marker at the clicked location with the custom icon
   var marker = L.marker(e.latlng, { icon: customIcon }).addTo(map);
 });
-        }
-      ") %>%
-      
-      # Set initial map view to a specific latitude, longitude, and zoom level
-      setView(lng = -118.377620, lat = 33.726973, zoom = 8) %>%
-      
-      # Add a mini map with toggle display
-      addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
-      
-      # Add marker at a specific location
-      addMarkers(lat = 33.726973,lng = -118.377620,
-                 #options = markerOptions(draggable = TRUE),
-                 icon = makeIcon(
-                   iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png", 
-                   iconWidth = 25, iconHeight = 41, 
-                   iconAnchorX = 12, iconAnchorY = 41
-                 )) 
+
+}
+      ")
+    
   })
   
   ### Observe Marker Click Event ###--------------
