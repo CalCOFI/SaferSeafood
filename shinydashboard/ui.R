@@ -271,9 +271,8 @@ body <-dashboardBody(
               HTML("To estimate the DDT concentration:
           <ol>
               <li>Navigate to the <em>'Toxin Tracker'</em> tab.</li>
-              <li>Select a fish species from the dropdown menu.</li>
-              </li>Confirm that your fish species is correct with the provided photo </li>
               <li>Use the interactive map to select your fish catch location by placing a marker. This helps in providing the most accurate predictions. Your location must be within the highlighted study area in order to receive a prediction.</li>
+              <li>Select a fish species from the dropdown menu.</li>
               <li>Click the <strong>'Predict DDT'</strong> button to receive the forecast.</li>
               <li>Results will be displayed below the map.</li>
           </ol>")
