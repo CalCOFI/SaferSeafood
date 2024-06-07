@@ -23,5 +23,13 @@ This repository containing files and data for developing the R Shiny online appl
 >       │ serving_size.Rmd
 >       │ practice-script-shinydashboard.R
 >       | practice-script.R
->
+>       | nearest-script.R
+>       | data-proccessing-shinydashboard.R
+> └───shinydashboard
+>       │ www
+>       │ ui.R
+>       | server.R
+>       | global.R
+>       | rsconnect
+>       | data
 >
