@@ -423,7 +423,10 @@ tabItem(tabName = "about",
                        box(width = 12,
                            
                            title = tagList(strong("Citation")),
-                           "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. "
+                           "All of the data used for this project has been collected from public data files, and all code and future data/modeling will be available publicly through the team's GitHub organization and repositories. All statistical and web application coding will be conducted in R within RStudio, so any interested parties will be able to reproduce any work in R. ",
+                           p(),
+                           p("This application can be cited using the following:"),
+                           p("Becker, K., Catalán, L., Hahn, H., Versteeg, B. (2024). SaferSeafood (Version 1.0) [Mobile App]. R package version 4.3.1. https://shiny.calcofi.io/saferseafood")
                            
                        ), #END data source box 
                        
@@ -432,6 +435,8 @@ tabItem(tabName = "about",
                            
                            title = tagList(strong("Disclaimer")),
                            "There are no restrictions on sharing the data and any outputs that result from this project, but all sources of data should be referenced.",
+                           p(),
+                           p("License: The data used in this project is is free and public domain. There are no restrictions on downloaded data.")
                            
                            #style = "background-color: #ff0000;"  # change color as needed
                            
@@ -471,7 +476,7 @@ tabItem(tabName = "fish_id",
           p("For additional assistance, please refer to the tutorial videos and FAQs on the portal."),
           div(class = "well",
               p("Still having trouble? Contact our support team for personalized help."),
-              tags$a(href = "bversteeg@ucsb.edu", class = "btn btn-success", "Email Support"))
+              tags$a(href = "mailto:lmmcgill@ucsd.edu", class = "btn btn-success", "Email Support"))
         ) # End Fish Identification box 
         
         
