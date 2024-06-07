@@ -68,7 +68,7 @@ body <-dashboardBody(
               
               fluidRow(
                 column(width = 12,
-                       # Add map box with point dragger 
+                       # Add map box with point 
                        box(
                          width = NULL,
                          div(
@@ -273,7 +273,7 @@ body <-dashboardBody(
               <li>Navigate to the <em>'Toxin Tracker'</em> tab.</li>
               <li>Select a fish species from the dropdown menu.</li>
               </li>Confirm that your fish species is correct with the provided photo </li>
-              <li>Use the interactive map to drag the marker to your fish catch location. This helps in providing the most accurate predictions. Your location must be within the highlighted study area in order to receive a prediction.</li>
+              <li>Use the interactive map to select your fish catch location by placing a marker. This helps in providing the most accurate predictions. Your location must be within the highlighted study area in order to receive a prediction.</li>
               <li>Click the <strong>'Predict DDT'</strong> button to receive the forecast.</li>
               <li>Results will be displayed below the map.</li>
           </ol>")
