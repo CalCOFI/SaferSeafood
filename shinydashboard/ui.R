@@ -172,7 +172,7 @@ body <-dashboardBody(
                               width = NULL, 
                               height = "260px",
                               div(class = "prediction-title",
-                                  tags$b("OEHHA Advisory **", style = "color:0c3D6x; font-size: 16px;")), 
+                                  tags$b("OEHHA Health Advisory **", style = "color:0c3D6x; font-size: 16px;")), 
                               #status = "success", 
                               solidHeader = FALSE,
                               collapsible = FALSE,

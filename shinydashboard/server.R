@@ -107,7 +107,7 @@ server <- function(input, output, session) {
       return(NA)
     }
     
-    prediction <- as.data.frame(fitted(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
+    prediction <- as.data.frame(predict(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
     estimate <- prediction[1]
     estimate_trans <- exp(estimate) - 1 # Transform the estimate
     
@@ -120,6 +120,7 @@ server <- function(input, output, session) {
   
   
   # Prediction function using the Bayesian model
+  # Finds Max prediction
   predict_DDT1 <- function(species, lat, long) {
     # Function to predict DDT value using the Bayesian model
     
@@ -156,7 +157,7 @@ server <- function(input, output, session) {
       return(NA)
     }
     
-    prediction <- as.data.frame(fitted(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
+    prediction <- as.data.frame(predict(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
     estimate <- prediction[3]
     estimate_trans1 <- exp(estimate) - 1 # Transform the estimate
     
@@ -166,6 +167,8 @@ server <- function(input, output, session) {
       return(estimate_trans1)}
   }
   
+  
+  # Finds min prediction
   predict_DDT2 <- function(species, lat, long) {
     # Function to predict DDT value using the Bayesian model
     
@@ -202,7 +205,7 @@ server <- function(input, output, session) {
       return(NA)
     }
     
-    prediction <- as.data.frame(fitted(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
+    prediction <- as.data.frame(predict(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
     estimate <- prediction[4]
     estimate_trans2 <- exp(estimate) - 1 # Transform the estimate
     
@@ -293,9 +296,6 @@ server <- function(input, output, session) {
       
       # Set initial map view to a specific latitude, longitude, and zoom level
       setView(lng = -118.377620, lat = 33.726973, zoom = 8) %>%
-      
-      # Set the maximum bounds
-      # setMaxBounds(lng1 = -130, lat1 = 20, lng2 = -100, lat2 = 45) %>%
       
       # Add a mini map with toggle display
       addMiniMap(toggleDisplay = TRUE, minimized = TRUE) %>%
@@ -416,9 +416,10 @@ map.on('click', function(e) {
     
     # Calculate prediction and serving size
     prediction <- predict_DDT(species, latitude, longitude) # Call the prediction function
-    prediction1 <- predict_DDT1(species, latitude, longitude) # Call the prediction2 function
-    prediction2 <- predict_DDT2(species, latitude, longitude) # Call the prediction3 function
+    prediction1 <- predict_DDT1(species, latitude, longitude) # Call the prediction1 function (finds max prediction)
+    prediction2 <- predict_DDT2(species, latitude, longitude) # Call the prediction2 function (finds min prediction)
     
+    #Finds the average serving size based on the prediction
     assignment_of_serving <- data.frame(pred = prediction) %>% 
       mutate(rec = ifelse(prediction <= 21,
                           8,
@@ -444,73 +445,68 @@ map.on('click', function(e) {
                             rec))
     
     
-    serving_size <- as.character(assignment_of_serving[1, 2]) # Get the serving size recommendation
+    # Finds the max serving size based on the prediction1
+    assignment_of_serving_max <- data.frame(pred = prediction1) %>% 
+      mutate(rec = ifelse(prediction1 <= 21,
+                          8,
+                          ifelse(prediction1 > 21 & prediction1 <= 220,
+                                 7,
+                                 ifelse(prediction1 > 220 & prediction1 <= 260,
+                                        6,
+                                        ifelse(prediction1 > 260 & prediction1 <= 310,
+                                               5, 
+                                               ifelse(prediction1 > 310 & prediction1 <= 390,
+                                                      4, 
+                                                      ifelse(prediction1 > 390 & prediction1 <= 520,
+                                                             3,
+                                                             ifelse(prediction1 > 520 & prediction1 <= 1000,
+                                                                    2,
+                                                                    ifelse(prediction1 > 1000 & prediction1 <= 2100,
+                                                                           1,
+                                                                           ifelse(prediction1 > 2100,
+                                                                                  0,
+                                                                                  NA))))))))),
+             label = ifelse(rec == 8,
+                            "7+",
+                            rec))
+    
+    
+    # Finds the min serving size based on the prediction2
+    assignment_of_serving_min <- data.frame(pred = prediction2) %>% 
+      mutate(rec = ifelse(prediction2 <= 21,
+                          8,
+                          ifelse(prediction2 > 21 & prediction2 <= 220,
+                                 7,
+                                 ifelse(prediction2 > 220 & prediction2 <= 260,
+                                        6,
+                                        ifelse(prediction2 > 260 & prediction2 <= 310,
+                                               5, 
+                                               ifelse(prediction2 > 310 & prediction2 <= 390,
+                                                      4, 
+                                                      ifelse(prediction2 > 390 & prediction2 <= 520,
+                                                             3,
+                                                             ifelse(prediction2 > 520 & prediction2 <= 1000,
+                                                                    2,
+                                                                    ifelse(prediction2 > 1000 & prediction2 <= 2100,
+                                                                           1,
+                                                                           ifelse(prediction2 > 2100,
+                                                                                  0,
+                                                                                  NA))))))))),
+             label = ifelse(rec == 8,
+                            "7+",
+                            rec))
+    
+    
+    serving_size <- as.character(assignment_of_serving[1, 2]) # Get the average serving size recommendation
+    
+    serving_size_max <- as.character(assignment_of_serving_max[1, 2]) # Get the max serving size recommendation
+    
+    serving_size_min <- as.character(assignment_of_serving_min[1, 2]) # Get the min serving size recommendation
     
     # Make the serving size bar
     # Composite score v2
-    assignment_df <- reactive(assignment_of_serving)  # Reactive expression for assignment data frame
-    
-    # Function to create gradient data frame
-    create_gradient_df <- function(n = 8) {
-      data.frame(
-        x = seq(0, 8, length.out = n),  # Generate sequence of x values
-        color = colorRampPalette(c("red", "green"))(n)  # Create gradient from red to green
-      )
-    }
-    
-    output$servings <- renderPlot({
-      gradient_df <- create_gradient_df()  # Create gradient data frame
-      
-      ggplot(assignment_df(), aes(y = as.factor(1))) +  # Create dummy y-axis
-        
-        # Add gradient tiles
-        geom_tile(data = gradient_df, aes(x = x, y = 1, fill = color), 
-                  color = "black",
-                  height = 0.75,
-                  width = 1.14) +
-        scale_fill_identity() +  # Use the fill color directly
-        
-        # Plot a black line at the value of the hazard score
-        geom_segment(aes(y = 0.5, yend = 1.5, x = rec, xend = rec),
-                     color = "black",
-                     linewidth = 1.5) +
-        
-        # Label the hazard score
-        geom_text(aes(x = rec, y = 1, label = label),
-                  hjust = -0.1,
-                  color = "black", size = 8) +
-        
-        # Set x-axis limits
-        xlim(0, 8) +
-        
-        # Add plot labels
-        labs(y = NULL,
-             x = NULL,
-             title = "Number of Servings Per Week") +
-        
-        # Customize x-axis labels
-        scale_x_continuous(
-          breaks = c(0, 8),  # Specify where to place the labels
-          labels = c("Unsafe", "Safe")  # Specify the labels
-        ) +
-        
-        # Apply minimal theme and customize appearance
-        theme_minimal() +
-        theme(aspect.ratio = 1/10,  # Adjust aspect ratio to move the plot title and x-axis labels closer
-              plot.title = element_text(face = "bold", size = 20),
-              panel.grid.major.x = element_blank(),
-              panel.grid.minor.x = element_blank(),
-              panel.grid.major.y = element_blank(),
-              panel.grid.minor.y = element_blank(),
-              axis.text.y = element_blank(),
-              axis.text.x = element_text(size = 14))
-    })
-    
-    
-    
-    # Make the serving size bar
-    # Composite score v2
-    assignment_df <- reactive(assignment_of_serving)  # Reactive expression for assignment data frame
+    # Takes the minimum serving size recommendation
+    assignment_df <- reactive(assignment_of_serving_min)  # Reactive expression for assignment data frame
     
     #plot for advisory
     create_gradient_df <- function(n = 8) {
@@ -548,7 +544,7 @@ map.on('click', function(e) {
         # Add plot labels
         labs(y = NULL,
              x = NULL,
-             title = "Number of Servings Per Week") +
+             title = "Recommended Number of Servings Per Week") +
         
         # Customize x-axis labels
         scale_x_continuous(
@@ -559,7 +555,7 @@ map.on('click', function(e) {
         # Apply minimal theme and customize appearance
         theme_minimal() +
         theme(aspect.ratio = 1/10,  # Adjust aspect ratio to move the plot title and x-axis labels closer
-              plot.title = element_text(face = "bold", size = 20),
+              plot.title = element_text(face = "bold", size = 13),
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
               panel.grid.major.y = element_blank(),
@@ -607,16 +603,23 @@ map.on('click', function(e) {
         # Clear any previous error messages
         output$serving_size <- renderText({ NULL })
       } else {
+        
+        if(serving_size_min == serving_size_max){
         # Display the recommended serving size using the value from 'serving_size'
         output$serving_size <- renderText({
           paste0("The recommended number of servings per week for ", species_name_advisory, " at this location is ",serving_size,".")
         })
+        } else {
+          output$serving_size <- renderText({
+            paste0("The recommended number of servings per week for ", species_name_advisory, " at this location is between ",serving_size_min," and ",serving_size_max,".")
+          })
+        }
         
         # If prediction is available, render the predicted value in the format of ng/g lipid
         output$prediction <- renderText({ NULL })
         output$fish_error <- renderText({ NULL })
         output$prediction <- renderText({
-          paste0("The range of predicted DDT concentration is between ", round(prediction1, 2), " to ", round(prediction2, 2)," ng of per gram of fish.")
+          paste0("The range of predicted DDT concentration is between ", round(prediction1, 1), " to ", round(prediction2, 1)," ng of per gram of fish.")
         })
         output$fish_image <- renderImage({
           if (!file.exists(image_path2)) {

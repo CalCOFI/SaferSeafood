@@ -92,7 +92,7 @@ advisory_areas <- rbind(ventura, smbeach, sbpier) %>%
 
 # Fish data
 fish_data <- read_csv("data/fish_data_preprocessed.csv")
-fish_clean <- read_csv("data/fish_clean.csv")
+fish_clean <- read_csv("data/ddx_southernCA_norm.csv")
 
 
 
@@ -197,7 +197,7 @@ species_name_clean <- as.data.frame(species_name) %>%
 taxa <- rfishbase::load_taxa()
 taxa_filter <- taxa %>% 
   filter(Species %in% species_name_clean$species_name) %>% 
-  dplyr::select(scientific_name = Species, Family, Genus)
+  dplyr::select(scientific_name = Species, Genus)
 
 # Renaming fish species and joining with taxa data
 fish.clean.fam <- fish_clean %>% 
@@ -206,10 +206,7 @@ fish.clean.fam <- fish_clean %>%
     scientific_name == "Rhinobatos productus" ~ "Pseudobatos productus",
     TRUE ~ scientific_name
   )) %>%
-  left_join(taxa_filter, by = "scientific_name") %>% 
-  dplyr::mutate(Family = ifelse(scientific_name == "Doryteuthis opalescens",
-                                "Loliginidae",
-                                Family))
+  left_join(taxa_filter, by = "scientific_name")
 
 # Loading dataframe with cleaned species names and life history characteristics
 fish_lh <- read_csv("data/species_common_science.csv")
