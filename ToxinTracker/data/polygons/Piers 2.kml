@@ -1,0 +1,1488 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Public_Piers_and_Jetties___R7___CDFW__ds3090_" id="Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+	<SimpleField name="OBJECTID" type="int"></SimpleField>
+	<SimpleField name="pier" type="string"></SimpleField>
+	<SimpleField name="county" type="string"></SimpleField>
+	<SimpleField name="lat_ddm" type="string"></SimpleField>
+	<SimpleField name="long_ddm" type="string"></SimpleField>
+	<SimpleField name="notes" type="string"></SimpleField>
+</Schema>
+<Folder><name>Public_Piers_and_Jetties___R7___CDFW__ds3090_</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">1</SimpleData>
+		<SimpleData name="pier">Adorni Center Pier</SimpleData>
+		<SimpleData name="county">Humboldt</SimpleData>
+		<SimpleData name="lat_ddm">40° 48.37039638' N</SimpleData>
+		<SimpleData name="long_ddm">124° 09.67771400' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-124.161309053842,40.8061782635553</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">2</SimpleData>
+		<SimpleData name="pier">Alameda Rock Wall</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 46.12169109' N</SimpleData>
+		<SimpleData name="long_ddm">122° 17.47266345' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.291224142238,37.7686999124168</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">3</SimpleData>
+		<SimpleData name="pier">Alamitos Bay (72nd Street) Jetty West</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 44.61062771' N</SimpleData>
+		<SimpleData name="long_ddm">118° 07.07407814' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.117913640282,33.7435155048968</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">4</SimpleData>
+		<SimpleData name="pier">Alamitos Bay Jetty East</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 44.72290286' N</SimpleData>
+		<SimpleData name="long_ddm">118° 06.87885796' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.114659941424,33.7453866652265</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">5</SimpleData>
+		<SimpleData name="pier">Arrowhead Marsh/MLK Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 44.56272990' N</SimpleData>
+		<SimpleData name="long_ddm">122° 12.52922839' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.208833360223,37.7427174323686</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">6</SimpleData>
+		<SimpleData name="pier">Avalon Pier, Catalina Island</SimpleData>
+		<SimpleData name="county">Los Angeles (Catalina)</SimpleData>
+		<SimpleData name="lat_ddm">33° 20.62055047' N</SimpleData>
+		<SimpleData name="long_ddm">118° 19.49875403' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.324991482946,33.3436808208329</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">7</SimpleData>
+		<SimpleData name="pier">Avila Pier</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 10.71290377' N</SimpleData>
+		<SimpleData name="long_ddm">120° 44.06188456' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-120.734377279528,35.178553474771</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">8</SimpleData>
+		<SimpleData name="pier">B St. Pier</SimpleData>
+		<SimpleData name="county">Del Norte</SimpleData>
+		<SimpleData name="lat_ddm">41° 44.62064908' N</SimpleData>
+		<SimpleData name="long_ddm">124° 11.82660397' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-124.197123985007,41.7436823687641</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">9</SimpleData>
+		<SimpleData name="pier">Balboa Pier, Newport</SimpleData>
+		<SimpleData name="county">Orange</SimpleData>
+		<SimpleData name="lat_ddm">33° 36.01265514' N</SimpleData>
+		<SimpleData name="long_ddm">117° 54.01750494' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.900303949226,33.6002160180721</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">10</SimpleData>
+		<SimpleData name="pier">Belmont Pier, Long Beach</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 45.49732053' N</SimpleData>
+		<SimpleData name="long_ddm">118° 08.87942183' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.148002710723,33.7582931972365</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">11</SimpleData>
+		<SimpleData name="pier">Bodega Bay North Jetty</SimpleData>
+		<SimpleData name="county">Sonoma</SimpleData>
+		<SimpleData name="lat_ddm">38° 18.35018630' N</SimpleData>
+		<SimpleData name="long_ddm">123° 03.14426888' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-123.052417886444,38.3058414324702</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">12</SimpleData>
+		<SimpleData name="pier">Bodega Bay South Jetty</SimpleData>
+		<SimpleData name="county">Sonoma</SimpleData>
+		<SimpleData name="lat_ddm">38° 18.27297428' N</SimpleData>
+		<SimpleData name="long_ddm">123° 03.23527644' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-123.053934242643,38.3045542381226</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">13</SimpleData>
+		<SimpleData name="pier">Cabrillo Mole, Catalina Island</SimpleData>
+		<SimpleData name="county">Los Angeles (Catalina)</SimpleData>
+		<SimpleData name="lat_ddm">33° 20.66251245' N</SimpleData>
+		<SimpleData name="long_ddm">118° 19.28174894' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.321374864714,33.3443802302566</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">14</SimpleData>
+		<SimpleData name="pier">Capitola Wharf</SimpleData>
+		<SimpleData name="county">Santa Cruz</SimpleData>
+		<SimpleData name="lat_ddm">36° 58.26881526' N</SimpleData>
+		<SimpleData name="long_ddm">121° 57.22239031' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-121.953719903472,36.9711519244664</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">15</SimpleData>
+		<SimpleData name="pier">Cayucos Pier</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 26.93279970' N</SimpleData>
+		<SimpleData name="long_ddm">120° 54.37542914' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-120.906269909144,35.448885098253</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">16</SimpleData>
+		<SimpleData name="pier">Crystal Pier (Pacific Beach)</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">32° 47.77540222' N</SimpleData>
+		<SimpleData name="long_ddm">117° 15.41905432' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.256996119755,32.7962614662205</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">17</SimpleData>
+		<SimpleData name="pier">Cuttings Wharf</SimpleData>
+		<SimpleData name="county">Napa</SimpleData>
+		<SimpleData name="lat_ddm">38° 13.56678956' N</SimpleData>
+		<SimpleData name="long_ddm">122° 18.47256943' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.307889687389,38.2261184741298</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">18</SimpleData>
+		<SimpleData name="pier">Dana Point Harbor Pier</SimpleData>
+		<SimpleData name="county">Orange</SimpleData>
+		<SimpleData name="lat_ddm">33° 27.74493795' N</SimpleData>
+		<SimpleData name="long_ddm">117° 42.37311977' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.706231017828,33.4624202398515</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">19</SimpleData>
+		<SimpleData name="pier">Dana Point Jetty</SimpleData>
+		<SimpleData name="county">Orange</SimpleData>
+		<SimpleData name="lat_ddm">33° 27.57872612' N</SimpleData>
+		<SimpleData name="long_ddm">117° 42.38447795' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.706419663139,33.459650349576</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">20</SimpleData>
+		<SimpleData name="pier">Dana Point Jetty South</SimpleData>
+		<SimpleData name="county">Orange</SimpleData>
+		<SimpleData name="lat_ddm">33° 27.50938361' N</SimpleData>
+		<SimpleData name="long_ddm">117° 41.38959768' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.689838559625,33.4584947025439</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">21</SimpleData>
+		<SimpleData name="pier">Del Norte Street Pier</SimpleData>
+		<SimpleData name="county">Humboldt</SimpleData>
+		<SimpleData name="lat_ddm">40° 47.44214920' N</SimpleData>
+		<SimpleData name="long_ddm">124° 11.23553556' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-124.187273059601,40.7907074405603</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">22</SimpleData>
+		<SimpleData name="pier">Doolittle Drive Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 43.86571716' N</SimpleData>
+		<SimpleData name="long_ddm">122° 12.58626947' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.209784676108,37.7311000302088</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">23</SimpleData>
+		<SimpleData name="pier">Dumbarton Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 30.62983881' N</SimpleData>
+		<SimpleData name="long_ddm">122° 06.67319659' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.111233200335,37.5105020969163</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">24</SimpleData>
+		<SimpleData name="pier">Eckley Pier</SimpleData>
+		<SimpleData name="county">Contra Costa</SimpleData>
+		<SimpleData name="lat_ddm">38° 03.23121078' N</SimpleData>
+		<SimpleData name="long_ddm">122° 12.10038035' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.201686362924,38.0538584367734</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">25</SimpleData>
+		<SimpleData name="pier">Elephant Rock Pier</SimpleData>
+		<SimpleData name="county">Marin</SimpleData>
+		<SimpleData name="lat_ddm">37° 52.32776357' N</SimpleData>
+		<SimpleData name="long_ddm">122° 27.03372201' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.450575392173,37.8721343575844</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">26</SimpleData>
+		<SimpleData name="pier">Embarcadero Pier</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">32° 42.20033169' N</SimpleData>
+		<SimpleData name="long_ddm">117° 09.87668727' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.164623256506,32.7033438731757</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">27</SimpleData>
+		<SimpleData name="pier">Emeryville Marina Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 50.53171593' N</SimpleData>
+		<SimpleData name="long_ddm">122° 18.76763871' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.312807065254,37.8422000981626</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">28</SimpleData>
+		<SimpleData name="pier">Estuary Park Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 47.35478741' N</SimpleData>
+		<SimpleData name="long_ddm">122° 16.01767040' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.266974121143,37.7892511606326</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">29</SimpleData>
+		<SimpleData name="pier">Ferry Point Pier</SimpleData>
+		<SimpleData name="county">Contra Costa</SimpleData>
+		<SimpleData name="lat_ddm">37° 54.55685642' N</SimpleData>
+		<SimpleData name="long_ddm">122° 23.43994925' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.390679323187,37.9092861343944</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">30</SimpleData>
+		<SimpleData name="pier">Fort Baker Jetty</SimpleData>
+		<SimpleData name="county">Marin</SimpleData>
+		<SimpleData name="lat_ddm">37° 49.92085211' N</SimpleData>
+		<SimpleData name="long_ddm">122° 28.40991090' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.473512076322,37.832019468175</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">31</SimpleData>
+		<SimpleData name="pier">Fort Baker Pier</SimpleData>
+		<SimpleData name="county">Marin</SimpleData>
+		<SimpleData name="lat_ddm">37° 49.91370334' N</SimpleData>
+		<SimpleData name="long_ddm">122° 28.66120615' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.477700021278,37.831900271991</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">32</SimpleData>
+		<SimpleData name="pier">Goleta Pier</SimpleData>
+		<SimpleData name="county">Santa Barbara</SimpleData>
+		<SimpleData name="lat_ddm">34° 25.00171177' N</SimpleData>
+		<SimpleData name="long_ddm">119° 49.73325133' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.828899727648,34.4166996930123</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">33</SimpleData>
+		<SimpleData name="pier">Harford Pier, Port San Luis</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 10.25891607' N</SimpleData>
+		<SimpleData name="long_ddm">120° 45.35726597' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-120.755967389066,35.1709867026091</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">34</SimpleData>
+		<SimpleData name="pier">Hermosa Beach Pier</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 51.70648479' N</SimpleData>
+		<SimpleData name="long_ddm">118° 24.14387344' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.402410090762,33.8617798306029</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">35</SimpleData>
+		<SimpleData name="pier">Humboldt Bay North Jetty</SimpleData>
+		<SimpleData name="county">Humboldt</SimpleData>
+		<SimpleData name="lat_ddm">40° 45.96665010' N</SimpleData>
+		<SimpleData name="long_ddm">124° 14.11096013' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-124.235196384276,40.7661160361542</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">36</SimpleData>
+		<SimpleData name="pier">Humboldt Bay South Jetty</SimpleData>
+		<SimpleData name="county">Humboldt</SimpleData>
+		<SimpleData name="lat_ddm">40° 45.55999965' N</SimpleData>
+		<SimpleData name="long_ddm">124° 14.25378060' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-124.237576918881,40.7593385525191</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">37</SimpleData>
+		<SimpleData name="pier">Huntington Beach Pier</SimpleData>
+		<SimpleData name="county">Orange</SimpleData>
+		<SimpleData name="lat_ddm">33° 39.37570418' N</SimpleData>
+		<SimpleData name="long_ddm">118° 00.17735976' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.002967911471,33.65626669914</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">38</SimpleData>
+		<SimpleData name="pier">Imperial Beach Pier</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">32° 34.77282678' N</SimpleData>
+		<SimpleData name="long_ddm">117° 07.97668845' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.132956744426,32.5795521557132</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">39</SimpleData>
+		<SimpleData name="pier">J Street Marina, Chula Vista, Pier</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">32° 37.47155413' N</SimpleData>
+		<SimpleData name="long_ddm">117° 06.33135576' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.105534773859,32.6245308153631</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">40</SimpleData>
+		<SimpleData name="pier">Crescent City Harbor Lighthouse Jetty</SimpleData>
+		<SimpleData name="county">Del Norte</SimpleData>
+		<SimpleData name="lat_ddm">41° 44.65656805' N</SimpleData>
+		<SimpleData name="long_ddm">124° 11.97080791' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-124.199527877605,41.7442809087752</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">41</SimpleData>
+		<SimpleData name="pier">Malibu Pier</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">34° 02.22669478' N</SimpleData>
+		<SimpleData name="long_ddm">118° 40.59375261' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.67657501716,34.0371160916333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">42</SimpleData>
+		<SimpleData name="pier">Manhattan Beach Pier</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 53.05171032' N</SimpleData>
+		<SimpleData name="long_ddm">118° 24.74326789' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.412400254139,33.8842000462242</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">43</SimpleData>
+		<SimpleData name="pier">Martinez Marina Pier</SimpleData>
+		<SimpleData name="county">Contra Costa</SimpleData>
+		<SimpleData name="lat_ddm">38° 01.63026266' N</SimpleData>
+		<SimpleData name="long_ddm">122° 08.37296252' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.139562471135,38.0271761289873</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">44</SimpleData>
+		<SimpleData name="pier">McNears Beach County Park Pier</SimpleData>
+		<SimpleData name="county">Marin</SimpleData>
+		<SimpleData name="lat_ddm">37° 59.51805624' N</SimpleData>
+		<SimpleData name="long_ddm">122° 27.02547150' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.450437949934,37.9919727944507</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">45</SimpleData>
+		<SimpleData name="pier">Mission Bay Jetty North</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">32° 45.54688839' N</SimpleData>
+		<SimpleData name="long_ddm">117° 15.25203626' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.25421224069,32.7591196583765</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">46</SimpleData>
+		<SimpleData name="pier">Monterey Coast Guard Breakwater</SimpleData>
+		<SimpleData name="county">Monterey</SimpleData>
+		<SimpleData name="lat_ddm">36° 36.56271328' N</SimpleData>
+		<SimpleData name="long_ddm">121° 53.64786113' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-121.894143633829,36.609383169921</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">47</SimpleData>
+		<SimpleData name="pier">Monterey Municipal Wharf 2</SimpleData>
+		<SimpleData name="county">Monterey</SimpleData>
+		<SimpleData name="lat_ddm">36° 36.12137481' N</SimpleData>
+		<SimpleData name="long_ddm">121° 53.37812786' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-121.889648464147,36.6020276459697</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">48</SimpleData>
+		<SimpleData name="pier">Morro Bay North Jetty</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 22.05937267' N</SimpleData>
+		<SimpleData name="long_ddm">120° 52.15838763' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-120.869319507461,35.3676607444185</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">49</SimpleData>
+		<SimpleData name="pier">Morro Bay South Jetty</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 21.64171463' N</SimpleData>
+		<SimpleData name="long_ddm">120° 51.71659561' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-120.861956016178,35.3606998933709</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">50</SimpleData>
+		<SimpleData name="pier">Moss Landing Breakwater North</SimpleData>
+		<SimpleData name="county">Monterey</SimpleData>
+		<SimpleData name="lat_ddm">36° 48.46632364' N</SimpleData>
+		<SimpleData name="long_ddm">121° 47.37490257' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land and on jetty inside the harbor a license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-121.789595006117,36.807776701977</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">51</SimpleData>
+		<SimpleData name="pier">Moss Landing Breakwater South</SimpleData>
+		<SimpleData name="county">Monterey</SimpleData>
+		<SimpleData name="lat_ddm">36° 48.37019070' N</SimpleData>
+		<SimpleData name="long_ddm">121° 47.33703136' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land and on jetty inside the harbor a license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-121.788963490473,36.8061749469588</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">52</SimpleData>
+		<SimpleData name="pier">Newport Beach Pier</SimpleData>
+		<SimpleData name="county">Orange</SimpleData>
+		<SimpleData name="lat_ddm">33° 36.44168284' N</SimpleData>
+		<SimpleData name="long_ddm">117° 55.75846384' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.929319532903,33.6073664984206</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">53</SimpleData>
+		<SimpleData name="pier">Newport Harbor North Jetty</SimpleData>
+		<SimpleData name="county">Orange</SimpleData>
+		<SimpleData name="lat_ddm">33° 35.59951051' N</SimpleData>
+		<SimpleData name="long_ddm">117° 52.86587461' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.88110964655,33.5933298376303</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">54</SimpleData>
+		<SimpleData name="pier">Newport Harbor South Jetty</SimpleData>
+		<SimpleData name="county">Orange</SimpleData>
+		<SimpleData name="lat_ddm">33° 35.51611052' N</SimpleData>
+		<SimpleData name="long_ddm">117° 52.64927468' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.87750021484,33.5919402627682</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">55</SimpleData>
+		<SimpleData name="pier">Ocean Beach Pier</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">32° 44.82623593' N</SimpleData>
+		<SimpleData name="long_ddm">117° 15.21003225' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.253512453982,32.7471088500251</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">56</SimpleData>
+		<SimpleData name="pier">Oceanside Harbor Pier</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">33° 12.48024541' N</SimpleData>
+		<SimpleData name="long_ddm">117° 23.66028008' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.394350323328,33.2080087134634</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">57</SimpleData>
+		<SimpleData name="pier">Oceanside Pier</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">33° 11.64313702' N</SimpleData>
+		<SimpleData name="long_ddm">117° 23.08961866' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.384838960201,33.1940569803113</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">58</SimpleData>
+		<SimpleData name="pier">Pacifica Pier</SimpleData>
+		<SimpleData name="county">San Mateo</SimpleData>
+		<SimpleData name="lat_ddm">37° 38.00304366' N</SimpleData>
+		<SimpleData name="long_ddm">122° 29.67337412' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.494569484897,37.6333886821323</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">59</SimpleData>
+		<SimpleData name="pier">Paradise Beach County Park Pier</SimpleData>
+		<SimpleData name="county">Marin</SimpleData>
+		<SimpleData name="lat_ddm">37° 53.64291472' N</SimpleData>
+		<SimpleData name="long_ddm">122° 27.37296832' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.456229388571,37.8940533732381</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">60</SimpleData>
+		<SimpleData name="pier">Pepper Park, National City, Pier</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">32° 38.95888365' N</SimpleData>
+		<SimpleData name="long_ddm">117° 06.72840703' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.112151764242,32.6493197702967</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">61</SimpleData>
+		<SimpleData name="pier">Pier J Fishing Pier South</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 44.56207387' N</SimpleData>
+		<SimpleData name="long_ddm">118° 11.25997810' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.187678601877,33.7427057765544</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">62</SimpleData>
+		<SimpleData name="pier">Halfmoon Bay Jetty West</SimpleData>
+		<SimpleData name="county">San Mateo</SimpleData>
+		<SimpleData name="lat_ddm">37° 29.71739860' N</SimpleData>
+		<SimpleData name="long_ddm">122° 29.69312432' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.494898268291,37.4952947782958</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">63</SimpleData>
+		<SimpleData name="pier">Pillar Point Harbor Fishing Pier</SimpleData>
+		<SimpleData name="county">San Mateo</SimpleData>
+		<SimpleData name="lat_ddm">37° 30.12818251' N</SimpleData>
+		<SimpleData name="long_ddm">122° 29.12379387' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.485409363945,37.5021416263288</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">64</SimpleData>
+		<SimpleData name="pier">Pismo Beach Pier</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 08.31571038' N</SimpleData>
+		<SimpleData name="long_ddm">120° 38.60923975' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-120.643500113023,35.1385998633901</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">65</SimpleData>
+		<SimpleData name="pier">Port Hueneme Pier</SimpleData>
+		<SimpleData name="county">Ventura</SimpleData>
+		<SimpleData name="lat_ddm">34° 08.50521886' N</SimpleData>
+		<SimpleData name="long_ddm">119° 11.63391329' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.193911195125,34.1417581336384</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">66</SimpleData>
+		<SimpleData name="pier">Port View Park Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 48.23784492' N</SimpleData>
+		<SimpleData name="long_ddm">122° 20.36688569' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.339460978049,37.8039690010257</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">67</SimpleData>
+		<SimpleData name="pier">Pt. Pinole Pier</SimpleData>
+		<SimpleData name="county">Contra Costa</SimpleData>
+		<SimpleData name="lat_ddm">38° 00.76006475' N</SimpleData>
+		<SimpleData name="long_ddm">122° 21.87104663' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.364530262683,38.0126727348966</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">68</SimpleData>
+		<SimpleData name="pier">Redondo Beach Pier</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 50.37646886' N</SimpleData>
+		<SimpleData name="long_ddm">118° 23.56657608' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.392788235754,33.8396126376975</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">69</SimpleData>
+		<SimpleData name="pier">Redondo Beach/King Harbor Breakwater</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 51.02527369' N</SimpleData>
+		<SimpleData name="long_ddm">118° 23.96807056' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.399479786305,33.8504257659164</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">70</SimpleData>
+		<SimpleData name="pier">San Antonio Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 47.05498943' N</SimpleData>
+		<SimpleData name="long_ddm">122° 14.69001235' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.244846818166,37.7842546345686</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">71</SimpleData>
+		<SimpleData name="pier">San Clemente Pier</SimpleData>
+		<SimpleData name="county">Orange</SimpleData>
+		<SimpleData name="lat_ddm">33° 25.17223085' N</SimpleData>
+		<SimpleData name="long_ddm">117° 37.21499809' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.620262244239,33.4195422173878</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">72</SimpleData>
+		<SimpleData name="pier">San Leandro Marina Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 41.72410014' N</SimpleData>
+		<SimpleData name="long_ddm">122° 11.48635102' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.191452755207,37.6954066608187</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">73</SimpleData>
+		<SimpleData name="pier">San Simeon Pier</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 38.57647828' N</SimpleData>
+		<SimpleData name="long_ddm">121° 11.25384154' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-121.187576441152,35.6429462682253</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">74</SimpleData>
+		<SimpleData name="pier">Santa Barbara Breakwater</SimpleData>
+		<SimpleData name="county">Santa Barbara</SimpleData>
+		<SimpleData name="lat_ddm">34° 24.18506212' N</SimpleData>
+		<SimpleData name="long_ddm">119° 41.50657218' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.691788967517,34.4030889432293</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">75</SimpleData>
+		<SimpleData name="pier">Santa Cruz Harbor Breakwater East</SimpleData>
+		<SimpleData name="county">Santa Cruz</SimpleData>
+		<SimpleData name="lat_ddm">36° 57.68796682' N</SimpleData>
+		<SimpleData name="long_ddm">122° 00.07489882' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.001261443253,36.9614709902837</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">76</SimpleData>
+		<SimpleData name="pier">Santa Cruz Harbor Breakwater West</SimpleData>
+		<SimpleData name="county">Santa Cruz</SimpleData>
+		<SimpleData name="lat_ddm">36° 57.64342958' N</SimpleData>
+		<SimpleData name="long_ddm">122° 00.13247531' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.002220844875,36.9607287926618</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">77</SimpleData>
+		<SimpleData name="pier">Santa Cruz Wharf</SimpleData>
+		<SimpleData name="county">Santa Cruz</SimpleData>
+		<SimpleData name="lat_ddm">36° 57.73770577' N</SimpleData>
+		<SimpleData name="long_ddm">122° 01.37921614' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.022999774814,36.9623000330665</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">78</SimpleData>
+		<SimpleData name="pier">Santa Monica Pier</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">34° 00.59232949' N</SimpleData>
+		<SimpleData name="long_ddm">118° 29.80739464' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.496802365872,34.0098766802833</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">79</SimpleData>
+		<SimpleData name="pier">Seacliff State Beach Pier (Seacliff Wharf)</SimpleData>
+		<SimpleData name="county">Santa Cruz</SimpleData>
+		<SimpleData name="lat_ddm">36° 58.29067868' N</SimpleData>
+		<SimpleData name="long_ddm">121° 54.76571598' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-121.912774692822,36.9715165144784</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">80</SimpleData>
+		<SimpleData name="pier">Seal Beach Pier</SimpleData>
+		<SimpleData name="county">Orange</SimpleData>
+		<SimpleData name="lat_ddm">33° 44.32147644' N</SimpleData>
+		<SimpleData name="long_ddm">118° 06.40699429' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.10679519201,33.7386958659931</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">81</SimpleData>
+		<SimpleData name="pier">Shelter Island Pier</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">32° 42.70225871' N</SimpleData>
+		<SimpleData name="long_ddm">117° 13.69833410' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.22831740431,32.7117091776392</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">82</SimpleData>
+		<SimpleData name="pier">Shoreline Village Pier 1</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 45.46441040' N</SimpleData>
+		<SimpleData name="long_ddm">118° 11.42633070' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.190450803742,33.7577450086131</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">83</SimpleData>
+		<SimpleData name="pier">Shoreline Village Pier 2</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 45.43300173' N</SimpleData>
+		<SimpleData name="long_ddm">118° 11.35784831' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.189309943331,33.7572214620864</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">84</SimpleData>
+		<SimpleData name="pier">Shoreline Village Pier 3</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 45.40315044' N</SimpleData>
+		<SimpleData name="long_ddm">118° 11.28167078' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.188039724621,33.7567240525811</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">85</SimpleData>
+		<SimpleData name="pier">Spud Point Public Pier</SimpleData>
+		<SimpleData name="county">Sonoma</SimpleData>
+		<SimpleData name="lat_ddm">38° 19.63329547' N</SimpleData>
+		<SimpleData name="long_ddm">123° 03.38524503' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-123.05643425318,38.3272262525899</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">86</SimpleData>
+		<SimpleData name="pier">Stearn's Wharf</SimpleData>
+		<SimpleData name="county">Santa Barbara</SimpleData>
+		<SimpleData name="lat_ddm">34° 24.71514542' N</SimpleData>
+		<SimpleData name="long_ddm">119° 41.32914264' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.688831713602,34.4119241395322</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">87</SimpleData>
+		<SimpleData name="pier">Torpedo Wharf (Fort Point) Pier</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 48.51570339' N</SimpleData>
+		<SimpleData name="long_ddm">122° 28.23520637' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.470599738171,37.8086001069678</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">88</SimpleData>
+		<SimpleData name="pier">Venice Pier</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 58.70942359' N</SimpleData>
+		<SimpleData name="long_ddm">118° 28.06937131' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.46783529122,33.978495033233</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">89</SimpleData>
+		<SimpleData name="pier">Ventura Pier</SimpleData>
+		<SimpleData name="county">Ventura</SimpleData>
+		<SimpleData name="lat_ddm">34° 16.53136737' N</SimpleData>
+		<SimpleData name="long_ddm">119° 17.44402537' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.290745991289,34.2755274084902</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">90</SimpleData>
+		<SimpleData name="pier">Warehouse One Pier</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 43.31052894' N</SimpleData>
+		<SimpleData name="long_ddm">118° 16.30566314' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.271773488884,33.7218466611939</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">91</SimpleData>
+		<SimpleData name="pier">Oceanside Jetty East</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">33° 12.41280034' N</SimpleData>
+		<SimpleData name="long_ddm">117° 23.95405414' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.399246141626,33.2068850509349</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">92</SimpleData>
+		<SimpleData name="pier">Pier J Fishing Pier North</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 44.75207300' N</SimpleData>
+		<SimpleData name="long_ddm">118° 11.32973459' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.188841021854,33.745872936138</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">93</SimpleData>
+		<SimpleData name="pier">Halfmoon Bay Jetty East</SimpleData>
+		<SimpleData name="county">San Mateo</SimpleData>
+		<SimpleData name="lat_ddm">37° 29.98094004' N</SimpleData>
+		<SimpleData name="long_ddm">122° 28.50784713' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.475144315193,37.4996871822505</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">94</SimpleData>
+		<SimpleData name="pier">Cabrillo Beach Fishing Pier</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 42.50107105' N</SimpleData>
+		<SimpleData name="long_ddm">118° 16.62845007' W</SimpleData>
+		<SimpleData name="notes">On the adjacent breakwater a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.277152600806,33.708356248327</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">95</SimpleData>
+		<SimpleData name="pier">Coronado Fishing Pier</SimpleData>
+		<SimpleData name="county">San Diego</SimpleData>
+		<SimpleData name="lat_ddm">32° 41.97328935' N</SimpleData>
+		<SimpleData name="long_ddm">117° 10.19144317' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-117.169869418664,32.6995596890984</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">96</SimpleData>
+		<SimpleData name="pier">Shoreline Aquatic Park Pier 1</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 45.61505901' N</SimpleData>
+		<SimpleData name="long_ddm">118° 11.83346418' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.1972366765,33.7602558963017</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">97</SimpleData>
+		<SimpleData name="pier">Shoreline Aquatic Park Pier 2</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 45.58290875' N</SimpleData>
+		<SimpleData name="long_ddm">118° 11.69543517' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.194936091057,33.759719668879</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">98</SimpleData>
+		<SimpleData name="pier">Marina Del Rey South Jetty</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 57.73753066' N</SimpleData>
+		<SimpleData name="long_ddm">118° 27.38070811' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.456357516835,33.9622973186585</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">99</SimpleData>
+		<SimpleData name="pier">Marina Del Rey North Jetty</SimpleData>
+		<SimpleData name="county">Los Angeles</SimpleData>
+		<SimpleData name="lat_ddm">33° 57.80001322' N</SimpleData>
+		<SimpleData name="long_ddm">118° 27.63767579' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-118.460639786692,33.9633381716068</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">100</SimpleData>
+		<SimpleData name="pier">Port San Luis Breakwater</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 09.47591445' N</SimpleData>
+		<SimpleData name="long_ddm">120° 45.14708002' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-120.752463959458,35.1579368626205</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">101</SimpleData>
+		<SimpleData name="pier">Morro Bay North T-Pier</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 22.24538593' N</SimpleData>
+		<SimpleData name="long_ddm">120° 51.49247074' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-120.858220821227,35.3707615070184</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">102</SimpleData>
+		<SimpleData name="pier">Morro Bay South T-Pier</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 22.17256945' N</SimpleData>
+		<SimpleData name="long_ddm">120° 51.34014602' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-120.855682182234,35.3695477334371</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">103</SimpleData>
+		<SimpleData name="pier">Anchor Memorial Park Pier</SimpleData>
+		<SimpleData name="county">San Luis Obispo</SimpleData>
+		<SimpleData name="lat_ddm">35° 22.05234779' N</SimpleData>
+		<SimpleData name="long_ddm">120° 51.25984103' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-120.854343692461,35.3675442712129</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">104</SimpleData>
+		<SimpleData name="pier">Redwood City Pier</SimpleData>
+		<SimpleData name="county">San Mateo</SimpleData>
+		<SimpleData name="lat_ddm">37° 30.27303409' N</SimpleData>
+		<SimpleData name="long_ddm">122° 12.81367241' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.213574667394,37.5045553700845</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">105</SimpleData>
+		<SimpleData name="pier">Coyote Point Pier</SimpleData>
+		<SimpleData name="county">San Mateo</SimpleData>
+		<SimpleData name="lat_ddm">37° 35.48539524' N</SimpleData>
+		<SimpleData name="long_ddm">122° 18.99694436' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.316628498473,37.5914280552968</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">106</SimpleData>
+		<SimpleData name="pier">Oyster Point Pier</SimpleData>
+		<SimpleData name="county">San Mateo</SimpleData>
+		<SimpleData name="lat_ddm">37° 39.71575219' N</SimpleData>
+		<SimpleData name="long_ddm">122° 22.44356210' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.374072168529,37.6619340688279</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">107</SimpleData>
+		<SimpleData name="pier">Sierra Point Pier</SimpleData>
+		<SimpleData name="county">San Mateo</SimpleData>
+		<SimpleData name="lat_ddm">37° 40.65602802' N</SimpleData>
+		<SimpleData name="long_ddm">122° 22.86597588' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.381113162828,37.6776050753512</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">108</SimpleData>
+		<SimpleData name="pier">Candlestick Fishing Pier</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 42.48856222' N</SimpleData>
+		<SimpleData name="long_ddm">122° 22.47211053' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.374548274732,37.7081475845202</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">109</SimpleData>
+		<SimpleData name="pier">Islais Creek Pier</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 44.81825799' N</SimpleData>
+		<SimpleData name="long_ddm">122° 23.28080361' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.388026598153,37.7469759086249</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">110</SimpleData>
+		<SimpleData name="pier">Agua Vista Pier</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 45.96529851' N</SimpleData>
+		<SimpleData name="long_ddm">122° 23.15647444' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.385954183894,37.7660930570533</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">111</SimpleData>
+		<SimpleData name="pier">South Beach Harbor Pier</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 46.70487206' N</SimpleData>
+		<SimpleData name="long_ddm">122° 23.16495421' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.386096118607,37.7784192455377</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">112</SimpleData>
+		<SimpleData name="pier">Pier 14</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 47.63828563' N</SimpleData>
+		<SimpleData name="long_ddm">122° 23.43658386' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.390622728426,37.793976181183</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">113</SimpleData>
+		<SimpleData name="pier">Pier 7</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 47.96251537' N</SimpleData>
+		<SimpleData name="long_ddm">122° 23.73391203' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.39557873295,37.7993801949577</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">114</SimpleData>
+		<SimpleData name="pier">Pier 45</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 48.65120434' N</SimpleData>
+		<SimpleData name="long_ddm">122° 25.19583728' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.419943739299,37.8108584195274</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">115</SimpleData>
+		<SimpleData name="pier">San Francisco Municipal Wharf “Muni” Pier</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 48.59413286' N</SimpleData>
+		<SimpleData name="long_ddm">122° 25.58504050' W</SimpleData>
+		<SimpleData name="notes">Municipal Pier at Aquatic Park is closed until further notice due to safety concerns.</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.426430473966,37.8099074100862</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">116</SimpleData>
+		<SimpleData name="pier">Fort Mason Pier 3</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 48.50520095' N</SimpleData>
+		<SimpleData name="long_ddm">122° 25.81368092' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.430241127401,37.8084248045182</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">117</SimpleData>
+		<SimpleData name="pier">Fort Mason Pier 2</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 48.49207973' N</SimpleData>
+		<SimpleData name="long_ddm">122° 25.88180241' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.43137659792,37.8082062081683</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">118</SimpleData>
+		<SimpleData name="pier">Saint Francis Jetty</SimpleData>
+		<SimpleData name="county">San Francisco</SimpleData>
+		<SimpleData name="lat_ddm">37° 48.48459891' N</SimpleData>
+		<SimpleData name="long_ddm">122° 26.49213711' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.441549120198,37.8080812956777</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">119</SimpleData>
+		<SimpleData name="pier">Veteran's Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 44.87912127' N</SimpleData>
+		<SimpleData name="long_ddm">122° 14.21883060' W</SimpleData>
+		<SimpleData name="notes">On the adjacent walking bridge a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.236993746851,37.7479902344325</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">120</SimpleData>
+		<SimpleData name="pier">Union Point Park Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 46.56184564' N</SimpleData>
+		<SimpleData name="long_ddm">122° 14.50803611' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.241814107564,37.7760356845599</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">121</SimpleData>
+		<SimpleData name="pier">San Antonio North (Best Western) Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 47.16685952' N</SimpleData>
+		<SimpleData name="long_ddm">122° 14.84027193' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.247351322077,37.7861189642605</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">122</SimpleData>
+		<SimpleData name="pier">Webster St. (Jack London) Pier</SimpleData>
+		<SimpleData name="county">Alameda</SimpleData>
+		<SimpleData name="lat_ddm">37° 47.54802453' N</SimpleData>
+		<SimpleData name="long_ddm">122° 16.43857865' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.273989065197,37.7924719586692</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">123</SimpleData>
+		<SimpleData name="pier">Acqua Hotel Pier</SimpleData>
+		<SimpleData name="county">Marin</SimpleData>
+		<SimpleData name="lat_ddm">37° 53.29190904' N</SimpleData>
+		<SimpleData name="long_ddm">122° 31.12174059' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.518709013212,37.8882032686123</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">124</SimpleData>
+		<SimpleData name="pier">Barbara and Jay Vincent Park Pier</SimpleData>
+		<SimpleData name="county">Contra Costa</SimpleData>
+		<SimpleData name="lat_ddm">37° 54.51779134' N</SimpleData>
+		<SimpleData name="long_ddm">122° 21.10908592' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.351831676928,37.9086347839672</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">125</SimpleData>
+		<SimpleData name="pier">Barbara and Jay Vincent Park Jetty</SimpleData>
+		<SimpleData name="county">Contra Costa</SimpleData>
+		<SimpleData name="lat_ddm">37° 54.45935390' N</SimpleData>
+		<SimpleData name="long_ddm">122° 21.20531715' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.353435170609,37.9076609369911</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">126</SimpleData>
+		<SimpleData name="pier">John J Sheridan Pier</SimpleData>
+		<SimpleData name="county">Contra Costa</SimpleData>
+		<SimpleData name="lat_ddm">37° 54.56679795' N</SimpleData>
+		<SimpleData name="long_ddm">122° 21.63194161' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.360545336083,37.9094512752636</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">127</SimpleData>
+		<SimpleData name="pier">Benicia Point Fishing Pier</SimpleData>
+		<SimpleData name="county">Solano</SimpleData>
+		<SimpleData name="lat_ddm">38° 02.66225706' N</SimpleData>
+		<SimpleData name="long_ddm">122° 09.90408606' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.165080913411,38.0443756361408</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">128</SimpleData>
+		<SimpleData name="pier">9th Street Pier, Benicia</SimpleData>
+		<SimpleData name="county">Solano</SimpleData>
+		<SimpleData name="lat_ddm">38° 03.47157212' N</SimpleData>
+		<SimpleData name="long_ddm">122° 10.47864715' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.17465695434,38.057864824284</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">129</SimpleData>
+		<SimpleData name="pier">Vallejo Launch Ramp Fishing Pier</SimpleData>
+		<SimpleData name="county">Solano</SimpleData>
+		<SimpleData name="lat_ddm">38° 05.72759407' N</SimpleData>
+		<SimpleData name="long_ddm">122° 15.47872000' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.257991866617,38.0954649492971</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">130</SimpleData>
+		<SimpleData name="pier">Vallejo Waterfront (Independence Park)</SimpleData>
+		<SimpleData name="county">Solano</SimpleData>
+		<SimpleData name="lat_ddm">38° 05.89765586' N</SimpleData>
+		<SimpleData name="long_ddm">122° 15.69689506' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.261628246887,38.0982990947861</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">131</SimpleData>
+		<SimpleData name="pier">Cullinan Ranch Fishing Pier</SimpleData>
+		<SimpleData name="county">Solano</SimpleData>
+		<SimpleData name="lat_ddm">38° 08.21139470' N</SimpleData>
+		<SimpleData name="long_ddm">122° 20.65777861' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.344309185638,38.1368612560543</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">132</SimpleData>
+		<SimpleData name="pier">Shollenberger Pier</SimpleData>
+		<SimpleData name="county">Sonoma</SimpleData>
+		<SimpleData name="lat_ddm">38° 13.39190362' N</SimpleData>
+		<SimpleData name="long_ddm">122° 36.30871352' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-122.605158384579,38.2232031940209</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">133</SimpleData>
+		<SimpleData name="pier">Point Arena Pier</SimpleData>
+		<SimpleData name="county">Mendocino</SimpleData>
+		<SimpleData name="lat_ddm">38° 54.87280741' N</SimpleData>
+		<SimpleData name="long_ddm">123° 42.62997364' W</SimpleData>
+		<SimpleData name="notes">None</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-123.710512883806,38.9145515803625</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Public_Piers_and_Jetties___R7___CDFW__ds3090_">
+		<SimpleData name="OBJECTID">134</SimpleData>
+		<SimpleData name="pier">Noyo River Jetty</SimpleData>
+		<SimpleData name="county">Mendocino</SimpleData>
+		<SimpleData name="lat_ddm">39° 25.68682321' N</SimpleData>
+		<SimpleData name="long_ddm">123° 48.60214097' W</SimpleData>
+		<SimpleData name="notes">On the adjacent rock wall touching land a fishing license is required</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-123.810048912232,39.4281189808858</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>
