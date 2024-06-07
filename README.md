@@ -11,17 +11,17 @@ This repository containing files and data for developing the R Shiny online appl
 ## Structure 
 
 > ```
-> Models
+> Shiny-Dashboard
 > │   README.md
-> │   Models.Rproj
+> │   SaferSeafood_Shiny_Dashboard.Rproj
 > │  .gitignore
 > │   session_info.txt
-> └───data
->       │ fish_data
->       │ sediment_data
->       │ data_outputs
-> └───code
->       │ data_cleaning
->       │ models
+> |   output.txt
+> └───raw_data
+>       │ fish_clean.csv
+> └───scratch
+>       │ serving_size.Rmd
+>       │ practice-script-shinydashboard.R
+>       | practice-script.R
 >
 >
