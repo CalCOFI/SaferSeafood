@@ -39,7 +39,7 @@ This research project was designed for educational purposes. The information pro
 >       | practice-script.R
 >       | nearest-script.R
 >       | data-proccessing-shinydashboard.R
-> └───shinydashboard
+> └───ToxinTracker
 >       │ www
 >       │ ui.R
 >       | server.R
