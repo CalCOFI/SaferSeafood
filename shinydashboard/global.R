@@ -22,7 +22,7 @@ suppressPackageStartupMessages({
   library(caret)
   library(corrplot)
   library(sjPlot)
-  library(rstanarm)
+  # library(rstanarm) # problem installing on CalCOFI server
   library(terra)
   library(reactlog)
   library(geos)
