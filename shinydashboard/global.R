@@ -47,6 +47,24 @@ reactlog_enable()
 
 # Loading spatial data for coastal health advisories and other geographic features
 
+# San Diego Bay advisory polygons
+cacoastal <- read_sf("data/polygons/cacoastalstatewater.kml") %>%
+  st_zm() %>% 
+  mutate(Name = "cacoastal") %>% 
+  st_transform(crs = 4326)
+
+# San Diego Bay advisory polygons
+sandiego <- read_sf("data/polygons/san_diego_bay.kml") %>%
+  st_zm() %>% 
+  mutate(Name = "sandiego_bay") %>% 
+  st_transform(crs = 4326)
+
+# Mission Bay advisory polygons
+mission <- read_sf("data/polygons/mission_bay.kml") %>%
+  st_zm() %>% 
+  mutate(Name = "mission_bay") %>% 
+  st_transform(crs = 4326)
+
 # Ventura harbor advisory polygons
 ventura <- read_sf("data/polygons/venturaharbor.kml", layer = "VenturaHarbortoSMPier.kmz") %>%
   st_zm() %>% 
@@ -81,7 +99,7 @@ channel_islands <- sf::st_read("data/polygons/cinms_py2") %>%
 channel_islands <- channel_islands[-1, , drop = FALSE]
 
 # Combining advisory areas into a single dataframe
-advisory_areas <- rbind(ventura, smbeach, sbpier) %>% 
+advisory_areas <- rbind(ventura, smbeach, sbpier, sandiego, mission,cacoastal) %>% 
   dplyr::select(Name, geometry)
 
 
@@ -98,7 +116,8 @@ fish_clean <- read_csv("data/ddx_southernCA_norm.csv")
 
 # Pelagic and nearshore fish zones
 areas <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>% 
-  left_join(fish_data, by = c("Name" = "CompositeStationArea")) 
+  dplyr::left_join(read.csv("data/totalDDX_sediment_zone_summary_90.csv")) %>% 
+  dplyr::left_join(fish_data, by = c("Name" = "CompositeStationArea")) 
 
 values_to_remove <- c("849", "850")
 
@@ -191,7 +210,7 @@ species_name_clean <- as.data.frame(species_name) %>%
     species_name == "Embiotica jacksoni" ~ "Embiotoca jacksoni",
     species_name == "Rhinobatos productus" ~ "Pseudobatos productus",
     TRUE ~ species_name
-  ))
+  )) 
 
 # Loading fish taxa from FishBase and filtering based on species names
 taxa <- rfishbase::load_taxa()
@@ -209,7 +228,7 @@ fish.clean.fam <- fish_clean %>%
   left_join(taxa_filter, by = "scientific_name")
 
 # Loading dataframe with cleaned species names and life history characteristics
-fish_lh <- read_csv("data/species_common_science.csv")
+fish_lh <- read_csv("data/species_common_science.csv") 
 
 # Loading Bayesian regression model for prediction
 # brm.diet.habitat.year.fam.clean <- readRDS("data/brm_mod.rda")

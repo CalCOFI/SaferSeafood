@@ -19,7 +19,7 @@ server <- function(input, output, session) {
     lonlat_sf = st_as_sf(lonlat, coords=c("long", "lat"), crs="EPSG:4326")
     
     # make the areas df into a spatial object
-    polsf <- sf::st_as_sf(advisory_areas)
+    polsf <- st_make_valid(sf::st_as_sf(advisory_areas))
     
     # assign the point to a fishing zone polygon based on nearest distance
     nearest <- polsf[sf::st_nearest_feature(lonlat_sf, polsf) ,]
@@ -54,7 +54,7 @@ server <- function(input, output, session) {
     
     # assign point a sediment DDT value
     zone_id <- lonlat_sf %>%
-      mutate(sedDDT = nearest$AvgDDT,
+      mutate(sedDDT = nearest$DDT90,
              zone = nearest$Name)
     
     # to add into the model we would call:
@@ -68,7 +68,7 @@ server <- function(input, output, session) {
   
   getYear <- function(Year) {
     # Placeholder logic to get the year
-    return(24)  # Placeholder constant value
+    return(20)  # Placeholder constant value - corresponds to 2018
   }
   
   predict_DDT <- function(species, lat, long) {
@@ -82,6 +82,7 @@ server <- function(input, output, session) {
     Year_value = getYear()  # function or logic
     
     species_name <- tolower(input$species) # Convert species name to lowercase
+    #species_name = ifelse(species_name == "brown smoothhound shark","brown smooth-hound shark",species_name) 
     
     # Filter the fish life history dataframe for the species provided as argument
     input_species <- fish_lh %>% 
@@ -157,7 +158,7 @@ server <- function(input, output, session) {
       return(NA)
     }
     
-    prediction <- as.data.frame(predict(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
+    prediction <- as.data.frame(predict(model, newdata = new_data, re.form = NULL, probs=c(.1,.9))) # Predict using the Bayesian model
     estimate <- prediction[3]
     estimate_trans1 <- exp(estimate) - 1 # Transform the estimate
     
@@ -205,7 +206,7 @@ server <- function(input, output, session) {
       return(NA)
     }
     
-    prediction <- as.data.frame(predict(model, newdata = new_data, re.form = NA)) # Predict using the Bayesian model
+    prediction <- as.data.frame(predict(model, newdata = new_data, re.form = NA, probs=c(.1,.9))) # Predict using the Bayesian model
     estimate <- prediction[4]
     estimate_trans2 <- exp(estimate) - 1 # Transform the estimate
     
@@ -245,7 +246,7 @@ server <- function(input, output, session) {
       addCircleMarkers(lng = -118.48, 
                        lat = 33.55, 
                        color = "red",
-                       label = "Barrel field of DDT-laced sludge") %>% 
+                       label = "Dumpsite 2") %>% 
       
       ## Uncommented code for advisory borders (if needed in future) ##
       
@@ -268,7 +269,7 @@ server <- function(input, output, session) {
     # Add circle markers for existing DDT dumpsites
     addCircleMarkers(data = dumpsite_area, 
                      ~lng, ~lat,
-                     group = "DDT Dumpsites") %>%
+                     group = "Offshore Dumpsites") %>%
       
       # Add circle markers for fishing piers with popup information
       addCircleMarkers(
@@ -288,10 +289,10 @@ server <- function(input, output, session) {
       
       # Add layer control for toggling visibility of DDT dumpsites and piers
       addLayersControl(
-        overlayGroups = c("DDT Dumpsites", "Piers"),
+        overlayGroups = c("Offshore Dumpsites", "Piers"),
         options = layersControlOptions(collapsed = FALSE)
       ) %>%
-      hideGroup("DDT Dumpsites") %>%
+      hideGroup("Offshore Dumpsites") %>%
       hideGroup("Piers") %>%
       
       # Set initial map view to a specific latitude, longitude, and zoom level
@@ -501,12 +502,44 @@ map.on('click', function(e) {
     
     serving_size_max <- as.character(assignment_of_serving_max[1, 2]) # Get the max serving size recommendation
     
-    serving_size_min <- as.character(assignment_of_serving_min[1, 2]) # Get the min serving size recommendation
+    serving_size_min <- as.character(assignment_of_serving_min[1, 3]) # Get the min serving size recommendation
     
+    
+   # assignment_of_serving_min_overall = 
+      
     # Make the serving size bar
     # Composite score v2
     # Takes the minimum serving size recommendation
     assignment_df <- reactive(assignment_of_serving_min)  # Reactive expression for assignment data frame
+    
+    # Gets serving sizes from OEHHA
+    image_path <- read_csv(paste0(path, advisory_name, "/other_advisory.csv")) %>% 
+      filter(Species == species_name_advisory) # Read advisory image path from CSV
+
+    recs = data.frame(rec = as.numeric(), 
+                      label = as.character())
+    #rec2 = data.frame(rec = as.numeric(), 
+    #                  label = as.character())
+    
+    if (nrow(image_path) > 0) {  # Check if there are any OEHHA recommendations found
+      if (image_path[[2]] >= assignment_df()[,2]) {  # If DDT is most restrictive, use DDT
+        recs[1,] = assignment_df()[,2:3]
+        recs[2,] = assignment_df()[,2:3]
+      } else if (image_path[[2]] < assignment_df()[,2] & image_path[[3]] > assignment_df()[,2]) {
+        recs[1,] = c(as.numeric(image_path[[2]]), as.character(image_path[[2]]))
+        recs[2,] = assignment_df()[,2:3]
+      }
+      else {
+        recs[1,] = c(as.numeric(image_path[[2]]), as.character(image_path[[2]]))
+        recs[2,] = c(as.numeric(image_path[[3]]), as.character(image_path[[3]]))
+      }
+      } else { # If no recommendations found, use DDT advice
+        recs[1,] = assignment_df()[,2:3]
+        recs[2,] = assignment_df()[,2:3]
+    }
+    
+    recs = unique(recs)
+    recs$rec = as.numeric(recs$rec)
     
     #plot for advisory
     create_gradient_df <- function(n = 8) {
@@ -519,7 +552,7 @@ map.on('click', function(e) {
     output$servings <- renderPlot({
       gradient_df <- create_gradient_df()  # Create gradient data frame
       
-      ggplot(assignment_df(), aes(y = as.factor(1))) +  # Create dummy y-axis
+      ggplot(recs, aes(y = as.factor(1))) +  # Create dummy y-axis
         
         # Add gradient tiles
         geom_tile(data = gradient_df, aes(x = x, y = 1, fill = color), 
@@ -544,7 +577,7 @@ map.on('click', function(e) {
         # Add plot labels
         labs(y = NULL,
              x = NULL,
-             title = "Recommended Number of Servings Per Week") +
+             title = "Recommended Maximum Number of Servings Per Week") +
         
         # Customize x-axis labels
         scale_x_continuous(
@@ -607,11 +640,12 @@ map.on('click', function(e) {
         if(serving_size_min == serving_size_max){
         # Display the recommended serving size using the value from 'serving_size'
         output$serving_size <- renderText({
-          paste0("The recommended number of servings per week for ", species_name_advisory, " at this location is ",serving_size,".")
+          paste0("Based on the upper end of the predicted range, the recommended number of servings per week for ", species_name_advisory, " at this location is ",serving_size,".")
         })
         } else {
           output$serving_size <- renderText({
-            paste0("The recommended number of servings per week for ", species_name_advisory, " at this location is between ",serving_size_min," and ",serving_size_max,".")
+            HTML(paste("Based on the upper end of the predicted range, the recommended number of servings per week for ", species_name_advisory, " at this location is ","<b>",serving_size_min,"</b>","."))
+            #paste0("The recommended number of servings per week for ", species_name_advisory, " at this location is between ",serving_size_min," and ",serving_size_max,".")
           })
         }
         
@@ -619,7 +653,7 @@ map.on('click', function(e) {
         output$prediction <- renderText({ NULL })
         output$fish_error <- renderText({ NULL })
         output$prediction <- renderText({
-          paste0("The range of predicted DDT concentration is between ", round(prediction1, 1), " to ", round(prediction2, 1)," ng of per gram of fish.")
+          paste0("The range of the predicted DDT concentration is between ", round(prediction1, 1), " to ", round(prediction2, 1)," ng of per gram of fish.")
         })
         output$fish_image <- renderImage({
           if (!file.exists(image_path2)) {
@@ -635,22 +669,23 @@ map.on('click', function(e) {
           if (length(image_path) >= 3) {  # Check if there are values for both age groups
             if (image_path[[2]] == image_path[[3]]) {  # Check if serving sizes for both age groups are equal
               output$advisory <- renderText({  # Render the advisory message
-                paste0("The recommended number of servings per week for all age groups is ", image_path[[2]], ".")
+                HTML(paste("The recommended number of servings per week for all age groups is ", "<b>",image_path[[2]], "</b>","."))
               })
             } else {  # If serving sizes for both age groups are different
               output$advisory <- renderText({  # Render the advisory message
-                paste("The recommended number of servings per week for women 18-49 years and children 1-17 years is ", image_path[[2]], ". The recommended number of servings per week for women 50 years and older and men 18 years and older is ", image_path[[3]], ".")
+                HTML(paste("The recommended number of servings per week for women 18-49 years and children 1-17 years is ", "<b>",image_path[[2]],"</b>", ".", "<br/>", "<br>",
+                           "The recommended number of servings per week for women 50 years and older and men 18 years and older is ", "<b>",image_path[[3]], "</b>","."))
               })
             }
           } else {  # If only one serving size is found
             output$advisory <- renderText({  # Render the advisory message
-              paste("The recommended number of servings per week for all age and gender groups is ", image_path[[2]], ".")
+              HTML(paste("The recommended number of servings per week for all age and gender groups is ", "<b>", image_path[[2]],"</b>" ,"."))
             })
           }
         } else {  # If no image paths are found
           # If species not found, display "no advisories found"
           output$advisory <- renderText({  # Render the advisory message
-            HTML("No other advisories found for your species at your location.")
+            HTML("OEHHA has not yet assessed your species at your location.")
           })
         }
         
