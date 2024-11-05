@@ -23,8 +23,8 @@ sidebar <- dashboardSidebar(
                        menuSubItem(text = "Troubleshooting", tabName = "troubleshooting")),
               menuItem(text = "About", tabName = "about"), 
               menuItem(text = "Resources", tabName = "resources", #
-                       menuSubItem(text = "Fish Identification", tabName = "fish_id"),
-                       menuSubItem(text = "DDT Research", tabName = "research")
+                       menuSubItem(text = "Fish Identification", tabName = "fish_id")#,
+                       #menuSubItem(text = "DDT Research", tabName = "research")
               ),
               # Add logos to sidebar 
               tags$div(
@@ -59,7 +59,7 @@ body <-dashboardBody(
                 width = NULL,
                 title = tagList(strong("DDT Advisory For You and Your Seafood", style = "font-size: 34px;, font-family: Tahoma, Geneva, sans-serif;")),
                 HTML("<br>"), 
-                HTML("<div style='text-align: center;'><span style='font-size: 20px;'>Caught a fish off the coast of Southern California? Fill in the required fields below to understand the DDT levels in your seafood and receive serving size recommendations based on DDT, Mercury, and PCB advisories.</span></div>"),
+                HTML("<div style='text-align: center;'><span style='font-size: 20px;'>Caught a fish off the coast of Southern California? Fill in the required fields below to understand the DDT levels in your seafood and receive serving size recommendations based on DDT, PCBs, and mercury advisories.</span></div>"),
                 HTML("<br>"), 
                 HTML("<div style='text-align: center;'><span style='font-size: 12px;'>Disclaimer: This research project was designed for educational purposes. The information provided here does not come from any public agency and we are not making health recommendations.</span></div>")
                 
@@ -136,18 +136,22 @@ body <-dashboardBody(
                               width = NULL,
                               height = "260px",
                               div(class = "prediction-title",
-                                  tags$b("DDT Prediction Results *", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;")
-                              ),  
+                                  tags$b("DDT Prediction Results *", style = "color:#0c3D6E; font-size: 16px;font-family: Tahoma, Geneva, sans-serif;"), 
+                                  tags$br(),
+                                  tags$b("DDT Prediction Results consider only the effects of DDT.", style = "color:0c3D6x; font-size: 12px;")                              ),  
                               #status = "warning",
                               
                               solidHeader = TRUE,
                               collapsible = FALSE,
+                              HTML("<br>"), 
+                              
                               span(textOutput("validation_result"), style = "color:red"),
                               span(textOutput("fish_error"), style = "color:red"),
-                              span(textOutput("serving_size"), style = "color:black"),
                               span(textOutput("prediction"), style = "color:black"),
                               HTML("<br>"), 
-                              plotOutput(outputId = "servings", height = "100px"),  # Adding the plot output here
+                              span(htmlOutput("serving_size"), style = "color:black"),
+                              HTML("<br>"), 
+                              #plotOutput(outputId = "servings", height = "100px"),  # Adding the plot output here
                               
                               
                               
@@ -172,11 +176,13 @@ body <-dashboardBody(
                               width = NULL, 
                               height = "260px",
                               div(class = "prediction-title",
-                                  tags$b("OEHHA Health Advisory **", style = "color:0c3D6x; font-size: 16px;")), 
+                                  tags$b("OEHHA Health Advisory **", style = "color:0c3D6x; font-size: 16px;"), 
+                                  tags$br(),
+                                  tags$b("OEHHA Health Advisories and Safe Eating Guidelines consider the cumulative effects of DDT, PCBs, and mercury.", style = "color:0c3D6x; font-size: 12px;")), 
                               #status = "success", 
-                              solidHeader = FALSE,
+                         HTML("<br>"), solidHeader = FALSE,
                               collapsible = FALSE,
-                              span(textOutput(outputId = "advisory"), style = "color:black"),
+                              span(htmlOutput(outputId = "advisory"), style = "color:black"),
                               #imageOutput(outputId = "advisory_image"),
                               tags$style(type="text/css",
                                          ".shiny-output-error { visibility: hidden; }",
@@ -199,14 +205,35 @@ body <-dashboardBody(
                             )
                             
                      ),
-                     
-                     
+                     # column(
+                     #   width = 12,
+                     #   HTML("<div><span style='position: top: 0; color: #f2570f; font-size: 18px;'><b>Follow the lower recommendation for number of servings per week.</b></span></div>"),
+                     #   HTML("<br>")
+                     # ),
                      column(
                        width = 12,
                        box(
                          width = NULL,
-                         HTML("<div><span style='position: top: 0; color: #f2570f; font-size: 18px;'><b>Follow the lower recommendation for number of servings per week.</b></span></div>"),
-                         HTML("<br>"), 
+                         HTML("<div><span style='position: top: 0; color: #f2570f; font-size: 18px;'><b>Following the lower recommendation, your recommended maximum number of servings per week for this species and location is below. </b></span></div>"),
+                         HTML("<br>"),
+                         HTML("<div><span style='position: top: 0; color: #f2570f; font-size: 12px;'><b>If two serving sizes are shown, the lower is for women 18-49 years and children 1-17 years and the larger is for women 50 years and older and men 18 years and older. </b></span></div>"),
+                         HTML("<br>"),
+                         style = "text-align: center;",  # Center-align the source wording
+                         plotOutput(outputId = "servings", height = "100px"),  # Adding the plot output here
+                         
+                       ), # END serving size box
+                       
+                       
+                       
+                       HTML("<br>")
+                       
+                     ), # END serving size REDO
+                     column(
+                       width = 12,
+                       box(
+                         width = NULL,
+                         #HTML("<div><span style='position: top: 0; color: #f2570f; font-size: 18px;'><b>Follow the lower recommendation for number of servings per week.</b></span></div>"),
+                         #HTML("<br>"), 
                          # Apply CSS styling to the image tag
                          tags$img(src = "fish-serving-box.png",
                                   alt = "Fish Hand Image",
@@ -225,6 +252,7 @@ body <-dashboardBody(
                        HTML("<br>")
                        
                      ), # END serving size column
+                     
                      
                    ) # END prediciton results box 
                    
@@ -285,7 +313,7 @@ body <-dashboardBody(
             box(
               width = 12,
               title = tagList(strong("How To Interpret The Output")),
-              HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommended serving size and relevant Mercury/PCB advisories are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions. These results do not come from any federal agency and should be used in conjunction with advisories provided by the California Office of Environmental Health Hazard Assessment, the Food and Drug Administration, and the Fish Contamination Education Collaborative. These are NOT FDA sectioned advisories. For women and children related advice refer to this link: <a href='https://oehha.ca.gov/fish/women-and-children'>https://oehha.ca.gov/fish/women-and-children</a>" )
+              HTML("The output displays the estimated DDT concentration in the fish species at your specified location. This measurement is shown in ng/g units, which reflects the DDT levels typically found in the tissue of the species based on the entered parameters. Along with the DDT concentration, a recommended serving size and relevant OEHHA consumption advisory are also outputted. Understanding these results can help in assessing potential health risks and making informed decisions. These results do not come from any federal agency and should be used in conjunction with advisories provided by the California Office of Environmental Health Hazard Assessment, the Food and Drug Administration, and the Fish Contamination Education Collaborative. These are NOT FDA sectioned advisories. For women and children related advice refer to this link: <a href='https://oehha.ca.gov/fish/women-and-children'>https://oehha.ca.gov/fish/women-and-children</a>" )
               
             ) # END section 3: box
             
@@ -353,14 +381,26 @@ fluidRow(
 <strong>Fish Error Message:</strong> "Please select a fish species before pressing the Predict button."<br>
    <strong>-</strong> Triggered when a user clicks the predict button without first selecting a fish species. No prediction will be made until a species is selected.<br><br>
 
-<strong>Advisory Error Message:</strong> "No other advisories found for your species at your location."<br>
-    <strong>-</strong> Specifies that there are no current Mercury/PCB advisories for that specific species of fish in the selected location.
+<strong>Advisory Error Message:</strong> "OEHHA has not yet assessed your species at your location."<br>
+    <strong>-</strong> Specifies that there are no current advisories for that species of fish in the selected location.
 ')
 
   ) # END box
 
 ), # End FluidRow
 
+fluidRow(
+  
+  box(
+    width = 12,
+    title = tagList(strong("Still Having Trouble?")),
+    HTML('For additional assistance, please refer to the tutorial videos and FAQs on the portal or contact our support team for personalized help.<br><br>'),
+    tags$a(href = "mailto:lmmcgill@ucsd.edu", class = "btn btn-success", "Email Support")
+  
+
+  ) # END box
+
+), # End FluidRow
 
                 ) # END fluidRow for troubleshopping 
 
@@ -387,9 +427,20 @@ tabItem(tabName = "about",
                      #background info box ----
                      box(width = NULL,
                          title = tagList(strong("Project Background")),
-                         HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and <strong>can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals </strong> . A recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of a vast barrel field of DDT-laced sludge off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood.The DDT dumping in the Southern California coast, specifically, is an important current issue due to there not being enough information about the DDT concentration in the fish caught there. The California Environmental Protection Agency Office of Environmental Health Hazard Assessment (OEHHA) currently issues statewide consumption advisories for coastal communities. However, these advisories are severely limited as they are site and species-specific, covering only two chemicals: Mercury and Polychlorinated biphenyl (PCB)s."), 
+                         HTML("Dichlorodiphenyltrichloroethane (DDT) is an insecticide that is resistant to degradation and can cause increased risks of cancer, premature births, developmental abnormalities, and neurological diseases in humans and animals. 
+                              From 1947-1971 the ocean off the coast of Los Angeles was a dumping ground for the nation's largest producer of DDT. Industrial waste was discharged both through the Los Angeles County wastewater treatment plant, which was deposited nearshore on the Palos Verdes Shelf (PVS), and via ships that transported and dumped bulk waste in deeper waters.
+                              The recent <a href='https://www.latimes.com/environment/story/2022-05-18/heres-what-we-know-about-the-legacy-of-ddt-dumping-near-catalina'>rediscovery</a> of offshore dumpsites off the coast of southern California has captured the attention of the public and raised concerns regarding consumption of contaminated seafood."),
                          p(),
-                              p("In order to improve consumption advisory accessibility, SaferSeafood has partnered with Scripps Institution of Oceanography and the California Cooperative Oceanic Fisheries Investigations, who have collected and analyzed fish and sediment monitoring data to understand the extensive human and ecological impacts resulting from legacy DDT dumping. Their current model accurately predicts localized risk of DDT in sport fish off the Southern California coast. This risk encompasses the potential adverse effects on human health due to exposure to these contaminants (Marjadi et al. 2021). The goal of this project, SaferSeafood, was to expand on this by creating various models that predict fish DDT levels using factors like sediment DDT, capture year, and fish characteristics. These then were used to develop a spatiotemporal statistical model to predict DDT concentrations for species and locations that were not included in the sample collected by Scripps. This project helps inform the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. Alongside direct public health impacts, a decrease in seafood consumers poses a threat to the regional economy and recreational fishing communities.  The interactive element of this application will allow users to access predicted concentrations of total DDT in seafood catch based on their location and the specific species of their catch. Advisories for Mercury and PCBs (Polychlorinated biphenyl) consumption will also be provided to the user sourced from the California Office of Environmental Health Hazard Assessment. It should be emphasized that this dashboard is a research project designed to educate and inform. The information provided here does not come from any public agency and we are not making health recommendations.")
+                         HTML("The California Environmental Protection Agency Office of Environmental Health Hazard Assessment (OEHHA) currently issues <a href='https://oehha.ca.gov/advisories/statewide-advisory-eating-fish-california-coastal-locations-without-site-specific-advice'>a general statewide consumption advisory based on DDT, PCBs, and mercury for coastal locations and a limited number of site-specific consumption advisories</a>, with a subset of commonly-caught species considered in these advisories. 
+                           In order to improve consumption advisory accessibility and generate more localized predictions of DDT risk, SaferSeafood has partnered with Scripps Institution of Oceanography and the California Cooperative Oceanic Fisheries Investigations, who have collated fish and sediment monitoring data to understand the extensive human and ecological impacts resulting from legacy DDT dumping. 
+                           Their current model examines factors that drive localized DDT risk in sport fish off the Southern California coast, and results were recently published in the journal <a href='https://www.pnas.org/doi/10.1073/pnas.2401500121'> Proceedings of the National Academy of Sciences </a>."),
+                         p(),
+                              p("The goal of this project, SaferSeafood, was to expand on this effort by creating statistical models that predict fish DDT concentrations using factors like average sediment DDT concentration, capture year, and species-specific ecological characteristics such as diet and habitat. 
+                                This project aims to educate the public and give users the autonomy to understand the risk and make informed decisions on their seafood consumption. 
+                                The interactive element of this application allows users to access predicted concentrations of total DDT in seafood catch based on their location and the species of their catch. 
+                                Official government consumption advisories are also be provided to the user sourced from OEHHA. 
+                                It should be emphasized that this dashboard is a research project designed to educate and inform. 
+                                The information provided here does not come from any public agency and we are not making health recommendations.")
                      ),
                      
                      box(width = NULL,
@@ -473,10 +524,7 @@ tabItem(tabName = "fish_id",
               # ,
               # img(src = "www/help-guide-image.png", height = "200px", alt = "Helpful Guide Image")
           ),
-          p("For additional assistance, please refer to the tutorial videos and FAQs on the portal."),
-          div(class = "well",
-              p("Still having trouble? Contact our support team for personalized help."),
-              tags$a(href = "mailto:lmmcgill@ucsd.edu", class = "btn btn-success", "Email Support"))
+
         ) # End Fish Identification box 
         
         
@@ -491,7 +539,8 @@ tabItem(tabName = "research",
                #collaboration info box ----
                box(width = NULL,
                    title = tagList(strong("The Broader Picture")),
-                   p("Further research and educational collaborators, working to understand the human and ecological impacts of the recently discovered DDT dumpsite, will be highlighted here. We aim to provide a platform that enables researchers to connect with communities in a meaningful way.")
+                   p("Ongoing research and educational collaborators, working to understand the human and ecological impacts of DDT witin Southern California, are listed below. 
+                     We aim to provide a platform that enables researchers to connect with communities in a meaningful way. If you would like a link added here, please contact the website administrator.")
                    
                ) # END collaboration info box 
                
