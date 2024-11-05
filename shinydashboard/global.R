@@ -99,9 +99,8 @@ channel_islands <- sf::st_read("data/polygons/cinms_py2") %>%
 channel_islands <- channel_islands[-1, , drop = FALSE]
 
 # Combining advisory areas into a single dataframe
-advisory_areas <- rbind(ventura, smbeach, sbpier, sandiego, mission,cacoastal) %>% 
+advisory_areas <- bind_rows(ventura, smbeach, sbpier, sandiego, mission,cacoastal) %>% 
   dplyr::select(Name, geometry)
-
 
 
  ## LOAD AND PROCESS DATA ----
