@@ -3,7 +3,7 @@
  ## LOAD LIBRARIES ----
  
 # Suppressing package startup messages to keep the console clean
-suppressPackageStartupMessages({
+ suppressPackageStartupMessages({
   library(shiny)
   library(shinydashboard)
   library(shinyjs)
@@ -12,10 +12,10 @@ suppressPackageStartupMessages({
   library(leaflet)
   library(leaflet.extras)
   library(shinycssloaders)
-  library(extrafont)
+  library(extrafont)   # librarian::shelf(extrafontdb, wch/Rttf2pt1, wch/extrafont)
   library(showtext)
   library(markdown)
-  library(rfishbase)
+  library(rfishbase)   # remotes::install_version("rfishbase", version = "5.0.1", repos = "http://cran.us.r-project.org")
   library(sf)
   library(skimr)
   library(tidymodels)
@@ -32,8 +32,8 @@ suppressPackageStartupMessages({
   library(brms)
 })
 
-# Enabling Reactlog for debugging
-reactlog_enable()
+# reactlog_enable()                # enable Reactlog for debugging
+options(readr.show_col_types = F)  # turn off column specifications with readr::read_csv() 
 
 # customIcon <- makeIcon(
 #   iconUrl = "https://fontawesome.com/icons/fishing-rod?f=classic&s=thin",  # URL to the marker icon image
@@ -94,7 +94,7 @@ piers <- read_sf("data/polygons/Piers.kml") %>%
   st_transform(crs = 4326)
 
 # Channel islands polygons``
-channel_islands <- sf::st_read("data/polygons/cinms_py2") %>%
+channel_islands <- sf::st_read("data/polygons/cinms_py2", quiet = T) %>%
   st_transform(crs = 4326)
 channel_islands <- channel_islands[-1, , drop = FALSE]
 
@@ -108,14 +108,12 @@ advisory_areas <- bind_rows(ventura, smbeach, sbpier, sandiego, mission,cacoasta
 # Reading in fish data and associated geographic zones
 
 # Fish data
-fish_data <- read_csv("data/fish_data_preprocessed.csv")
+fish_data  <- read_csv("data/fish_data_preprocessed.csv")
 fish_clean <- read_csv("data/ddx_southernCA_norm.csv")
-
-
 
 # Pelagic and nearshore fish zones
 areas <- readRDS("data/pelagic_nearshore_fish_zones.rds") %>% 
-  dplyr::left_join(read.csv("data/totalDDX_sediment_zone_summary_90.csv")) %>% 
+  dplyr::left_join(read.csv("data/totalDDX_sediment_zone_summary_90.csv"), by = join_by(Name)) %>% 
   dplyr::left_join(fish_data, by = c("Name" = "CompositeStationArea")) 
 
 values_to_remove <- c("849", "850")
@@ -145,8 +143,8 @@ if (is.null(st_geometry(fish_zones_sf))) {
 # Function to remove overlapping areas from sf object
 remove_overlaps <- function(sf_object) {
   non_overlapping <- st_make_valid(sf_object) %>%
-    st_union() %>%
-    st_collection_extract("POLYGON")
+    st_union() # %>%
+    # st_collection_extract("POLYGON")
   return(non_overlapping)
 }
 
@@ -158,7 +156,7 @@ non_overlapping_sf <- st_sf(data = data.frame(id = seq(length(non_overlapping_zo
                             geometry = non_overlapping_zones)
 
 # trying to clip piers
-clip_kml <- st_as_sfc(st_bbox(non_overlapping_sf))
+clip_kml   <- st_as_sfc(st_bbox(non_overlapping_sf))
 clipped_sf <- st_intersection(clip_kml, piers)
 
 clip_coords <- do.call(rbind, st_geometry(clipped_sf)) %>% 
@@ -212,7 +210,15 @@ species_name_clean <- as.data.frame(species_name) %>%
   )) 
 
 # Loading fish taxa from FishBase and filtering based on species names
-taxa <- rfishbase::load_taxa()
+# taxa <- rfishbase::load_taxa()  # error on Linux server
+species_parquet <- here::here("shinydashboard/data/species.parquet")
+if (!file.exists(species_parquet)){
+  download.file(
+    "https://huggingface.co/datasets/cboettig/fishbase/resolve/main/data/fb/v24.07/parquet/species.parquet", 
+    species_parquet)
+}
+taxa <- arrow::read_parquet(species_parquet)
+
 taxa_filter <- taxa %>% 
   filter(Species %in% species_name_clean$species_name) %>% 
   dplyr::select(scientific_name = Species, Genus)
