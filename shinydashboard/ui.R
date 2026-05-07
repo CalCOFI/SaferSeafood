@@ -45,9 +45,10 @@ sidebar <- dashboardSidebar(
 #..........................dashboardBody.........................
 body <-dashboardBody(
   
-  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"), 
-  ), 
-  
+  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+  ),
+  tags$head(includeHTML("google-analytics.html")),
+
   fluidPage(
     
     
